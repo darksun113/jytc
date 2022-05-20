@@ -1,12 +1,12 @@
 <template>
-	<view class="page" :style="{height:pageHeight+'px'}">
+	<view class="page" :style="{height:'calc('+pageHeight+'px - 156rpx)'}">
 		<slot></slot>
 	</view>
 </template>
 
 <script>
 	export default {
-		name:'PageTemp',
+		name:'PageTempHasTabbar',
 		data() {
 			return {
 				pageHeight:0
@@ -29,6 +29,7 @@
 <style lang="scss" scoped>
 	.page{
 		background: #04030A;
+		padding: 0 30rpx;
 		color: #FFFFFF;
 	}
 </style>

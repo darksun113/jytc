@@ -1,23 +1,15 @@
 <template>
-	<PageTemp>
+	<PageTempHasTabbar>
 		<view class="home">
 			<Banner></Banner>
 			<StickyNav @changeShowType="changeShowType"></StickyNav>
-			<view class="container" >
-				<view class="list_layout" v-if="showType==0">
-					<ModelOfListFlow :item="item" v-for="(item,index) in list" :key="index"></ModelOfListFlow>
-				</view>
-				<view class="water_layout" v-else>
-					<view>
-						<ModelOfWaterFall :item="item" v-for="(item,index) in list" :key="index" v-if="index % 2 ==0"></ModelOfWaterFall>
-					</view>
-					<view>
-						<ModelOfWaterFall :item="item" v-for="(item,index) in list" :key="index" v-if="index % 2 !==0"></ModelOfWaterFall>
-					</view>
-				</view>
+			<view class="container">
+				<ModelOfListFlow :seriesList="seriesList" v-if="showType==0"></ModelOfListFlow>
+				<ModelOfWaterFall :seriesList="seriesList" v-else></ModelOfWaterFall>
+				<IsEnd></IsEnd>
 			</view>
 		</view>
-	</PageTemp>
+	</PageTempHasTabbar>
 </template>
 
 <script>
@@ -31,7 +23,7 @@
 		data(){
 			return{
 				showType:0,
-				list:[
+				seriesList:[
 					{
 						title:"漫威英雄系列",
 						image:require("@/static/images/demo2.png"),
@@ -82,10 +74,5 @@
 		height: 100%;
 		overflow: auto;
 		color: #FFFFFF;
-		.water_layout{
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: space-between;
-		}
 	}
 </style>

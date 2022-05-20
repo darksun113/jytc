@@ -1,7 +1,7 @@
 <template>
-	<PageTempHasTabbar>
+	<view>
 		
-	</PageTempHasTabbar>
+	</view>
 </template>
 
 <script>
@@ -10,10 +10,15 @@
 			return {
 				
 			};
+		},
+		mounted() {
+			uni.setNavigationBarTitle({
+				title:"详情"
+			})
 		}
 	}
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 </style>

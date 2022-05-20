@@ -6,30 +6,29 @@
 		{
 			"path": "pages/home/home",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "首页",
+				"navigationBarTextStyle": "white"
 			}
+		}, {
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"enablePullDownRefresh": false
+			}
+
 		}
-	    ,{
-            "path" : "pages/user/user",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "我的",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	"tabBar": {
-		"color": "#6667AB",//字体颜色
-		"selectedColor": "#FFFFFF",//选中时字体颜色
-		"backgroundColor": "#090c47",//底部背景色
-		"fontSize":"20rpx",//字体大小
-		"spacing":"10rpx",//字体到图标的距离
-		"height":"156rpx",//底部高
+		"color": "#6667AB", //字体颜色
+		"selectedColor": "#FFFFFF", //选中时字体颜色
+		"backgroundColor": "#090c47", //底部背景色
+		"fontSize": "20rpx", //字体大小
+		"spacing": "10rpx", //字体到图标的距离
+		"height": "156rpx", //底部高
 		"list": [{
 				"pagePath": "pages/home/home",
-				"iconPath": "static/tabBar/home_tab_icon.svg",//未选中时图片样式
-				"selectedIconPath": "static/tabBar/home_tab_s_icon.svg",//选中时图片样式
+				"iconPath": "static/tabBar/home_tab_icon.svg", //未选中时图片样式
+				"selectedIconPath": "static/tabBar/home_tab_s_icon.svg", //选中时图片样式
 				"text": "首页"
 			},
 			{
@@ -40,33 +39,41 @@
 			}
 		]
 	},
-	"subPackages":[
-		{
-			"root": "subpageA",
-			"pages": [
-				{
-					"path": "LoginPage/LoginPage",
-					"style": {
-						"navigationBarTitleText": "登录",
-						"enablePullDownRefresh": false,
-						"navigationBarTextStyle": "black",
-						"navigationBarBackgroundColor": "#04030A"
-					}
-				}
-			    ,{
-                    "path" : "Certification/Certification",
-                    "style" :                                                                                    
-                {
-                    "navigationBarTitleText": "",
-                    "enablePullDownRefresh": false
-                }
-                
-                }
-            ]
-		}
-	],
+	"subPackages": [{
+		"root": "subpageA",
+		"pages": [{
+			"path": "LoginPage/LoginPage",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"enablePullDownRefresh": false,
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#04030A"
+			}
+		}, {
+			"path": "Certification/Certification",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "SeriesPage/SeriesPage",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "DetailPage/DetailPage",
+			"style": {
+				"navigationBarTitleText": "详情",
+				"enablePullDownRefresh": false
+			}
+
+		}]
+	}],
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
+		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "金裕天成",
 		"navigationBarBackgroundColor": "#04030A",
 		"backgroundColor": "#04030A"

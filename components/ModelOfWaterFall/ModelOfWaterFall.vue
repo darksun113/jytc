@@ -1,77 +1,39 @@
 <template>
-	<view class="series-box">
-		<img class="series-pic" :src="item.image" />
-		<view class="series-info">
-			<view class="series-title nowrap">
-				{{item.title}}
-			</view>
-			<view class="author-box">
-				<image class="author-icon" :src="item.authorIcon" mode=""></image>
-				<view class="author-name nowrap">
-					{{item.author}}
-				</view>
-			</view>
+	<view class="water_layout" v-else>
+		<view>
+			<WaterFallCard :item="item" v-for="(item,index) in seriesList" :key="index" v-if="index % 2 ==0" @toSeriesDetailPage="toSeriesDetailPage"></WaterFallCard>
+		</view>
+		<view>
+			<WaterFallCard :item="item" v-for="(item,index) in seriesList" :key="index" v-if="index % 2 !==0" @toSeriesDetailPage="toSeriesDetailPage"></WaterFallCard>
 		</view>
 	</view>
 </template>
 
 <script>
+	import WaterFallCard from "./components/WaterFallCard.vue"
 	export default {
 		name:"ModelOfWaterFall",
 		props:{
-			item:{
-				type:Object,
-				default:()=>{}
+			seriesList:{
+				type:Array,
+				default:()=>[]
+			}
+		},
+		components:{
+			WaterFallCard
+		},
+		methods:{
+			toSeriesDetailPage(){
+				this.$routerTo("../../subpageA/SeriesPage/SeriesPage")
 			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-.series-box{
-	color: #FFFFFF;
-	background: #0A0C47;
-	border-radius: 20rpx;
-	margin-bottom: 40rpx;
-	width: 336rpx;
-	box-sizing: border-box;
-	// display: inline-block;
-	
-	.series-pic{
-		width: 100%;
-		border-radius: 20rpx;
-	}
-	.series-info{
-		padding: 30rpx 40rpx;
-		.series-title{
-			height: 44rpx;
-			font-size: 32rpx;
-			font-family: PingFangSC-Medium, PingFang SC;
-			font-weight: 500;
-			line-height: 44rpx;
-		}
-		.author-box{
-			display: flex;
-			align-items: center;
-			margin-top: 20rpx;
-			.author-icon{
-				width: 36rpx;
-				height: 36rpx;
-				min-width: 36rpx;
-				min-height: 36rpx;
-				border-radius: 50%;
-				margin-right: 10rpx;
-			}
-			.author-name{
-				height: 40rpx;
-				font-size: 28rpx;
-				font-family: PingFangSC-Regular, PingFang SC;
-				font-weight: 400;
-				line-height: 40rpx;
-			}
-		}
-	}
-	
-	
+.water_layout{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 }
 </style>

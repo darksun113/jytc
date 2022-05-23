@@ -4,7 +4,9 @@
 			
 		},
 		onShow: function() {
-			
+			// uni.navigateTo({
+			// 	url:"./subpageA/SharePage/SharePage"
+			// })
 		},
 		onHide: function() {
 			

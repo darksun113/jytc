@@ -11,22 +11,14 @@
 					<ActivityStep></ActivityStep>
 				</view>
 				<ActivityRules></ActivityRules>
-				<!-- 底部交互区 -->
-				<view style="margin-top: 60rpx;">
-					<JoinButton v-if="posterData.state == 0"></JoinButton>
-					<ActivityStatus v-else></ActivityStatus>
-				</view>
+				
 			</view>
 		</view>
-		<ActivityPoster :isOpenPoster="isOpenPoster" @close="isOpenPoster=false" :posterData="posterData"></ActivityPoster>
 	</u-popup>
 </template>
 <script>
 	import ActivityStep from "./components/ActivityStep"
 	import ActivityRules from "./components/ActivityRules"
-	import JoinButton from "./components/JoinButton"
-	import ActivityStatus from "./components/ActivityStatus"
-	import ActivityPoster from "./components/ActivityPoster"
 	export default {
 		props:['isShow'],
 		data() {
@@ -40,27 +32,13 @@
 		},
 		components:{
 			ActivityStep,
-			JoinButton,
-			ActivityRules,
-			ActivityStatus,
-			ActivityPoster
+			ActivityRules
 		},
 		mounted() {
-			uni.$on("toOpenSharePoster",(data)=>{
-				this.posterData={...data}
-				this.isOpenPoster=true
-			})
-			uni.$on("joinSuccess",(data)=>{
-				this.posterData.state=1
-			})
 		},
 		destroyed() {
-			uni.$off("toOplenSharePoster")
 		},
 		methods: {
-			joinSuccess(){
-				this.posterData.state=1
-			},
 			open() {
 				// console.log('open');
 			},
@@ -78,9 +56,6 @@
 </script>
 
 <style lang="scss" scoped>
-	::v-deep .u-steps-item__wrapper{
-		background-color: rgba(0, 0, 0, 0);
-	}
 	.activity-pop{
 		height: 70vh;
 		width: 100%;

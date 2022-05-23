@@ -70,7 +70,16 @@
 				"enablePullDownRefresh": false
 			}
 
-		}]
+		}    ,{
+                    "path" : "SharePage/SharePage",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ]
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

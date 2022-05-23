@@ -25,7 +25,8 @@
 		data(){
 			return {
 				joinStatus:0,
-				isShow:false
+				isShow:false,
+				
 			}
 		},
 		components:{

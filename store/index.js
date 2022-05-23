@@ -5,8 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
 	state: {
-		filePath: {},
-		
+		filePath: {}
 	},
 	mutations: {
 		saveFilePath(state, data) {
@@ -16,5 +15,11 @@ export default new Vuex.Store({
 		resetFilePath(state) {
 			state.filePath = {}
 		},
+		oplenSharePoster(state){
+			state.isOpenPoster=true
+		},
+		closeSharePoster(state){
+			state.isOpenPoster=false
+		}
 	},
 })

@@ -1,0 +1,175 @@
+<template>
+	<view class="fun-module">
+		<!-- 链上信息 -->
+		<view class="options_box" v-if="loadType==0" @click="toOpenBlockPopup(1)">
+			<view class="options_right">
+				<image class="options-icon" src="./static/images/block_info_icon.svg" mode=""></image>
+				<view class="options_info">
+					<view class="options_name">
+						链上信息
+					</view>
+				</view>
+			</view>
+			<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>
+		</view>
+		<!-- 区块链证书 -->
+		<view class="options_box" v-else-if="loadType==1" @click="toOpenBlockPopup(4)">
+			<view class="options_right">
+				<image class="options-icon" src="./static/images/certificate_icon.svg" style="border-radius: 0;"
+					mode="">
+				</image>
+				<view class="options_info">
+					<view class="options_name">
+						区块链证书
+					</view>
+				</view>
+			</view>
+			<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>
+		</view>
+		<!-- 发行方 -->
+		<view class="options_box" @click="toOpenBlockPopup(2)">
+			<view class="options_right">
+				<!-- <image class="options-icon" :src="goodsData.shopIcon" mode=""></image> -->
+				<image class="options-icon" src="@/static/images/demo2.png" mode=""></image>
+				<view class="options_info">
+					<!-- <view class="options_name">
+						{{goodsData.shopName}}
+					</view> -->
+					<view class="options_name">
+						深圳九州龙文化传播有限公司
+					</view>
+				</view>
+			</view>
+			<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>
+		</view>
+		<!-- 流转历史 -->
+		<view class="options_box" v-if="loadType==1" @click="toOpenBlockPopup(5)">
+			<view class="options_right">
+				<image class="options-icon" src="./static/images/transfer_icon.svg" mode=""></image>
+				<view class="options_info">
+					<view class="options_name">
+						流转历史
+					</view>
+				</view>
+			</view>
+			<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>
+		</view>
+		<!-- 最近购买 -->
+		<view class="options_box" v-if="loadType==0" @click="toOpenBlockPopup(3)">
+			<view class="options_right">
+				<view class="options_info"
+					style="margin-left: 0;font-size: 32rpx;font-family: PingFangSC-Regular, PingFang SC;color: #FFFFFF;">
+					最近购买
+				</view>
+			</view>
+			<view class="buyer_box">
+				<view class="player_avatar">
+					<image :src="item.recipientIcon" mode="" v-for="(item ,index) in buyerList"
+						:style="{'margin-left':buyerList.length==1? '0' :'-8px'}" :key="index"></image>
+				</view>
+				<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>
+			</view>
+		</view>
+		<PopupBottom :isShow="isPopupShow" :popupData="popupData" :loadType="PopupShowType" @close="isPopupShow=false" @openTokenPop="isShow=true">
+		</PopupBottom>
+	</view>
+</template>
+
+<script>
+	import PopupBottom from "./components/PopupBottom"
+	export default {
+		// loadType 0 未购买 1 已购买
+		props: ["loadType"],
+		components: {
+			PopupBottom
+		},
+		data() {
+			return {
+				isPopupShow:false,
+				PopupShowType:0,
+				popupData:{},
+				buyerList: [{
+					recipientIcon: require("@/static/images/demo3.png")
+				}, {
+					recipientIcon: require("@/static/images/demo3.png")
+				}, {
+					recipientIcon: require("@/static/images/demo3.png")
+				}, ]
+			}
+		},
+		methods: {
+			toOpenBlockPopup(type) {
+				this.isPopupShow=true
+				this.PopupShowType=type
+			}
+		},
+	}
+</script>
+
+<style lang="scss" scoped>
+	.fun-module {
+		margin-top: 40rpx;
+
+		.options_box {
+			display: flex;
+			width: 100%;
+			border-radius: 32rpx;
+			padding-top: 40rpx;
+			align-items: center;
+			justify-content: space-between;
+
+			.options_right {
+				display: flex;
+				align-items: center;
+
+				.options-icon {
+					width: 44rpx;
+					height: 44rpx;
+					border-radius: 50%;
+				}
+
+			}
+
+			.buyer_box {
+				display: flex;
+
+				.player_avatar {
+					display: flex;
+					margin-right: 20rpx;
+
+					image {
+						width: 44rpx;
+						height: 44rpx;
+						border-radius: 50%;
+					}
+				}
+			}
+
+			.options_info {
+				margin-left: 10px;
+				font-size: 14px;
+				font-family: PingFangSC-Regular, PingFang SC;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-around;
+
+				.options_title {
+					color: #999999;
+				}
+
+				.options_name {
+					color: #ffffff;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					display: -webkit-box;
+					font-size: 28rpx;
+				}
+			}
+
+			.options_collect {
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+</style>

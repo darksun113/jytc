@@ -2,15 +2,15 @@
 	<view class="power-num-box">
 		<swiper class="number-of-power" :current="curDot" @change="swiperChange" :circular='true' :display-multiple-items="5">
 			<swiper-item v-for="i in list" :key="i">
-				<image src="@/static/images/power_num.png" mode=""></image>
+				<image src="@/static/images/power_num_avatar.png" mode=""></image>
 			</swiper-item>
 		</swiper>
 		<view class="left-right-icon">
 			<view class="left-back" @click.stop="leftImg">
-				<u-icon name="arrow-left"></u-icon>
+				<u-icon name="arrow-left" color="#666666"></u-icon>
 			</view>
 			<view class="right-forword" @click.stop="rightImg">
-				<u-icon name="arrow-right"></u-icon>
+				<u-icon name="arrow-right" color="#666666"></u-icon>
 			</view>
 		</view>
 	</view>
@@ -36,7 +36,8 @@
 				let num = this.list.length - 1
 				if (this.curDot <= 0) {
 					this.circular = true
-					this.curDot = num
+					// this.curDot = num
+					return
 				} else {
 					this.curDot--
 				}
@@ -45,7 +46,8 @@
 				this.circular = true
 				let num = this.list.length - 1
 				if (this.curDot >= num) {
-					this.curDot = 0
+					return
+					// this.curDot = 0
 				} else {
 					this.curDot++
 				}
@@ -55,6 +57,9 @@
 </script>
 
 <style lang="scss" scoped>
+	uni-swiper{
+		height: 80rpx;
+	}
 	.power-num-box{
 		position: relative;
 		height: 80rpx;

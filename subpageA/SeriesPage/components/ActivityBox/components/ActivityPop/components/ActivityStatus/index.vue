@@ -3,7 +3,7 @@
 		<view class="title-count" v-if="true">还差 4 人即可参与抽奖</view>
 		<view class="title-count" v-else>已完成任务，等待开奖吧</view>
 		<PowerNums></PowerNums>
-		<view class="share-poster-btn" v-if="true">
+		<view class="share-poster-btn" @click="toOpenSharePoster">
 			分享我的专属海报
 		</view>
 	</view>
@@ -12,7 +12,13 @@
 <script>
 	import PowerNums from "./components/PowerNums/index.vue"
 	export default{
-		components:{PowerNums}
+		components:{PowerNums},
+		methods:{
+			toOpenSharePoster(){
+				const data={a:44}
+				uni.$emit("toOpenSharePoster",data)
+			}
+		}
 	}
 </script>
 

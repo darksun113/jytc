@@ -5,7 +5,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
 	state: {
-		filePath: {}
+		filePath: {},
+		// 用于登录倒计时
+		second:60,
+		isCount:false,
+		userInfo:{}
 	},
 	mutations: {
 		saveFilePath(state, data) {
@@ -15,11 +19,26 @@ export default new Vuex.Store({
 		resetFilePath(state) {
 			state.filePath = {}
 		},
-		oplenSharePoster(state){
-			state.isOpenPoster=true
+		countdown(state){
+			const timer = setInterval(() => {
+				state.isCount = true
+			    if (state.second>0) {
+			        state.second--
+			    } else {
+			        state.isCount = false
+			        this.second=60
+			        clearInterval(timer) 
+			    }
+			}, 1000);
 		},
-		closeSharePoster(state){
-			state.isOpenPoster=false
+		resetCount(state){
+			state.second=60
+		},
+		updateUserInfo(){
+			
 		}
 	},
+	actions:{
+		
+	}
 })

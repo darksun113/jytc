@@ -34,7 +34,9 @@
 		},
 		methods:{
 			toDetailPage(){
-				this.$routerTo("../../subpageA/DetailPage/DetailPage")
+				const goodsId=""
+				const type=0
+				this.$routerTo(`../../subpageA/DetailPage/DetailPage?goodsId=${goodsId}&type=${type}`)
 			}
 		}
 	}

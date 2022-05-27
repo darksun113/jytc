@@ -55,7 +55,7 @@
 			})
 		},
 		destroyed() {
-			uni.$off("toOplenSharePoster")
+			uni.$off("toOpenSharePoster")
 		},
 		methods: {
 			joinSuccess(){

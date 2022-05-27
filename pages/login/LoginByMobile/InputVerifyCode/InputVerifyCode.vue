@@ -1,0 +1,91 @@
+<template>
+	<PageTemp>
+		<view class="login-page">
+			<view class="title-box">
+				<view class="title-text">
+					输入验证码
+				</view>
+				<view class="title-tip">
+					<view class="tip-phone">
+						已发送到 {{phone}}
+					</view>
+					<view class="count" @click="getCode">
+						重新发送<text v-show="$store.state.isCount">({{$store.state.second}})</text>
+					</view>
+				</view>
+			</view>
+			<view class="code-box">
+				<u-code-input v-model="value" :hairline="true" mode="line" color="#9A98ED" @finish="finish"></u-code-input>
+			</view>
+		</view>
+		<PuzzleCode style="z-index:9999999" @resetPuzzle="starCheckRobot" :bind="$attrs" :show="isPuzzleShow"
+			success-text="验证成功" fail-text="验证失败" slider-text="拖动滑块完成拼图" @success="puzzleSuccess" @close="puzzleClose" />
+	</PageTemp>
+</template>
+
+<script>
+	import mixin from "../../mixins/PuzzleCodeMixin.js"
+	export default {
+		data() {
+			return {
+				value:'',
+				phone:null
+			}
+		},
+		onLoad(opt) {
+			this.phone=opt.phone
+		},
+		mixins:[mixin],
+		methods: {
+			finish(){
+				const token = "a53d3100-6d99-4c7d-94af-b64b09738c71"
+				uni.setStorageSync("token",token)
+				this.$routerTo(2,"back")
+			},
+			getCode() {
+				this.starCheckRobot(3, this.phone)
+			},
+			// 人机验证通过后自定义方法执行
+			doSomething(){},
+		}
+	}
+</script>
+
+<style lang="scss" scoped>
+	.login-page{
+		padding: 96rpx 100rpx;
+		.title-box {
+			.title-text {
+				font-size: 42rpx;
+				font-family: PingFangSC-Medium, PingFang SC;
+				font-weight: 500;
+				color: #FFFFFF;
+				line-height: 48rpx;
+			}
+		
+			.title-tip {
+				margin-top: 40rpx;
+				display: flex;
+				.tip-phone{
+					font-size: 28rpx;
+					font-family: PingFangSC-Regular, PingFang SC;
+					font-weight: 400;
+					color: #CCCCCC;
+					line-height: 48rpx;
+					margin-right: 40rpx;
+				}
+				.count{
+					font-size: 24rpx;
+					font-family: PingFangSC-Regular, PingFang SC;
+					font-weight: 400;
+					color: #A5A6FF;
+					line-height: 48rpx;
+				}
+			}
+			
+		}
+		.code-box{
+			margin-top: 96rpx;
+		}
+	}
+</style>

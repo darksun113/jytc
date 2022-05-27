@@ -2,22 +2,48 @@
 	"easycom": {
 		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
 	},
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/home/home",
-			"style": {
-				"navigationBarTitleText": "首页",
-				"navigationBarTextStyle": "white"
-			}
-		}, {
-			"path": "pages/user/user",
-			"style": {
-				"navigationBarTitleText": "我的",
-				"enablePullDownRefresh": false
-			}
-
+	"pages": [{
+		"path": "pages/home/home",
+		"style": {
+			"navigationBarTitleText": "首页",
+			"navigationBarTextStyle": "white"
 		}
-	],
+	}, {
+		"path": "pages/user/user",
+		"style": {
+			"navigationBarTitleText": "我的",
+			"enablePullDownRefresh": false
+		}
+
+	}, {
+		"path": "pages/login/LoginByMobile/GetVerifyCode/GetVerifyCode",
+		"style": {
+			"navigationBarTitleText": "登录",
+			"enablePullDownRefresh": false
+		}
+
+	}, {
+		"path": "pages/login/LoginByMobile/InputVerifyCode/InputVerifyCode",
+		"style": {
+			"navigationBarTitleText": "登录",
+			"enablePullDownRefresh": false
+		}
+
+	}, {
+		"path": "pages/login/loginByPwd/loginByPwd",
+		"style": {
+			"navigationBarTitleText": "登录",
+			"enablePullDownRefresh": false
+		}
+
+	}, {
+		"path": "pages/login/ResetPwd/ResetPwd",
+		"style": {
+			"navigationBarTitleText": "",
+			"enablePullDownRefresh": false
+		}
+
+	}],
 	"tabBar": {
 		"color": "#6667AB", //字体颜色
 		"selectedColor": "#FFFFFF", //选中时字体颜色
@@ -39,20 +65,22 @@
 			}
 		]
 	},
+	"preloadRule":{
+		"pages/home/home":{
+			"network": "all",
+			"packages": ["__App__"]
+		},
+		"pages/user/user":{
+			"network": "all",
+			"packages": ["__App__"]
+		}
+	},
 	"subPackages": [{
 		"root": "subpageA",
 		"pages": [{
-			"path": "LoginPage/LoginPage",
+			"path": "BindIdCard/BindIdCard",
 			"style": {
-				"navigationBarTitleText": "登录",
-				"enablePullDownRefresh": false,
-				"navigationBarTextStyle": "white",
-				"navigationBarBackgroundColor": "#04030A"
-			}
-		}, {
-			"path": "Certification/Certification",
-			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "身份认证",
 				"enablePullDownRefresh": false
 			}
 
@@ -70,16 +98,40 @@
 				"enablePullDownRefresh": false
 			}
 
-		}    ,{
-                    "path" : "SharePage/SharePage",
-                    "style" :                                                                                    
-                {
-                    "navigationBarTitleText": "",
-                    "enablePullDownRefresh": false
-                }
-                
-                }
-            ]
+		}, {
+			"path": "SharePage/SharePage",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "BindCardSuccess/BindCardSuccess",
+			"style": {
+				"navigationBarTitleText": "身份认证",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "BindCardFail/BindCardFail",
+			"style": {
+				"navigationBarTitleText": "身份认证",
+				"enablePullDownRefresh": false
+			}
+
+		}]
+	}, {
+		"root": "subpageB",
+		"pages": [{
+			"path": "OrderPage/OrderPage",
+			"style": {
+				"navigationBarTitleText": "我的订单",
+				"navigationBarTextStyle": "black",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+
+		}]
 	}],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

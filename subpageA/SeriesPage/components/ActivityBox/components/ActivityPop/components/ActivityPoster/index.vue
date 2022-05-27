@@ -106,7 +106,6 @@
 				ownerFun.callMethod('_showLoading', '正在生成图片') // 生成图片的 loading 提示
 				setTimeout(() => {
 					const dom = document.getElementById('pagePoster') // 需要生成图片内容的 dom 节点
-					console.log(dom.clientWidth, dom.clientHeight, "clientHeight")
 					html2canvas(dom, {
 						backgroundColor: null,
 						width: dom.clientWidth, //dom 原始宽度

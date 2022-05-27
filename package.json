@@ -2,6 +2,8 @@
   "dependencies": {
     "file-saver": "^2.0.5",
     "html2canvas": "^1.4.1",
-    "image-tools": "^1.4.0"
+    "image-tools": "^1.4.0",
+    "three": "^0.140.2",
+    "three-obj-mtl-loader": "^1.0.3"
   }
 }

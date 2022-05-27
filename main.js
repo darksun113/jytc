@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 
-import request from 'utils/http.js';
+import request from './utils/http.js'
 import store from './store'
 import uView from "uview-ui"
 
@@ -20,7 +20,7 @@ Object.assign(Vue.prototype, {
 	'$routerTo': routerTo,
 })
 
-Vue.prototype.checkLogin = function() {
+Vue.prototype.$checkLogin = function() {
 	const token = uni.getStorageSync("token") || ''
 	return token ? true : false
 }

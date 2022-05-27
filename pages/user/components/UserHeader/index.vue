@@ -1,0 +1,148 @@
+<template>
+	<view class="user-header-default" v-if="false">
+		<image class="default-avatar" src="@/static/images/power_num_avatar.png"></image>
+		<view class="login-text">
+			<view style="margin-right: 40rpx;">注册 / 登录</view>
+			<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>
+		</view>
+	</view>
+	<view class="user-header" v-else>
+		<image class="avatar" src="@/static/images/power_num_avatar.png"></image>
+		<view class="user-info">
+			<view class="name-box">
+				<view class="name nowrap">张三</view>
+				<view class="real-name">未认证</view>
+			</view>
+			<view class="user-info-item">
+				<view class="id-style">
+					<view>ID：</view> 
+					<view class="nowrap_s" style="max-width: 300rpx;">500498500498</view>
+				</view>
+				<image class="copy-icon" src="@/static/images/copy_icon.svg" @click="copy('500498500498')"></image>
+			</view>
+			<view class="user-info-item">
+				<view class="id-style">
+					<view style="min-width: 164rpx;">区块链地址：</view> 
+					<view class="nowrap_s" style="max-width: 300rpx;">0ancad12akshuf48awd43ad</view>
+				</view>
+				<image class="copy-icon" src="@/static/images/copy_icon.svg" @click="copy('0ancad123vz3af3asdehaukwfgfgg546')"></image>
+			</view>
+			<view class="fans-focus">
+				<view class="item">
+					<text style="margin-right: 10rpx;color: #CCC;">粉丝</text>16
+				</view>
+				<view class="item">
+					<text style="margin-right: 10rpx;color: #CCC;">
+						关注</text>16
+				</view>
+				<view class="item">
+					<text style="margin-right: 10rpx;color: #CCC;">
+						藏品</text>16
+				</view>
+			</view>
+		</view>
+	</view>
+</template>
+
+<script>
+	export default{
+		data(){
+			return{
+				
+			}
+		},
+		methods:{
+			 copy(info){
+				uni.setClipboardData({
+					data: info,
+					success: () => {
+						uni.showToast({
+							title: "复制成功",
+							icon: "none"
+						})
+					}
+				}); 
+			 }
+		}
+	}
+</script>
+
+<style lang="scss" scoped>
+	.user-header{
+		display: flex;
+		margin-top: 40rpx;
+		.avatar{
+			width: 130rpx;
+			min-width: 130rpx;
+			height: 130rpx;
+			min-height: 130rpx;
+			border-radius: 50%;
+			margin-right: 36rpx;
+		}
+		.user-info{
+			width: calc(100% - 130rpx);
+			.name-box{
+				font-family: PingFangSC-Medium, PingFang SC;
+				color: #FFFFFF;
+				display: flex;
+				align-items: center;
+				font-weight: 500;
+				.name{
+					font-size: 32rpx;
+					line-height: 44rpx;
+					margin-right: 20rpx;
+				}
+				.real-name{
+					width: 88rpx;
+					min-width: 88rpx;
+					height: 32rpx;
+					background: #6667AB;
+					border-radius: 4rpx;
+					text-align: center;
+					font-size: 20rpx;
+					line-height: 32rpx;
+				}
+			}
+			.user-info-item{
+				display: flex;
+				align-items: center;
+				margin-top: 6rpx;
+				.id-style{
+					display: flex;
+					font-size: 28rpx;
+					max-width: 500rpx;
+					font-family: PingFangSC-Regular, PingFang SC;
+					font-weight: 400;
+					color: #FFFFFF;
+					line-height: 40rpx;
+				}
+				.copy-icon{
+					width: 20rpx;
+					height: 20rpx;
+					margin-left: 20rpx;
+				}
+			}
+			.fans-focus{
+				display: flex;
+				justify-content: space-between;
+				font-family: PingFangSC-Regular, PingFang SC;
+				margin-top: 20rpx;
+				font-size: 28rpx;
+			}
+		}
+	}
+	.user-header-default{
+		display: flex;
+		align-items: center;
+		.default-avatar{
+			width: 130rpx;
+			height: 130rpx;
+			border-radius: 50%;
+			margin-right: 36rpx;
+		}
+		.login-text{
+			display: flex;
+			align-items: center;
+		}
+	}
+</style>

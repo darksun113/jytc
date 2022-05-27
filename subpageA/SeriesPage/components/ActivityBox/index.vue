@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="active-tip">
+		<view class="active-tip" v-if="false">
 			<view class="active-tip-info">
 				<view class="active-tip-info-title">
 					预购活动已开启
@@ -12,6 +12,21 @@
 			<view class="active-btn-box">
 				<view class="custom-style" @click="toJoin">
 					{{joinStatus == 0?'参与':'已参与'}}
+				</view>
+			</view>
+		</view>
+		<view class="active-tip" v-else>
+			<view class="active-tip-info">
+				<view class="active-tip-info-title">
+					查看获得预购资格名单
+				</view>
+				<view class="active-tip-info-count">
+					889850人参与
+				</view>
+			</view>
+			<view class="active-btn-box">
+				<view class="custom-style" @click="toJoin">
+					查看
 				</view>
 			</view>
 		</view>

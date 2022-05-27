@@ -1,5 +1,6 @@
-const baseUrl = "http://192.168.2.127:18940";
-// const baseUrl = "http://192.168.2.127:18938";
+// const baseUrl = "http://192.168.2.127:18940";
+const baseUrl = "http://120.197.126.61:18938/";
+const pathArr=[]
 const request = (url = '', date = {}, type = 'POST', header = {}) => {
 	uni.showLoading()
 	const token = getToken()

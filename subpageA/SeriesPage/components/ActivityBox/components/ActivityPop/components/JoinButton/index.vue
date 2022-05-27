@@ -29,7 +29,6 @@
 		methods:{
 			toJoinActivity(){
 				this.isShow=true
-				// this.$emit("joinSuccess")
 			}
 		}
 	}

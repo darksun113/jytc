@@ -25,32 +25,38 @@
 				</view>
 			</view>
 			<view class="active-btn-box">
-				<view class="custom-style" @click="toJoin">
+				<view class="custom-style" @click="toViewWinnerList">
 					查看
 				</view>
 			</view>
 		</view>
-		<ActivityPop @close="isShow=false" :isShow="isShow"></ActivityPop>
+		<ActivityPop @close="isJoinShow=false" :isShow="isJoinShow"></ActivityPop>
+		<WinnerList @close="isWinnerOpen=false" :isShow="isWinnerOpen"></WinnerList>
 	</view>
 </template>
 
 <script>
 	import ActivityPop from "./components/ActivityPop/index.vue"
+	import WinnerList from "./components/WinnerList/index.vue"
 	export default{
 		data(){
 			return {
 				joinStatus:0,
-				isShow:false,
-				
+				isJoinShow:false,
+				isWinnerOpen:false
 			}
 		},
 		components:{
-			ActivityPop
+			ActivityPop,
+			WinnerList
 		},
 		methods:{
 			toJoin(){
-				this.isShow=true
+				this.isJoinShow=true
 				this.joinStatus==0?this.joinStatus=1:this.joinStatus=0
+			},
+			toViewWinnerList(){
+				this.isWinnerOpen=true
 			}
 		}
 	}

@@ -31,5 +31,6 @@
 		background: #04030A;
 		padding: 0 30rpx;
 		color: #FFFFFF;
+		overflow: auto;
 	}
 </style>

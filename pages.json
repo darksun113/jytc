@@ -65,12 +65,12 @@
 			}
 		]
 	},
-	"preloadRule":{
-		"pages/home/home":{
+	"preloadRule": {
+		"pages/home/home": {
 			"network": "all",
 			"packages": ["__App__"]
 		},
-		"pages/user/user":{
+		"pages/user/user": {
 			"network": "all",
 			"packages": ["__App__"]
 		}
@@ -129,6 +129,41 @@
 				"navigationBarTextStyle": "black",
 				"enablePullDownRefresh": false,
 				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+
+		}, {
+			"path": "AccountsAndSecurity/AccountsAndSecurity",
+			"style": {
+				"navigationBarTitleText": "账号与安全",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "MyObject/MyObject",
+			"style": {
+				"navigationBarTitleText": "我的藏品",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "MyPreorderList/MyPreorderList",
+			"style": {
+				"navigationBarTitleText": "预购信息",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "PrivacySetting/PrivacySetting",
+			"style": {
+				"navigationBarTitleText": "隐私设置",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "PlatformAbout/PlatformAbout",
+			"style": {
+				"navigationBarTitleText": "关于平台",
+				"enablePullDownRefresh": false
 			}
 
 		}]

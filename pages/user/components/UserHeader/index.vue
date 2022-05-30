@@ -1,13 +1,13 @@
 <template>
 	<view class="user-header-default" v-if="false">
-		<image class="default-avatar" src="@/static/images/power_num_avatar.png"></image>
+		<image class="default-avatar" src="@/static/images/default_avatar.png"></image>
 		<view class="login-text">
 			<view style="margin-right: 40rpx;">注册 / 登录</view>
 			<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>
 		</view>
 	</view>
 	<view class="user-header" v-else>
-		<image class="avatar" src="@/static/images/power_num_avatar.png"></image>
+		<image class="avatar" src="@/static/images/default_avatar.png"></image>
 		<view class="user-info">
 			<view class="name-box">
 				<view class="name nowrap">张三</view>

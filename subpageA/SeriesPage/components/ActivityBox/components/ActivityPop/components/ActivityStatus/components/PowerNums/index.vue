@@ -2,7 +2,7 @@
 	<view class="power-num-box">
 		<swiper class="number-of-power" :current="curDot" @change="swiperChange" :circular='true' :display-multiple-items="5">
 			<swiper-item v-for="i in list" :key="i">
-				<image src="@/static/images/power_num_avatar.png" mode=""></image>
+				<image src="@/static/images/default_avatar.png" mode=""></image>
 			</swiper-item>
 		</swiper>
 		<view class="left-right-icon">

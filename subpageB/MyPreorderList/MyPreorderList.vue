@@ -1,33 +1,21 @@
 <template>
-	<PageTempHasTabbar>
-		<scroll-view class="home" scroll-y="true" @scrolltolower="updateList">
-			<view class="">
-				<Banner></Banner>
-				<StickyNav @changeShowType="changeShowType"></StickyNav>
-				<view class="container">
-					<IsNoData v-if="false">暂无数据</IsNoData>
-					<view v-else>
-						<ModelOfListFlow :seriesList="seriesList" v-if="showType==0"></ModelOfListFlow>
-						<ModelOfWaterFall :seriesList="seriesList" v-else></ModelOfWaterFall>
-						<IsEnd></IsEnd>
-					</view>
+	<PageTemp>
+		<scroll-view class="pre-order" scroll-y="true" @scrolltolower="updateList">
+			<view class="container">
+				<view class="title">
+					已获得以下系列的预购名额
 				</view>
+				<ModelOfListFlow :seriesList="seriesList"></ModelOfListFlow>
+				<IsEnd></IsEnd>
 			</view>
 		</scroll-view>
-	</PageTempHasTabbar>
+	</PageTemp>
 </template>
 
 <script>
-	import Banner from "./components/Banner/index.vue"
-	import StickyNav from "./components/StickyNav/index.vue"
 	export default {
-		components:{
-			Banner,
-			StickyNav
-		},
-		data(){
-			return{
-				showType:0,
+		data() {
+			return {
 				seriesList:[
 					{
 						title:"漫威英雄系列",
@@ -64,24 +52,32 @@
 						authorIcon:require("@/static/images/demo1.png")
 					},
 				]
-			}
+			};
 		},
 		methods:{
-			changeShowType(type){
-				this.showType=type
-			},
-			updateList() {
-				console.log(456)
+			updateList(){
+				console.log(123)
 			}
 		}
 	}
 </script>
 
-<style lang="scss" scoped>
-	.home{
-		box-sizing: border-box;
-		height: 100%;
-		overflow: auto;
-		color: #FFFFFF;
+<style lang="scss">
+.pre-order{
+	height: 100%;
+	box-sizing: border-box;
+	overflow: auto;
+	padding: 40rpx 30rpx;
+	padding-top: 0;
+	.container{
+		.title{
+			font-size: 32rpx;
+			font-family: PingFangSC-Regular, PingFang SC;
+			color: #FFFFFF;
+			line-height: 44rpx;
+			text-align: center;
+			margin: 40rpx 0;
+		}
 	}
+}
 </style>

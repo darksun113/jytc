@@ -30,5 +30,6 @@
 	.page{
 		background: #04030A;
 		color: #FFFFFF;
+		overflow: auto;
 	}
 </style>

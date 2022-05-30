@@ -1,35 +1,35 @@
 <template>
 	<view class="user-menu">
 		<view class="title">常用功能</view>
-		<view class="item-box">
+		<view class="item-box" @click="toSubmenu(0)">
 			<view class="item-right">
 				<image src="@/static/images/my_ objects_icon.svg" mode=""></image>
 				我的藏品
 			</view>
 			<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>
 		</view>
-		<view class="item-box">
+		<view class="item-box" @click="toSubmenu(1)">
 			<view class="item-right">
 				<image src="@/static/images/preorder_icon.svg" mode=""></image>
 				预购信息
 			</view>
 			<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>
 		</view>
-		<view class="item-box">
-			<view class="item-right">
+		<view class="item-box" @click="toSubmenu(2)">
+			<view class="item-right" >
 				<image src="@/static/images/account_security_icon.svg" mode=""></image>
 				帐号与安全
 			</view>
 			<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>
 		</view>
-		<view class="item-box">
+		<view class="item-box" @click="toSubmenu(3)">
 			<view class="item-right">
 				<image src="@/static/images/privacy_icon.svg" mode=""></image>
 				隐私设置
 			</view>
 			<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>
 		</view>
-		<view class="item-box">
+		<view class="item-box" @click="toSubmenu(4)">
 			<view class="item-right">
 				<image src="@/static/images/about_icon.svg" mode=""></image>
 				关于平台
@@ -40,6 +40,27 @@
 </template>
 
 <script>
+	export default {
+		methods:{
+			toSubmenu(idx){
+				const fn_to=(path)=>{
+					this.$routerTo(`/subpageB/${path}/${path}`)
+				}
+				switch(idx){
+					case 0 : fn_to("MyObject")
+					break;
+					case 1 : fn_to("MyPreorderList")
+					break;
+					case 2 : fn_to("AccountsAndSecurity")
+					break;
+					case 3 : fn_to("PrivacySetting")
+					break;
+					case 4 : fn_to("PlatformAbout")
+					break;
+				}
+			}
+		}
+	}
 </script>
 
 <style lang="scss" scoped>

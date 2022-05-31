@@ -19,8 +19,9 @@
 								一起玩转数字藏品
 							</view>
 						</view>
-						<view class="right">
-							<image src="@/static/images/demo_ewm.png" mode=""></image>
+						<view class="right" id="qrBox">
+							<canvas id="qrcode" canvas-id="qrcode" :style="{ width: `${size}px`, height: `${size}px` }"></canvas>
+							<!-- <image src="@/static/images/demo_ewm.png" mode=""></image> -->
 						</view>
 					</view>
 				</view>
@@ -33,6 +34,7 @@
 </template>
 
 <script>
+	import uQRCode from 'u-qrcode';
 	import FileSaver from 'file-saver'
 	import { pathToBase64, base64ToPath } from "@/utils/tools.js"
 	export default {
@@ -46,9 +48,27 @@
 		data() {
 			return {
 				show: this.isOpenPoster,
+				codeUrl: 'http://web.penglainft.com/#/goods_detail?goodsId=3a7425333ee4419094e13c381d0c9086&instanceId&loadType=1&goodsType=1',
+				size: 60,
+				backgroundColor:"#FFFFFF",
+				foregroundColor:"#000000"
 			}
 		},
 		methods: {
+			initQrCode(){
+				this.size=document.getElementById("qrBox").clientWidth
+				const ctx = uni.createCanvasContext('qrcode');
+				const uqrcode = new uQRCode(
+				  {
+				    text: this.codeUrl,
+				    size: this.size,
+					backgroundColor:"#FFFFFF"
+				  },
+				  ctx
+				);
+				uqrcode.make();
+				uqrcode.draw();
+			},
 			// 获取生成的base64 图片路径
 			receiveRenderData(val) {
 				const posterUrl = val.replace(/[\r\n]/g, ''); // 去除base64位中的空格
@@ -85,7 +105,9 @@
 					icon: 'none'
 				});
 			},
-			open() {},
+			open() {
+				this.initQrCode()
+			},
 			close() {
 				this.$emit("close")
 			}
@@ -107,7 +129,7 @@
 				setTimeout(() => {
 					const dom = document.getElementById('pagePoster') // 需要生成图片内容的 dom 节点
 					html2canvas(dom, {
-						backgroundColor: null,
+						backgroundColor: "rbga(0,0,0,0)",
 						width: dom.clientWidth, //dom 原始宽度
 						height: dom.clientHeight,
 						scrollY: 0, // html2canvas默认绘制视图内的页面，需要把scrollY，scrollX设置为0
@@ -197,20 +219,23 @@
 
 						.tip-2 {
 							width: 320rpx;
-							height: 56rpx;
 							font-size: 20rpx;
 							font-family: PingFangSC-Regular, PingFang SC;
 							font-weight: 400;
 							color: #A5A6FF;
-							line-height: 28rpx;
+							line-height: 34rpx;
 						}
 					}
 
 					.right {
 						width: 120rpx;
-						height: 120rpx;
+						// height: 120rpx;
 						min-width: 120rpx;
-
+						background-color: #FFFFFF;
+						border: 4rpx solid #FFF;
+						display: flex;
+						justify-content: center;
+						align-items: center;
 						image {
 							width: 100%;
 							height: 100%;

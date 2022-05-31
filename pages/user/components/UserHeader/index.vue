@@ -28,16 +28,14 @@
 				<image class="copy-icon" src="@/static/images/copy_icon.svg" @click="copy('0ancad123vz3af3asdehaukwfgfgg546')"></image>
 			</view>
 			<view class="fans-focus">
-				<view class="item">
+				<view class="item" @click="toFansPage(0)">
 					<text style="margin-right: 10rpx;color: #CCC;">粉丝</text>16
 				</view>
-				<view class="item">
-					<text style="margin-right: 10rpx;color: #CCC;">
-						关注</text>16
+				<view class="item" @click="toFansPage(1)">
+					<text style="margin-right: 10rpx;color: #CCC;">关注</text>16
 				</view>
 				<view class="item">
-					<text style="margin-right: 10rpx;color: #CCC;">
-						藏品</text>16
+					<text style="margin-right: 10rpx;color: #CCC;">藏品</text>16
 				</view>
 			</view>
 		</view>
@@ -52,7 +50,11 @@
 			}
 		},
 		methods:{
-			 copy(info){
+			toFansPage(type){
+				const url=`/subpageC/UserFansAndFocus/UserFansAndFocus?type=${type}`
+				this.$routerTo(url)
+			},
+			copy(info){
 				uni.setClipboardData({
 					data: info,
 					success: () => {
@@ -62,7 +64,7 @@
 						})
 					}
 				}); 
-			 }
+			}
 		}
 	}
 </script>

@@ -39,7 +39,7 @@
 	}, {
 		"path": "pages/login/ResetPwd/ResetPwd",
 		"style": {
-			"navigationBarTitleText": "",
+			"navigationBarTitleText": "忘记密码",
 			"enablePullDownRefresh": false
 		}
 
@@ -76,98 +76,117 @@
 		}
 	},
 	"subPackages": [{
-		"root": "subpageA",
-		"pages": [{
-			"path": "BindIdCard/BindIdCard",
-			"style": {
-				"navigationBarTitleText": "身份认证",
-				"enablePullDownRefresh": false
-			}
+			"root": "subpageA",
+			"pages": [{
+				"path": "BindIdCard/BindIdCard",
+				"style": {
+					"navigationBarTitleText": "身份认证",
+					"enablePullDownRefresh": false
+				}
 
+			}, {
+				"path": "SeriesPage/SeriesPage",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false
+				}
+
+			}, {
+				"path": "DetailPage/DetailPage",
+				"style": {
+					"navigationBarTitleText": "详情",
+					"enablePullDownRefresh": false
+				}
+
+			}, {
+				"path": "SharePage/SharePage",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false
+				}
+
+			}, {
+				"path": "BindCardSuccess/BindCardSuccess",
+				"style": {
+					"navigationBarTitleText": "身份认证",
+					"enablePullDownRefresh": false
+				}
+
+			}, {
+				"path": "BindCardFail/BindCardFail",
+				"style": {
+					"navigationBarTitleText": "身份认证",
+					"enablePullDownRefresh": false
+				}
+
+			}]
 		}, {
-			"path": "SeriesPage/SeriesPage",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
+			"root": "subpageB",
+			"pages": [{
+				"path": "OrderPage/OrderPage",
+				"style": {
+					"navigationBarTitleText": "我的订单",
+					"navigationBarTextStyle": "black",
+					"enablePullDownRefresh": false,
+					"navigationBarBackgroundColor": "#FFFFFF"
+				}
 
-		}, {
-			"path": "DetailPage/DetailPage",
-			"style": {
-				"navigationBarTitleText": "详情",
-				"enablePullDownRefresh": false
-			}
+			}, {
+				"path": "AccountsAndSecurity/AccountsAndSecurity",
+				"style": {
+					"navigationBarTitleText": "账号与安全",
+					"enablePullDownRefresh": false
+				}
 
-		}, {
-			"path": "SharePage/SharePage",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
+			}, {
+				"path": "MyObject/MyObject",
+				"style": {
+					"navigationBarTitleText": "我的藏品",
+					"enablePullDownRefresh": false
+				}
 
-		}, {
-			"path": "BindCardSuccess/BindCardSuccess",
-			"style": {
-				"navigationBarTitleText": "身份认证",
-				"enablePullDownRefresh": false
-			}
+			}, {
+				"path": "MyPreorderList/MyPreorderList",
+				"style": {
+					"navigationBarTitleText": "预购信息",
+					"enablePullDownRefresh": false
+				}
 
-		}, {
-			"path": "BindCardFail/BindCardFail",
-			"style": {
-				"navigationBarTitleText": "身份认证",
-				"enablePullDownRefresh": false
-			}
+			}, {
+				"path": "PrivacySetting/PrivacySetting",
+				"style": {
+					"navigationBarTitleText": "隐私设置",
+					"enablePullDownRefresh": false
+				}
 
-		}]
-	}, {
-		"root": "subpageB",
-		"pages": [{
-			"path": "OrderPage/OrderPage",
-			"style": {
-				"navigationBarTitleText": "我的订单",
-				"navigationBarTextStyle": "black",
-				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor": "#FFFFFF"
-			}
+			}, {
+				"path": "PlatformAbout/PlatformAbout",
+				"style": {
+					"navigationBarTitleText": "关于平台",
+					"enablePullDownRefresh": false
+				}
 
-		}, {
-			"path": "AccountsAndSecurity/AccountsAndSecurity",
-			"style": {
-				"navigationBarTitleText": "账号与安全",
-				"enablePullDownRefresh": false
-			}
+			}, {
+				"path": "MyOrderCenter/MyOrderCenter",
+				"style": {
+					"navigationBarTitleText": "我的订单",
+					"enablePullDownRefresh": false
+				}
 
-		}, {
-			"path": "MyObject/MyObject",
-			"style": {
-				"navigationBarTitleText": "我的藏品",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "MyPreorderList/MyPreorderList",
-			"style": {
-				"navigationBarTitleText": "预购信息",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "PrivacySetting/PrivacySetting",
-			"style": {
-				"navigationBarTitleText": "隐私设置",
-				"enablePullDownRefresh": false
-			}
-
-		}, {
-			"path": "PlatformAbout/PlatformAbout",
-			"style": {
-				"navigationBarTitleText": "关于平台",
-				"enablePullDownRefresh": false
-			}
-
-		}]
-	}],
+			}]
+		},
+		{
+			"root": "subpageC",
+			"pages": [{
+				"path": "UserFansAndFocus/UserFansAndFocus",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false,
+					"navigationStyle": "custom"
+				}
+			}]
+		}
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "金裕天成",

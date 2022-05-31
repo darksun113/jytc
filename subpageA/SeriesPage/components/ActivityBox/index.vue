@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<view class="active-tip" v-if="false">
+		<view class="active-tip" v-if="true">
 			<view class="active-tip-info">
 				<view class="active-tip-info-title">
 					预购活动已开启

@@ -4,6 +4,7 @@
     "html2canvas": "^1.4.1",
     "image-tools": "^1.4.0",
     "three": "^0.140.2",
-    "three-obj-mtl-loader": "^1.0.3"
+    "three-obj-mtl-loader": "^1.0.3",
+    "u-qrcode": "^3.2.2"
   }
 }

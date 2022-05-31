@@ -7,7 +7,7 @@
 			<view class="nowrap" style="font-size: 28rpx; display: flex; align-items: center">
 				<view class=""> 交易剩余时间 </view>
 				<view style="width: 140rpx;padding-left: 10rpx;">
-					<u-count-down :time="5 * 60  * 1000" format="DD:HH:mm:ss" @finish="countEnd"></u-count-down>
+					<u-count-down :time="5 * 60  * 1000" format="HH:mm:ss" @finish="countEnd"></u-count-down>
 				</view>
 				<view >, 请及时付款！</view>
 			</view>
@@ -37,7 +37,6 @@
 				goodsInfo:{
 					status:0
 				},
-				currentTime:parseInt(Date.now()/1000)
 			}
 		},
 		methods:{

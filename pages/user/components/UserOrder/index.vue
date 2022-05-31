@@ -2,10 +2,10 @@
 	<view class="order-box">
 		<view class="title">我的订单</view>
 		<view class="container">
-			<view style="flex: 1; border-right: 1px solid rgba(255, 255, 255, .2);">
+			<view style="flex: 1; border-right: 1px solid rgba(255, 255, 255, .2);" @click="toOrderCenter(0)">
 				待付款
 			</view>
-			<view style="flex: 1;">
+			<view style="flex: 1;" @click="toOrderCenter(1)">
 				已完成
 			</view>
 		</view>
@@ -13,6 +13,14 @@
 </template>
 
 <script>
+	export default{
+		methods:{
+			toOrderCenter(idx){
+				const url = `/subpageB/MyOrderCenter/MyOrderCenter?type=${idx}`
+				this.$routerTo(url)
+			}
+		}
+	}
 </script>
 
 <style lang="scss" scoped>

@@ -23,8 +23,10 @@
 			WaterFallCard
 		},
 		methods:{
-			toSeriesDetailPage(){
-				this.$routerTo("../../subpageA/SeriesPage/SeriesPage")
+			toSeriesDetailPage(goodsType){
+				const seriesId="7a7e5413004940d8b6d3ca27398f0a0d"
+				const url=`../../subpageA/SeriesPage/SeriesPage?seriesId=${seriesId}`
+				this.$routerTo(url)
 			}
 		}
 	}

@@ -18,7 +18,7 @@
 		},
 		data(){
 			return {
-				isNoData:true,
+				isNoData:false,
 				orderList:[
 					{
 						type:0

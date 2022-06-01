@@ -1,10 +1,10 @@
 <template>
-	<scroll-view class="list-box" scroll-y="true" @scrolltolower="updateList">
-		<view class="item" v-for="i in 20" :key="i">
+	<scroll-view v-if="true" class="list-box" scroll-y="true" @scrolltolower="updateList">
+		<view class="item" v-for="(item,index) in fansList" :key="index" @click="toOtherPage">
 			<view class="user-info">
 				<image class="avatar" src="@/static/images/demo1.png" mode="aspectFill"></image>
 				<view class="info">
-					<view class="name">张三</view>
+					<view class="name">{{item.name}}</view>
 					<view class="fans-collection">
 						<view class="fans-num">粉丝 183</view>
 						<view class="fans-num">藏品数 183</view>
@@ -12,20 +12,58 @@
 				</view>
 			</view>
 			<view class="operate">
-				<view class="btn">
-					回粉
-				</view>
+				<view class="btn" @click="focus(0,index)" v-if="item.isFocus">互相关注</view>
+				<view class="btn" @click="focus(1,index)" v-else>回粉</view>
 			</view>
 		</view>
 	</scroll-view>
+	<SecurityControls v-else-if="true">
+		由于该用户隐私设置，粉丝列表不可见
+	</SecurityControls>
+	<IsNoData v-else>
+		暂无粉丝
+	</IsNoData>
 </template>
 
 <script>
 	export default{
+		data(){
+			return {
+				fansList:[
+					{
+						isFocus:false,
+						name:"张晓"
+					},
+					{
+						isFocus:true,
+						name:"李丽"
+					},
+					{
+						isFocus:false,
+						name:"刘华强"
+					},
+					{
+						isFocus:false,
+						name:'赵世泽'
+					},
+					{
+						isFocus:true,
+						name:"许华强"
+					},
+				]
+			}
+		},
 		methods:{
+			toOtherPage(){
+				this.$emit("toOtherPage")
+			},
+			focus(type,index){
+				// type 0 取消关注  1 关注
+				type==0?this.fansList[index].isFocus=false:this.fansList[index].isFocus=true
+			},
 			updateList(){
 				console.log('update')
-			}
+			},
 		}
 	}
 </script>

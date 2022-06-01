@@ -35,7 +35,6 @@
 	      },
 	      close() {
 	        this.$emit("close")
-	        // console.log('close');
 			uni.$emit("joinSuccess")
 	      },
 		  toOpenSharePoster(){

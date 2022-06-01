@@ -1,9 +1,10 @@
 <template>
 	<view class="show-box">
-		<LoadModel v-if="loadType==0"></LoadModel>
-		<LoadImage v-else-if="loadType==1"></LoadImage>
-		<LoadVideo v-else-if="loadType==2"></LoadVideo>
-		<LoadAudio v-else></LoadAudio>
+		<LoadModel  :goodsData="loadData" v-if="loadData.goodsType==1 && loadData.threeD && loadData.mtl && loadData.mapping"></LoadModel>
+		<LoadImage  :goodsData="loadData" v-else-if="loadData.goodsType==2"></LoadImage>
+		<LoadVideo  :goodsData="loadData" v-else-if="loadData.goodsType==3"></LoadVideo>
+		<LoadAudio  :goodsData="loadData" v-else></LoadAudio>
+		<SharePoster :isOpenPoster="isOpenPoster" @close="isOpenPoster=false" :posterData="posterData"></SharePoster>
 	</view>
 </template>
 
@@ -14,17 +15,37 @@
 	import LoadAudio from "./components/LoadAudio/index.vue"
 	export default{
 		props:{
-			// load 类型 0 模型  1 图片  2 视频 3 音频
-			loadType:{
-				type:Number,
-				default:()=>1
+			// goodsType 类型 1 模型  2 图片  3 视频  4 音频
+			goodsData:{
+				type:Object,
+				default:()=>{}
 			}
+		},
+		data(){
+			return {
+				loadData:this.goodsData,
+				isOpenPoster:false,
+				posterData:{
+					
+				}
+			}
+		},
+		mounted() {
+			uni.$on("toOpenSharePoster",(data)=>{
+				this.posterData={...data}
+				this.isOpenPoster=true
+			})
 		},
 		components:{
 			LoadModel,
 			LoadImage,
 			LoadVideo,
 			LoadAudio
+		},
+		watch:{
+			goodsData(data){
+				this.loadData=data
+			}
 		}
 	}
 </script>

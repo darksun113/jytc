@@ -49,5 +49,4 @@ export default {
     height: 100vh;
     z-index: 9999;
 }
-
 </style>

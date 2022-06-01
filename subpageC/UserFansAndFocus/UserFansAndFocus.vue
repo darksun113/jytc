@@ -2,8 +2,8 @@
 	<view class="fans-focus">
 		<NavBar :current="curTab" @changeTab="changeTab"></NavBar>
 		<view class="main">
-			<Fans v-if="curTab==0"></Fans>
-			<Focus v-else></Focus>
+			<Fans @toOtherPage="toOtherPage" v-if="curTab==0"></Fans>
+			<Focus @toOtherPage="toOtherPage" v-else></Focus>
 		</view>
 	</view>
 </template>
@@ -29,7 +29,11 @@
 		methods:{
 			changeTab(idx){
 				this.curTab=idx
-			}
+			},
+			toOtherPage(data){
+				const url=`../OtherPage/OtherPage`
+				this.$routerTo(url)
+			},
 		}
 	}
 </script>

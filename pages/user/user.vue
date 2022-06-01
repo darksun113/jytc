@@ -1,10 +1,11 @@
 <template>
 	<PageTempHasTabbar>
 		<view class="user-page">
-			<UserHeader></UserHeader>
-			<UserOrder></UserOrder>
-			<UserMenu></UserMenu>
+			<UserHeader :isLogin="isLogin"></UserHeader>
+			<UserOrder :isLogin="isLogin"></UserOrder>
+			<UserMenu :isLogin="isLogin"></UserMenu>
 		</view>
+		<LoginTipPop name="user" :isShow="isShow" @close="isShow=false"></LoginTipPop>
 	</PageTempHasTabbar>
 </template>
 
@@ -20,19 +21,30 @@
 		},
 		data() {
 			return {
-				userInfo:{}
+				userInfo:{},
+				isLogin:false,
+				isShow:false
 			};
 		},
 		onShow() {
-			this.getUserInfo()
+			this.init()
+			uni.$on("showLogin",()=>{
+				this.isShow=true
+			})
+		},
+		onHide() {
+			uni.$off()
 		},
 		methods:{
-			getUserInfo(){
-				const userInfo=uni.getStorageSync("userInfo")
-				if(userInfo){
-					this.$store.commit("updateUserInfo",JSON.parse(userInfo))
+			init(){
+				this.isLogin=this.$checkLogin()
+				if(this.isLogin){
+					this.getUserInfo()
 				}
-				
+			},
+			getUserInfo(){
+				const userInfo=uni.getStorageSync("userInfo") || "{}"
+				this.$store.commit("updateUserInfo",JSON.parse(userInfo))
 			}
 		}
 	}

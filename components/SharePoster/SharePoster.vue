@@ -21,7 +21,6 @@
 						</view>
 						<view class="right" id="qrBox">
 							<canvas id="qrcode" canvas-id="qrcode" :style="{ width: `${size}px`, height: `${size}px` }"></canvas>
-							<!-- <image src="@/static/images/demo_ewm.png" mode=""></image> -->
 						</view>
 					</view>
 				</view>
@@ -38,6 +37,7 @@
 	import FileSaver from 'file-saver'
 	import { pathToBase64, base64ToPath } from "@/utils/tools.js"
 	export default {
+		name:"SharePoster",
 		props: {
 			posterData: {
 				type: Object,
@@ -61,8 +61,7 @@
 				const uqrcode = new uQRCode(
 				  {
 				    text: this.codeUrl,
-				    size: this.size,
-					backgroundColor:"#FFFFFF"
+				    size: this.size
 				  },
 				  ctx
 				);
@@ -129,7 +128,7 @@
 				setTimeout(() => {
 					const dom = document.getElementById('pagePoster') // 需要生成图片内容的 dom 节点
 					html2canvas(dom, {
-						backgroundColor: "rbga(0,0,0,0)",
+						backgroundColor: "none",
 						width: dom.clientWidth, //dom 原始宽度
 						height: dom.clientHeight,
 						scrollY: 0, // html2canvas默认绘制视图内的页面，需要把scrollY，scrollX设置为0

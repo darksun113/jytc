@@ -22,7 +22,7 @@ export default{
 	            ""
 	        }
 	    },
-	    // 加载类型 0 不可控 1 可控（部分） 2 全控
+	    // 加载类型 0 不可控(未购买)  1 可控（已购买）
 	    loadType: [Number,String],
 	},
 	data() {
@@ -123,14 +123,7 @@ export default{
 		                child.receiveShadow = true;
 		            });
 		            that.model = obj;
-		            const setPosition = function(){
-		                switch(that.modelType){
-		                    case 1:return -90;
-		                    case 2:return -25;
-		                    case 3:return -25;
-		                }
-		            }
-		            const y=setPosition()
+		            const y= that.setPosition()
 		            that.model.position.y = y;
 		            // 添加到场景
 		            that.scene.add(that.model);

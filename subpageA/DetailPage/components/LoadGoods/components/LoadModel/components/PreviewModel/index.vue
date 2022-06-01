@@ -1,24 +1,25 @@
 <template>
-	<u-popup v-model="show" mode="center" @close="close" :mask="false">
-		<view class="model_preview">
-			<img class="close_icon" src="../../../../static/images/close_preview_icon.svg" alt="" @click="close">
-			<LoadModelPre  ref="LoadModelPre" v-if="modelData.threeD && modelData.mtl && modelData.mapping && loadType==2" 
-			    :OBJPath="modelData.threeD" :MTLPath="modelData.mtl"  :MAPPath="modelData.mapping"
-				:modelType="modelData.modelType"></LoadModelPre>
-			<view class="control">
-				<img @click="startRotate" src="../../static/images/start_rotate_icon.svg" alt="">
-				<img @click="stopRotate" src="../../static/images/stop_rotate_icon.svg" alt="">
+	<view class="model_preview">
+		<img class="close_icon" src="../../../../static/images/close_preview_icon.svg" alt="" @click="$emit('close')">
+		<LoadModelPre  ref="LoadModelPre" v-if="goodsData.threeD && goodsData.mtl && goodsData.mapping && loadType==2" 
+			:OBJPath="goodsData.threeD" :MTLPath="goodsData.mtl"  :MAPPath="goodsData.mapping"
+			:modelType="goodsData.modelType"></LoadModelPre>
+		<view class="control">
+			<view class="btn" @click="startRotate">
+				<img src="../../static/images/start_rotate_icon.svg" alt="">
+			</view>
+			<view class="btn" @click="stopRotate">
+				<img src="../../static/images/stop_rotate_icon.svg" alt="">
 			</view>
 		</view>
-	</u-popup>
+	</view>
 </template>
 
 <script>
 	import LoadModelPre from "./LoadModelPre.vue"
 	export default {
 		props:{
-			isShow:[Boolean],
-			modelData:{
+			goodsData:{
 				type:Object,
 				default:()=>{}
 			}
@@ -36,9 +37,6 @@
 			}
 		},
 		methods:{
-			close(){
-				this.$emit("close")
-			},
 			startRotate(){
 				this.$refs.LoadModelPre.startRotate()
 			},
@@ -58,7 +56,7 @@
 	.model_preview{
 		width: 100vw;
 		height: 100vh;
-		background: rgba(0, 0, 0, .7);
+		background: rgba(0, 0, 0, .8);
 		position: relative;
 		.close_icon{
 			width: 64rpx;
@@ -71,7 +69,6 @@
 		.control{
 			width: 260rpx;
 			height: 80rpx;
-			background: #EFCE91;
 			border-radius: 56rpx;
 			position: absolute;
 			left: 50%;
@@ -80,9 +77,18 @@
 			display: flex;
 			justify-content: space-around;
 			align-items: center;
-			img{
-				width: 40rpx;
-				height: 40rpx;
+			.btn{
+				width: 80rpx;
+				height: 80rpx;
+				border-radius: 50%;
+				background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				img{
+					width: 40rpx;
+					height: 40rpx;
+				}
 			}
 		}
 	}

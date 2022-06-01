@@ -1,9 +1,9 @@
 <template>
 	<PageTemp>
 		<view class="detail-page">
-			<LoadGoods></LoadGoods>
-			<GoodsInfo></GoodsInfo>
-			<ButtonBox></ButtonBox>
+			<LoadGoods :goodsData="goodsData"></LoadGoods>
+			<GoodsInfo :goodsData="goodsData"></GoodsInfo>
+			<ButtonBox :goodsData="goodsData"></ButtonBox>
 		</view>
 	</PageTemp>
 </template>
@@ -12,20 +12,30 @@
 	import LoadGoods from "./components/LoadGoods/index.vue"
 	import GoodsInfo from "./components/GoodsInfo/index.vue"
 	import ButtonBox from "./components/ButtonBox/index.vue"
+	import mixin from "./mixins/mixin.js"
 	export default {
 		components:{
 			LoadGoods,
 			GoodsInfo,
 			ButtonBox
 		},
+		mixins:[mixin],
 		data() {
 			return {
 				// 加载方式 0 未购买  1 已购买
-				loadType: 1
+				loadType: 0,
+				goodsId:"",
+				goodsData:{}
 			}
 		},
+		onUnload() {
+			uni.$off("toOpenSharePoster")
+		},
 		onLoad(opt) {
-			this.loadType=opt.type
+			// loadType: 0 未购买  已购买
+			this.loadType=opt.loadType
+			this.goodsId=opt.goodsId
+			this.goodsType=opt.goodsType
 		}
 	}
 </script>

@@ -14,10 +14,27 @@
 
 <script>
 	export default{
+		props:{
+			isLogin:[Boolean]
+		},
+		data(){
+			return{
+				checkLogin:this.isLogin
+			}
+		},
 		methods:{
 			toOrderCenter(idx){
+				if(!this.checkLogin){
+					uni.$emit("showLogin")
+					return
+				}
 				const url = `/subpageB/MyOrderCenter/MyOrderCenter?type=${idx}`
 				this.$routerTo(url)
+			}
+		},
+		watch:{
+			isLogin(boo){
+				this.checkLogin=boo
 			}
 		}
 	}

@@ -184,7 +184,16 @@
 					"enablePullDownRefresh": false,
 					"navigationStyle": "custom"
 				}
-			}]
+			}    ,{
+                    "path" : "OtherPage/OtherPage",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ]
 		}
 	],
 	"globalStyle": {

@@ -6,7 +6,7 @@
 					确认要退出登录吗
 				</view>
 			</view>
-			<view class="operate-box">
+			<view class="operate-box" @click="exit">
 				确认
 			</view>
 		</view>
@@ -29,6 +29,11 @@
 		methods:{
 			close(){
 				this.$emit('close')
+			},
+			exit(){
+				uni.removeStorageSync("token")
+				uni.removeStorageSync("userInfo")
+				this.$routerTo(1,"back")
 			}
 		},
 		watch:{

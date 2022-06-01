@@ -5,7 +5,7 @@
 			<view class="container">
 				<ActivityDesBox></ActivityDesBox>
 				<ActivityBox></ActivityBox>
-				<GoodsList ref="GoodsList"></GoodsList>
+				<GoodsList ref="GoodsList" :seriesId="seriesId"></GoodsList>
 			</view>
 		</scroll-view>
 	</PageTemp>
@@ -25,8 +25,11 @@
 		},
 		data() {
 			return {
-				
+				seriesId:""
 			};
+		},
+		onLoad(opt) {
+			this.seriesId=opt.seriesId
 		},
 		mounted() {
 			uni.setNavigationBarTitle({

@@ -8,7 +8,7 @@
 						深圳百纳维科技有限公司
 					</view>
 				</view>
-				<view class="count-box">
+				<view class="count-box" style="justify-content: end;">
 					<text v-if="item.type==0">交易完成</text>
 					<text v-else style="color:#888888;">已取消</text>
 				</view>
@@ -66,100 +66,5 @@
 </script>
 
 <style lang="scss" scoped>
-	::v-deep .u-count-down__text {
-		color: #FFD690;
-		font-size: 28rpx;
-	}
-	.item {
-		padding: 40rpx;
-		margin-bottom: 40rpx;
-		background: #0A0C47;
-		border-radius: 20rpx;
-
-		.item-top {
-			padding-bottom: 20rpx;
-			border-bottom: 2rpx dashed rgba(255, 255, 255, .1);
-
-			.title-box {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-
-				.author-box {
-					display: flex;
-					align-items: center;
-					margin-right: 40rpx;
-
-					.avatar {
-						width: 36rpx;
-						min-width: 36rpx;
-						height: 36rpx;
-						border-radius: 50%;
-						margin-right: 10rpx;
-					}
-
-					.author {
-						font-size: 24rpx;
-						font-family: PingFangSC-Regular, PingFang SC;
-						font-weight: 400;
-						color: #FFFFFF;
-						line-height: 34rpx;
-					}
-				}
-
-				.count-box {
-					width: 150rpx;
-					text-align: right;
-					min-width: 150rpx;
-					font-size: 28rpx;
-				}
-			}
-
-			.order-time {
-				margin-top: 20rpx;
-				font-size: 24rpx;
-				font-family: PingFangSC-Regular, PingFang SC;
-				font-weight: 400;
-				color: #FFFFFF;
-				line-height: 34rpx;
-			}
-		}
-
-		.item-center {
-			padding-top: 30rpx;
-			display: flex;
-
-			.goods-pic {
-				height: 200rpx;
-				width: 200rpx;
-				min-width: 200rpx;
-				margin-right: 20rpx;
-			}
-
-			.goods-info {
-				font-family: PingFangSC-Medium, PingFang SC;
-				display: flex;
-				flex-direction: column;
-				justify-content: space-between;
-
-				.goods-name {
-					font-size: 32rpx;
-					font-weight: 500;
-					color: #FFFFFF;
-					line-height: 44rpx;
-				}
-
-				.goods-type {
-					width: 36rpx;
-					height: 36rpx;
-				}
-
-				.price {
-					font-size: 44rpx;
-					font-weight: 500;
-					color: #FFFFFF;
-				}
-			}
-		}
-	}
+@import "../../../common.scss";
 </style>

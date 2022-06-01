@@ -1,18 +1,17 @@
 <template>
-	<view class="card-of-object">
+	<view class="card-of-object" @click="toGoodsDetail">
 		<view class="goods-pic-box">
-			<image class="goods-pic" src="../../static/images/demo2.png" mode="aspectFill"></image>
+			<image class="goods-pic" :src="item.image" mode="aspectFill"></image>
 			<view class="icon">
-				<image v-if="item.type==0" class="goods-type" src="@/static/images/type_pic.svg" mode=""></image>
-				<image v-else-if="item.type==1" class="goods-type" src="@/static/images/type_3D.svg" mode=""></image>
-				<image v-else-if="item.type==2" class="goods-type" src="@/static/images/type_video.svg" mode=""></image>
-				<image v-else-if="item.type==3" class="goods-type" src="@/static/images/type_audio.svg" mode=""></image>
+				<image v-if="item.goodsType==1" class="goods-type" src="@/static/images/type_3D.svg" mode=""></image>
+				<image v-else-if="item.goodsType==2" class="goods-type" src="@/static/images/type_pic.svg" mode=""></image>
+				<image v-else-if="item.goodsType==3" class="goods-type" src="@/static/images/type_video.svg" mode=""></image>
+				<image v-else-if="item.goodsType==4" class="goods-type" src="@/static/images/type_audio.svg" mode=""></image>
 			</view>
 		</view>
-		
 		<view class="goods-info">
 			<view class="goods-name nowrap_2">
-				故宫里的中国节-中秋当名字过长时换行当名字过长时换行当名字过长时换行
+				{{item.name}}
 			</view>
 			<view class="goods-code-box">
 				<view class="code">
@@ -20,9 +19,9 @@
 				</view>
 			</view>
 			<view class="author-box">
-				<image class="author-icon" src="../../static/images/demo1.png" mode=""></image>
+				<image class="author-icon" :src="item.authorIcon" mode=""></image>
 				<view class="author-name nowrap">
-					深圳百纳维科技有限公司
+					{{item.author}}
 				</view>
 			</view>
 		</view>
@@ -32,12 +31,23 @@
 <script>
 	export default {
 		name:"CardOfObject",
+		props:{
+			item:{
+				type:Object,
+				default:()=>{}
+			}
+		},
 		data() {
 			return {
-				item:{
-					type:0
-				}
+				
 			};
+		},
+		methods:{
+			toGoodsDetail(){
+				const goodsId="7a7e5413004940d8b6d3ca27398f0a0d"
+				const url=`/subpageA/DetailPage/DetailPage?loadType=1&goodsId=${goodsId}&goodsType=${this.item.goodsType}`
+				this.$routerTo(url)
+			}
 		}
 	}
 </script>
@@ -59,6 +69,7 @@
 		.goods-pic{
 			width: 100%;
 			height: 100%;
+			border-radius: 8rpx;
 		}
 		.icon{
 			position: absolute;

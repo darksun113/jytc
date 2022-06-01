@@ -1,7 +1,7 @@
 <template>
-	<view class="user-header-default" v-if="false">
+	<view class="user-header-default" v-if="!checkLogin">
 		<image class="default-avatar" src="@/static/images/default_avatar.png"></image>
-		<view class="login-text">
+		<view class="login-text" @click="toLogin">
 			<view style="margin-right: 40rpx;">注册 / 登录</view>
 			<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>
 		</view>
@@ -34,7 +34,7 @@
 				<view class="item" @click="toFansPage(1)">
 					<text style="margin-right: 10rpx;color: #CCC;">关注</text>16
 				</view>
-				<view class="item">
+				<view class="item" @click="toMyObjects">
 					<text style="margin-right: 10rpx;color: #CCC;">藏品</text>16
 				</view>
 			</view>
@@ -44,14 +44,25 @@
 
 <script>
 	export default{
+		props:{
+			isLogin:[Boolean]
+		},
 		data(){
 			return{
-				
+				checkLogin:this.isLogin
 			}
 		},
 		methods:{
+			toLogin(){
+				const url="/pages/login/LoginByMobile/GetVerifyCode/GetVerifyCode?name=user"
+				this.$routerTo(url)
+			},
 			toFansPage(type){
 				const url=`/subpageC/UserFansAndFocus/UserFansAndFocus?type=${type}`
+				this.$routerTo(url)
+			},
+			toMyObjects(){
+				const url="/subpageB/MyObject/MyObject"
 				this.$routerTo(url)
 			},
 			copy(info){
@@ -64,6 +75,11 @@
 						})
 					}
 				}); 
+			}
+		},
+		watch:{
+			isLogin(boo){
+				this.checkLogin=boo
 			}
 		}
 	}

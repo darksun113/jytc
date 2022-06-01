@@ -9,17 +9,14 @@
 			</view>
 		</view>
 		<view class="account-item" @click="reName">
-			<view class="title">
-				昵称
+			<view class="title">昵称
 			</view>
 			<view class="info" style="display: flex;align-items: center;">
 				张三
 			</view>
 		</view>
 		<view class="account-item">
-			<view class="title">
-				手机号
-			</view>
+			<view class="title">手机号</view>
 			<view class="info" style="display: flex;align-items: center;">
 				159******12
 			</view>

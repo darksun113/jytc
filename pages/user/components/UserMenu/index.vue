@@ -41,8 +41,20 @@
 
 <script>
 	export default {
+		props:{
+			isLogin:[Boolean]
+		},
+		data() {
+			return {
+				checkLogin:this.isLogin
+			}
+		},
 		methods:{
 			toSubmenu(idx){
+				if(!this.checkLogin){
+					uni.$emit("showLogin")
+					return
+				}
 				const fn_to=(path)=>{
 					this.$routerTo(`/subpageB/${path}/${path}`)
 				}
@@ -58,6 +70,11 @@
 					case 4 : fn_to("PlatformAbout")
 					break;
 				}
+			}
+		},
+		watch:{
+			isLogin(boo){
+				this.checkLogin=boo
 			}
 		}
 	}

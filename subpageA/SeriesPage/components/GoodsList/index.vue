@@ -14,6 +14,7 @@
 
 <script>
 	export default {
+		props:["seriesId"],
 		data(){
 			return {
 				isLastItem:false,
@@ -23,34 +24,39 @@
 						image:require("@/static/images/demo2.png"),
 						author:"深圳百纳维科技有限公司",
 						authorIcon:require("@/static/images/demo1.png"),
-						type:0
+						goodsId:"7a7e5413004940d8b6d3ca27398f0a0d",
+						goodsType:1
 					},
 					{
 						title:"超人系列",
 						image:require("@/static/images/demo3.png"),
 						author:"深圳百纳维科技有限公司",
 						authorIcon:require("@/static/images/demo1.png"),
-						type:1
+						goodsId:"7a7e5413004940d8b6d3ca27398f0a0d",
+						goodsType:3
 					},{
 						title:"漫威英雄系列",
 						image:require("@/static/images/demo4.png"),
 						author:"深圳百纳维科技有限公司",
 						authorIcon:require("@/static/images/demo1.png"),
-						type:2
+						goodsId:"7a7e5413004940d8b6d3ca27398f0a0d",
+						goodsType:4
 					},
 					{
 						title:"超人系列",
 						image:require("@/static/images/demo3.png"),
 						author:"深圳百纳维科技有限公司",
 						authorIcon:require("@/static/images/demo1.png"),
-						type:3
+						goodsId:"7a7e5413004940d8b6d3ca27398f0a0d",
+						goodsType:3
 						
 					},{
 						title:"漫威英雄系列",
 						image:require("@/static/images/demo2.png"),
 						author:"深圳百纳维科技有限公司",
 						authorIcon:require("@/static/images/demo1.png"),
-						type:2
+						goodsId:"7a7e5413004940d8b6d3ca27398f0a0d",
+						goodsType:2
 					},
 				]
 			}

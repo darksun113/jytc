@@ -18,7 +18,7 @@
 				</view>
 			</view>
 		</view>
-		<ActivityPoster :isOpenPoster="isOpenPoster" @close="isOpenPoster=false" :posterData="posterData"></ActivityPoster>
+		<SharePoster :isOpenPoster="isOpenPoster" @close="isOpenPoster=false" :posterData="posterData"></SharePoster>
 	</u-popup>
 </template>
 <script>
@@ -26,7 +26,6 @@
 	import ActivityRules from "./components/ActivityRules"
 	import JoinButton from "./components/JoinButton"
 	import ActivityStatus from "./components/ActivityStatus"
-	import ActivityPoster from "./components/ActivityPoster"
 	export default {
 		props:['isShow'],
 		data() {
@@ -43,7 +42,6 @@
 			JoinButton,
 			ActivityRules,
 			ActivityStatus,
-			ActivityPoster
 		},
 		mounted() {
 			uni.$on("toOpenSharePoster",(data)=>{

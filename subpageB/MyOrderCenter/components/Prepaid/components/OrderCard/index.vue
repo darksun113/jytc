@@ -1,5 +1,5 @@
 <template>
-	<view class="item">
+	<view class="item" @click="toOrderPage">
 		<view class="item-top">
 			<view class="title-box">
 				<view class="author-box">
@@ -54,7 +54,7 @@
 			}
 		},
 		methods: {
-			toPay() {
+			toOrderPage(){
 				const url = `/subpageB/OrderPage/OrderPage?orderNo=${1}`
 				this.$routerTo(url)
 			},

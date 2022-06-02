@@ -46,6 +46,24 @@
 						goodsId:"7a7e5413004940d8b6d3ca27398f0a0d",
 						goodsType:3
 						
+					},
+					{
+						name:"超人系列",
+						image:require("@/static/images/demo3.png"),
+						author:"深圳百纳维科技有限公司",
+						authorIcon:require("@/static/images/demo1.png"),
+						goodsId:"7a7e5413004940d8b6d3ca27398f0a0d",
+						goodsType:3
+						
+					},
+					{
+						name:"超人系列",
+						image:require("@/static/images/demo3.png"),
+						author:"深圳百纳维科技有限公司",
+						authorIcon:require("@/static/images/demo1.png"),
+						goodsId:"7a7e5413004940d8b6d3ca27398f0a0d",
+						goodsType:3
+						
 					},{
 						name:"漫威英雄系列",
 						image:require("@/static/images/demo2.png"),

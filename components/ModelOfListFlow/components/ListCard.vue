@@ -77,6 +77,7 @@
 	background: #0A0C47;
 	border-radius: 20rpx;
 	margin-bottom: 40rpx;
+	overflow: hidden;
 	position: relative;
 	.sell-tip{
 		position: absolute;

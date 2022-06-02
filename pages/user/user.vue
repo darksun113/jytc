@@ -53,7 +53,6 @@
 <style lang="scss" scoped>
 .user-page{
 	height: 100%;
-	padding-bottom: 40rpx;
 	overflow: auto;
 }
 </style>

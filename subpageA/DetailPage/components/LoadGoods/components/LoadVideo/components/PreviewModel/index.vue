@@ -1,7 +1,7 @@
 <template>
 	<view class="pre-image">
-		<img class="close_icon" src="../../../../static/images/close_preview_icon.svg" alt="" @click="$emit('close')">
-		<video :src="goodsData.path" controls></video>
+		<img class="close_icon" src="../../../../static/images/close_preview_icon.svg" alt="" @click="close">
+		<VideoPlayer ref="VideoPlayer_1" videoRef="video2"  :videoData="videoData"></VideoPlayer>
 		<view class="control">
 			<view class="btn" @click="startRotate">
 				<img src="../../../../static/images/play_icon.svg" alt="">
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-	import viewer from "viewer"
+	import VideoPlayer from "../VideoPlayer"
 	export default {
 		props: {
 			goodsData: {
@@ -19,14 +19,35 @@
 				default: () => {}
 			}
 		},
+		data(){
+			return {
+				videoData: {
+					poster:'',
+					videoPath:"http://yun-live.oss-cn-shanghai.aliyuncs.com/record/yunlive/record/yunlive/meeting_1070/2020-11-25-09-27-59_2020-11-25-09-35-52.m3u8",
+					autoplay:true,
+					muted:false,
+					controls: true, //是否拥有控制条 【默认true】,如果设为false ,那么只能通过api进行控制了。也就是说界面上不会出现任何控制按钮
+					controlBar:{
+						volumePanel: { //声音样式
+							inline: true // 不使用水平方式
+						},
+						timeDivider: true, // 时间分割线
+						durationDisplay: true, // 总时间
+						progressControl: true, // 进度条
+						remainingTimeDisplay: true, //当前以播放时间
+						fullscreenToggle: true, //全屏按钮
+						pictureInPictureToggle: false, //画中画
+					}
+				}
+			}
+		},
+		components:{
+			VideoPlayer
+		},
 		methods: {
-			// 缩小
-			shrink() {
-
-			},
-			// 放大
-			magnify() {
-
+			close(){
+				this.$refs.VideoPlayer_1.player.dispose()
+				this.$emit("close")
 			}
 		}
 	}

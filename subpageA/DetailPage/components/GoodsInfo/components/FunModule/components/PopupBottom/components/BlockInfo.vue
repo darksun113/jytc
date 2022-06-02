@@ -9,7 +9,8 @@
 					区块哈希
 				</view>
 				<view class="item_info">
-					{{popupData.blockHash}}
+					<!-- {{popupData.blockHash}} -->
+					ZXf08292c1e85285ff35e1a10c4af0ZXf08292c1e85285ff35e1a10c4af0ZXf08292c1
 				</view>
 			</view>
 			<view class="item">
@@ -17,7 +18,8 @@
 					tokenID
 				</view>
 				<view class="item_info">
-					{{popupData.goodsId}}
+					<!-- {{popupData.goodsId}} -->
+					364589540657598123
 				</view>
 			</view>
 			<view class="item">

@@ -38,9 +38,10 @@
 <style lang="scss" scoped>
 	.btn-box{
 		width: 100%;
-		height: 124rpx;
+		height: 208;
 		background: #0A0C47;
 		padding: 20rpx 40rpx;
+		padding-bottom: 80rpx;
 		position: fixed;
 		left: 0;
 		bottom: 0;

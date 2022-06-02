@@ -1,7 +1,7 @@
 <template>
 	<PageTempHasTabbar>
 		<scroll-view class="home" scroll-y="true" @scrolltolower="updateList">
-			<view class="">
+			<view>
 				<Banner></Banner>
 				<StickyNav @changeShowType="changeShowType"></StickyNav>
 				<view class="container">
@@ -31,43 +31,43 @@
 				seriesList:[
 					{
 						title:"漫威英雄系列",
-						image:require("@/static/images/demo2.png"),
+						image:require("@/static/images/demo1.png"),
 						author:"深圳百纳维科技有限公司",
 						authorIcon:require("@/static/images/demo1.png"),
 						goodsType:1
 					},
 					{
 						title:"超人系列",
-						image:require("@/static/images/demo3.png"),
+						image:require("@/static/images/demo4.png"),
 						author:"深圳百纳维科技有限公司",
 						authorIcon:require("@/static/images/demo1.png"),
 						goodsType:2
 					},{
 						title:"漫威英雄系列",
 						image:require("@/static/images/demo5.png"),
-						author:"深圳百纳维科技有限公司",
-						authorIcon:require("@/static/images/demo1.png"),
-						goodsType:2
-					},
-					{
-						title:"超人系列",
-						image:require("@/static/images/demo3.png"),
 						author:"深圳百纳维科技有限公司",
 						authorIcon:require("@/static/images/demo1.png"),
 						goodsType:3
-					},{
-						title:"漫威英雄系列",
-						image:require("@/static/images/demo5.png"),
-						author:"深圳百纳维科技有限公司",
-						authorIcon:require("@/static/images/demo1.png"),
-						goodsType:4
 					},
 					{
 						title:"超人系列",
 						image:require("@/static/images/demo3.png"),
 						author:"深圳百纳维科技有限公司",
 						authorIcon:require("@/static/images/demo1.png"),
-						goodsType:2
+						goodsType:4
+					},{
+						title:"漫威英雄系列",
+						image:require("@/static/images/demo2.png"),
+						author:"深圳百纳维科技有限公司",
+						authorIcon:require("@/static/images/demo1.png"),
+						goodsType:3
+					},
+					{
+						title:"超人系列",
+						image:require("@/static/images/demo6.png"),
+						author:"深圳百纳维科技有限公司",
+						authorIcon:require("@/static/images/demo1.png"),
+						goodsType:1
 					},
 				]
 			}
@@ -85,7 +85,6 @@
 
 <style lang="scss" scoped>
 	.home{
-		box-sizing: border-box;
 		height: 100%;
 		overflow: auto;
 		color: #FFFFFF;

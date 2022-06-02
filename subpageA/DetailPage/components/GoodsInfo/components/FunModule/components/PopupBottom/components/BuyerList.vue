@@ -28,9 +28,7 @@
 						</view>
 					</view>
 				</view>
-				<view v-if="isLastItem" style="text-align: center;color: #888;height:300rpx;padding-top: 100rpx;">
-					-----到底啦-----
-				</view>
+				<IsEnd></IsEnd>
 			</scroll-view>
 		</view>
 	</view>
@@ -48,7 +46,7 @@
 			return {
 				buyerList:[],
 				isNone:false,
-				isLastItem:true,
+				isLastItem:false,
 				isUpdate:true
 			}
 		},
@@ -68,7 +66,7 @@
 			}
 		},
 		created() {
-			this.init()
+			// this.init()
 		},
 		destroyed() {
 			this.buyerList=[]

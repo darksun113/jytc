@@ -30,5 +30,7 @@
 <style lang="scss" scoped>
 .list_layout{
 	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
 }
 </style>

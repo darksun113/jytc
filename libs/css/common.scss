@@ -24,6 +24,11 @@ view{
 }
 html{
 	max-width: 980px;
+	height: 100%;
 	margin: 0 auto;
 	background-color: #000;
 }
+body,html,view{
+	overflow-x: hidden;
+}
+body::-webkit-scrollbar {display: none;}

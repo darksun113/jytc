@@ -3,7 +3,7 @@
 		<view class="detail-page">
 			<LoadGoods :goodsData="goodsData"></LoadGoods>
 			<GoodsInfo :goodsData="goodsData"></GoodsInfo>
-			<ButtonBox :goodsData="goodsData"></ButtonBox>
+			<ButtonBox :goodsData="goodsData" v-if="loadType==0"></ButtonBox>
 		</view>
 	</PageTemp>
 </template>
@@ -45,6 +45,6 @@
 	height: 100%;
 	overflow: auto;
 	position: relative;
-	padding-bottom: 124rpx;
+	/* padding-bottom: 204rpx; */
 }
 </style>

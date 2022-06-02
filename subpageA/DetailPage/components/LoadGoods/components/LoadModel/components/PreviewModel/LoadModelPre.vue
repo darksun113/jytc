@@ -16,7 +16,7 @@ export default {
         initCamera() {
             this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
             // 设置相机位置
-            this.camera.position.set(0 , 0 , 250)
+            this.camera.position.set(0 , 0 , 500)
             this.camera.receiveShadow=true
             // 设置相机指向的位置 默认0，0，0
             this.camera.lookAt(this.scene.position);
@@ -30,6 +30,8 @@ export default {
                 preserveDrawingBuffer: true
             });
             this.renderer.setSize(window.innerWidth, window.innerHeight);
+			// 设置像素比，解决模型失真问题
+			this.renderer.setPixelRatio(window.devicePixelRatio);
             // 告诉渲染器需要阴影效果
             this.renderer.shadowMap.enabled = true;
             this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;

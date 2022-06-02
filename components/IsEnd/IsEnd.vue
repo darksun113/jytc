@@ -1,6 +1,6 @@
 <template>
-	<view style="width: 100%;text-align:center;color: #888;height: 100rpx;line-height: 100rpx;">
-		-----到底啦-----
+	<view class="end" style="">
+		—— 到底了 ——
 	</view>
 </template>
 
@@ -15,6 +15,15 @@
 	}
 </script>
 
-<style lang="scss">
-
+<style lang="scss" scoped>
+.end{
+	width: 100%;
+	text-align:center;
+	line-height: 100rpx;
+	font-size: 24rpx;
+	overflow: hidden;
+	font-family: PingFangSC-Regular, PingFang SC;
+	font-weight: 400;
+	color: #6667AB;
+}
 </style>

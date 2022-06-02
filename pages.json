@@ -184,22 +184,23 @@
 					"enablePullDownRefresh": false,
 					"navigationStyle": "custom"
 				}
-			}    ,{
-                    "path" : "OtherPage/OtherPage",
-                    "style" :                                                                                    
-                {
-                    "navigationBarTitleText": "",
-                    "enablePullDownRefresh": false
-                }
-                
-                }
-            ]
+			}, {
+				"path": "OtherPage/OtherPage",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false
+				}
+
+			}]
 		}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "金裕天成",
 		"navigationBarBackgroundColor": "#04030A",
-		"backgroundColor": "#04030A"
+		"backgroundColor": "#04030A",
+		"app-plus": {
+			"scrollIndicator": "none" //全局 在APP页面都不显示滚动条
+		}
 	}
 }

@@ -1,5 +1,5 @@
 <template>
-	<view class="water_layout" v-else>
+	<view class="water_layout">
 		<view>
 			<WaterFallCard :item="item" v-for="(item,index) in seriesList" :key="index" v-if="index % 2 ==0" @toSeriesDetailPage="toSeriesDetailPage"></WaterFallCard>
 		</view>

@@ -1,7 +1,9 @@
 <template>
 	<view class="load-video">
-		<video class="video" :src="path" :autoplay="true" :muted="true" :loop="true" :controls="false"></video>
-		<Control  v-if="goodsData.loadType==1" @preview="toOpenModelPreImg" @share="toShare"></Control>
+		<view class="video-box">
+			<VideoPlayer ref="VideoPlayer" videoRef="video"  :videoData="videoData"></VideoPlayer>
+		</view>
+		<Control v-if="goodsData.loadType==1" @preview="toOpenModelPreImg" @share="toShare"></Control>
 		<view class="lock_text" v-else>购买后可解锁高清观赏模式</view>
 		<Preview :isShow="isOpenPre">
 			<PreviewModel :goodsData="videoData" @close="closePreviewModel"></PreviewModel>
@@ -10,60 +12,95 @@
 </template>
 
 <script>
+	import Videojs from 'video.js'
+	import 'video.js/dist/video-js.min.css'
 	import Control from "../Control/index.vue"
 	import PreviewModel from "./components/PreviewModel"
-	export default{
-		props:{
+	import VideoPlayer from "./components/VideoPlayer"
+	
+	export default {
+		props: {
 			// goodsData.loadType: 0 未购买 1 已购买
 			// goodsType 类型 1 模型  2 图片  3 视频  4 音频
-			goodsData:{
-				type:Object,
-				default:()=>{}
+			goodsData: {
+				type: Object,
+				default: () => {}
 			}
 		},
-		components:{
+		components: {
 			Control,
-			PreviewModel
+			PreviewModel,
+			VideoPlayer
 		},
-		data(){
+		data() {
 			return {
-				path:"https://oss.nftcn.com.cn/video/20220127/202112310931.mp4",
-				isOpenPre:false,
-				videoData:{}
+				videoPath: "https://oss.nftcn.com.cn/video/20220127/202112310931.mp4",
+				// 'http://yun-live.oss-cn-shanghai.aliyuncs.com/record/yunlive/record/yunlive/meeting_1070/2020-11-25-09-27-59_2020-11-25-09-35-52.m3u8'
+				isOpenPre: false,
+				videoData: {
+					poster:'',
+					videoPath:"http://yun-live.oss-cn-shanghai.aliyuncs.com/record/yunlive/record/yunlive/meeting_1070/2020-11-25-09-27-59_2020-11-25-09-35-52.m3u8",
+					autoplay:true,
+					muted:true,
+					controls: false, //是否拥有控制条 【默认true】,如果设为false ,那么只能通过api进行控制了。也就是说界面上不会出现任何控制按钮
+					controlBar:{
+						volumePanel: { //声音样式
+							inline: false // 不使用水平方式
+						},
+						timeDivider: true, // 时间分割线
+						durationDisplay: true, // 总时间
+						progressControl: true, // 进度条
+						remainingTimeDisplay: true, //当前以播放时间
+						fullscreenToggle: true, //全屏按钮
+						pictureInPictureToggle: false, //画中画
+					}
+				}
 			}
 		},
-		methods:{
-			closePreviewModel(){
-				this.isOpenPre=false
+		mounted() {
+		},
+		destroyed() {
+			
+		},
+		methods: {
+			closePreviewModel() {
+				// this.$refs.VideoPlayer.initVideo()
+				this.isOpenPre = false
 			},
-			toOpenModelPreImg(){
-				const data= {
-					path:this.path
+			toOpenModelPreImg() {
+				this.$refs.VideoPlayer.player.dispose()
+				const data = {
+					path: this.path
 				}
-				this.videoData={...data}
-				this.isOpenPre=true
+				this.videoData = {
+					...data
+				}
+				this.isOpenPre = true
 			},
-			toShare(){
+			toShare() {
 				uni.$emit("toOpenSharePoster")
-			}
+			},
+			
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.load-video{
+	.load-video {
 		width: 100%;
 		height: 100%;
 		position: relative;
-		.video{
+
+		.video-box {
 			width: 450rpx;
 			height: 252rpx;
 			position: absolute;
 			left: 50%;
 			top: 50%;
-			transform: translate(-50%,-50%);
+			transform: translate(-50%, -50%);
 		}
-		.lock_text{
+
+		.lock_text {
 			height: 28rpx;
 			font-size: 20rpx;
 			font-family: PingFangSC-Regular, PingFang SC;
@@ -75,7 +112,8 @@
 			transform: translateX(-50%);
 			bottom: 40rpx;
 			padding-left: 28rpx;
-			&::before{
+
+			&::before {
 				width: 20rpx;
 				height: 20rpx;
 				content: '';

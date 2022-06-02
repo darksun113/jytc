@@ -6,6 +6,7 @@
 				<ActivityDesBox></ActivityDesBox>
 				<ActivityBox></ActivityBox>
 				<GoodsList ref="GoodsList" :seriesId="seriesId"></GoodsList>
+				<IsEnd></IsEnd>
 			</view>
 		</scroll-view>
 	</PageTemp>

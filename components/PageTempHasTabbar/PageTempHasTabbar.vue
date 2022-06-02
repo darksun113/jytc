@@ -1,4 +1,5 @@
 <template>
+	<!-- :style="{height:'calc('+pageHeight+'px - 156rpx)'}" -->
 	<view class="page" :style="{height:'calc('+pageHeight+'px - 156rpx)'}">
 		<slot></slot>
 	</view>
@@ -32,5 +33,8 @@
 		padding: 0 30rpx;
 		color: #FFFFFF;
 		overflow: auto;
+		height: 100%;
+		padding-bottom: 156rpx;
+		// padding-bottom: var(--window-bottom);
 	}
 </style>

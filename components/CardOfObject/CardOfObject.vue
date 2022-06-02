@@ -57,6 +57,7 @@
 	background: #0A0C47;
 	border-radius: 8rpx;
 	margin-bottom: 40rpx;
+	overflow: hidden;
 	padding: 8rpx;
 	color: #FFFFFF;
 	display: flex;

@@ -1,5 +1,5 @@
 <template>
-	<u-sticky style="top: 0;">
+	<!-- <u-sticky style="top: 0;"> -->
 		<view class="nav-box">
 			<view class="nav-bar">
 				<view class="bar" :style="{left:navType==0?'0':'64rpx'}"></view>
@@ -7,7 +7,7 @@
 				<image :src="navType==1?require('./images/waterfall_s_icon.svg'):require('./images/waterfall_icon.svg')" @click="changeNav(1)"></image>
 			</view>
 		</view>
-	</u-sticky>
+	<!-- </u-sticky> -->
 </template>
 
 <script>

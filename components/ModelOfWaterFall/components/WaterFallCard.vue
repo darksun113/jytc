@@ -38,8 +38,8 @@
 	background: #0A0C47;
 	border-radius: 20rpx;
 	margin-bottom: 40rpx;
+	overflow: hidden;
 	width: 336rpx;
-	box-sizing: border-box;
 	.series-pic{
 		width: 100%;
 		border-radius: 20rpx;

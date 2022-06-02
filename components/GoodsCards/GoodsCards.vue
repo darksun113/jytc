@@ -49,6 +49,7 @@
 	background: #0A0C47;
 	border-radius: 8rpx;
 	margin-bottom: 20rpx;
+	overflow: hidden;
 	.goods-pic-box{
 		width: 336rpx;
 		height: 336rpx;

@@ -1,5 +1,5 @@
 <template>
-	<u-swiper :list="bannerList" keyName="url" @change="e => current = e.current" :autoplay="true" indicator indicatorMode="dot">
+	<u-swiper bgColor="transparent" :circular="true" :list="bannerList" imgMode="aspectFill" keyName="url" @change="e => current = e.current" :autoplay="true" indicator indicatorMode="dot">
 		<view slot="indicator" class="indicator">
 			<view class="indicator__dot" v-for="(item, index) in bannerList" :key="index" :class="[index === current && 'indicator__dot--active']">
 			</view>
@@ -13,9 +13,11 @@
 			return {
 				current:0,
 				bannerList: [{
-					url: 'https://cdn.uviewui.com/uview/swiper/swiper2.png',
-				}, {
-					url: 'https://cdn.uviewui.com/uview/swiper/swiper3.png',
+					url: require("@/static/images/banner_1.png")
+				},{
+					url: require("@/static/images/banner_2.png")
+				},{
+					url: require("@/static/images/banner_3.png")
 				}, ]
 			}
 		},

@@ -24,7 +24,8 @@ export default {
                 preserveDrawingBuffer: true
             });
             this.renderer.setSize(this.$refs.model.clientWidth, this.$refs.model.clientHeight);
-			console.log(this.renderer)
+			// 设置像素比，解决模型失真问题
+			this.renderer.setPixelRatio(window.devicePixelRatio);
             // 告诉渲染器需要阴影效果
             this.renderer.shadowMap.enabled = true;
             this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;

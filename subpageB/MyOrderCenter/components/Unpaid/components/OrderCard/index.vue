@@ -39,10 +39,10 @@
 			</view>
 		</view>
 		<view class="item-bottom">
-			<view class="btn btn-cancel" @click="$emit('cancelOrder',159)">
+			<view class="btn btn-cancel" @click.stop="$emit('cancelOrder',159)">
 				取消订单
 			</view>
-			<view class="btn btn-pay" @click="toPay">
+			<view class="btn btn-pay" @click.stop="toPay">
 				立即支付
 			</view>
 		</view>

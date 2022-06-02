@@ -41,6 +41,7 @@
 							</view>
 						</view>
 					</view>
+					<IsEnd></IsEnd>
 				</view>
 			</view>
 		</view>
@@ -92,7 +93,7 @@
 			}
 		},
 		created(){
-			this.getListPic()
+			// this.getListPic()
 		},
 	}
 </script>

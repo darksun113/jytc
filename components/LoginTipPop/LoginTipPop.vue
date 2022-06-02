@@ -1,5 +1,5 @@
 <template>
-	<u-popup :show="show" class="popup" @close="cancel" :closeable=true  mode="center">
+	<u-popup :show="show" class="popup" @close="cancel" :closeable="true" bgColor="transparent" mode="center" >
 		<view class="tokenbox">
 			<view class="token_tip">
 				<view>请先登录而使用平台所有功能</view>

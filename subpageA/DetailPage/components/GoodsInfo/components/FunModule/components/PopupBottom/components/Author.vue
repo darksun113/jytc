@@ -5,16 +5,18 @@
 		</view>
 		<view class="author_content">
 			<view class="pic_box">
-				<img :src="authorInfo.icon" alt="">
+				<!-- <img :src="authorInfo.icon" alt=""> -->
+				<img src="@/static/images/demo1.png" alt="">
 				<view class="author_name nowrap">
-					{{authorInfo.shopName}}
+					<!-- {{authorInfo.shopName}} -->
+					深圳百纳维科技有限公司
 				</view>
 			</view>
 			<view class="author_des">
-				{{authorInfo.description}}
+				<!-- {{authorInfo.description}} -->
+				此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊
 			</view>
 		</view>
-		
 	</view>
 </template>
 
@@ -33,7 +35,7 @@
 			}
 		},
 		created() {
-			this.getAuthorData()
+			// this.getAuthorData()
 		},
 		methods:{
 			async getAuthorData(){

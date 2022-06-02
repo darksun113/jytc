@@ -4,7 +4,7 @@
 			暂无订单
 		</IsNoData>
 		<view v-else>
-			<OrderCard :item="item" v-for="(item,index) in orderList" :key="index"></OrderCard>
+			<OrderCard :item="item" v-for="(item,index) in orderList" :key="index" @cancelOrder="cancelOrder"></OrderCard>
 			<IsEnd></IsEnd>
 		</view>
 		<CancelPop :isShow="isShow" :orderNo="cancelOrderNo" @close="isShow=false" @cancelSuccess="cancelSuccess"></CancelPop>

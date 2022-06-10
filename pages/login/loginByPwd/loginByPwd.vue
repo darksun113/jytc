@@ -51,6 +51,7 @@
 
 <script>
 	import mixin from "../mixins/PuzzleCodeMixin.js"
+	import {getFilePath,rsaEncrypt} from "@/utils/tools.js"
 	export default {
 		data() {
 			return {
@@ -115,7 +116,7 @@
 			},
 			// 滑动拼图验证成功
 			puzzleSuccess(id) {
-			    this.puzzleRoundId=id
+			    this.slidingFigureId=id
 			    this.isPuzzleShow = false // 通过验证后，需要手动隐藏模态框
 			    if (this.loginType && this.loginType == 1) {
 			        this.toLogin()
@@ -124,13 +125,31 @@
 			    }
 			},
 			toLogin(){
-				uni.$u.toast('登录成功')
-				let timer = setTimeout(()=>{
-					clearTimeout(timer)
-					const token = "a53d3100-6d99-4c7d-94af-b64b09738c71"
-					uni.setStorageSync("token",token)
-					this.$routerTo(1,"back")
-				},1000)
+				// #ifdef H5
+					this.loginRequest()
+				// #endif
+			},
+			async loginRequest(){
+				try{
+					const browserCode=uni.getStorageSync("browserCode")
+					const pwd=await rsaEncrypt(this.form.pwd)
+					const res=await uni.$http("/user/webPwdLogin",{
+						browserCode,
+						pwd,
+						phone:this.form.phone,
+						slidingFigureId:this.slidingFigureId
+					})
+					if(res.code==0){
+						uni.setStorageSync("token",res.data.token)
+						let timer = setTimeout(()=>{
+							clearTimeout(timer)
+							uni.$u.toast('登录成功')
+							this.$routerTo(1,"back")
+						},1000)
+					}
+				}catch(e){
+					//TODO handle the exception
+				}
 			},
 			toPhoneLogin(){
 				const url="../LoginByMobile/GetVerifyCode/GetVerifyCode"

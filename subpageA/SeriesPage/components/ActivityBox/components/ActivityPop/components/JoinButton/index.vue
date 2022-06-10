@@ -10,25 +10,19 @@
 		<view class="btn" @click="toJoinActivity">
 			确认
 		</view>
-		<JoinResult :isShow='isShow' @close="isShow=false"></JoinResult>
 	</view>
 </template>
 
 <script>
-	import JoinResult from "./components/JoinResult"
 	export default {
-		components:{
-			JoinResult
-		},
 		data(){
 			return {
-				isChecked:true,
-				isShow:false
+				isChecked:true
 			}
 		},
 		methods:{
 			toJoinActivity(){
-				this.isShow=true
+				uni.$emit("joinSuccessShow")
 			}
 		}
 	}

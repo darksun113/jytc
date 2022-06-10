@@ -32,7 +32,7 @@
 			},
 			exit(){
 				uni.removeStorageSync("token")
-				uni.removeStorageSync("userInfo")
+				uni.removeStorageSync("userId")
 				this.$routerTo(1,"back")
 			}
 		},

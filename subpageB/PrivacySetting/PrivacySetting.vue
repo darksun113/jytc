@@ -19,7 +19,7 @@
 		</view>
 		<view class="pricavy-box">
 			<view class="title">
-				不允许他/她看我的数字收藏
+				不允许他/她看我的粉丝列表
 			</view>
 			<view class="pricavy-item">
 				<text>陌生人</text>
@@ -36,7 +36,7 @@
 		</view>
 		<view class="pricavy-box">
 			<view class="title">
-				不允许他/她看我的数字收藏
+				不允许他/她看我的关注列表
 			</view>
 			<view class="pricavy-item">
 				<text>陌生人</text>
@@ -72,6 +72,32 @@
 				
 			};
 		},
+		onShow() {
+			this.getPrivacySet(item=>{
+				let type=""
+				switch(item.type){
+					case 1: type="stranger_1"
+						break;
+					case 2: type="fans_1"
+						break;
+					case 3: type="friend_1"
+						break;
+					case 4: type="stranger_2"
+						break;
+					case 5: type="fans_2"
+						break;
+					case 6: type="friend_2"
+						break;
+					case 7: type="stranger_3"
+						break;
+					case 8: type="fans_3"
+						break;
+					case 9: type="friend_3"
+						break;
+				}
+				this.renderSwitch(type,item.status)
+			})
+		},
 		methods:{
 			asyncChange(e){
 				uni.showModal({
@@ -82,6 +108,21 @@
 						}
 					}
 				})
+			},
+			async getPrivacySet(callback){
+				try{
+					const res=await uni.$http("/user/getPrivacySet",{})
+					if(res.code==0){
+						res.data.list.forEach(item=>{
+							callback(item)
+						})
+					}
+				}catch(e){
+					//TODO handle the exception
+				}
+			},
+			renderSwitch(type,status){
+				this.pricavyForm[type]=status==0?false:true
 			}
 		}
 	}

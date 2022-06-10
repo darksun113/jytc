@@ -7,35 +7,35 @@
 		</view>
 	</view>
 	<view class="user-header" v-else>
-		<image class="avatar" src="@/static/images/default_avatar.png"></image>
+		<image class="avatar" :src="$store.state.userInfo.avatar"></image>
 		<view class="user-info">
 			<view class="name-box">
-				<view class="name nowrap">张三</view>
-				<view class="real-name">未认证</view>
+				<view class="name nowrap">{{$store.state.userInfo.name}}</view>
+				<view class="real-name" v-if="$store.state.userInfo.certificationStatus!==1">未认证</view>
 			</view>
 			<view class="user-info-item">
 				<view class="id-style">
 					<view>ID：</view> 
-					<view class="nowrap_s" style="max-width: 300rpx;">500498500498</view>
+					<view class="nowrap_s" style="max-width: 300rpx;">{{$store.state.userInfo.buyerId}}</view>
 				</view>
-				<image class="copy-icon" src="@/static/images/copy_icon.svg" @click="copy('500498500498')"></image>
+				<image class="copy-icon" src="@/static/images/copy_icon.svg" @click="copy($store.state.userInfo.buyerId)"></image>
 			</view>
 			<view class="user-info-item">
 				<view class="id-style">
 					<view style="min-width: 164rpx;">区块链地址：</view> 
-					<view class="nowrap_s" style="max-width: 300rpx;">0ancad12akshuf48awd43ad</view>
+					<view class="nowrap_s" style="max-width: 300rpx;">{{$store.state.userInfo.blockchainAddress}}</view>
 				</view>
-				<image class="copy-icon" src="@/static/images/copy_icon.svg" @click="copy('0ancad123vz3af3asdehaukwfgfgg546')"></image>
+				<image class="copy-icon" src="@/static/images/copy_icon.svg" @click="copy($store.state.userInfo.blockchainAddress)"></image>
 			</view>
 			<view class="fans-focus">
 				<view class="item" @click="toFansPage(0)">
-					<text style="margin-right: 10rpx;color: #CCC;">粉丝</text>16
+					<text style="margin-right: 10rpx;color: #CCC;">粉丝</text>{{$store.state.userInfo.fansNumber}}
 				</view>
 				<view class="item" @click="toFansPage(1)">
-					<text style="margin-right: 10rpx;color: #CCC;">关注</text>16
+					<text style="margin-right: 10rpx;color: #CCC;">关注</text>{{$store.state.userInfo.followNumber}}
 				</view>
 				<view class="item" @click="toMyObjects">
-					<text style="margin-right: 10rpx;color: #CCC;">藏品</text>16
+					<text style="margin-right: 10rpx;color: #CCC;">藏品</text>{{$store.state.userInfo.collectionNumber}}
 				</view>
 			</view>
 		</view>

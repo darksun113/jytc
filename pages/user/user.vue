@@ -21,7 +21,6 @@
 		},
 		data() {
 			return {
-				userInfo:{},
 				isLogin:false,
 				isShow:false
 			};
@@ -33,18 +32,14 @@
 			})
 		},
 		onHide() {
-			uni.$off()
+			uni.$off("showLogin")
 		},
 		methods:{
 			init(){
 				this.isLogin=this.$checkLogin()
 				if(this.isLogin){
-					this.getUserInfo()
+					uni.$emit("updateUserInfo")
 				}
-			},
-			getUserInfo(){
-				const userInfo=uni.getStorageSync("userInfo") || "{}"
-				this.$store.commit("updateUserInfo",JSON.parse(userInfo))
 			}
 		}
 	}

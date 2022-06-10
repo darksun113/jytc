@@ -1,6 +1,6 @@
 <template>
 	<view class="show-box">
-		<LoadModel  :goodsData="loadData" v-if="loadData.goodsType==1 && loadData.threeD && loadData.mtl && loadData.mapping"></LoadModel>
+		<LoadModel  :goodsData="loadData" v-if="loadData.goodsType==1"></LoadModel>
 		<LoadImage  :goodsData="loadData" v-else-if="loadData.goodsType==2"></LoadImage>
 		<LoadVideo  :goodsData="loadData" v-else-if="loadData.goodsType==3"></LoadVideo>
 		<LoadAudio  :goodsData="loadData" v-else></LoadAudio>

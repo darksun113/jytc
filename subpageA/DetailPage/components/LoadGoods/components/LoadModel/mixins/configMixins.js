@@ -55,9 +55,9 @@ export default {
         // 瓷器类灯光
         lightTypeOfPorcelain() {
             // 基础光源
-            let ambientLight = new THREE.AmbientLight();
+            let ambientLight = new THREE.AmbientLight(0xeeeeee, 0.8);
             // 平行光
-            let DirectionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+            let DirectionalLight = new THREE.DirectionalLight(0xeeeeee, 0.6);
             DirectionalLight.position.set(60000, 40000, 40000)
             this.camera.add(ambientLight);
             this.camera.add(DirectionalLight);

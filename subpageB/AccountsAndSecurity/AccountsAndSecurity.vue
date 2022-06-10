@@ -1,33 +1,30 @@
 <template>
 	<PageTemp class="user-account">
 		<view class="account-item" @click="changeAvatar">
-			<view class="title">
-				头像
-			</view>
+			<view class="title">头像</view>
 			<view class="info" style="display: flex;align-items: center;">
 				<image  style="width: 84rpx;height: 84rpx;border-radius: 50%;"  src="/static/images/default_avatar.png"></image>
 			</view>
 		</view>
 		<view class="account-item" @click="reName">
-			<view class="title">昵称
-			</view>
+			<view class="title">昵称</view>
 			<view class="info" style="display: flex;align-items: center;">
-				张三
+				{{$store.state.userInfo.name}}
 			</view>
 		</view>
 		<view class="account-item">
 			<view class="title">手机号</view>
 			<view class="info" style="display: flex;align-items: center;">
-				159******12
+				{{$store.state.userInfo.phone}}
 			</view>
 		</view>
 		<view class="account-item">
 			<view class="title">
 				实名认证
 			</view>
-			<view class="info" style="display: flex;align-items: center;">
-				<text>未认证</text>
-				<!-- <text style="color: #888;">已认证</text> -->
+			<view @click="toBindCard" class="info" style="display: flex;align-items: center;">
+				<text style="color: #888;" v-if="$store.state.userInfo.certificationStatus==1">已认证</text>
+				<text v-else>未认证</text>
 			</view>
 		</view>
 		<view class="account-item" style="margin-top: 60rpx;" @click="exit">
@@ -61,6 +58,11 @@
 			};
 		},
 		methods:{
+			toBindCard(){
+				if(this.$store.state.userInfo.certificationStatus==0){
+					this.$routerTo("/subpageA/BindIdCard/BindIdCard")
+				}
+			},
 			// 修改名字
 			reName(){
 				this.isRename=true

@@ -135,9 +135,25 @@
 				}
 				uni.setStorageSync("certificationStatus", 1);
 				uni.navigateTo({
-					url: "../BindCardSuccess/BindCardSuccess",
+					url: "",
 				});
 			},
+			async sendRequest(){
+				try{
+					const res = await uni.$http("/user/bindIdCard",{
+						fullName:this.name,
+						idCard:this.idCard
+					})
+					if(res.code==0){
+						uni.$emit("updateUserInfo")
+						this.$routerTo("../BindCardSuccess/BindCardSuccess")
+					}else{
+						this.$routerTo(`../BindCardFail/BindCardFail?errMsg=${res.errorMsg}`)
+					}
+				}catch(e){
+					//TODO handle the exception
+				}
+			}
 		},
 	};
 </script>

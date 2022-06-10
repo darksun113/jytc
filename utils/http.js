@@ -15,12 +15,13 @@ const request = (url = '', date = {}, type = 'POST', header = {}) => {
 			},
 			dataType: 'json',
 		}
-		pathArr.forEach(item=>{
-			if(data.url!==item){
-				data.header.Authorization = token
-				return
-			}
-		})
+		data.header.Authorization = token
+		// pathArr.forEach(item=>{
+		// 	if(data.url!==item){
+		// 		data.header.Authorization = token
+		// 		return
+		// 	}
+		// })
 		uni.request({ ...data }).then((response) => {
 			let [error, res] = response;
 			if(res.data.code==1000){

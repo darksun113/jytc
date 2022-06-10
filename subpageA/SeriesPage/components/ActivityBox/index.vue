@@ -32,6 +32,7 @@
 		</view>
 		<ActivityPop @close="isJoinShow=false" :isShow="isJoinShow"></ActivityPop>
 		<WinnerList @close="isWinnerOpen=false" :isShow="isWinnerOpen"></WinnerList>
+		<LoginTipPop name="SeriesPage" :isShow="isLoginTip" @close="isLoginTip=false"></LoginTipPop>
 	</view>
 </template>
 
@@ -43,7 +44,8 @@
 			return {
 				joinStatus:0,
 				isJoinShow:false,
-				isWinnerOpen:false
+				isWinnerOpen:false,
+				isLoginTip:false
 			}
 		},
 		components:{
@@ -52,8 +54,13 @@
 		},
 		methods:{
 			toJoin(){
-				this.isJoinShow=true
-				this.joinStatus==0?this.joinStatus=1:this.joinStatus=0
+				const login=this.$checkLogin()
+				if(login){
+					this.isJoinShow=true
+					this.joinStatus==0?this.joinStatus=1:this.joinStatus=0
+				}else{
+					this.isLoginTip=true
+				}
 			},
 			toViewWinnerList(){
 				this.isWinnerOpen=true

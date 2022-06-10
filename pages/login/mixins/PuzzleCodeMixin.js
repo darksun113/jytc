@@ -5,8 +5,8 @@ export default {
             isPuzzleShow: false,
             bgImg: "",
             sliderImg: '',
-            puzzleRoundId: '',
-            type: 1,
+            slidingFigureId: '',
+            type: 2,
             phone: null
         };
     },
@@ -36,7 +36,8 @@ export default {
             try {
                 if (this.checkPhone(phone)) {
 					uni.showLoading()
-                    const res = await uni.$http("notification/sms/sendVerifyCode", { type: this.type, phone})
+					// type 类型 1注册 2登录 3重置密码
+                    const res = await uni.$http("/notification/sms/sendVerifyCode", { type: this.type, phone})
                     if (res.code == 0) {
 						uni.hideLoading()
                         this.countdown()
@@ -66,6 +67,11 @@ export default {
         puzzleClose() {
             this.isPuzzleShow = false // 通过验证后，需要手动隐藏模态框
         },
+		puzzleSuccess(id){
+			this.slidingFigureId=id
+			this.isPuzzleShow = false
+			this.getVerificationCode(this.phone)
+		},
         doSomething(){}
     },
 }

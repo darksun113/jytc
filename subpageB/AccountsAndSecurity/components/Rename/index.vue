@@ -5,7 +5,7 @@
 				<view class="title">修改昵称</view>
 				<view class="author-name">
 					<text style="min-width: 160rpx;">收藏家：</text>
-					<text class="nowrap">张三</text>
+					<text class="nowrap">{{$store.state.userInfo.fullName}}</text>
 				</view>
 				<view class="input-box">
 					<u--input placeholder="请输入内容" border="none" color="#FFF" :customStyle="{background:'#2C2E69',padding:'12rpx 26rpx' }" v-model="renameValue"></u--input>

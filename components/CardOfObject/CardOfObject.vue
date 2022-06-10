@@ -44,7 +44,7 @@
 		},
 		methods:{
 			toGoodsDetail(){
-				const goodsId="7a7e5413004940d8b6d3ca27398f0a0d"
+				const instanceId="7a7e5413004940d8b6d3ca27398f0a0d"
 				const url=`/subpageA/DetailPage/DetailPage?loadType=1&goodsId=${goodsId}&goodsType=${this.item.goodsType}`
 				this.$routerTo(url)
 			}

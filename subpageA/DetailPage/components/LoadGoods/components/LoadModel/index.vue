@@ -1,20 +1,12 @@
 <template>
 	<view class="model-box">
-		<LoadModel
-			ref="d_model"
-			:OBJPath="goodsData.threeD" 
-			:MTLPath="goodsData.mtl" 
-			:MAPPath="goodsData.mapping" 
-			:loadType="goodsData.loadType" 
-			:modelType="goodsData.modelType"
-			>
+		<LoadModel ref="d_model" :OBJPath="goodsData.threeD" :MTLPath="goodsData.mtl" :MAPPath="goodsData.mapping"
+			:loadType="goodsData.loadType" :modelType="goodsData.modelType">
 		</LoadModel>
 		<Preview :isShow="isOpenModelPre">
 			<PreviewModel :goodsData="modelData" @close="closePreviewModel"></PreviewModel>
 		</Preview>
-		<Control  v-if="goodsData.loadType==1" 
-			@preview="toOpenModelPre3D" 
-			@share="toShare"></Control>
+		<Control v-if="goodsData.loadType==1" @preview="toOpenModelPre3D" @share="toShare"></Control>
 		<view class="lock_text" v-else>
 			购买后可解锁高清观赏模式
 		</view>
@@ -26,56 +18,58 @@
 	import PreviewModel from "./components/PreviewModel";
 	import Control from "../Control/index.vue"
 	export default {
-		props:{
+		props: {
 			// goodsData.loadType: 0 未购买 1 已购买
 			// goodsType 类型 1 模型  2 图片  3 视频  4 音频
-			goodsData:{
-				type:Object,
-				default:()=>{}
+			goodsData: {
+				type: Object,
+				default: () => {}
 			}
 		},
-		data(){
-			return{
-				isOpenModelPre:false,
-				modelData:{}
+		data() {
+			return {
+				isOpenModelPre: false,
+				modelData: {}
 			}
 		},
-		components:{
+		components: {
 			LoadModel,
 			PreviewModel,
 			Control
 		},
-		methods:{
-			toShare(){
+		methods: {
+			toShare() {
 				uni.$emit("toOpenSharePoster")
 			},
-			closePreviewModel(){
+			closePreviewModel() {
 				this.$refs.d_model.startRotate()
-				this.isOpenModelPre=false
+				this.isOpenModelPre = false
 			},
-			toOpenModelPre3D(){
-				const data= {
-					threeD:this.goodsData.threeD,
-					mtl:this.goodsData.mtl,
-					mapping:this.goodsData.mapping,
-					modelType:this.goodsData.modelType
+			toOpenModelPre3D() {
+				const data = {
+					threeD: this.goodsData.threeD,
+					mtl: this.goodsData.mtl,
+					mapping: this.goodsData.mapping,
+					modelType: this.goodsData.modelType
 				}
 				this.$refs.d_model.stopRotate()
-				this.modelData={...data}
-				this.isOpenModelPre=true
+				this.modelData = {
+					...data
+				}
+				this.isOpenModelPre = true
 			}
 		},
-		mounted() {
-		}
+		mounted() {}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.model-box{
+	.model-box {
 		width: 100%;
 		height: 100%;
 		position: relative;
-		.control-box{
+
+		.control-box {
 			display: flex;
 			width: 220rpx;
 			justify-content: space-between;
@@ -83,22 +77,25 @@
 			left: 50%;
 			bottom: 20rpx;
 			transform: translateX(-50%);
-			.control{
+
+			.control {
 				width: 60rpx;
 				height: 60rpx;
-				background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);;
+				background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);
+				;
 				border-radius: 50%;
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				img{
+
+				img {
 					width: 28rpx;
 					height: 28rpx;
 				}
 			}
 		}
-		
-		.lock_text{
+
+		.lock_text {
 			height: 28rpx;
 			font-size: 20rpx;
 			font-family: PingFangSC-Regular, PingFang SC;
@@ -110,7 +107,8 @@
 			transform: translateX(-50%);
 			bottom: 40rpx;
 			padding-left: 28rpx;
-			&::before{
+
+			&::before {
 				width: 20rpx;
 				height: 20rpx;
 				content: '';

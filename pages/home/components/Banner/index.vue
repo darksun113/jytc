@@ -8,21 +8,35 @@
 </template>
 
 <script>
+	import {getFilePath} from "@/utils/tools.js"
 	export default {
 		data() {
 			return {
 				current:0,
-				bannerList: [{
-					url: require("@/static/images/banner_1.png")
-				},{
-					url: require("@/static/images/banner_2.png")
-				},{
-					url: require("@/static/images/banner_3.png")
-				}, ]
+				bannerList: []
 			}
 		},
-		created() {
-
+		methods:{
+			async getBanner(){
+				try{
+					const res = await uni.$http("/homepage/getBannerList",{})
+					if(res.code==0){
+						res.data.list.forEach(async item=>{
+							let url = await getFilePath(item.url)
+							item.url=url
+						})
+						this.bannerList=res.data.list
+					}
+				}catch(e){
+					//TODO handle the exception
+				}
+			},
+			init(){
+				this.getBanner()
+			}
+		},
+		mounted() {
+			this.init()
 		}
 	}
 </script>

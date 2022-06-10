@@ -18,6 +18,7 @@
 				</view>
 			</view>
 		</view>
+		<JoinResult :isShow='isShowStatus' @close="isShowStatus=false"></JoinResult>
 		<SharePoster :isOpenPoster="isOpenPoster" @close="isOpenPoster=false" :posterData="posterData"></SharePoster>
 	</u-popup>
 </template>
@@ -26,12 +27,14 @@
 	import ActivityRules from "./components/ActivityRules"
 	import JoinButton from "./components/JoinButton"
 	import ActivityStatus from "./components/ActivityStatus"
+	import JoinResult from "./components/JoinResult/index.vue"
 	export default {
 		props:['isShow'],
 		data() {
 			return {
 				show: this.isShow,
 				isOpenPoster:false,
+				isShowStatus:false,
 				posterData:{
 					state:0
 				}
@@ -42,6 +45,7 @@
 			JoinButton,
 			ActivityRules,
 			ActivityStatus,
+			JoinResult
 		},
 		mounted() {
 			uni.$on("toOpenSharePoster",(data)=>{
@@ -50,6 +54,9 @@
 			})
 			uni.$on("joinSuccess",(data)=>{
 				this.posterData.state=1
+			})
+			uni.$on("joinSuccessShow",()=>{
+				this.isShowStatus=true
 			})
 		},
 		destroyed() {

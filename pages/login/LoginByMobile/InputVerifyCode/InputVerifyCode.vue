@@ -15,7 +15,7 @@
 				</view>
 			</view>
 			<view class="code-box">
-				<u-code-input v-model="value" :hairline="true" mode="line" color="#9A98ED" @finish="finish"></u-code-input>
+				<u-code-input v-model="verifyCode" :hairline="true" mode="line" color="#9A98ED" @finish="finish"></u-code-input>
 			</view>
 		</view>
 		<PuzzleCode style="z-index:9999999" @resetPuzzle="starCheckRobot" :bind="$attrs" :show="isPuzzleShow"
@@ -28,7 +28,7 @@
 	export default {
 		data() {
 			return {
-				value:'',
+				verifyCode:"",
 				phone:null
 			}
 		},
@@ -38,15 +38,31 @@
 		mixins:[mixin],
 		methods: {
 			finish(){
-				const token = "a53d3100-6d99-4c7d-94af-b64b09738c71"
-				uni.setStorageSync("token",token)
-				this.$routerTo(2,"back")
+				// #ifdef H5
+					this.login()
+				// #endif
+			},
+			async login(){
+				try{
+					const browserCode=uni.getStorageSync("browserCode")
+					const res=await uni.$http("/user/webVerifyCodeLogin",{
+						browserCode,
+						phone:this.phone,
+						verifyCode:this.verifyCode,
+						slidingFigureId:this.slidingFigureId
+					})
+					if(res.code==0){
+						uni.setStorageSync("token",res.data.token)
+						this.$routerTo(2,"back")
+					}
+				}catch(e){
+					//TODO handle the exception
+				}
 			},
 			getCode() {
+				this.verifyCode=""
 				this.starCheckRobot(3, this.phone)
-			},
-			// 人机验证通过后自定义方法执行
-			doSomething(){},
+			}
 		}
 	}
 </script>

@@ -51,13 +51,12 @@
 	  }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	view{
 		box-sizing: border-box;
 	}
 	.join-res-box{
 		width: 600rpx;
-		height: 456rpx;
 		background: #0A0C47;
 		border-radius: 20rpx;
 		position: relative;

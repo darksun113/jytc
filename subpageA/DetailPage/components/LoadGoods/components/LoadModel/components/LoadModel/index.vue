@@ -7,8 +7,6 @@
  
 <script>
 import * as THREE from "three";
-import {  OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import {  MTLLoader, OBJLoader } from "three-obj-mtl-loader";
 import configMixins from "../../mixins/configMixins.js";
 import initModelMixin from "../../mixins/initModelMixin.js"
 export default {

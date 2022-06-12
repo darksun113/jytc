@@ -1,4 +1,4 @@
-import {getFilesPath} from "@/utils/tools.js"
+import {getFilePath, getFilesPath} from "@/utils/tools.js"
 export default {
 	methods:{
 		async getGoodsDetail(){
@@ -32,9 +32,55 @@ export default {
 				//TODO handle the exception
 			}
 		},
+		async getGoodsInstanceDetail(){
+			try{
+				const res= await uni.$http("/goods/getGoodsInstanceDetail",{instanceId:this.instanceId})
+				if(res.code==0){
+					const temp={
+						image:res.data.image,
+						shopIcon: res.data.shopIcon,
+						goodsDesc: res.data.goodsDesc,
+					}
+					res.data.mapping?temp.mapping=res.data.mapping:''
+					res.data.threeD?temp.threeD=res.data.threeD:''
+					res.data.mtl?temp.mtl=res.data.mtl:''
+					const objData=await getFilesPath(temp)
+					Object.keys(objData).forEach(key=>{
+						res.data[key]=objData[key]
+					})
+					this.goodsData=res.data
+					this.goodsData.loadType=this.loadType
+					this.goodsData.goodsType=this.goodsType
+					this.goodsData.modelType=4
+				}
+			}catch(e){
+				//TODO handle the exception
+			}
+		},
+		async getBuyers(callback){
+			try{
+				const res=await uni.$http("/goods/getBuyers",{goodsId:this.goodsId,size:3})
+				if(res.code==0){
+					res.data.list.forEach(async item=>{
+						item.recipientIcon = await getFilePath(item.recipientIcon) 
+						callback(item)
+					})
+				}
+			}catch(e){
+				//TODO handle the exception
+			}
+		},
 		async init(){
+			if(this.loadType==0){
+				this.getGoodsDetail()
+				this.getBuyers(item=>{
+					this.buyerList.push(item)
+					this.buyerList=this.buyerList.sort((a,b)=>b.createTime-a.createTime)
+				})
+			}else{
+				this.getGoodsInstanceDetail()
+			}
 			
-			this.getGoodsDetail()
 		}
 	},
 	mounted(){

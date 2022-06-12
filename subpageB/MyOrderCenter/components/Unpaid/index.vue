@@ -4,8 +4,8 @@
 			暂无订单
 		</IsNoData>
 		<view v-else>
-			<OrderCard :item="item" v-for="(item,index) in orderList" :key="index" @cancelOrder="cancelOrder"></OrderCard>
-			<IsEnd></IsEnd>
+			<OrderCard :item="item" :index="index" v-for="(item,index) in orderList" :key="index" @cancelOrder="cancelOrder"></OrderCard>
+			<IsEnd v-if="isLastData"></IsEnd>
 		</view>
 		<CancelPop :isShow="isShow" :orderNo="cancelOrderNo" @close="isShow=false" @cancelSuccess="cancelSuccess"></CancelPop>
 	</scroll-view>
@@ -14,6 +14,7 @@
 <script>
 	import CancelPop from "./components/CancelPop/index.vue"
 	import OrderCard from "./components/OrderCard/index.vue"
+	import {getFilesPath} from "@/utils/tools.js"
 	export default{
 		components:{
 			OrderCard,
@@ -25,30 +26,74 @@
 				isShow:false,
 				// 要取消的订单号
 				cancelOrderNo:null,
-				orderList:[
-					{
-						type:0
-					},
-					{
-						type:1
-					},
-					{
-						type:3
-					}
-				] 
+				cancelIdx:null,
+				isLastData:false,
+				updatePage:1,
+				orderList:[] 
 			} 
 		},
+		mounted() {
+			this.init()
+		},
 		methods:{
-			cancelOrder(orderNo){
+			init(){
+				this.orderList=[]
+				this.getOrderList(parseInt(Date.now()/1000),item=>{
+					if(item==0){
+						this.isNoData=true
+					}else{
+						this.orderList=this.orderList.push(item).sort((a,b)=>a.createTime-b.createTime)
+					}
+				})
+			},
+			async getOrderList(createTime,callback){
+				try{
+					const res= await uni.$http("/order/list",{
+						status:0,
+						size:10,
+						createTime,
+						optType:0,
+						page:this.updatePage
+					})
+					if(res.code==0){
+						if(res.data.list.length==0){
+							callback(0)
+						}else{
+							res.data.list.forEach(async item=>{
+								const temp={
+									image:item.goods.image,
+									shopIcon:item.goods.shopIcon
+								}
+								const objData = await getFilesPath(temp)
+								Object.keys(objData).forEach(key=>{
+									item.goods[key]=objData[key]
+								})
+								callback(item)
+							})
+						}
+					}
+				}catch(e){
+					//TODO handle the exception
+				}
+			},
+			cancelOrder(orderNo,index){
 				this.cancelOrderNo=orderNo
+				this.cancelIdx=index
 				this.isShow=true
 			},
 			cancelSuccess(){
 				this.isShow=false
-				console.log("cancelSuccess")
+				this.orderList.splice(this.cancelIdx,1)
 			},
 			updateList(){
-				console.log('update')
+				const createTime=this.orderList[this.orderList.length-1].createTime
+				this.getOrderList(createTime,item=>{
+					if(item==0){
+						this.isLastData=true
+					}else{
+						this.orderList=this.orderList.push(item).sort((a,b)=>a.createTime-b.createTime)
+					}
+				})
 			}
 		}
 	}

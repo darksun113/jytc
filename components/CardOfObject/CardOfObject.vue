@@ -11,17 +11,19 @@
 		</view>
 		<view class="goods-info">
 			<view class="goods-name nowrap_2">
-				{{item.name}}
+				{{item.goodsName}}
 			</view>
-			<view class="goods-code-box">
-				<view class="code">
-					#2845/8000
+			<view>
+				<view class="goods-code-box">
+					<view class="code">
+						#{{item.goodsCode}}/{{item.totalNumber}}
+					</view>
 				</view>
-			</view>
-			<view class="author-box">
-				<image class="author-icon" :src="item.authorIcon" mode=""></image>
-				<view class="author-name nowrap">
-					{{item.author}}
+				<view class="author-box">
+					<image class="author-icon" :src="item.shopIcon" mode=""></image>
+					<view class="author-name nowrap">
+						{{item.shopName}}
+					</view>
 				</view>
 			</view>
 		</view>
@@ -44,8 +46,7 @@
 		},
 		methods:{
 			toGoodsDetail(){
-				const instanceId="7a7e5413004940d8b6d3ca27398f0a0d"
-				const url=`/subpageA/DetailPage/DetailPage?loadType=1&goodsId=${goodsId}&goodsType=${this.item.goodsType}`
+				const url=`/subpageA/DetailPage/DetailPage?loadType=1&instanceId=${this.item.instanceId}&goodsType=${this.item.goodsType}`
 				this.$routerTo(url)
 			}
 		}
@@ -71,6 +72,7 @@
 			width: 100%;
 			height: 100%;
 			border-radius: 8rpx;
+			background: #000000;
 		}
 		.icon{
 			position: absolute;
@@ -90,6 +92,9 @@
 	
 	.goods-info{
 		padding: 20rpx;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 		.goods-name{
 			font-size: 32rpx;
 			font-family: PingFangSC-Medium, PingFang SC;

@@ -30,10 +30,20 @@
 			close(){
 				this.$emit('close')
 			},
-			exit(){
-				uni.removeStorageSync("token")
-				uni.removeStorageSync("userId")
-				this.$routerTo(1,"back")
+			async exit(){
+				try{
+					const token=uni.getStorageSync("token")
+					const res=await uni.$http("/user/webLogout",{
+						token
+					})
+					if(res.code==0){
+						uni.removeStorageSync("token")
+						uni.removeStorageSync("userId")
+						this.$routerTo(1,"back")
+					}
+				}catch(e){
+					//TODO handle the exception
+				}
 			}
 		},
 		watch:{

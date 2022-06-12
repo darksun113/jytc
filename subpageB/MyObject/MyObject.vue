@@ -18,19 +18,10 @@
 				hasData:true,
 				isEnd:false,
 				isCanReq:true,
-				goodsList:[
-					{
-						name:"漫威英雄系列",
-						image:require("@/static/images/demo2.png"),
-						author:"深圳百纳维科技有限公司",
-						authorIcon:require("@/static/images/demo1.png"),
-						goodsId:"7a7e5413004940d8b6d3ca27398f0a0d",
-						goodsType:1
-					}
-				]
+				goodsList:[]
 			};
 		},
-		created() {
+		onShow() {
 			this.init()
 		},
 		onHide() {
@@ -44,7 +35,8 @@
 					if(item==0){
 						this.isCanReq=false
 					}else{
-						this.goodsList=this.goodsList.push(item).sort((a,b)=>a.startTime-b.startTime)
+						this.goodsList.push(item)
+						this.goodsList=this.goodsList.sort((a,b)=>b.startTime-a.startTime)
 					}
 				}))
 			},
@@ -53,7 +45,8 @@
 					if(item==0){
 						this.hasData=false
 					}else{
-						this.goodsList=this.goodsList.push(item).sort((a,b)=>a.startTime-b.startTime)
+						this.goodsList.push(item)
+						this.goodsList=this.goodsList.sort((a,b)=>b.startTime-a.startTime)
 					}
 				})
 			},

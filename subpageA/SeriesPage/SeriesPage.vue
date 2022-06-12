@@ -1,10 +1,10 @@
 <template>
 	<PageTemp>
 		<scroll-view class="series-page" scroll-y="true" @scrolltolower="updateList">
-			<Banner></Banner>
+			<Banner :seriesInfo="seriesInfo"></Banner>
 			<view class="container">
-				<ActivityDesBox></ActivityDesBox>
-				<ActivityBox></ActivityBox>
+				<ActivityDesBox :seriesInfo="seriesInfo"></ActivityDesBox>
+				<ActivityBox :seriesInfo="seriesInfo"></ActivityBox>
 				<GoodsList ref="GoodsList" :seriesId="seriesId"></GoodsList>
 				<IsEnd></IsEnd>
 			</view>
@@ -17,6 +17,7 @@
 	import ActivityDesBox from "./components/ActivityDesBox"
 	import ActivityBox from "./components/ActivityBox"
 	import GoodsList from "./components/GoodsList"
+	import { getFilesPath } from "@/utils/tools.js"
 	export default {
 		components:{
 			Banner,
@@ -26,11 +27,13 @@
 		},
 		data() {
 			return {
-				seriesId:""
+				seriesId:"",
+				seriesInfo:{}
 			};
 		},
 		onLoad(opt) {
 			this.seriesId=opt.seriesId
+			this.getSeriesDetail()
 		},
 		mounted() {
 			uni.setNavigationBarTitle({
@@ -38,6 +41,29 @@
 			})
 		},
 		methods:{
+			async getSeriesDetail(){
+				try{
+					const res=await uni.$http("/series/getSeriesDetail",{
+						seriesId:this.seriesId
+					})
+					if(res.code==0){
+						uni.setNavigationBarTitle({
+							title:res.data.seriesName
+						})
+						const temp={
+							seriesImg:res.data.seriesImg,
+							shopIcon:res.data.shopIcon,
+						}
+						const objData=await getFilesPath(temp)
+						Object.keys(objData).forEach(key=>{
+							res.data[key]=objData[key]
+						})
+						this.seriesInfo=res.data
+					}
+				}catch(e){
+					//TODO handle the exception
+				}
+			},
 			updateList(){
 				this.$refs.GoodsList.updateList()
 			}

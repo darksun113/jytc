@@ -69,7 +69,7 @@
 				<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg"></image>
 			</view>
 		</view>
-		<PopupBottom :isShow="isPopupShow" :popupData="popupData" :loadType="PopupShowType" @close="isPopupShow=false" @openTokenPop="isShow=true">
+		<PopupBottom :isShow="isPopupShow" :popupData="goodsData" :loadType="PopupShowType" @close="isPopupShow=false" @openTokenPop="isShow=true">
 		</PopupBottom>
 	</view>
 </template>
@@ -82,6 +82,10 @@
 			goodsData:{
 				type:Object,
 				default:()=>{}
+			},
+			buyerList:{
+				type:Array,
+				default:()=>[]
 			}
 		},
 		components: {
@@ -90,15 +94,7 @@
 		data() {
 			return {
 				isPopupShow:false,
-				PopupShowType:0,
-				popupData:{},
-				buyerList: [{
-					recipientIcon: require("@/static/images/demo2.png")
-				}, {
-					recipientIcon: require("@/static/images/demo1.png")
-				}, {
-					recipientIcon: require("@/static/images/demo3.png")
-				}, ]
+				PopupShowType:0
 			}
 		},
 		methods: {

@@ -145,7 +145,7 @@
 						idCard:this.idCard
 					})
 					if(res.code==0){
-						uni.$emit("updateUserInfo")
+						this.$updateUserInfo()
 						this.$routerTo("../BindCardSuccess/BindCardSuccess")
 					}else{
 						this.$routerTo(`../BindCardFail/BindCardFail?errMsg=${res.errorMsg}`)

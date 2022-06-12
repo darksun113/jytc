@@ -1,11 +1,11 @@
 <template>
 	<view class="goods-info">
-		<view class="goods-price-box">
+		<view class="goods-price-box" v-if="goodsData.loadType==0">
 			<view class="price">
-				¥ 19.99
+				¥ {{(goodsData.goodsPrice/100).toFixed(2)}}
 			</view>
 			<view class="limit">
-				<text>限量1000份</text>
+				<text>限量{{goodsData.totalNumber}}份</text>
 			</view>
 		</view>
 		<view class="tags-box">
@@ -14,13 +14,13 @@
 				<view class="tag">山海经</view>
 				<view class="tag">国风</view>
 			</view>
-			<view class="goodsCode_box" >
-				<view class="goodsCode">#2845/8000</view>
+			<view class="goodsCode_box" v-if="goodsData.loadType==1">
+				<view class="goodsCode">#{{goodsData.goodsCode}}/{{goodsData.totalNumber}}</view>
 			</view>
 		</view>
-		<FunModule :goodsData="goodsData"></FunModule>
+		<FunModule :goodsData="goodsData" :buyerList="buyerList"></FunModule>
 		<view class="goods-introduce">
-			<img src="@/static/images/demo5.png" alt="">
+			<img :src="goodsData.description || goodsData.goodsDesc" alt="">
 		</view>
 		<view class="digital-collection-tip">
 			<view class="title">
@@ -41,6 +41,10 @@
 			goodsData:{
 				type:Object,
 				default:()=>{}
+			},
+			buyerList:{
+				type:Array,
+				default:()=>[]
 			}
 		},
 		components:{

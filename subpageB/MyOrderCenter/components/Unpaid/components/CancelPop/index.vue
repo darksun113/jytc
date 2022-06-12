@@ -35,9 +35,18 @@
 			}
 		},
 		methods:{
-			cancelOrder(){
-				console.log(this.orderNo)
-				this.$emit("cancelSuccess")
+			async cancelOrder(){
+				try{
+					this.$emit("cancelSuccess")
+					const res=await uni.$http("/order/cancel",{orderNo:this.orderNo})
+					if(res.code==0){
+						this.$emit("cancelSuccess")
+					}else{
+						uni.$u.toast(res.errorMsg)
+					}
+				}catch(e){
+					//TODO handle the exception
+				}
 			}
 		},
 		watch:{

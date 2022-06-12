@@ -57,6 +57,9 @@
 				isChangeAvatar:false
 			};
 		},
+		onShow() {
+			this.$updateUserInfo()
+		},
 		methods:{
 			toBindCard(){
 				if(this.$store.state.userInfo.certificationStatus==0){

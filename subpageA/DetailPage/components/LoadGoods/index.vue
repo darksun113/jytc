@@ -25,9 +25,7 @@
 			return {
 				loadData:this.goodsData,
 				isOpenPoster:false,
-				posterData:{
-					
-				}
+				posterData:{}
 			}
 		},
 		mounted() {

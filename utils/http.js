@@ -1,5 +1,5 @@
-// const baseUrl = "http://192.168.2.127:18940";
-const baseUrl = "http://api.penglainft.com:81";
+const baseUrl = "http://192.168.2.127:18940";
+// const baseUrl = "http://api.penglainft.com:81";
 const pathArr=[]
 const request = (url = '', date = {}, type = 'POST', header = {}) => {
 	uni.showLoading()

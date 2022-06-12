@@ -83,7 +83,7 @@
 			// 获取手机+验证码匹配结果
 			async checkVerifyCode () {
 			  try {
-				const res = await uni.$http("user/webResetPwdCheckVerifyCode", { ...this.form })
+				const res = await uni.$http("/user/webResetPwdCheckVerifyCode", { ...this.form })
 				if (res.code == 0) {
 				  this.$emit("checkPhoneSuccess",res.data.resetPwdProof)
 				} else {
@@ -109,7 +109,7 @@
 	.get-verification-code-btn {
 		margin: 0 auto;
 		margin-left: 40rpx;
-		width: 210rpx;
+		width: 260rpx;
 		height: 88rpx;
 		background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);
 		border-radius: 16rpx;

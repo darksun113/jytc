@@ -30,8 +30,8 @@
 			changeTab(idx){
 				this.curTab=idx
 			},
-			toOtherPage(data){
-				const url=`../OtherPage/OtherPage`
+			toOtherPage(otherId){
+				const url=`../OtherPage/OtherPage?otherId=${otherId}`
 				this.$routerTo(url)
 			},
 		}

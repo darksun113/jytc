@@ -28,8 +28,9 @@
 						</view>
 					</view>
 				</view>
-				<IsEnd></IsEnd>
+				<IsEnd v-if="isLastItem"></IsEnd>
 			</scroll-view>
+			<LoginTipPop :isShow="isShow" name="DetailPage" @close="isShow=false"></LoginTipPop>
 		</view>
 	</view>
 </template>
@@ -47,7 +48,8 @@
 				buyerList:[],
 				isNone:false,
 				isLastItem:false,
-				isUpdate:true
+				isUpdate:true,
+				isShow:false
 			}
 		},
 		filters:{
@@ -66,7 +68,7 @@
 			}
 		},
 		created() {
-			// this.init()
+			this.init()
 		},
 		destroyed() {
 			this.buyerList=[]
@@ -79,10 +81,9 @@
 						if(res.data.list.length==0){
 							callback(0)
 						}else{
-							res.data.list.forEach(item=>{
-								getFilePath(item.recipientIcon,path=>{
-									item.recipientIcon=path
-								})
+							res.data.list.forEach(async item=>{
+								item.recipientIcon=await getFilePath(item.recipientIcon)
+								
 							})
 							callback(res.data.list,res.data.count)
 						}
@@ -117,13 +118,12 @@
 				})
 			},
 			toOtherPage(e){
-				if(this.checkLogin()){
-					uni.setStorageSync("otherId", e);
+				if(this.$checkLogin()){
 					uni.navigateTo({
-						url: `/subPagesB/otherPage/otherPage?otherId=${e}`,
+						url: `/subpageC/OtherPage/OtherPage?otherId=${e}`,
 					})
 				}else{
-					this.$emit("openTokenPop")
+					this.isShow=true
 				}
 			},
 			

@@ -1,31 +1,31 @@
 <template>
 	<view class="user-header">
-		<image class="avatar" src="@/static/images/default_avatar.png"></image>
+		<image class="avatar" :src="userInfo.avatar"></image>
 		<view class="user-info">
 			<view class="name-box">
-				<view class="name nowrap">张三</view>
-				<view class="real-name">未认证</view>
+				<view class="name nowrap">{{userInfo.name}}</view>
+				<view class="real-name" v-if="userInfo.certificationStatus==0">未认证</view>
 			</view>
 			<view class="user-info-item">
 				<view class="id-style">
 					<view>ID：</view> 
-					<view class="nowrap_s" style="max-width: 300rpx;">500498500498</view>
+					<view class="nowrap_s" style="max-width: 300rpx;">{{userInfo.buyerId}}</view>
 				</view>
-				<image class="copy-icon" src="@/static/images/copy_icon.svg" @click="copy('500498500498')"></image>
+				<image class="copy-icon" src="@/static/images/copy_icon.svg" @click="copy(userInfo.buyerId)"></image>
 			</view>
 			<view class="user-info-item">
 				<view class="id-style">
 					<view style="min-width: 164rpx;">区块链地址：</view> 
-					<view class="nowrap_s" style="max-width: 300rpx;">0ancad12akshuf48awd43ad</view>
+					<view class="nowrap_s" style="max-width: 300rpx;">{{userInfo.blockchainAddress}}</view>
 				</view>
-				<image class="copy-icon" src="@/static/images/copy_icon.svg" @click="copy('0ancad123vz3af3asdehaukwfgfgg546')"></image>
+				<image class="copy-icon" src="@/static/images/copy_icon.svg" @click="copy(userInfo.blockchainAddress)"></image>
 			</view>
 			<view class="fans-focus">
 				<view class="item" @click="toFansPage(0)">
-					<text style="margin-right: 10rpx;color: #CCC;">粉丝</text>16
+					<text style="margin-right: 10rpx;color: #CCC;">粉丝</text>{{userInfo.fansNumber}}
 				</view>
 				<view class="item" @click="toFansPage(1)">
-					<text style="margin-right: 10rpx;color: #CCC;">关注</text>16
+					<text style="margin-right: 10rpx;color: #CCC;">关注</text>{{userInfo.followNumber}}
 				</view>
 				<view class="item" @click="toFocus">
 					{{isFocus? "取消关注":"关注"}}
@@ -37,6 +37,12 @@
 
 <script>
 	export default{
+		props:{
+			userInfo:{
+				type:Object,
+				default:()=>{}
+			}
+		},
 		data(){
 			return{
 				isFocus:false

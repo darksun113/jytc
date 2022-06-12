@@ -18,8 +18,7 @@
 			}
 		},
 		methods:{
-			toSeriesDetailPage(goodsType){
-				const seriesId="7a7e5413004940d8b6d3ca27398f0a0d"
+			toSeriesDetailPage(seriesId){
 				const url=`../../subpageA/SeriesPage/SeriesPage?seriesId=${seriesId}`
 				this.$routerTo(url)
 			}

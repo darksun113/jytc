@@ -1,21 +1,29 @@
 <template>
 	<view class="active_box">
 		<view class="active_title nowrap">
-			元宇宙国风潮玩时代	
+			{{seriesInfo.seriesName}}	
 		</view>
 		<view class="author-box">
-			<image class="author-pic" src="@/static/images/demo1.png" mode=""></image>
+			<image class="author-pic" :src="seriesInfo.shopIcon" mode=""></image>
 			<view class="author-name nowrap">
-				深圳九州龙文化传播有限公司
+				{{seriesInfo.shopName}}
 			</view>
 		</view>
 		<view class="active_text">
-			星堡的长者们看到琳琅满目的汉服和饰品跃跃欲试，也想穿着汉服游豫园，在充满幻想的国风主题街区中玩“穿越”，做不一样的时髦达人！
+			{{seriesInfo.description}}
 		</view>
 	</view>
 </template>
 
 <script>
+	export default {
+		props:{
+			seriesInfo:{
+				type:Object,
+				default:()=>{}
+			}
+		}
+	}
 </script>
 
 <style lang="scss" scoped>

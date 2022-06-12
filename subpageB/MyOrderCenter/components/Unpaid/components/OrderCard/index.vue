@@ -39,7 +39,7 @@
 			</view>
 		</view>
 		<view class="item-bottom">
-			<view class="btn btn-cancel" @click.stop="$emit('cancelOrder',159)">
+			<view class="btn btn-cancel" @click.stop="$emit('cancelOrder',{orderNo:item.orderNo,index:this.index})">
 				取消订单
 			</view>
 			<view class="btn btn-pay" @click.stop="toPay">
@@ -55,7 +55,8 @@
 			item: {
 				type: Object,
 				default: () => {}
-			}
+			},
+			index:[Number,String]
 		},
 		data() {
 			return {

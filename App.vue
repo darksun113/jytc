@@ -8,12 +8,8 @@
 			// uni.navigateTo({
 			// 	url:"./subpageA/SharePage/SharePage"
 			// })
-			uni.$on("updateUserInfo",()=>{
-				this.$store.dispatch("getUserInfo")
-			})
 		},
 		onHide: function() {
-			
 		},
 		methods:{
 			resetFilePath() {

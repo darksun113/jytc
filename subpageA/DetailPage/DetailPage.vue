@@ -2,7 +2,7 @@
 	<PageTemp>
 		<view class="detail-page">
 			<LoadGoods :goodsData="goodsData"></LoadGoods>
-			<GoodsInfo :goodsData="goodsData"></GoodsInfo>
+			<GoodsInfo :goodsData="goodsData" :buyerList="buyerList"></GoodsInfo>
 			<ButtonBox :goodsData="goodsData" v-if="loadType==0"></ButtonBox>
 		</view>
 	</PageTemp>
@@ -25,7 +25,8 @@
 				// 加载方式 0 未购买  1 已购买
 				loadType: 0,
 				goodsId:"",
-				goodsData:{}
+				goodsData:{},
+				buyerList:[]
 			}
 		},
 		onUnload() {
@@ -35,6 +36,7 @@
 			// loadType: 0 未购买  已购买
 			this.loadType=opt.loadType
 			this.goodsId=opt.goodsId
+			this.instanceId=opt.instanceId
 			this.goodsType=opt.goodsType
 		}
 	}

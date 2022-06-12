@@ -5,7 +5,7 @@
 				<view class="title">修改昵称</view>
 				<view class="author-name">
 					<text style="min-width: 160rpx;">收藏家：</text>
-					<text class="nowrap">{{$store.state.userInfo.fullName}}</text>
+					<text class="nowrap">{{$store.state.userInfo.name}}</text>
 				</view>
 				<view class="input-box">
 					<u--input placeholder="请输入内容" border="none" color="#FFF" :customStyle="{background:'#2C2E69',padding:'12rpx 26rpx' }" v-model="renameValue"></u--input>
@@ -15,7 +15,7 @@
 				<view class="left" @click="$emit('close')">
 					取消
 				</view>
-				<view class="right">
+				<view class="right" @click="changeName">
 					确认
 				</view>
 			</view>
@@ -35,6 +35,29 @@
 			return {
 				show:this.isShow,
 				renameValue:""
+			}
+		},
+		methods:{
+			async changeName(){
+				try{
+					if(this.renameValue==this.$store.state.userInfo.name){
+						uni.$u.toast("与原昵称重复")
+						return
+					}
+					const res=await uni.$http("/user/editBuyerInfo",{
+						name:this.renameValue,
+						avatar:this.$store.state.avatarUuid
+					})
+					if(res.code==0){
+						uni.$u.toast("修改成功")
+						this.$updateUserInfo()
+						this.$emit("close")
+					}else{
+						uni.$u.toast(res.errorMsg)
+					}
+				}catch(e){
+					//TODO handle the exception
+				}
 			}
 		},
 		watch:{

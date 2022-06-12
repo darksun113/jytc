@@ -1,12 +1,13 @@
 <template>
 	<PageTemp class="other-page">
-		<UserHeader></UserHeader>
+		<UserHeader :userInfo="userInfo"></UserHeader>
 		<view class="container">
-			<view class="title">他的藏品（2）</view>
-			<scroll-view v-if="false" class="list-box" scroll-y="true" @scrolltolower="updateList">
-				<CardOfObject v-for="i in 15" :key="i"></CardOfObject>
+			<view class="title">他的藏品（{{userInfo.collectionNumber}}）</view>
+			<scroll-view v-if="privacyAuth==0 && hasData" class="list-box" scroll-y="true" @scrolltolower="updateList">
+				<CardOfObject v-for="(item,index) in goodsList" :key="index" :item="item"></CardOfObject>
+				<IsEnd v-if="isLastItem"></IsEnd>
 			</scroll-view>
-			<SecurityControls v-else-if="false">
+			<SecurityControls v-else-if="privacyAuth==1">
 				由于该用户隐私设置，藏品不可见
 			</SecurityControls>
 			<IsNoObject v-else>
@@ -17,6 +18,7 @@
 </template>
 
 <script>
+	import {getFilePath,getFilesPath} from "@/utils/tools.js"
 	import UserHeader from "./components/UserHeader/index.vue"
 	export default {
 		components:{
@@ -24,12 +26,97 @@
 		},
 		data() {
 			return {
-				
+				viewBuyerId:"",
+				privacyAuth:0,
+				hasData:true,
+				isLastItem:false,
+				userInfo:{},
+				goodsList:[]
 			};
+		},
+		onLoad(opt) {
+			this.viewBuyerId=opt.otherId
+			uni.setStorageSync("viewBuyerId",opt.otherId)
+		},
+		onShow() {
+			this.init()
 		},
 		methods:{
 			updateList(){
-				console.log("update")
+				const startTime = this.goodsList[this.goodsList.length-1].startTime
+				this.getGoodsList(startTime,list=>{
+					if(list==0){
+						this.isLastItem=true
+					}else{
+						this.goodsList=[...this.goodsList,...list]
+					}
+				})
+			},
+			init(){
+				this.getUserInfo()
+				this.getGoodsList(parseInt(Date.now()/1000),list=>{
+					if(list==0){
+						this.hasData=false
+					}else{
+						this.goodsList=list
+					}
+				})
+			},
+			async getUserInfo(){
+				try{
+					const res = await uni.$http("/user/buyerBasicInfo", {
+						viewBuyerId:this.viewBuyerId
+					})
+					if(res.code==0){
+						res.data.avatar=await getFilePath(res.data.avatar)
+						this.userInfo=res.data
+					}else{
+						uni.showToast({
+							title:res.errorMsg,
+							icon:"error"
+						})
+						if(res.code==20033){
+							let timer=setTimeout(()=>{
+								clearTimeout(timer)
+								this.$routerTo(1,"back")
+							},1000)
+						}
+					}
+				}catch(e){
+					//TODO handle the exception
+				}
+			},
+			async getGoodsList(startTime,callback){
+				try{
+					const res=await uni.$http("/goods/antiques",{
+						viewBuyerId:this.viewBuyerId,
+						size:10,
+						type:1,
+						startTime
+					})
+					if(res.code==0){
+						this.privacyAuth=res.data.privacyAuth
+						if(res.data.list.length==0){
+							callback(0)
+						}else{
+							res.data.list.forEach(async item=>{
+								const temp={
+									image:item.image,
+									shopIcon:item.shopIcon
+								}
+								const objData=await getFilesPath(temp)
+								Object.keys(objData).forEach(key=>{
+									item[key]=objData[key]
+								})
+							})
+							callback(res.data.list)
+						}
+					}else{
+						uni.$u.toast(res.errorMsg)
+					}
+				}catch(e){
+					//TODO handle the exception
+				}
 			}
 		}
 	}

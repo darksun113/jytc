@@ -11,8 +11,8 @@
 							收藏家
 						</view>
 						<view>
-							<!-- {{popupData.buyerName}} -->
-							张三
+							{{popupData.buyerName}}
+							<!-- 张三 -->
 						</view>
 					</view>
 					<view class="rz_info_item">
@@ -20,8 +20,8 @@
 							收藏时间
 						</view>
 						<view>
-							<!-- {{popupData.collectionTime| formatDate}} -->
-							2022-02-01
+							{{popupData.collectionTime| formatDate}}
+							<!-- 2022-02-01 -->
 						</view>
 					</view>
 					<view class="rz_info_item">
@@ -29,8 +29,8 @@
 							区块链身份
 						</view>
 						<view>
-							<!-- {{popupData.buyerHash}} -->
-							ZXf08292c1e85285ff35e1a10c4af0ZXf08292c1e85285ff35e1a10c4af0ZXf08292c1
+							{{popupData.buyerHash}}
+							<!-- ZXf08292c1e85285ff35e1a10c4af0ZXf08292c1e85285ff35e1a10c4af0ZXf08292c1 -->
 						</view>
 					</view>
 					<view class="rz_info_item">
@@ -38,8 +38,8 @@
 							区块链地址
 						</view>
 						<view>
-							<!-- {{popupData.hash}} -->
-							ZXf08292c1e85285ff35e1a10c4af0ZXf08292c1e85285ff35e1a10c4af0ZXf08292c1
+							{{popupData.hash}}
+							<!-- ZXf08292c1e85285ff35e1a10c4af0ZXf08292c1e85285ff35e1a10c4af0ZXf08292c1 -->
 						</view>
 					</view>
 					<view class="rz_info_item">
@@ -47,8 +47,8 @@
 							区块高度
 						</view>
 						<view>
-							<!-- {{popupData.height}} -->
-							90290236
+							{{popupData.height}}
+							<!-- 90290236 -->
 						</view>
 					</view>
 					<view class="rz_info_item">
@@ -56,8 +56,8 @@
 							令牌ID
 						</view>
 						<view>
-							<!-- {{popupData.tokenId}} -->
-							364589540657598123
+							{{popupData.tokenId}}
+							<!-- 364589540657598123 -->
 						</view>
 					</view>
 				</view>

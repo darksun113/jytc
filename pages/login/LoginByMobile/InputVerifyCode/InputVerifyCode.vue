@@ -53,7 +53,13 @@
 					})
 					if(res.code==0){
 						uni.setStorageSync("token",res.data.token)
-						this.$routerTo(2,"back")
+						uni.$u.toast('登录成功')
+						let timer = setTimeout(()=>{
+							clearTimeout(timer)
+							this.$routerTo(2,"back")
+						},1000)
+					}else{
+						uni.$u.toast(res.errorMsg)
 					}
 				}catch(e){
 					//TODO handle the exception

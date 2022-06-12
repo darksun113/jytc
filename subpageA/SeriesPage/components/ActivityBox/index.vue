@@ -40,6 +40,12 @@
 	import ActivityPop from "./components/ActivityPop/index.vue"
 	import WinnerList from "./components/WinnerList/index.vue"
 	export default{
+		props:{
+			seriesInfo:{
+				type:Object,
+				default:()=>{}
+			}
+		},
 		data(){
 			return {
 				joinStatus:0,

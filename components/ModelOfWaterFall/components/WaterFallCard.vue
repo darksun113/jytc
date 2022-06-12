@@ -1,14 +1,14 @@
 <template>
 	<view class="series-box" @click="toSeriesDetailPage">
-		<img class="series-pic" :src="item.image" />
+		<img class="series-pic" :src="item.seriesImg" />
 		<view class="series-info">
 			<view class="series-title nowrap">
-				{{item.title}}
+				{{item.seriesName}}
 			</view>
 			<view class="author-box">
-				<image class="author-icon" :src="item.authorIcon" mode=""></image>
+				<image class="author-icon" :src="item.shopIcon" mode=""></image>
 				<view class="author-name nowrap">
-					{{item.author}}
+					{{item.shopName}}
 				</view>
 			</view>
 		</view>
@@ -26,7 +26,7 @@
 		},
 		methods:{
 			toSeriesDetailPage(){
-				this.$emit("toSeriesDetailPage")
+				this.$emit("toSeriesDetailPage",this.item.seriesId)
 			}
 		}
 	}

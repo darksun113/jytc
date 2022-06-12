@@ -29,7 +29,9 @@ Vue.prototype.$checkLogin = function() {
 	const token = uni.getStorageSync("token") || ''
 	return token ? true : false
 }
-
+Vue.prototype.$updateUserInfo=function(){
+	this.$store.dispatch("getUserInfo")
+}
 const app = new Vue({
 	...App,
 	store

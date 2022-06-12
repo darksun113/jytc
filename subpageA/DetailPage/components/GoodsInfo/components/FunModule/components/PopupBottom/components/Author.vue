@@ -5,16 +5,16 @@
 		</view>
 		<view class="author_content">
 			<view class="pic_box">
-				<!-- <img :src="authorInfo.icon" alt=""> -->
-				<img src="@/static/images/demo1.png" alt="">
+				<img :src="authorInfo.icon" alt="">
+				<!-- <img src="@/static/images/demo1.png" alt=""> -->
 				<view class="author_name nowrap">
-					<!-- {{authorInfo.shopName}} -->
-					深圳百纳维科技有限公司
+					{{authorInfo.shopName}}
+					<!-- 深圳百纳维科技有限公司 -->
 				</view>
 			</view>
 			<view class="author_des">
-				<!-- {{authorInfo.description}} -->
-				此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊
+				{{authorInfo.description}}
+				<!-- 此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊 -->
 			</view>
 		</view>
 	</view>
@@ -35,17 +35,15 @@
 			}
 		},
 		created() {
-			// this.getAuthorData()
+			this.getAuthorData()
 		},
 		methods:{
 			async getAuthorData(){
 				try{
-					const res=await uni.$http("homepage/getShopDescription",{shopId:this.popupData.shopId})
+					const res=await uni.$http("/homepage/getShopDescription",{shopId:this.popupData.shopId})
 					if(res.code==0){
-						getFilePath(res.data.icon,path=>{
-							res.data.icon=path
-							this.authorInfo=res.data
-						})
+						res.data.icon=await getFilePath(res.data.icon)
+						this.authorInfo=res.data
 					}
 				}catch(e){
 					//TODO handle the exception

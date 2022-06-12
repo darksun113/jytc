@@ -11,6 +11,8 @@ export default new Vuex.Store({
 		// 用于登录倒计时
 		second: 60,
 		isCount: false,
+		// 用户头像uuid
+		avatarUuid:'',
 		userInfo: {}
 	},
 	mutations: {
@@ -21,10 +23,14 @@ export default new Vuex.Store({
 			} = data
 			state.filePath[uuid] = path
 		},
+		setAvatarUuid(state,value){
+			state.avatarUuid=value
+		},
 		resetFilePath(state) {
 			state.filePath = {}
 		},
 		countdown(state) {
+			state.second=60
 			const timer = setInterval(() => {
 				state.isCount = true
 				if (state.second > 0) {
@@ -58,10 +64,12 @@ export default new Vuex.Store({
 				}
 				async function getMineInfo(viewBuyerId) {
 					try {
+						uni.setStorageSync("viewBuyerId",viewBuyerId)
 						const res = await uni.$http("/user/buyerBasicInfo", {
 							viewBuyerId
 						})
 						if (res.code == 0) {
+							context.commit("setAvatarUuid", res.data.avatar)
 							const avatar = await getFilePath(res.data.avatar)
 							res.data.avatar = avatar
 							context.commit("setUserInfo", res.data)
@@ -74,25 +82,6 @@ export default new Vuex.Store({
 					} catch (e) {
 						//TODO handle the exception
 					}
-				}
-			} catch (e) {
-				//TODO handle the exception
-			}
-		},
-		async getBuyerBasicInfo(context, viewBuyerId) {
-			try {
-				const res = await ("/user/buyerBasicInfo", {
-					viewBuyerId
-				})
-				if (res.code == 0) {
-					const avatar = await getFilePath(res.data.avatar)
-					res.data.avatar = avatar
-					context.commit("setUserInfo", res.data)
-				} else {
-					uni.showToast({
-						title: res.errorMsg,
-						icon: "error"
-					})
 				}
 			} catch (e) {
 				//TODO handle the exception

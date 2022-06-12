@@ -4,7 +4,7 @@ import { md , pki } from "node-forge";
 // 获取单张图片
 export async function getFilePath(uuid) {
     try {
-      const reg_result = uuid.indexOf("http")
+      const reg_result = uuid.indexOf("https://")
       if (reg_result == 0) {
           return uuid
       } else {
@@ -33,7 +33,7 @@ export async function getFilesPath(data) {
         const length = Object.keys(data).length
         let idx=0
         for (let key in data) {
-            const reg_result = data[key].indexOf("http")
+            const reg_result = data[key].indexOf("https")
           if (reg_result == 0) {
             result[key] = data[key]
             idx++

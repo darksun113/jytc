@@ -38,7 +38,7 @@
 			init(){
 				this.isLogin=this.$checkLogin()
 				if(this.isLogin){
-					uni.$emit("updateUserInfo")
+					this.$updateUserInfo()
 				}
 			}
 		}

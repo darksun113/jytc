@@ -39,7 +39,7 @@
 						shopName:"深圳百纳维科技有限公司",
 						shopIcon:require("@/static/images/demo1.png"),
 						seriesId:"15444",
-						goodsType:1
+						materialType:1
 					},
 					{
 						seriesName:"超人系列",
@@ -47,14 +47,14 @@
 						shopName:"深圳百纳维科技有限公司",
 						shopIcon:require("@/static/images/demo1.png"),
 						seriesId:"15444",
-						goodsType:2
+						materialType:2
 					},{
 						seriesName:"漫威英雄系列",
 						seriesImg:require("@/static/images/demo5.png"),
 						shopName:"深圳百纳维科技有限公司",
 						shopIcon:require("@/static/images/demo1.png"),
 						seriesId:"15444",
-						goodsType:3
+						materialType:3
 					},
 					{
 						seriesName:"超人系列",
@@ -62,14 +62,14 @@
 						shopName:"深圳百纳维科技有限公司",
 						shopIcon:require("@/static/images/demo1.png"),
 						seriesId:"15444",
-						goodsType:4
+						materialType:4
 					},{
 						seriesName:"漫威英雄系列",
 						seriesImg:require("@/static/images/demo2.png"),
 						shopName:"深圳百纳维科技有限公司",
 						shopIcon:require("@/static/images/demo1.png"),
 						seriesId:"15444",
-						goodsType:3
+						materialType:3
 					},
 					{
 						seriesName:"超人系列",
@@ -77,7 +77,7 @@
 						shopName:"深圳百纳维科技有限公司",
 						shopIcon:require("@/static/images/demo1.png"),
 						seriesId:"15444",
-						goodsType:1
+						materialType:1
 					},
 				]
 			}

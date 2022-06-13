@@ -1,27 +1,45 @@
 <template>
 	<view>
-		<view class="active-tip" v-if="true">
+		<!-- 活动未开启 -->
+		<view class="active-tip" v-if="seriesInfo.prePurchaseOpenTime - curTime>0">
+			<view class="active-tip-info">
+				<view class="active-tip-info-title">
+					{{seriesInfo.prePurchaseOpenTime | format}}
+				</view>
+				<view class="active-tip-info-count">
+					开启预购活动
+				</view>
+			</view>
+			<view class="active-btn-box">
+				<view class="custom-style" style="background: #5C5A88;">
+					未开启
+				</view>
+			</view>
+		</view>
+		<!-- 活动进行中 -->
+		<view class="active-tip" v-else-if="seriesInfo.end == 0 && seriesInfo.prePurchaseFinishTime - curTime > 0">
 			<view class="active-tip-info">
 				<view class="active-tip-info-title">
 					预购活动已开启
 				</view>
 				<view class="active-tip-info-count">
-					889850人参与
+					{{seriesInfo.joinNumber}}人参与
 				</view>
 			</view>
 			<view class="active-btn-box">
 				<view class="custom-style" @click="toJoin">
-					{{joinStatus == 0?'参与':'已参与'}}
+					{{seriesInfo.join == 0?'参与':'已参与'}}
 				</view>
 			</view>
 		</view>
+		<!-- 活动已结束 -->
 		<view class="active-tip" v-else>
 			<view class="active-tip-info">
 				<view class="active-tip-info-title">
 					查看获得预购资格名单
 				</view>
 				<view class="active-tip-info-count">
-					889850人参与
+					{{seriesInfo.joinNumber}}人参与
 				</view>
 			</view>
 			<view class="active-btn-box">
@@ -30,8 +48,8 @@
 				</view>
 			</view>
 		</view>
-		<ActivityPop @close="isJoinShow=false" :isShow="isJoinShow"></ActivityPop>
-		<WinnerList @close="isWinnerOpen=false" :isShow="isWinnerOpen"></WinnerList>
+		<ActivityPop @close="isJoinShow=false" :isShow="isJoinShow" :joinStatus="joinStatus" :purchaseId="seriesInfo.prePurchaseId"></ActivityPop>
+		<WinnerList @close="isWinnerOpen=false" :isShow="isWinnerOpen" :purchaseId="seriesInfo.prePurchaseId"></WinnerList>
 		<LoginTipPop name="SeriesPage" :isShow="isLoginTip" @close="isLoginTip=false"></LoginTipPop>
 	</view>
 </template>
@@ -51,8 +69,24 @@
 				joinStatus:0,
 				isJoinShow:false,
 				isWinnerOpen:false,
-				isLoginTip:false
+				isLoginTip:false,
+				curTime:parseInt(Date.now()/1000)
 			}
+		},
+		filters:{
+			format(stamp){
+				if(!stamp){
+					return ""
+				}else{
+					const date = new Date(stamp*1000)
+					const Y = date.getFullYear() + '.'
+					const M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '.'
+					const D = date.getDate() < 10 ? '0' + date.getDate() + ' ' : date.getDate() + ' '
+					const H = date.getHours() + ':'
+					const M2 = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes())
+					return Y + M + D + H + M2
+				}
+			},
 		},
 		components:{
 			ActivityPop,
@@ -62,8 +96,8 @@
 			toJoin(){
 				const login=this.$checkLogin()
 				if(login){
+					this.joinStatus=this.seriesInfo.join
 					this.isJoinShow=true
-					this.joinStatus==0?this.joinStatus=1:this.joinStatus=0
 				}else{
 					this.isLoginTip=true
 				}
@@ -71,7 +105,8 @@
 			toViewWinnerList(){
 				this.isWinnerOpen=true
 			}
-		}
+		},
+		
 	}
 </script>
 

@@ -1,14 +1,11 @@
 <template>
 	<view class="banner">
-		<!-- <image class="banner-pic" :src="seriesInfo.seriesImg" mode="aspectFill"></image> -->
-		<image class="banner-pic" src="@/static/images/demo1.png" mode="aspectFill"></image>
-		<view class="sell-info" v-if="curTime - seriesInfo.sellTime > 0">
-			<!-- 将于{{seriesInfo.sellTime | format}}开售 -->
-			将于{{curTime | format}} 开售
+		<image class="banner-pic" :src="seriesInfo.seriesImg" mode="aspectFill"></image>
+		<view class="sell-info" v-if="seriesInfo.sellTime - curTime > 0">
+			将于{{seriesInfo.sellTime | format}} 开售
 		</view>
 		<view class="sell-info" v-else>
-			<!-- 将于{{seriesInfo.sellTime | format}}开售 -->
-			{{curTime | format}} 已开售
+			{{seriesInfo.sellTime | format}} 已开售
 		</view>
 	</view>
 </template>

@@ -25,6 +25,7 @@
 				// 加载方式 0 未购买  1 已购买
 				loadType: 0,
 				goodsId:"",
+				materialType:null,
 				goodsData:{},
 				buyerList:[]
 			}
@@ -37,7 +38,7 @@
 			this.loadType=opt.loadType
 			this.goodsId=opt.goodsId
 			this.instanceId=opt.instanceId
-			this.goodsType=opt.goodsType
+			this.materialType=opt.materialType
 		}
 	}
 </script>
@@ -47,6 +48,6 @@
 	height: 100%;
 	overflow: auto;
 	position: relative;
-	/* padding-bottom: 204rpx; */
+	padding-bottom: 204rpx;
 }
 </style>

@@ -20,7 +20,7 @@ export default {
 					})
 					this.goodsData=resData
 					this.goodsData.loadType=this.loadType
-					this.goodsData.goodsType=this.goodsType
+					this.goodsData.materialType=this.materialType
 					this.goodsData.modelType=4
 				}else{
 					uni.showToast({
@@ -50,7 +50,7 @@ export default {
 					})
 					this.goodsData=res.data
 					this.goodsData.loadType=this.loadType
-					this.goodsData.goodsType=this.goodsType
+					this.goodsData.materialType=this.materialType
 					this.goodsData.modelType=4
 				}
 			}catch(e){

@@ -1,6 +1,6 @@
 <template>
 	<view class="series-box" @click="toSeriesDetailPage">
-		<view class="sell-tip" v-if="false">
+		<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-if="item.goodsTotal==0">
 			已售罄
 		</view>
 		<view class="sell-tip" v-if="false">

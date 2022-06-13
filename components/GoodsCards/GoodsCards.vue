@@ -3,16 +3,16 @@
 		<view class="goods-pic-box">
 			<image class="goods-pic" :src="item.image" mode="aspectFill"></image>
 			<view class="goods-count">
-				限量10000份
+				限量{{item.totalNumber}}份
 			</view>
 		</view>
 		<view class="goods-info">
 			<view class="goods-title nowrap_2">
-				{{item.title}}
+				{{item.goodsName}}
 			</view>
 			<view class="price-box">
 				<view class="price">
-					¥ 18.88
+					¥ {{(item.goodsPrice/100).toFixed(2)}}
 				</view>
 				<image v-if="item.materialType==0" class="goods-type" src="@/static/images/type_3D.svg" mode=""></image>
 				<image v-else-if="item.materialType==1" class="goods-type" src="@/static/images/type_pic.svg" mode=""></image>
@@ -36,7 +36,7 @@
 			toDetailPage(){
 				const loadType=0
 				// materialType 类型  0模型 1图片 2视频 3音频
-				const url=`/subpageA/DetailPage/DetailPage?loadType=${loadType}&goodsId=${this.item.goodsId}&goodsType=${this.item.materialType}`
+				const url=`/subpageA/DetailPage/DetailPage?loadType=${loadType}&goodsId=${this.item.goodsId}&materialType=${this.item.materialType}`
 				this.$routerTo(url)
 			}
 		}

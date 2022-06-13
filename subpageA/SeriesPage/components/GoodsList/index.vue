@@ -20,45 +20,55 @@
 			return {
 				isLastItem:false,
 				total:0,
-				updatePage:0,
+				updatePage:1,
 				goodsList:[
 					{
-						title:"漫威英雄系列",
+						goodsName:"漫威英雄系列",
 						image:require("@/static/images/demo2.png"),
 						author:"深圳百纳维科技有限公司",
 						authorIcon:require("@/static/images/demo1.png"),
 						goodsId:"7a7e5413004940d8b6d3ca27398f0a0d",
+						totalNumber:15598,
+						goodsPrice:1098,
 						materialType:1
 					},
 					{
-						title:"超人系列",
+						goodsName:"超人系列",
 						image:require("@/static/images/demo3.png"),
 						author:"深圳百纳维科技有限公司",
 						authorIcon:require("@/static/images/demo1.png"),
 						goodsId:"7a7e5413004940d8b6d3ca27398f0a0d",
+						totalNumber:15598,
+						goodsPrice:1098,
 						materialType:3
 					},{
-						title:"漫威英雄系列",
+						goodsName:"漫威英雄系列",
 						image:require("@/static/images/demo4.png"),
 						author:"深圳百纳维科技有限公司",
 						authorIcon:require("@/static/images/demo1.png"),
 						goodsId:"7a7e5413004940d8b6d3ca27398f0a0d",
-						materialType:4
+						totalNumber:15598,
+						goodsPrice:1098,
+						materialType:0
 					},
 					{
-						title:"超人系列",
+						goodsName:"超人系列",
 						image:require("@/static/images/demo3.png"),
 						author:"深圳百纳维科技有限公司",
 						authorIcon:require("@/static/images/demo1.png"),
 						goodsId:"7a7e5413004940d8b6d3ca27398f0a0d",
+						totalNumber:15598,
+						goodsPrice:1098,
 						materialType:3
 						
 					},{
-						title:"漫威英雄系列",
+						goodsName:"漫威英雄系列",
 						image:require("@/static/images/demo2.png"),
 						author:"深圳百纳维科技有限公司",
 						authorIcon:require("@/static/images/demo1.png"),
 						goodsId:"7a7e5413004940d8b6d3ca27398f0a0d",
+						totalNumber:15598,
+						goodsPrice:1098,
 						materialType:2
 					},
 				]
@@ -70,10 +80,18 @@
 		methods:{
 			// 翻页更新goodsList
 			updateList(){
-				console.log("翻页更新")
+				this.getSeriesGoodsList((list)=>{
+					if(list==0){
+						this.isLastItem=true
+					}else{
+						this.goodsList=[...this.goodsList,...list]
+					}
+				})
 			},
 			init(){
-				this.getSeriesGoodsList(callback)
+				this.getSeriesGoodsList((list)=>{
+					this.goodsList=list
+				})
 			},
 			async getSeriesGoodsList(callback){
 				try{

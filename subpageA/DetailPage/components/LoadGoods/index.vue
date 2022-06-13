@@ -1,8 +1,8 @@
 <template>
 	<view class="show-box">
-		<LoadModel  :goodsData="loadData" v-if="loadData.goodsType==1"></LoadModel>
-		<LoadImage  :goodsData="loadData" v-else-if="loadData.goodsType==2"></LoadImage>
-		<LoadVideo  :goodsData="loadData" v-else-if="loadData.goodsType==3"></LoadVideo>
+		<LoadModel  :goodsData="loadData" v-if="loadData.materialType==0"></LoadModel>
+		<LoadImage  :goodsData="loadData" v-else-if="loadData.materialType==1"></LoadImage>
+		<LoadVideo  :goodsData="loadData" v-else-if="loadData.materialType==2"></LoadVideo>
 		<LoadAudio  :goodsData="loadData" v-else></LoadAudio>
 		<SharePoster :isOpenPoster="isOpenPoster" @close="isOpenPoster=false" :posterData="posterData"></SharePoster>
 	</view>
@@ -15,7 +15,7 @@
 	import LoadAudio from "./components/LoadAudio/index.vue"
 	export default{
 		props:{
-			// goodsType 类型 1 模型  2 图片  3 视频  4 音频
+			// materialType 类型 0 模型  1 图片  2 视频  3 音频
 			goodsData:{
 				type:Object,
 				default:()=>{}

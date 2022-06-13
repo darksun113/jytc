@@ -20,11 +20,16 @@
 		},
 		data() {
 			return {
-				
+				inviterId:"",
+				seriesId:""
 			}
 		},
 		methods: {
 			
+		},
+		onLoad(opt) {
+			this.inviterId=opt.inviterId
+			this.seriesId=opt.seriesId
 		},
 		onShow() {
 			uni.setNavigationBarTitle({

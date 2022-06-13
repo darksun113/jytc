@@ -1,5 +1,8 @@
 <template>
 	<view class="series-box" @click="toSeriesDetailPage">
+		<view class="sell-tip" v-if="item.goodsTotal==0">
+			已售罄
+		</view>
 		<img class="series-pic" :src="item.seriesImg" />
 		<view class="series-info">
 			<view class="series-title nowrap">
@@ -40,6 +43,20 @@
 	margin-bottom: 40rpx;
 	overflow: hidden;
 	width: 336rpx;
+	position: relative;
+	.sell-tip{
+		position: absolute;
+		background: rgba(0, 0, 0, .7);
+		padding: 10rpx 20rpx;
+		border-radius: 4px;
+		font-size: 28rpx;
+		font-family: PingFangSC-Regular, PingFang SC;
+		left: 20rpx;
+		top: 20rpx;
+		z-index: 1;
+		display: flex;
+		align-items: center;
+	}
 	.series-pic{
 		width: 100%;
 		border-radius: 20rpx;

@@ -1,5 +1,4 @@
 <template>
-	<!-- :style="{height:pageHeight+'px'}" -->
 	<view class="page" :style="{height:pageHeight+'px'}">
 		<slot></slot>
 	</view>
@@ -19,9 +18,11 @@
 		methods: {
 			getPageHeight(){
 				const systemInfo=uni.getSystemInfoSync()
+				console.log(systemInfo)
 				const top=systemInfo.windowTop
-				const windowHeight=systemInfo.screenHeight
-				this.pageHeight=windowHeight-top
+				const statusBarHeight=systemInfo.statusBarHeight
+				const windowHeight=systemInfo.windowHeight
+				this.pageHeight=windowHeight
 			}
 		}
 	}
@@ -32,6 +33,5 @@
 		background: #04030A;
 		color: #FFFFFF;
 		overflow: auto;
-		// padding-bottom: var(--window-bottom);
 	}
 </style>

@@ -1,7 +1,8 @@
 <template>
 	<view class="load-video">
 		<view class="video-box">
-			<VideoPlayer ref="VideoPlayer" videoRef="video"  :videoData="videoData"></VideoPlayer>
+			<!-- <VideoPlayer ref="VideoPlayer" videoRef="video"  :videoData="videoData"></VideoPlayer> -->
+			<video src="https://oss.nftcn.com.cn/video/20220127/202112310931.mp4" style="width: 100%;height: 100%;" :enable-progress-gesture="false" :controls="false" :autoplay="true" :muted="true" :loop="true"></video>
 		</view>
 		<Control v-if="goodsData.loadType==1" @preview="toOpenModelPreImg" @share="toShare"></Control>
 		<view class="lock_text" v-else>购买后可解锁高清观赏模式</view>
@@ -21,7 +22,7 @@
 	export default {
 		props: {
 			// goodsData.loadType: 0 未购买 1 已购买
-			// goodsType 类型 1 模型  2 图片  3 视频  4 音频
+			// materialType 类型 0 模型  1 图片  2 视频  3 音频
 			goodsData: {
 				type: Object,
 				default: () => {}

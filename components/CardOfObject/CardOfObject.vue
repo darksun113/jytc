@@ -3,10 +3,10 @@
 		<view class="goods-pic-box">
 			<image class="goods-pic" :src="item.image" mode="aspectFill"></image>
 			<view class="icon">
-				<image v-if="item.goodsType==1" class="goods-type" src="@/static/images/type_3D.svg" mode=""></image>
-				<image v-else-if="item.goodsType==2" class="goods-type" src="@/static/images/type_pic.svg" mode=""></image>
-				<image v-else-if="item.goodsType==3" class="goods-type" src="@/static/images/type_video.svg" mode=""></image>
-				<image v-else-if="item.goodsType==4" class="goods-type" src="@/static/images/type_audio.svg" mode=""></image>
+				<image v-if="item.materialType==0" class="goods-type" src="@/static/images/type_3D.svg" mode=""></image>
+				<image v-else-if="item.materialType==1" class="goods-type" src="@/static/images/type_pic.svg" mode=""></image>
+				<image v-else-if="item.materialType==2" class="goods-type" src="@/static/images/type_video.svg" mode=""></image>
+				<image v-else-if="item.materialType==3" class="goods-type" src="@/static/images/type_audio.svg" mode=""></image>
 			</view>
 		</view>
 		<view class="goods-info">
@@ -46,7 +46,7 @@
 		},
 		methods:{
 			toGoodsDetail(){
-				const url=`/subpageA/DetailPage/DetailPage?loadType=1&instanceId=${this.item.instanceId}&goodsType=${this.item.goodsType}`
+				const url=`/subpageA/DetailPage/DetailPage?loadType=1&instanceId=${this.item.instanceId}&materialType=${this.item.materialType}`
 				this.$routerTo(url)
 			}
 		}

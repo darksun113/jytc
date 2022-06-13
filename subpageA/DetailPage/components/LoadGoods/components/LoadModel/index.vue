@@ -20,7 +20,7 @@
 	export default {
 		props: {
 			// goodsData.loadType: 0 未购买 1 已购买
-			// goodsType 类型 1 模型  2 图片  3 视频  4 音频
+			// goodsData.materialType 类型 0 模型  1 图片  2 视频  3 音频
 			goodsData: {
 				type: Object,
 				default: () => {}

@@ -15,14 +15,29 @@
 
 <script>
 	export default {
+		props:["prePurchaseId"],
 		data(){
 			return {
-				isChecked:true
+				isChecked:false
 			}
 		},
 		methods:{
-			toJoinActivity(){
-				uni.$emit("joinSuccessShow")
+			async toJoinActivity(){
+				try{
+					if(this.isChecked){
+						const res=await uni.$http("/series/prePurchase/join",{prePurchaseId:this.prePurchaseId})
+						if(res.code==0){
+							uni.$emit("joinSuccessShow")
+						}else{
+							uni.$u.toast(res.errorMsg)
+						}
+					}else{
+						uni.$u.toast("请勾选并了解活动规则后操作！")
+					}
+				}catch(e){
+					//TODO handle the exception
+				}
+				
 			}
 		}
 	}

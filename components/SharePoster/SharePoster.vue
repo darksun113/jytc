@@ -2,8 +2,9 @@
 	<u-popup :show="show" mode="center" @open="open" overlayOpacity="0.8" :closeOnClickOverlay="false"
 		bgColor="transparent">
 		<view class="poster-page">
-			<image class="download_pic_icon" src="@/static/images/download_pic_icon.svg" @click="canvasImage.generateImage"></image>
-			<view class="poster-box" id="pagePoster">
+			<image class="download_pic_icon" src="@/static/images/download_pic_icon.svg" @click="saveFile"></image>
+			<image v-if="posterUrl" :src="posterUrl" mode="" style="height: 740rpx;width: 100%;;"></image>
+			<view class="poster-box" id="pagePoster" v-else>
 				<image class="poster-pic" src="@/static/images/demo3.png" mode="aspectFill"></image>
 				<view class="poster-content">
 					<view class="poster-title nowrap">
@@ -29,6 +30,9 @@
 				取消
 			</view>
 		</view>
+		<view class="mask" v-if="!posterUrl">
+			<u-loading-icon mode="semicircle" size="36"></u-loading-icon>
+		</view>
 	</u-popup>
 </template>
 
@@ -48,10 +52,11 @@
 		data() {
 			return {
 				show: this.isOpenPoster,
-				codeUrl: 'http://web.penglainft.com/#/goods_detail?goodsId=3a7425333ee4419094e13c381d0c9086&instanceId&loadType=1&goodsType=1',
+				codeUrl: 'http://web.penglainft.com/#/goods_detail?goodsId=3a7425333ee4419094e13c381d0c9086&instanceId&loadType=1&materialType=1',
 				size: 60,
 				backgroundColor:"#FFFFFF",
-				foregroundColor:"#000000"
+				foregroundColor:"#000000",
+				posterUrl:null
 			}
 		},
 		methods: {
@@ -67,42 +72,16 @@
 				);
 				uqrcode.make();
 				uqrcode.draw();
+				console.log(this.canvasImage.generateImage,"this.canvasImage")
+				this.$nextTick(()=>{
+					this.canvasImage.generateImage((val)=>{
+						this.posterUrl = val.replace(/[\r\n]/g, ''); // 去除base64位中的空格
+					})
+				})
 			},
-			// 获取生成的base64 图片路径
-			receiveRenderData(val) {
-				const posterUrl = val.replace(/[\r\n]/g, ''); // 去除base64位中的空格
-				// 保存图片至本地
-				FileSaver.saveAs(posterUrl);
-				uni.hideLoading();
-			},
-			// 显示loading
-			_showLoading(str) {
-				this.posterUrl = '';
-				uni.showLoading({
-					title: str
-				});
-			},
-			// 隐藏loading
-			_hideLoading() {
-				uni.hideLoading();
-				// #ifdef H5
-				this._showToast('长按保存图片');
-				// #endif
-			},
-			// 报错alert
-			_errAlert(content) {
-				uni.showModal({
-					title: '提示',
-					content: content
-				});
-			},
-
-			// 提示弹窗
-			_showToast(msg) {
-				uni.showToast({
-					title: msg,
-					icon: 'none'
-				});
+			// 保存图片至本地
+			saveFile(){
+				FileSaver.saveAs(this.posterUrl)
 			},
 			open() {
 				this.initQrCode()
@@ -123,12 +102,11 @@
 	export default {
 		methods: {
 			// 生成图片需要调用的方法
-			generateImage(e, ownerFun) {
-				ownerFun.callMethod('_showLoading', '正在生成图片') // 生成图片的 loading 提示
+			generateImage(callback) {
 				setTimeout(() => {
 					const dom = document.getElementById('pagePoster') // 需要生成图片内容的 dom 节点
 					html2canvas(dom, {
-						backgroundColor: "none",
+						backgroundColor: "rgba(0,0,0,0)",
 						width: dom.clientWidth, //dom 原始宽度
 						height: dom.clientHeight,
 						scrollY: 0, // html2canvas默认绘制视图内的页面，需要把scrollY，scrollX设置为0
@@ -138,10 +116,9 @@
 					}).then((canvas) => {
 						// 生成成功
 						// html2canvas 生成成功的图片链接需要转成 base64位的url
-						ownerFun.callMethod('receiveRenderData', canvas.toDataURL('image/png'))
+						callback(canvas.toDataURL('image/png'))
 					}).catch(err => {
 						// 生成失败 弹出提示弹窗
-						ownerFun.callMethod('_errAlert', `【生成图片失败，请重试】${err}`)
 					})
 				}, 300)
 			}
@@ -153,7 +130,18 @@
 	view {
 		box-sizing: border-box;
 	}
-
+	.mask{
+		width: 100%;
+		height: 100vh;
+		position: fixed;
+		background: #04030A;
+		z-index: 2;
+		left: 0;
+		top: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 	.poster-page {
 		position: relative;
 		.download_pic_icon {
@@ -173,7 +161,6 @@
 			background: #0A0C47;
 			border-radius: 20rpx;
 			position: relative;
-
 			.poster-pic {
 				width: 100%;
 				height: 516rpx;

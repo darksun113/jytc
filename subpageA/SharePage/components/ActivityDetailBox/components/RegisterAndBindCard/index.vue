@@ -6,7 +6,7 @@
 		<view class="share-poster-btn" :style="{background:isRegister?'#5C5A88':'linear-gradient(180deg, #70D0FF 0%, #D575FF 100%)'}" v-if="true" @click="toRegister">
 			{{isRegister?"已完成注册":"立即注册"}}
 		</view>
-		<view class="share-poster-btn" v-if="true">
+		<view class="share-poster-btn" v-if="true" @click="toBlindIdCard">
 			立即实名认证
 		</view>
 	</view>
@@ -22,7 +22,11 @@
 		},
 		methods:{
 			toRegister(){
-				this.$routerTo("../../../../../../pages/login/LoginByMobile/GetVerifyCode/GetVerifyCode?name=share")
+				this.$routerTo("/pages/login/LoginByMobile/GetVerifyCode/GetVerifyCode?name=share")
+			},
+			toBlindIdCard(){
+				const url = `/subpageA/BindIdCard/BindIdCard`
+				this.$routerTo(url)
 			}
 		}
 	}

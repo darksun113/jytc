@@ -8,13 +8,13 @@
 				<!-- 活动时间 -->
 				<view class="activity-timer-box">
 					<view class="timer-title"> 活动时间</view>
-					<ActivityStep></ActivityStep>
+					<ActivityStep :prePurchaseInfo="prePurchaseInfo"></ActivityStep>
 				</view>
-				<ActivityRules></ActivityRules>
+				<ActivityRules :prePurchaseInfo="prePurchaseInfo"></ActivityRules>
 				<!-- 底部交互区 -->
 				<view style="margin-top: 60rpx;">
-					<JoinButton v-if="posterData.state == 0"></JoinButton>
-					<ActivityStatus v-else></ActivityStatus>
+					<JoinButton v-if="joinStatus == 0" :prePurchaseId="prePurchaseId"></JoinButton>
+					<ActivityStatus v-else :prePurchaseInfo="prePurchaseInfo"></ActivityStatus>
 				</view>
 			</view>
 		</view>
@@ -29,12 +29,18 @@
 	import ActivityStatus from "./components/ActivityStatus"
 	import JoinResult from "./components/JoinResult/index.vue"
 	export default {
-		props:['isShow'],
+		props:['isShow',"prePurchaseId","joinStatus"],
 		data() {
 			return {
 				show: this.isShow,
 				isOpenPoster:false,
 				isShowStatus:false,
+				prePurchaseInfo:{
+					openTime:parseInt(Date.now()/1000) - 24*3600,
+					finishTime:parseInt(Date.now()/1000) + 72*3600,
+					rewardTime:parseInt(Date.now()/1000) + 96*3600,
+					activityRule:"该处为规则介绍，需要后台管理系统对系列开启“拉新”活动后，同时填写输入活动规则。同时填写输入活动规则。比如：该系列的介绍xxx平台联合xxx的IP发售该系列数字藏品，将通过活动，获得抽奖机会，赠送1000个提前购买名额，获得名额的用户可以不需要抢购，并且提前10分钟购买数字藏品。购买成功后，该权益消失，并且该权益只可使用一次限购一份。/ 1. 点击“参与活动”即可参与预购；/2. 分享专属二维码邀请好友，成功邀请5位新用户，完成实名注册即可参与抽奖。"
+				},
 				posterData:{
 					state:0
 				}
@@ -56,18 +62,33 @@
 				this.posterData.state=1
 			})
 			uni.$on("joinSuccessShow",()=>{
+				this.getPrePurchase()
 				this.isShowStatus=true
-			})
+			}) 
 		},
 		destroyed() {
 			uni.$off("toOpenSharePoster")
+			uni.$off("joinSuccess")
+			uni.$off("joinSuccessShow")
 		},
 		methods: {
 			joinSuccess(){
 				this.posterData.state=1
 			},
+			async getPrePurchase(){
+				try{
+					const res=await uni.$http("/series/prepurchase/detail",{
+						prePurchaseId:this.prePurchaseId
+					})
+					if(res.code==0){
+						this.prePurchaseInfo=res.data
+					}
+				}catch(e){
+					//TODO handle the exception
+				}
+			},
 			open() {
-				// console.log('open');
+				this.getPrePurchase()
 			},
 			close() {
 				this.$emit("close")

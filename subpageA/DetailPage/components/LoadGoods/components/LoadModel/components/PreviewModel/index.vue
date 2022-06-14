@@ -1,6 +1,6 @@
 <template>
 	<view class="model_preview">
-		<img class="close_icon" src="../../../../static/images/close_preview_icon.svg" alt="" @click="$emit('close')">
+		<img class="close_icon" src="@/static/images/close_preview_icon.svg" alt="" @click="$emit('close')">
 		<LoadModelPre  ref="LoadModelPre" v-if="goodsData.threeD && goodsData.mtl && goodsData.mapping && loadType==2" 
 			:OBJPath="goodsData.threeD" :MTLPath="goodsData.mtl"  :MAPPath="goodsData.mapping"
 			:modelType="goodsData.modelType"></LoadModelPre>

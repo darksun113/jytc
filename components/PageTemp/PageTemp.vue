@@ -18,7 +18,6 @@
 		methods: {
 			getPageHeight(){
 				const systemInfo=uni.getSystemInfoSync()
-				console.log(systemInfo)
 				const top=systemInfo.windowTop
 				const statusBarHeight=systemInfo.statusBarHeight
 				const windowHeight=systemInfo.windowHeight

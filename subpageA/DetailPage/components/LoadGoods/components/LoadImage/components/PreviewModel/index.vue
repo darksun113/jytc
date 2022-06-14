@@ -1,6 +1,6 @@
 <template>
 	<view class="pre-image">
-		<img class="close_icon" src="../../../../static/images/close_preview_icon.svg" alt="" @click="$emit('close')">
+		<img class="close_icon" src="@/static/images/close_preview_icon.svg" alt="" @click="$emit('close')">
 		<view class="scaleImg">
 			<movable-area>
 				<movable-view direction="all" scale-value="1" scale-min="0.1" scale="true" scale-max="8">

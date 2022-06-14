@@ -3,7 +3,7 @@
 		<image class="goods-pic" src="@/static/images/demo2.png" mode="aspectFill"></image>
 		<Control  v-if="goodsData.loadType==1" @preview="toOpenModelPreImg" @share="toShare"></Control>
 		<view class="lock_text" v-else>购买后可解锁高清观赏模式</view>
-		<Preview :isShow="isOpenPre">
+		<Preview :isShow="isOpenPre" @close="isOpenPre=false">
 			<PreviewModel :goodsData="imgData" @close="closePreviewModel"></PreviewModel>
 		</Preview>
 	</view>

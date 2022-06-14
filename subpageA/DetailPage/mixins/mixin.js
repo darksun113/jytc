@@ -52,6 +52,11 @@ export default {
 					this.goodsData.loadType=this.loadType
 					this.goodsData.materialType=this.materialType
 					this.goodsData.modelType=4
+				}else{
+					uni.showToast({
+						title:res.errorMsg,
+						icon:"none"
+					})
 				}
 			}catch(e){
 				//TODO handle the exception
@@ -78,7 +83,8 @@ export default {
 					this.buyerList=this.buyerList.sort((a,b)=>b.createTime-a.createTime)
 				})
 			}else{
-				this.getGoodsInstanceDetail()
+				this.getGoodsDetail()
+				// this.getGoodsInstanceDetail()
 			}
 			
 		}

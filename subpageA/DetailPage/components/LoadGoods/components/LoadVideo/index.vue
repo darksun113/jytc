@@ -1,24 +1,20 @@
 <template>
 	<view class="load-video">
 		<view class="video-box">
-			<!-- <VideoPlayer ref="VideoPlayer" videoRef="video"  :videoData="videoData"></VideoPlayer> -->
-			<video src="https://oss.nftcn.com.cn/video/20220127/202112310931.mp4" style="width: 100%;height: 100%;" :enable-progress-gesture="false" :controls="false" :autoplay="true" :muted="true" :loop="true"></video>
+			<VideoPlayer ref="VideoPlayer" videoRef="video"  :videoData="videoData"></VideoPlayer>
 		</view>
-		<Control v-if="goodsData.loadType==1" @preview="toOpenModelPreImg" @share="toShare"></Control>
+		<Control v-if="goodsData.loadType==1" @preview="toOpenModelPreVideo" @share="toShare"></Control>
 		<view class="lock_text" v-else>购买后可解锁高清观赏模式</view>
-		<Preview :isShow="isOpenPre">
-			<PreviewModel :goodsData="videoData" @close="closePreviewModel"></PreviewModel>
+		<Preview :isShow="isOpenPre" @close="isOpenPre=false">
+			<PreviewModel :videoData="videoData" @close="closePreviewModel"></PreviewModel>
 		</Preview>
 	</view>
 </template>
 
 <script>
-	import Videojs from 'video.js'
-	import 'video.js/dist/video-js.min.css'
 	import Control from "../Control/index.vue"
 	import PreviewModel from "./components/PreviewModel"
 	import VideoPlayer from "./components/VideoPlayer"
-	
 	export default {
 		props: {
 			// goodsData.loadType: 0 未购买 1 已购买
@@ -35,30 +31,17 @@
 		},
 		data() {
 			return {
-				videoPath: "https://oss.nftcn.com.cn/video/20220127/202112310931.mp4",
+				// videoPath:require("@/static/demo.mp4"),
 				// 'http://yun-live.oss-cn-shanghai.aliyuncs.com/record/yunlive/record/yunlive/meeting_1070/2020-11-25-09-27-59_2020-11-25-09-35-52.m3u8'
 				isOpenPre: false,
 				videoData: {
 					poster:'',
-					videoPath:"http://yun-live.oss-cn-shanghai.aliyuncs.com/record/yunlive/record/yunlive/meeting_1070/2020-11-25-09-27-59_2020-11-25-09-35-52.m3u8",
-					autoplay:true,
-					muted:true,
-					controls: false, //是否拥有控制条 【默认true】,如果设为false ,那么只能通过api进行控制了。也就是说界面上不会出现任何控制按钮
-					controlBar:{
-						volumePanel: { //声音样式
-							inline: false // 不使用水平方式
-						},
-						timeDivider: true, // 时间分割线
-						durationDisplay: true, // 总时间
-						progressControl: true, // 进度条
-						remainingTimeDisplay: true, //当前以播放时间
-						fullscreenToggle: true, //全屏按钮
-						pictureInPictureToggle: false, //画中画
-					}
+					videoPath:require("@/static/demo.mp4")
 				}
 			}
 		},
 		mounted() {
+			
 		},
 		destroyed() {
 			
@@ -68,14 +51,7 @@
 				// this.$refs.VideoPlayer.initVideo()
 				this.isOpenPre = false
 			},
-			toOpenModelPreImg() {
-				this.$refs.VideoPlayer.player.dispose()
-				const data = {
-					path: this.path
-				}
-				this.videoData = {
-					...data
-				}
+			toOpenModelPreVideo() {
 				this.isOpenPre = true
 			},
 			toShare() {

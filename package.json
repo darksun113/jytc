@@ -3,6 +3,7 @@
     "file-saver": "^2.0.5",
     "fingerprintjs2": "^2.1.4",
     "html2canvas": "^1.4.1",
+    "mui-player": "^1.6.1",
     "three": "^0.140.2",
     "u-qrcode": "^3.2.2",
     "video.js": "^7.19.2"

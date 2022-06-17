@@ -6,7 +6,6 @@
 				<ActivityDesBox :seriesInfo="seriesInfo"></ActivityDesBox>
 				<ActivityBox :seriesInfo="seriesInfo" v-if="seriesInfo.prePurchaseId"></ActivityBox>
 				<GoodsList ref="GoodsList" :seriesId="seriesId"></GoodsList>
-				<IsEnd></IsEnd>
 			</view>
 		</scroll-view>
 	</PageTemp>

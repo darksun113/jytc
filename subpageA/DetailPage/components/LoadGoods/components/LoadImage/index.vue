@@ -1,6 +1,6 @@
 <template>
 	<view class="load-image">
-		<image class="goods-pic" src="@/static/images/demo2.png" mode="aspectFill"></image>
+		<image class="goods-pic" :src="goodsData.loadType.image" mode="aspectFill"></image>
 		<Control  v-if="goodsData.loadType==1" @preview="toOpenModelPreImg" @share="toShare"></Control>
 		<view class="lock_text" v-else>购买后可解锁高清观赏模式</view>
 		<Preview :isShow="isOpenPre" @close="isOpenPre=false">
@@ -37,7 +37,7 @@
 			},
 			toOpenModelPreImg(){
 				const data= {
-					image:require("@/static/images/demo2.png")
+					image:this.goodsData.image
 				}
 				this.imgData={...data}
 				this.isOpenPre=true

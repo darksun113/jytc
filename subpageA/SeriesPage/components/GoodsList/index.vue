@@ -1,7 +1,7 @@
 <template>
 	<view class="goods-list">
 		<view class="list-title">
-			该系列下有{{total}}种藏品
+			该系列下有{{listTotal}}种藏品
 		</view>
 		<view class="list-contnet">
 			<template v-for="(item,index) in goodsList">
@@ -19,62 +19,13 @@
 		data(){
 			return {
 				isLastItem:false,
-				total:0,
+				listTotal:0,
 				updatePage:1,
-				goodsList:[
-					{
-						goodsName:"漫威英雄系列",
-						image:require("@/static/images/demo2.png"),
-						author:"深圳百纳维科技有限公司",
-						authorIcon:require("@/static/images/demo1.png"),
-						goodsId:"7a7e5413004940d8b6d3ca27398f0a0d",
-						totalNumber:15598,
-						goodsPrice:1098,
-						materialType:1
-					},
-					{
-						goodsName:"超人系列",
-						image:require("@/static/images/demo3.png"),
-						author:"深圳百纳维科技有限公司",
-						authorIcon:require("@/static/images/demo1.png"),
-						goodsId:"7a7e5413004940d8b6d3ca27398f0a0d",
-						totalNumber:15598,
-						goodsPrice:1098,
-						materialType:3
-					},{
-						goodsName:"漫威英雄系列",
-						image:require("@/static/images/demo4.png"),
-						author:"深圳百纳维科技有限公司",
-						authorIcon:require("@/static/images/demo1.png"),
-						goodsId:"7a7e5413004940d8b6d3ca27398f0a0d",
-						totalNumber:15598,
-						goodsPrice:1098,
-						materialType:0
-					},
-					{
-						goodsName:"超人系列",
-						image:require("@/static/images/demo3.png"),
-						author:"深圳百纳维科技有限公司",
-						authorIcon:require("@/static/images/demo1.png"),
-						goodsId:"7a7e5413004940d8b6d3ca27398f0a0d",
-						totalNumber:15598,
-						goodsPrice:1098,
-						materialType:3
-						
-					},{
-						goodsName:"漫威英雄系列",
-						image:require("@/static/images/demo2.png"),
-						author:"深圳百纳维科技有限公司",
-						authorIcon:require("@/static/images/demo1.png"),
-						goodsId:"7a7e5413004940d8b6d3ca27398f0a0d",
-						totalNumber:15598,
-						goodsPrice:1098,
-						materialType:2
-					},
-				]
+				goodsList:[]
 			}
 		},
 		mounted() {
+			this.updatePage=1
 			this.init()
 		},
 		methods:{
@@ -89,7 +40,8 @@
 				})
 			},
 			init(){
-				this.getSeriesGoodsList((list)=>{
+				this.getSeriesGoodsList((list,total)=>{
+					this.listTotal=total
 					this.goodsList=list
 				})
 			},
@@ -101,14 +53,14 @@
 						size:10
 					})
 					if(res.code==0){
-						this.listTotal=res.data.total
 						if(res.data.list.length==0){
 							callback(0)
 						}else{
 							res.data.list.forEach(async item=>{
 								item.image=await getFilePath(item.image)
 							})
-							callback(res.data.list)
+							this.updatePage++
+							callback(res.data.list,res.data.total)
 						}
 					}
 				}catch(e){

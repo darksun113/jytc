@@ -32,58 +32,12 @@
 				hasData:true,
 				isLastItem:false,
 				updatePage:1,
-				seriesList:[
-					{
-						seriesName:"漫威英雄系列",
-						seriesImg:require("@/static/images/demo1.png"),
-						shopName:"深圳百纳维科技有限公司",
-						shopIcon:require("@/static/images/demo1.png"),
-						seriesId:"15444",
-						materialType:1
-					},
-					{
-						seriesName:"超人系列",
-						seriesImg:require("@/static/images/demo4.png"),
-						shopName:"深圳百纳维科技有限公司",
-						shopIcon:require("@/static/images/demo1.png"),
-						seriesId:"15444",
-						materialType:2
-					},{
-						seriesName:"漫威英雄系列",
-						seriesImg:require("@/static/images/demo5.png"),
-						shopName:"深圳百纳维科技有限公司",
-						shopIcon:require("@/static/images/demo1.png"),
-						seriesId:"15444",
-						materialType:3
-					},
-					{
-						seriesName:"超人系列",
-						seriesImg:require("@/static/images/demo3.png"),
-						shopName:"深圳百纳维科技有限公司",
-						shopIcon:require("@/static/images/demo1.png"),
-						seriesId:"15444",
-						materialType:4
-					},{
-						seriesName:"漫威英雄系列",
-						seriesImg:require("@/static/images/demo2.png"),
-						shopName:"深圳百纳维科技有限公司",
-						shopIcon:require("@/static/images/demo1.png"),
-						seriesId:"15444",
-						materialType:3
-					},
-					{
-						seriesName:"超人系列",
-						seriesImg:require("@/static/images/demo6.png"),
-						shopName:"深圳百纳维科技有限公司",
-						shopIcon:require("@/static/images/demo1.png"),
-						seriesId:"15444",
-						materialType:1
-					},
-				]
+				seriesList:[]
 			}
 		},
 		onShow() {
-			// this.init()
+			this.updatePage=1
+			this.init()
 		},
 		methods:{
 			changeShowType(type){
@@ -94,7 +48,6 @@
 					if(list==0){
 						this.isLastItem=true
 					}else{
-						this.updatePage++
 						this.seriesList=[...this.seriesList,...list]
 					}
 				})
@@ -115,6 +68,7 @@
 						if(res.data.list==0){
 							callback(0)
 						}else{
+							this.updatePage++
 							res.data.list.forEach(async item=>{
 								const temp={
 									shopIcon:item.shopIcon,

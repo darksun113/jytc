@@ -1,5 +1,5 @@
 // const baseUrl = "http://192.168.2.50:18940";
-const baseUrl =process.env.NODE_ENV=="development"?"http://120.197.126.61:18940" : "http://api.penglainft.com:81";	
+const baseUrl =process.env.NODE_ENV=="development"?"http://120.197.126.61:18940" : "http://120.197.126.61:18940";	
 const pathArr=[
 	baseUrl+"/series/getSeriesList"
 ]

@@ -54,6 +54,7 @@
 					if(res.code==0){
 						uni.setStorageSync("token",res.data.token)
 						uni.$u.toast('登录成功')
+						this.$updateUserInfo()
 						let timer = setTimeout(()=>{
 							clearTimeout(timer)
 							this.$routerTo(2,"back")

@@ -21,7 +21,8 @@
 				isNoData:false,
 				isLastData:false,
 				updatePage:1,
-				orderList:[]
+				orderList:[],
+				shouldRequest:true
 			}
 		},
 		mounted() {
@@ -29,6 +30,7 @@
 		},
 		methods:{
 			init(){
+				this.updatePage=1
 				this.orderList=[]
 				this.getOrderList(parseInt(Date.now()/1000),item=>{
 					if(item==0){
@@ -52,6 +54,7 @@
 						if(res.data.list.length==0){
 							callback(0)
 						}else{
+							this.updatePage++
 							res.data.list.forEach(async item=>{
 								const temp={
 									image:item.goods.image,
@@ -70,15 +73,18 @@
 				}
 			},
 			updateList(){
-				const createTime=this.orderList[this.orderList.length-1].createTime
-				this.getOrderList(createTime,item=>{
-					if(item==0){
-						this.isLastData=true
-					}else{
-						this.orderList.push(item)
-						this.orderList=this.orderList.sort((a,b)=>a.createTime-b.createTime)
-					}
-				})
+				if(this.shouldRequest){
+					const createTime=this.orderList[this.orderList.length-1].createTime
+					this.getOrderList(createTime,item=>{
+						if(item==0){
+							this.isLastData=true
+							this.shouldRequest=false
+						}else{
+							this.orderList.push(item)
+							this.orderList=this.orderList.sort((a,b)=>a.createTime-b.createTime)
+						}
+					})
+				}
 			}
 		}
 	}

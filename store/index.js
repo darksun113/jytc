@@ -50,6 +50,7 @@ export default new Vuex.Store({
 				...state.userInfo,
 				...userInfo
 			}
+			uni.setStorageSync("userInfo",state.userInfo)
 		}
 	},
 	actions: {

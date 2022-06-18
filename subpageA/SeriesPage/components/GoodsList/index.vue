@@ -21,7 +21,8 @@
 				isLastItem:false,
 				listTotal:0,
 				updatePage:1,
-				goodsList:[]
+				goodsList:[],
+				shouldRequest:true
 			}
 		},
 		mounted() {
@@ -31,13 +32,17 @@
 		methods:{
 			// 翻页更新goodsList
 			updateList(){
-				this.getSeriesGoodsList((list)=>{
-					if(list==0){
-						this.isLastItem=true
-					}else{
-						this.goodsList=[...this.goodsList,...list]
-					}
-				})
+				if(this.shouldRequest){
+					this.getSeriesGoodsList((list)=>{
+						if(list==0){
+							this.isLastItem=true
+							this.shouldRequest=false
+						}else{
+							this.goodsList=[...this.goodsList,...list]
+						}
+					})
+				}
+				
 			},
 			init(){
 				this.getSeriesGoodsList((list,total)=>{

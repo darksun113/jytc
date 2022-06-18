@@ -32,7 +32,8 @@
 				hasData:true,
 				isLastItem:false,
 				updatePage:1,
-				seriesList:[]
+				seriesList:[],
+				shouldRequest:true
 			}
 		},
 		onShow() {
@@ -44,13 +45,16 @@
 				this.showType=type
 			},
 			updateList() {
-				this.getSeriesList(list=>{
-					if(list==0){
-						this.isLastItem=true
-					}else{
-						this.seriesList=[...this.seriesList,...list]
-					}
-				})
+				if(this.shouldRequest){
+					this.getSeriesList(list=>{
+						if(list==0){
+							this.isLastItem=true
+							this.shouldRequest=false
+						}else{
+							this.seriesList=[...this.seriesList,...list]
+						}
+					})
+				}
 			},
 			init(){
 				this.getSeriesList(list=>{

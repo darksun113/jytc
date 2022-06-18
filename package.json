@@ -5,7 +5,7 @@
     "html2canvas": "^1.4.1",
     "mui-player": "^1.6.1",
     "three": "^0.140.2",
-    "u-qrcode": "^3.2.2",
-    "video.js": "^7.19.2"
+    "three-obj-mtl-loader": "^1.0.3",
+    "u-qrcode": "^3.2.2"
   }
 }

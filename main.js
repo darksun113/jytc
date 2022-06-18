@@ -7,11 +7,6 @@ import uView from "uview-ui"
 
 // 自定义方法
 import { routerTo } from '@/utils/routerTo.js' //公共方法
-// 引入video.js
-import Videojs from 'video.js'
-import 'video.js/dist/video-js.min.css' 
-
-Vue.prototype.$video = Videojs //使用video.js时用$video
 
 Vue.prototype.$store = store
 Vue.config.productionTip = false

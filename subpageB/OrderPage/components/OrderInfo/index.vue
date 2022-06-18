@@ -17,21 +17,58 @@
 		<view class="order-detail-box">
 			<view class="order-detail">
 				<view class="title">订单金额：</view>
-				<view class="detail price">¥ 18.88</view>
+				<view class="detail price">¥ {{(goodsData.goods.goodsPrice/100).toFixed(2)}}</view>
 			</view>
 			<view class="order-detail">
 				<view class="title">订单编号：</view>
-				<view class="detail">20220201234567890</view>
+				<view class="detail">{{goodsData.orderNo}}</view>
 			</view>
 			<view class="order-detail">
 				<view class="title">创建时间：</view>
-				<view class="detail">2022-02-01 15:00:30</view>
+				<view class="detail">{{goodsData.createTime | format}}</view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	export default {
+		props:{
+			orderInfo:{
+				type:Object,
+				default:()=>{
+				}
+			}
+		},
+		data(){
+			return {
+				goodsData:{
+					goods:{}
+				}
+			}
+		},
+		filters:{
+			format(stamp){
+				if(!stamp){
+					return ""
+				}else{
+					const date = new Date(stamp*1000)
+					const Y = date.getFullYear() + '-'
+					const M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
+					const D = date.getDate() < 10 ? '0' + date.getDate() + ' ' : date.getDate() + ' '
+					const H = date.getHours() + ':'
+					const M2 = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':'
+					const S = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
+					return Y + M + D + H + M2 + S
+				}
+			}
+		},
+		watch:{
+			orderInfo(data){
+				this.goodsData=data
+			}
+		}
+	}
 </script>
 
 <style lang="scss" scoped>

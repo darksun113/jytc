@@ -47,6 +47,9 @@
 				default:()=>[]
 			}
 		},
+		mounted() {
+			console.log(this.goodsData)
+		},
 		components:{
 			FunModule
 		}

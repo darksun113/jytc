@@ -143,7 +143,6 @@
 					})
 					if(res.code==0){
 						this.$updateUserInfo()
-						uni.setStorageSync("certificationStatus", 1);
 						this.$routerTo("../BindCardSuccess/BindCardSuccess")
 					}else{
 						this.$routerTo(`../BindCardFail/BindCardFail?errMsg=${res.errorMsg}`)

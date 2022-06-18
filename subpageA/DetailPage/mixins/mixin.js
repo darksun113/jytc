@@ -7,7 +7,7 @@ export default {
 				if(res.code==0){
 					const resData=res.data.goods
 					const temp={
-						image:resData.image,
+						// image:resData.image,
 						shopIcon: resData.shopIcon,
 						description: resData.description,
 					}
@@ -22,6 +22,9 @@ export default {
 					this.goodsData.loadType=this.loadType
 					this.goodsData.materialType=this.materialType
 					this.goodsData.modelType=4
+					uni.setNavigationBarTitle({
+						title:resData.goodsName
+					})
 				}else{
 					uni.showToast({
 						title:res.errorMsg,
@@ -83,10 +86,8 @@ export default {
 					this.buyerList=this.buyerList.sort((a,b)=>b.createTime-a.createTime)
 				})
 			}else{
-				this.getGoodsDetail()
-				// this.getGoodsInstanceDetail()
+				this.getGoodsInstanceDetail()
 			}
-			
 		}
 	},
 	mounted(){

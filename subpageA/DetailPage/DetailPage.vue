@@ -1,9 +1,9 @@
 <template>
 	<PageTemp>
 		<view class="detail-page">
-			<LoadGoods :goodsData="goodsData"></LoadGoods>
-			<GoodsInfo :goodsData="goodsData" :buyerList="buyerList"></GoodsInfo>
-			<ButtonBox :goodsData="goodsData" v-if="loadType==0"></ButtonBox>
+			<LoadGoods v-if="JSON.stringify(goodsData)!=='{}'" :goodsData="goodsData"></LoadGoods>
+			<GoodsInfo v-if="JSON.stringify(goodsData)!=='{}'" :goodsData="goodsData" :buyerList="buyerList"></GoodsInfo>
+			<ButtonBox v-if="JSON.stringify(goodsData)!=='{}' && loadType==0" :goodsData="goodsData" ></ButtonBox>
 		</view>
 	</PageTemp>
 </template>

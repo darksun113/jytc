@@ -37,6 +37,7 @@
 		},
 		methods:{
 			init(){
+				this.updatePage=1
 				this.orderList=[]
 				this.getOrderList(parseInt(Date.now()/1000),item=>{
 					if(item==0){
@@ -56,12 +57,13 @@
 						page:this.updatePage
 					})
 					if(res.code==0){
-						if(res.data.list.length==0){
+						if(res.data.orders.length==0){
 							callback(0)
 						}else{
-							res.data.list.forEach(async item=>{
+							this.updatePage++
+							res.data.orders.forEach(async item=>{
 								const temp={
-									image:item.goods.image,
+									// image:item.goods.image,
 									shopIcon:item.goods.shopIcon
 								}
 								const objData = await getFilesPath(temp)

@@ -23,12 +23,13 @@
 	export default{
 		data(){
 			return {
-				payType:'aliPay'
+				payType:"aliPay"
 			}
 		},
 		methods:{
 			selectPayType(type){
 				this.payType=type
+				this.$emit("setPayType",type)
 			}
 		}
 	}

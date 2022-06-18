@@ -9,7 +9,7 @@
 					</view>
 				</view>
 				<view class="count-box">
-					<u-count-down style="width: 120rpx;" :time="5 * 60 * 60 * 1000" format="HH:mm:ss"
+					<u-count-down style="width: 120rpx;" :time="(item.expireTime - curTime)*1000" format="HH:mm:ss"
 						@finish="countEnd"></u-count-down>
 					<text>待支付</text>
 				</view>
@@ -60,7 +60,7 @@
 		},
 		data() {
 			return {
-
+				curTime:parseInt(Date.now()/1000)
 			}
 		},
 		methods: {
@@ -68,7 +68,7 @@
 				console.log('countEnd')
 			},
 			toPay() {
-				const url = `/subpageB/OrderPage/OrderPage?orderNo=${1}`
+				const url = `/subpageB/OrderPage/OrderPage?orderNo=${this.item.orderNo}`
 				this.$routerTo(url)
 			},
 		}

@@ -29,26 +29,30 @@
 				isLastItem:false,
 				updatePage:1,
 				prePurchaseId:this.purchaseId,
-				winnerList:[]
+				winnerList:[],
+				shouldRequest:true
 			}
 		},
 		methods: {
 			updateList(){
-				this.getWinnerList(list=>{
-					if(list==0){
-						this.isLastItem=true
-					}else{
-						this.winnerList=[...this.winnerList,...list]
-						this.updatePage++
-					}
-				})
+				if(this.shouldRequest){
+					this.getWinnerList(list=>{
+						if(list==0){
+							this.isLastItem=true
+							this.shouldRequest=false
+						}else{
+							this.winnerList=[...this.winnerList,...list]
+							this.updatePage++
+						}
+					})
+				}
 			},
 			open() {
-				// console.log('open');
 				this.getWinnerList(list=>{
 					if(list==0){
 						this.hasData=false
 					}else{
+						this.hasData=true
 						this.winnerList=list
 					}
 				})

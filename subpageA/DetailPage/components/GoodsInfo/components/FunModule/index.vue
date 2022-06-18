@@ -29,14 +29,10 @@
 		<!-- 发行方 -->
 		<view class="options_box" @click="toOpenBlockPopup(2)">
 			<view class="options_right">
-				<!-- <image class="options-icon" :src="goodsData.shopIcon" mode=""></image> -->
-				<image class="options-icon" src="@/static/images/demo2.png" mode=""></image>
+				<image class="options-icon" :src="goodsData.shopIcon" mode=""></image>
 				<view class="options_info">
-					<!-- <view class="options_name">
-						{{goodsData.shopName}}
-					</view> -->
 					<view class="options_name">
-						深圳九州龙文化传播有限公司
+						{{goodsData.shopName}}
 					</view>
 				</view>
 			</view>

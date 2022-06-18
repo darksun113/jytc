@@ -94,7 +94,7 @@
 			}, {
 				"path": "DetailPage/DetailPage",
 				"style": {
-					"navigationBarTitleText": "详情",
+					"navigationBarTitleText": "",
 					"enablePullDownRefresh": false
 				}
 

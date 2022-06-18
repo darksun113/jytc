@@ -10,6 +10,12 @@
 
 <script>
 	export  default {
+		props:{
+			goodsData:{
+				type:Object,
+				default:()=>{}
+			}
+		},
 		data() {
 			return {
 				isShow: false,
@@ -19,16 +25,29 @@
 		methods:{
 			toOrder(){
 				const boo=this.$checkLogin()
-				const certificationStatus=uni.getStorageSync("certificationStatus")
 				if(boo){
+					const certificationStatus=uni.getStorageSync("userInfo").certificationStatus
 					if(certificationStatus==1){
-						const url = "/subpageB/OrderPage/OrderPage"
-						this.$routerTo(url,'redirect')
+						this.getOrderNo()
 					}else{
 						this.identityShow=true
 					}
 				}else{
 					this.isShow=true
+				}
+			},
+			async getOrderNo(){
+				try{
+					const goodsId = this.goodsData.goodsId
+					const res = await uni.$http("/order/place",{goodsId})
+					if(res.code==0){
+						const url = `/subpageB/OrderPage/OrderPage?orderNo=${res.data.orderNo}`
+						this.$routerTo(url,'redirect')
+					}else{
+						uni.$u.toast(res.errorMsg)
+					}
+				}catch(e){
+					//TODO handle the exception
 				}
 			}
 		}

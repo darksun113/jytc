@@ -36,7 +36,7 @@
 				isOpenPre: false,
 				videoData: {
 					poster:'',
-					videoPath:require("@/static/demo.mp4")
+					videoPath:require("@/static/audio.mp3")
 				}
 			}
 		},

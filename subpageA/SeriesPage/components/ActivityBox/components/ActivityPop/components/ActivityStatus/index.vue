@@ -2,7 +2,7 @@
 	<view class="activity-status">
 		<view class="title-count" v-if="true">还差 4 人即可参与抽奖</view>
 		<view class="title-count" v-else>已完成任务，等待开奖吧</view>
-		<PowerNums></PowerNums>
+		<PowerNums :powerList="powerList" :totalNum="totalNum"></PowerNums>
 		<view class="share-poster-btn" @click="toOpenSharePoster">
 			分享我的专属海报
 		</view>
@@ -11,12 +11,33 @@
 
 <script>
 	import PowerNums from "./components/PowerNums/index.vue"
+	import {getFilePath} from "@/utils/tools.js"
 	export default{
+		props:{
+			prePurchaseInfo:{
+				type:Array,
+				default:()=>[]
+			},
+			totalNum:[Number,String]
+		},
+		data(){
+			return{
+				powerList:[]
+			}
+		},
 		components:{PowerNums},
 		methods:{
 			toOpenSharePoster(){
 				const data={a:44}
 				uni.$emit("toOpenSharePoster",data)
+			}
+		},
+		watch:{
+			prePurchaseInfo(newList){
+				newList.forEach(async item=>{
+					item.icon=await getFilePath(item.icon)
+				})
+				this.powerList=newList
 			}
 		}
 	}

@@ -27,7 +27,6 @@
 					uni.setStorageSync("browserCode", browserCode)
 				})
 				// #endif
-			  
 			},
 		}
 	}

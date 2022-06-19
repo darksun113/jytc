@@ -20,13 +20,19 @@
 		},
 		data(){
 			return {
+				info:""
 			}
 		},
 		computed:{
 			introduceInfoText(){
-				return this.prePurchaseInfo.activityRule.replace(/\//g,"<br />")
+				return this.info.replace(/\//g,"<br />")
 			}
 		},
+		watch:{
+			prePurchaseInfo(data){
+				this.info=data.activityRule
+			}
+		}
 	}
 </script>
 

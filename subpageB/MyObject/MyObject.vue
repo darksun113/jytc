@@ -52,7 +52,7 @@
 			},
 			async getGoodsList(startTime,callback){
 				try{
-					const viewBuyerId=uni.getStorageSync("userId")
+					const viewBuyerId=this.$store.state.userInfo.buyerId
 					const res= await uni.$http("/goods/antiques",{
 						viewBuyerId,
 						size:10,

@@ -3,7 +3,7 @@
 		<view class="account-item" @click="changeAvatar">
 			<view class="title">头像</view>
 			<view class="info" style="display: flex;align-items: center;">
-				<image  style="width: 84rpx;height: 84rpx;border-radius: 50%;"  src="/static/images/default_avatar.png"></image>
+				<image  style="width: 84rpx;height: 84rpx;border-radius: 50%;"  :src="$store.state.userInfo.avatar"></image>
 			</view>
 		</view>
 		<view class="account-item" @click="reName">

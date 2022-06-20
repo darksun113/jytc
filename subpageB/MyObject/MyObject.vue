@@ -75,7 +75,7 @@
 							})
 						}
 					}else{
-						uni.$u.toast(res.errorMsg)
+						this.$toast(res.errorMsg)
 					}
 				}catch(e){
 					//TODO handle the exception

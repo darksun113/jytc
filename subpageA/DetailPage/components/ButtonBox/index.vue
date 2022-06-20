@@ -44,7 +44,7 @@
 						const url = `/subpageB/OrderPage/OrderPage?orderNo=${res.data.orderNo}`
 						this.$routerTo(url,'redirect')
 					}else{
-						uni.$u.toast(res.errorMsg)
+						this.$toast(res.errorMsg)
 					}
 				}catch(e){
 					//TODO handle the exception

@@ -93,7 +93,7 @@
 				this.$refs.uForms.validate().then(res => {
 					this.sendRequest()
 				}).catch(errors => {
-					// uni.$u.toast('校验失败')
+					// this.$toast('校验失败')
 				})
 			},
 			// 获取手机+验证码匹配结果

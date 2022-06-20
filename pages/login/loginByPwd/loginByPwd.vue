@@ -97,7 +97,7 @@
 			getCode() {
 				this.$refs.uForm.validate().then(res => {
 					if (this.checkGrop[0] !== 'agree') {
-						uni.$u.toast('请先阅读并勾选用户协议与隐私政策')
+						this.$toast('请先阅读并勾选用户协议与隐私政策')
 						return
 					} else {
 						if(this.isNeedPuzzle){
@@ -107,7 +107,7 @@
 						}
 					}
 				}).catch(errors => {
-					// uni.$u.toast('校验失败')
+					// this.$toast('校验失败')
 				})
 			},
 			toResetPwd(){
@@ -141,14 +141,14 @@
 					})
 					if(res.code==0){
 						uni.setStorageSync("token",res.data.token)
-						uni.$u.toast('登录成功')
+						this.$toast('登录成功')
 						this.$updateUserInfo()
 						let timer = setTimeout(()=>{
 							clearTimeout(timer)
 							this.$routerTo(1,"back")
 						},1000)
 					}else{
-						uni.$u.toast(res.errorMsg)
+						this.$toast(res.errorMsg)
 					}
 				}catch(e){
 					//TODO handle the exception

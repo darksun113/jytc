@@ -39,7 +39,6 @@
 <script>
 	import uQRCode from 'u-qrcode';
 	import FileSaver from 'file-saver'
-	import { pathToBase64, base64ToPath } from "@/utils/tools.js"
 	export default {
 		name:"SharePoster",
 		props: {

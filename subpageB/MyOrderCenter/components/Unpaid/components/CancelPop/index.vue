@@ -42,7 +42,7 @@
 					if(res.code==0){
 						this.$emit("cancelSuccess")
 					}else{
-						uni.$u.toast(res.errorMsg)
+						this.$toast(res.errorMsg)
 					}
 				}catch(e){
 					//TODO handle the exception

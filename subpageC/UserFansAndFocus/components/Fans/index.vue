@@ -12,9 +12,9 @@
 				</view>
 			</view>
 			<view class="operate">
-				<view @click.stop="focus(1,item.buyerId,index)" class="btn" v-if="item.relation==0">关注</view>
-				<view @click.stop="focus(1,item.buyerId,index)" class="btn" v-if="item.relation==2">相互关注</view>
-				<view @click.stop="focus(0,item.buyerId,index)" class="btn" v-else-if="item.relation==1 || item.relation==3">已关注</view>
+				<view @click.stop="focus(0,item.buyerId,index)" class="btn" v-if="item.relation==0">关注</view>
+				<view @click.stop="focus(0,item.buyerId,index)" class="btn" v-if="item.relation==2">相互关注</view>
+				<view @click.stop="focus(1,item.buyerId,index)" class="btn" v-else-if="item.relation==1 || item.relation==3">已关注</view>
 				<!-- <view class="btn" @click="focus(0,index)" v-if="item.isFocus">互相关注</view>
 				<view class="btn" @click="focus(1,index)" v-else>回粉</view> -->
 			</view>
@@ -91,13 +91,14 @@
 			},
 			async focus(type,followId,index){
 				try{
-					// type 0 取消关注  1 关注
+					// type 1 取消关注  0 关注
 					const res=await uni.$http("/user/follow",{
 						followId,
 						type
 					})
 					if(res.code==0){
-						this.focusList[index].relation=res.data.relation
+						this.init()
+						
 					}
 				}catch(e){
 					//TODO handle the exception

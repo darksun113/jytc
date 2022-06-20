@@ -1,8 +1,7 @@
 <template>
-	<u-swiper bgColor="transparent" :circular="true" :list="bannerList" imgMode="aspectFill" keyName="url" @change="e => current = e.current" :autoplay="true" indicator indicatorMode="dot">
+	<u-swiper bgColor="transparent" :circular="true" :list="bannerList" @click="toBannerLink" imgMode="aspectFill" keyName="url" @change="e => current = e.current" :autoplay="true" indicator indicatorMode="dot">
 		<view slot="indicator" class="indicator">
-			<view class="indicator__dot" v-for="(item, index) in bannerList" :key="index" :class="[index === current && 'indicator__dot--active']">
-			</view>
+			<view class="indicator__dot" v-for="(item, index) in bannerList" :key="index" :class="[index === current && 'indicator__dot--active']"></view>
 		</view>
 	</u-swiper>
 </template>
@@ -29,6 +28,14 @@
 					}
 				}catch(e){
 					//TODO handle the exception
+				}
+			},
+			toBannerLink(idx){
+				const item=this.bannerList[idx]
+				if(item.link){
+					// #ifdef H5
+						window.location=item.link
+					// #endif
 				}
 			},
 			init(){

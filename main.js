@@ -24,6 +24,12 @@ Vue.prototype.$checkLogin = function() {
 	const token = uni.getStorageSync("token") || ''
 	return token ? true : false
 }
+Vue.prototype.$toast = function(text) {
+	uni.showToast({
+		title:text,
+		icon:"none"
+	})
+}
 Vue.prototype.$updateUserInfo=function(){
 	this.$store.dispatch("getUserInfo")
 }

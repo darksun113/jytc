@@ -74,7 +74,7 @@
 				this.$refs.uForms.validate().then(res => {
 					this.checkVerifyCode()
 				}).catch(errors => {
-					// uni.$u.toast('校验失败')
+					// this.$toast('校验失败')
 				})
 			},
 			getCode(){

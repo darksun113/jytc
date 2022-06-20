@@ -126,9 +126,9 @@
 					})
 					if (res.code == 0) {
 						this.pricavyForm[key] = !this.pricavyForm[key]
-						uni.$u.toast("操作成功")
+						this.$toast("操作成功")
 					} else {
-						uni.$u.toast(res.errorMsg)
+						this.$toast(res.errorMsg)
 					}
 				} catch (e) {
 					//TODO handle the exception

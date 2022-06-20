@@ -29,10 +29,10 @@
 						if(res.code==0){
 							uni.$emit("joinSuccessShow")
 						}else{
-							uni.$u.toast(res.errorMsg)
+							this.$toast(res.errorMsg)
 						}
 					}else{
-						uni.$u.toast("请勾选并了解活动规则后操作！")
+						this.$toast("请勾选并了解活动规则后操作！")
 					}
 				}catch(e){
 					//TODO handle the exception

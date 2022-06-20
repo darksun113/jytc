@@ -41,7 +41,7 @@
 			async changeName(){
 				try{
 					if(this.renameValue==this.$store.state.userInfo.name){
-						uni.$u.toast("与原昵称重复")
+						this.$toast("与原昵称重复")
 						return
 					}
 					const res=await uni.$http("/user/editBuyerInfo",{
@@ -49,11 +49,11 @@
 						avatar:this.$store.state.avatarUuid
 					})
 					if(res.code==0){
-						uni.$u.toast("修改成功")
+						this.$toast("修改成功")
 						this.$updateUserInfo()
 						this.$emit("close")
 					}else{
-						uni.$u.toast(res.errorMsg)
+						this.$toast(res.errorMsg)
 					}
 				}catch(e){
 					//TODO handle the exception

@@ -76,13 +76,13 @@
 				// this.type=1
 				this.$refs.uForm.validate().then(res => {
 					if (this.checkGrop[0] !== 'agree') {
-						uni.$u.toast('请先阅读并勾选用户协议与隐私政策')
+						this.$toast('请先阅读并勾选用户协议与隐私政策')
 						return
 					} else {
 						this.starCheckRobot(3, this.form.phone)
 					}
 				}).catch(errors => {
-					// uni.$u.toast('校验失败')
+					// this.$toast('校验失败')
 				})
 			},
 			// 人机验证通过后自定义方法执行

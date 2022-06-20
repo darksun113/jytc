@@ -89,16 +89,16 @@
 			},
 			async focus(type,followId,index){
 				try{
-					// type 0 取消关注  1 关注
+					// type 1 取消关注  0 关注
 					const res=await uni.$http("/user/follow",{
 						followId,
 						type
 					})	
 					if(res.code==0){
 						// this.focusList[index].relation=res.data.relation
-						this.focusList[index].relation=3
+						this.init()
 					}else{
-						uni.$u.toast(res.errorMsg)
+						this.$toast(res.errorMsg)
 					}
 				}catch(e){
 					//TODO handle the exception

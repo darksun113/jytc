@@ -4,15 +4,15 @@
 			<view class="main">
 				<view class="title">修改头像</view>
 				<view class="container-box">
-					<image class="avatar" :class="{checked:useAvatar==1}" @click="selectAvatar(1)" src="@/static/images/default_avatar.png"></image>
-					<image class="avatar" :class="{checked:useAvatar==2}" @click="selectAvatar(2)" src="@/static/images/default_avatar.png"></image>
-					<image class="avatar" :class="{checked:useAvatar==3}" @click="selectAvatar(3)" src="@/static/images/default_avatar.png"></image>
-					<image class="avatar" :class="{checked:useAvatar==4}" @click="selectAvatar(4)" src="@/static/images/default_avatar.png"></image>
-					<image class="avatar" :class="{checked:useAvatar==5}" @click="selectAvatar(5)" src="@/static/images/default_avatar.png"></image>
-					<image class="avatar" :class="{checked:useAvatar==6}" @click="selectAvatar(6)" src="@/static/images/default_avatar.png"></image>
+					<image class="avatar" :class="{checked:useAvatar==1}" @click="selectAvatar(1)" src="@/static/avatar/1.png"></image>
+					<image class="avatar" :class="{checked:useAvatar==2}" @click="selectAvatar(2)" src="@/static/avatar/2.png"></image>
+					<image class="avatar" :class="{checked:useAvatar==3}" @click="selectAvatar(3)" src="@/static/avatar/3.png"></image>
+					<image class="avatar" :class="{checked:useAvatar==4}" @click="selectAvatar(4)" src="@/static/avatar/4.png"></image>
+					<image class="avatar" :class="{checked:useAvatar==5}" @click="selectAvatar(5)" src="@/static/avatar/5.png"></image>
+					<image class="avatar" :class="{checked:useAvatar==6}" @click="selectAvatar(6)" src="@/static/avatar/6.png"></image>
 				</view>
 			</view>
-			<view class="operate-box">
+			<view class="operate-box" @click="comfirmChange">
 				确认修改
 			</view>
 		</view>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+	import {imgPathToBase64,base64toFile,getFileMd5 ,uploadFile} from "@/utils/tools.js"
 	export default{
 		props:{
 			isShow:{
@@ -30,12 +31,49 @@
 		data(){
 			return {
 				show:this.isShow,
-				useAvatar:null
+				useAvatar:null,
+				ruleForm: {
+					coverUrl: "",
+					coverFile: ""
+				},
 			}
 		},
 		methods:{
 			selectAvatar(idx){
-				this.useAvatar=idx
+				uni.showLoading()
+				const Data = new Request(`../../../../static/avatar/${idx}.png`)
+				imgPathToBase64(Data.url,async (base)=>{
+					this.fileBlob=await base64toFile(base,"头像"+idx)
+					this.fileMd5=await getFileMd5(this.fileBlob)
+					this.useAvatar=idx
+					uni.hideLoading()
+				})
+			},
+			async comfirmChange(){
+				try{
+					uni.showLoading()
+					const res=await uploadFile(this.fileMd5,this.fileBlob)
+					if(res.status=='success'){
+						const res_= uni.$http("/user/editBuyerInfo",{
+							name:this.$store.state.userInfo.name,
+							avatar:res.info
+						})
+						if(res_.code==0){
+							this.$updateUserInfo()
+							uni.hideLoading()
+							this.$toast("修改成功")
+							this.$emit("close")
+						}else{
+							uni.hideLoading()
+							this.$toast(res_.errorMsg)
+						}
+					}else{
+						uni.hideLoading()
+						this.$toast(res.info)
+					}
+				}catch(e){
+					//TODO handle the exception
+				}
 			},
 			close(){
 				this.$emit('close')
@@ -84,7 +122,7 @@
 						width: 100%;
 						height: 100%;
 						content: '';
-						background: url("../../static/images/check_icon.svg") no-repeat center center rgba(0, 0, 0, .8);
+						background: url("../../static/images/check_icon.svg") no-repeat center center rgba(0, 0, 0, .5);
 						background-size: 80rpx 60rpx;
 						position: absolute;
 						left: 0;

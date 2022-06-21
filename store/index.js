@@ -13,7 +13,8 @@ export default new Vuex.Store({
 		isCount: false,
 		// 用户头像uuid
 		avatarUuid:'',
-		userInfo: {}
+		userInfo: {},
+		token:""
 	},
 	mutations: {
 		saveFilePath(state, data) {
@@ -51,6 +52,9 @@ export default new Vuex.Store({
 				...userInfo
 			}
 			uni.setStorageSync("userInfo",state.userInfo)
+		},
+		getToken(state,token){
+			state.token=token
 		}
 	},
 	actions: {

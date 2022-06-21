@@ -1,26 +1,32 @@
 <template>
 	<view class="rules-des-box">
 		<view class="goods-pic">
-			<image src="@/static/images/demo4.png"></image>
+			<image :src="prePurchaseInfo.seriesImg"></image>
 		</view>
 		<view class="right-info">
-			<view class="goods-name">元宇宙国风潮玩时代</view>
+			<view class="goods-name">{{prePurchaseInfo.seriesName}}</view>
 			<view class="author-box">
-				<image src="@/static/images/demo2.png"></image>
-				<text>深圳百纳维科技有限公司</text>
+				<image :src="prePurchaseInfo.shopIcon"></image>
+				<text>{{prePurchaseInfo.shopName}}</text>
 			</view>
 			<view class="activity-rules" @click="viewRules">
 				<image src="@/static/images/rules_icon.svg"></image>
 				<text>查看活动规则</text>
 			</view>
 		</view>
-		<ActivityPop @close="isShow=false" :isShow="isShow"></ActivityPop>
+		<ActivityPop @close="isShow=false" :isShow="isShow" :prePurchaseInfo="prePurchaseInfo"></ActivityPop>
 	</view>
 </template>
 
 <script>
 	import ActivityPop from "./components/ActivityPop"
 	export default{
+		props:{
+			prePurchaseInfo:{
+				type:Object,
+				default:()=>{}
+			}
+		},
 		data(){
 			return{
 				isShow:false

@@ -1,7 +1,7 @@
 <template>
 	<view class="load-video">
 		<view class="video-box">
-			<VideoPlayer ref="VideoPlayer" videoRef="video"  :videoData="videoData"></VideoPlayer>
+			<VideoPlayer ref="VideoPlayer" videoRef="video"  :videoData="goodsData"></VideoPlayer>
 		</view>
 		<Control v-if="goodsData.loadType==1" @preview="toOpenModelPreVideo" @share="toShare"></Control>
 		<view class="lock_text" v-else>购买后可解锁高清观赏模式</view>
@@ -31,13 +31,6 @@
 		},
 		data() {
 			return {
-				// videoPath:require("@/static/demo.mp4"),
-				// 'http://yun-live.oss-cn-shanghai.aliyuncs.com/record/yunlive/record/yunlive/meeting_1070/2020-11-25-09-27-59_2020-11-25-09-35-52.m3u8'
-				isOpenPre: false,
-				videoData: {
-					poster:'',
-					videoPath:require("@/static/audio.mp3")
-				}
 			}
 		},
 		mounted() {

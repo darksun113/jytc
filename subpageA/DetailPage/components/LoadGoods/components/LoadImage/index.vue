@@ -1,6 +1,6 @@
 <template>
 	<view class="load-image">
-		<image class="goods-pic" :src="goodsData.description" mode="aspectFill"></image>
+		<image class="goods-pic" :src="goodsData.image" mode="aspectFill"></image>
 		<Control  v-if="goodsData.loadType==1" @preview="toOpenModelPreImg" @share="toShare"></Control>
 		<view class="lock_text" v-else>购买后可解锁高清观赏模式</view>
 		<Preview :isShow="isOpenPre" @close="isOpenPre=false">

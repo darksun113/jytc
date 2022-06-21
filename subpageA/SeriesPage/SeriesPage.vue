@@ -34,11 +34,6 @@
 			this.seriesId=opt.seriesId
 			this.getSeriesDetail()
 		},
-		mounted() {
-			uni.setNavigationBarTitle({
-				title:"中国节系列-中秋"
-			})
-		},
 		methods:{
 			async getSeriesDetail(){
 				try{

@@ -62,7 +62,7 @@
 							callback(0)
 						}else{
 							res.data.list.forEach(async item=>{
-								item.image=await getFilePath(item.image)
+								item.image = await getFilePath(item.image)
 							})
 							this.updatePage++
 							callback(res.data.list,res.data.total)

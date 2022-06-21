@@ -29,7 +29,7 @@
 			initVideo() {
 				this.player = new MuiPlayer({
 					container: '#mui-pre-player',
-					src: this.videoData.videoPath,
+					src: this.videoData.url,
 					autoplay: true,
 					muted: true,
 					loop: true,

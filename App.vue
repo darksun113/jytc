@@ -6,7 +6,7 @@
 		},
 		onShow: function() {
 			// uni.navigateTo({
-			// 	url:"./subpageA/SharePage/SharePage"
+			// 	url:"./subpageA/SharePage/SharePage?prePurchaseId=b99e662276954616b8d6bc4f22a474c5&userId=404408492136"
 			// })
 		},
 		onHide: function() {

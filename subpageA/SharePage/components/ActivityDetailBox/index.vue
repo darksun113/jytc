@@ -1,9 +1,9 @@
 <template>
 	<view class="activity-status">
-		<view class="title-count" v-if="true">还差 4 人即可参与抽奖</view>
+		<view class="title-count" v-if="prePurchaseInfo_.userList && prePurchaseInfo_.userList.length<prePurchaseInfo_.peopleNum">还差 {{prePurchaseInfo_.peopleNum - prePurchaseInfo_.userList.length}} 人即可参与抽奖</view>
 		<view class="title-count" v-else>已完成任务，等待开奖吧</view>
-		<PowerNums></PowerNums>
-		<RegisterAndBindCard v-if="true"></RegisterAndBindCard>
+		<PowerNums :powerList="prePurchaseInfo_.userList" :totalNum="prePurchaseInfo_.peopleNum"></PowerNums>
+		<RegisterAndBindCard v-if="!$store.state.userInfo.certificationStatus || $store.state.userInfo.certificationStatus==0" :prePurchaseInfo="prePurchaseInfo_"></RegisterAndBindCard>
 		<ToJoinActive v-else></ToJoinActive>
 	</view>
 </template>
@@ -13,9 +13,20 @@
 	import RegisterAndBindCard from "./components/RegisterAndBindCard/index.vue"
 	import ToJoinActive from "./components/ToJoinActive/index.vue"
 	export default{
+		props:{
+			prePurchaseInfo:{
+				type:Object,
+				default:()=>{
+					return {
+						userList:[]
+					}
+				}
+			}
+		},
 		data(){
 			return {
-				
+				isJoin:true,
+				prePurchaseInfo_:this.prePurchaseInfo
 			}
 		},
 		components:{
@@ -23,8 +34,10 @@
 			RegisterAndBindCard,
 			ToJoinActive
 		},
-		methods:{
-			
+		watch:{
+			prePurchaseInfo(data){
+				this.prePurchaseInfo_=data
+			}
 		}
 	}
 </script>

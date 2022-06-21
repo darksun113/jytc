@@ -58,6 +58,8 @@
 				checkGrop: [],
 				// 判断是否需要开启人机验证
 				isNeedPuzzle:true,
+				inviter:"",
+				prePurchaseId:"",
 				form:{
 					phone: null,
 					pwd:null,
@@ -91,6 +93,10 @@
 					]
 				},
 			}
+		},
+		onLoad(opt) {
+			this.inviter=opt.inviter?opt.inviter:""
+			this.prePurchaseId=opt.prePurchaseId?opt.prePurchaseId:""
 		},
 		mixins: [mixin],
 		methods: {
@@ -137,10 +143,13 @@
 						browserCode,
 						pwd,
 						phone:this.form.phone,
-						slidingFigureId:this.slidingFigureId
+						slidingFigureId:this.slidingFigureId,
+						inviter:this.inviter,
+						prePurchaseId:this.prePurchaseId
 					})
 					if(res.code==0){
 						uni.setStorageSync("token",res.data.token)
+						this.$store.commit("getToken",res.data.token)
 						this.$toast('登录成功')
 						this.$updateUserInfo()
 						let timer = setTimeout(()=>{

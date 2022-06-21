@@ -15,7 +15,7 @@
 
 <script>
 	export default {
-		props:["prePurchaseId"],
+		props:["prePurchaseId","seriesId"],
 		data(){
 			return {
 				isChecked:false
@@ -25,10 +25,14 @@
 			async toJoinActivity(){
 				try{
 					if(this.isChecked){
-						const res=await uni.$http("/series/prePurchase/join",{prePurchaseId:this.prePurchaseId})
+						const res=await uni.$http("/series/prePurchase/join",{
+							prePurchaseId:this.prePurchaseId,
+							seriesId:this.seriesId
+						})
 						if(res.code==0){
 							uni.$emit("joinSuccessShow")
 						}else{
+							uni.$emit("joinSuccessShow")
 							this.$toast(res.errorMsg)
 						}
 					}else{

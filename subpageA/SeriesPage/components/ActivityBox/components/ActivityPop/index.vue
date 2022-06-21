@@ -13,7 +13,7 @@
 				<ActivityRules :prePurchaseInfo="prePurchaseInfo"></ActivityRules>
 				<!-- 底部交互区 -->
 				<view style="margin-top: 60rpx;">
-					<JoinButton v-if="joinStatus == 0" :prePurchaseId="prePurchaseId"></JoinButton>
+					<JoinButton v-if="joinStatus_ == 0" :prePurchaseId="prePurchaseId" :seriesId="prePurchaseInfo.seriesId"></JoinButton>
 					<ActivityStatus v-else :prePurchaseInfo="prePurchaseInfo.userList" :totalNum="prePurchaseInfo.peopleNum"></ActivityStatus>
 				</view>
 			</view>
@@ -35,10 +35,9 @@
 				show: this.isShow,
 				isOpenPoster:false,
 				isShowStatus:false,
+				joinStatus_:this.joinStatus,
 				prePurchaseInfo:{},
-				posterData:{
-					state:0
-				}
+				posterData:{}
 			}
 		},
 		components:{
@@ -49,15 +48,17 @@
 			JoinResult
 		},
 		mounted() {
-			uni.$on("toOpenSharePoster",(data)=>{
-				this.posterData={...data}
+			uni.$on("toOpenSharePoster",()=>{
 				this.isOpenPoster=true
 			})
-			uni.$on("joinSuccess",(data)=>{
-				this.posterData.state=1
+			uni.$on("joinSuccess",()=>{
+				this.posterData.prePurchaseId=this.prePurchaseId
+				this.posterData.userId=uni.getStorageSync("userInfo").buyerId
 			})
 			uni.$on("joinSuccessShow",()=>{
 				this.getPrePurchase()
+				this.$emit("changeAcitveBoxStatus")
+				this.joinStatus_=1
 				this.isShowStatus=true
 			}) 
 		},
@@ -87,12 +88,14 @@
 			},
 			close() {
 				this.$emit("close")
-				// console.log('close');
 			}
 		},
 		watch:{
 			isShow(newState){
 				this.show=newState
+			},
+			joinStatus(boo){
+				this.joinStatus_=boo
 			}
 		}
 	}

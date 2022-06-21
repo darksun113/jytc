@@ -8,10 +8,9 @@
 				<!-- 活动时间 -->
 				<view class="activity-timer-box">
 					<view class="timer-title"> 活动时间</view>
-					<ActivityStep></ActivityStep>
+					<ActivityStep :prePurchaseInfo="prePurchaseInfo"></ActivityStep>
 				</view>
-				<ActivityRules></ActivityRules>
-				
+				<ActivityRules :activityRule="prePurchaseInfo.activityRule"></ActivityRules>
 			</view>
 		</view>
 	</u-popup>
@@ -20,7 +19,13 @@
 	import ActivityStep from "./components/ActivityStep"
 	import ActivityRules from "./components/ActivityRules"
 	export default {
-		props:['isShow'],
+		props:{
+			prePurchaseInfo:{
+				type:Object,
+				default:()=>{}
+			},
+			isShow:[Boolean]
+		},
 		data() {
 			return {
 				show: this.isShow,

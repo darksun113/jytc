@@ -1,10 +1,10 @@
 <template>
 	<view class="load-image">
-		<image class="goods-pic" src="@/static/images/demo2.png" mode="aspectFill"></image>
+		<image class="goods-pic" :src="goodsData.image" mode="aspectFill"></image>
 		<Control  v-if="goodsData.loadType==1" @preview="toOpenModelPreImg" @share="toShare"></Control>
 		<view class="lock_text" v-else>购买后可解锁高清观赏模式</view>
 		<Preview :isShow="isOpenPre" @close="isOpenPre=false">
-			<PreviewModel :audioData="audioData" @close="closePreviewModel"></PreviewModel>
+			<PreviewModel :audioData="goodsData" @close="closePreviewModel"></PreviewModel>
 		</Preview>
 	</view>
 </template>
@@ -23,11 +23,7 @@
 		},
 		data(){
 			return {
-				isOpenPre:false,
-				audioData: {
-					poster:'',
-					audioPath:require("@/static/audio.mp3")
-				}
+				isOpenPre:false
 			}
 		},
 		components:{

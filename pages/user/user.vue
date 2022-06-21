@@ -49,5 +49,6 @@
 .user-page{
 	height: 100%;
 	overflow: auto;
+	padding-bottom: 20rpx;
 }
 </style>

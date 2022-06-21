@@ -29,11 +29,16 @@
 		data() {
 			return {
 				verifyCode:"",
-				phone:null
+				phone:null,
+				inviter:"",
+				prePurchaseId:"",
 			}
 		},
 		onLoad(opt) {
 			this.phone=opt.phone
+			this.slidingFigureId=opt.slidingFigureId
+			this.inviter=opt.inviter?opt.inviter:""
+			this.prePurchaseId=opt.prePurchaseId?opt.prePurchaseId:""
 		},
 		mixins:[mixin],
 		methods: {
@@ -49,10 +54,13 @@
 						browserCode,
 						phone:this.phone,
 						verifyCode:this.verifyCode,
-						slidingFigureId:this.slidingFigureId
+						slidingFigureId:this.slidingFigureId,
+						inviter:this.inviter,
+						prePurchaseId:this.prePurchaseId
 					})
 					if(res.code==0){
 						uni.setStorageSync("token",res.data.token)
+						this.$store.commit("getToken",res.data.token)
 						this.$toast('登录成功')
 						this.$updateUserInfo()
 						let timer = setTimeout(()=>{

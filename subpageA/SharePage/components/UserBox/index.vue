@@ -1,12 +1,20 @@
 <template>
 	<view class="user-box">
-		<image class="avatar" src="@/static/images/demo3.png" mode=""></image>
-		<view class="user-name"> 收藏家：张三 </view>
-		<view class="power-text"> 助力一臂之力抽中白名单机会吧 </view>
+		<image class="avatar" :src="prePurchaseInfo.avatar" mode=""></image>
+		<view class="user-name"> 收藏家：{{prePurchaseInfo.name}} </view>
+		<view class="power-text"> 助ta一臂之力抽中白名单机会吧 </view>
 	</view>
 </template>
 
 <script>
+	export default{
+		props:{
+			prePurchaseInfo:{
+				type:Object,
+				default:()=>{}
+			}
+		}
+	}
 </script>
 
 <style lang="scss" scpoed>

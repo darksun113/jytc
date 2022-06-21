@@ -3,12 +3,12 @@
 		bgColor="transparent">
 		<view class="poster-page">
 			<image class="download_pic_icon" src="@/static/images/download_pic_icon.svg" @click="saveFile"></image>
-			<image v-if="posterUrl" :src="posterUrl" mode="" style="height: 740rpx;width: 100%;;"></image>
+			<image v-if="posterUrl" :src="posterUrl" mode="" style="height: 740rpx;width: 100%;"></image>
 			<view class="poster-box" id="pagePoster" v-else>
 				<image class="poster-pic" src="@/static/images/demo3.png" mode="aspectFill"></image>
 				<view class="poster-content">
 					<view class="poster-title nowrap">
-						收藏家xxx邀请你助力抽中白名单机会
+						收藏家 {{userName}} 邀请你助力抽中白名单机会
 					</view>
 					<view class="poster-detail">
 						<view class="left">
@@ -50,8 +50,8 @@
 		},
 		data() {
 			return {
+				userName:uni.getStorageSync("userInfo").fullName,
 				show: this.isOpenPoster,
-				codeUrl: 'http://web.penglainft.com/#/goods_detail?goodsId=3a7425333ee4419094e13c381d0c9086&instanceId&loadType=1&materialType=1',
 				size: 60,
 				backgroundColor:"#FFFFFF",
 				foregroundColor:"#000000",
@@ -60,18 +60,21 @@
 		},
 		methods: {
 			initQrCode(){
+				const prePurchaseId=this.posterData.prePurchaseId
+				const userId=this.posterData.userId
+				// const codeUrl = "http://web.penglainft.com/#/goods_detail?=3a7425333ee4419094e13c381d0c9086&instanceId&loadType=1&materialType=1"
+				const codeUrl = `http://192.168.2.29:8080/#/subpageA/SharePage/SharePage?prePurchaseId=${prePurchaseId}$userId=${userId}`
 				this.size=document.getElementById("qrBox").clientWidth
 				const ctx = uni.createCanvasContext('qrcode');
 				const uqrcode = new uQRCode(
 				  {
-				    text: this.codeUrl,
+				    text: codeUrl,
 				    size: this.size
 				  },
 				  ctx
 				);
 				uqrcode.make();
 				uqrcode.draw();
-				console.log(this.canvasImage.generateImage,"this.canvasImage")
 				this.$nextTick(()=>{
 					this.canvasImage.generateImage((val)=>{
 						this.posterUrl = val.replace(/[\r\n]/g, ''); // 去除base64位中的空格

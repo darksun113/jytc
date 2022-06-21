@@ -45,6 +45,8 @@
 		data() {
 			return {
 				checkGrop: [],
+				inviter:"",
+				prePurchaseId:"",
 				form:{
 					phone: null,
 				},
@@ -70,6 +72,10 @@
 				},
 			}
 		},
+		onLoad(opt) {
+			this.inviter=opt.inviter?opt.inviter:""
+			this.prePurchaseId=opt.prePurchaseId?opt.prePurchaseId:""
+		},
 		mixins: [mixin],
 		methods: {
 			getCode() {
@@ -87,10 +93,12 @@
 			},
 			// 人机验证通过后自定义方法执行
 			doSomething(){
-				this.$routerTo(`../InputVerifyCode/InputVerifyCode?phone=${this.form.phone}`)
+				const url=`../InputVerifyCode/InputVerifyCode?phone=${this.form.phone}&slidingFigureId=${this.slidingFigureId}&inviter=${this.inviter}&prePurchaseId=${this.prePurchaseId}`
+				this.$routerTo(url)
 			},
 			toPwdLogin(){
-				this.$routerTo(`../../loginByPwd/loginByPwd`,"redirect")
+				const url=`../../loginByPwd/loginByPwd?inviter=${this.inviter}&prePurchaseId=${this.prePurchaseId}`
+				this.$routerTo(url,"redirect")
 			}
 		}
 	}

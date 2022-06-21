@@ -17,7 +17,7 @@
 			</view>
 		</view>
 		<!-- 活动进行中 -->
-		<view class="active-tip" v-else-if="seriesInfo.end == 0 && seriesInfo.prePurchaseFinishTime - curTime > 0">
+		<view class="active-tip" v-else-if="seriesInfo.end == 0">
 			<view class="active-tip-info">
 				<view class="active-tip-info-title">
 					预购活动已开启
@@ -48,8 +48,8 @@
 				</view>
 			</view>
 		</view>
-		<ActivityPop @close="isJoinShow=false" :isShow="isJoinShow" :joinStatus="joinStatus" :purchaseId="seriesInfo.prePurchaseId"></ActivityPop>
-		<WinnerList @close="isWinnerOpen=false" :isShow="isWinnerOpen" :purchaseId="seriesInfo.prePurchaseId"></WinnerList>
+		<ActivityPop @close="isJoinShow=false" :isShow="isJoinShow" :joinStatus="joinStatus" :prePurchaseId="seriesInfo.prePurchaseId" @changeAcitveBoxStatus="changeAcitveBoxStatus"></ActivityPop>
+		<WinnerList @close="isWinnerOpen=false" :isShow="isWinnerOpen" :prePurchaseId="seriesInfo.prePurchaseId"></WinnerList>
 		<LoginTipPop name="SeriesPage" :isShow="isLoginTip" @close="isLoginTip=false"></LoginTipPop>
 	</view>
 </template>
@@ -104,6 +104,9 @@
 			},
 			toViewWinnerList(){
 				this.isWinnerOpen=true
+			},
+			changeAcitveBoxStatus(){
+				this.seriesInfo.join=1
 			}
 		},
 		

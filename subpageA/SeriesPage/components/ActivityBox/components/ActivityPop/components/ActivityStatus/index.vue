@@ -1,8 +1,8 @@
 <template>
 	<view class="activity-status">
-		<view class="title-count" v-if="true">还差 4 人即可参与抽奖</view>
+		<view class="title-count" v-if="true">还差 {{totalNum_ - powerList.length}} 人即可参与抽奖</view>
 		<view class="title-count" v-else>已完成任务，等待开奖吧</view>
-		<PowerNums :powerList="powerList" :totalNum="totalNum"></PowerNums>
+		<PowerNums :powerList="powerList" :totalNum="totalNum_"></PowerNums>
 		<view class="share-poster-btn" @click="toOpenSharePoster">
 			分享我的专属海报
 		</view>
@@ -18,18 +18,19 @@
 				type:Array,
 				default:()=>[]
 			},
+			// 总数
 			totalNum:[Number,String]
 		},
 		data(){
 			return{
-				powerList:[]
+				powerList:this.prePurchaseInfo,
+				totalNum_:this.totalNum
 			}
 		},
 		components:{PowerNums},
 		methods:{
 			toOpenSharePoster(){
-				const data={a:44}
-				uni.$emit("toOpenSharePoster",data)
+				uni.$emit("toOpenSharePoster")
 			}
 		},
 		watch:{
@@ -38,6 +39,9 @@
 					item.icon=await getFilePath(item.icon)
 				})
 				this.powerList=newList
+			},
+			totalNum(num){
+				this.totalNum_=num
 			}
 		}
 	}

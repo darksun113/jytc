@@ -1,7 +1,6 @@
 <template>
 	<view class="pre">
-		<image src="@/static/images/demo1.png" mode="aspectFill"></image>
-		<!-- <audio class="audio" poster="@/static/images/demo1.png" src="@/static/audio.mp3" ref="audio"></audio> -->
+		<image :src="audioData.image" mode="aspectFill"></image>
 		<view class="play-box" v-show="isPlay" @click="pause">
 			<image src="../../../../static/images/pause_icon.svg" mode=""></image>
 		</view>
@@ -34,7 +33,7 @@
 		methods: {
 			init(){
 				this.audioDom = uni.createInnerAudioContext();
-				this.audioDom.src=this.audioData.audioPath
+				this.audioDom.src=this.audioData.url
 				this.audioDom.onEnded(() => {
 				  this.isPlay=false
 				});

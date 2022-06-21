@@ -7,10 +7,11 @@ export default {
 				if(res.code==0){
 					const resData=res.data.goods
 					const temp={
-						// image:resData.image,
+						image:resData.image,
 						shopIcon: resData.shopIcon,
 						description: resData.description,
 					}
+					resData.url?temp.url=resData.url:''
 					resData.mapping?temp.mapping=resData.mapping:''
 					resData.threeD?temp.threeD=resData.threeD:''
 					resData.mtl?temp.mtl=resData.mtl:''
@@ -18,6 +19,7 @@ export default {
 					Object.keys(data).forEach(key=>{
 						resData[key]=data[key]
 					})
+					
 					this.goodsData=resData
 					this.goodsData.loadType=this.loadType
 					this.goodsData.materialType=this.materialType
@@ -44,6 +46,7 @@ export default {
 						shopIcon: res.data.shopIcon,
 						goodsDesc: res.data.goodsDesc,
 					}
+					res.data.url?temp.url=res.data.url:''
 					res.data.mapping?temp.mapping=res.data.mapping:''
 					res.data.threeD?temp.threeD=res.data.threeD:''
 					res.data.mtl?temp.mtl=res.data.mtl:''
@@ -86,7 +89,8 @@ export default {
 					this.buyerList=this.buyerList.sort((a,b)=>b.createTime-a.createTime)
 				})
 			}else{
-				this.getGoodsInstanceDetail()
+				this.getGoodsDetail()
+				// this.getGoodsInstanceDetail()
 			}
 		}
 	},

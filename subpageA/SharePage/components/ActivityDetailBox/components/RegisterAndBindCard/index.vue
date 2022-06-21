@@ -4,7 +4,7 @@
 			完成以下操作立即帮TA助力
 		</view>
 		<view class="share-poster-btn" :style="{background:isRegister?'#5C5A88':'linear-gradient(180deg, #70D0FF 0%, #D575FF 100%)'}" v-if="true" @click="toRegister">
-			{{isRegister?"已完成注册":"立即注册"}}
+			{{$store.state.token?"已完成注册":"立即注册"}}
 		</view>
 		<view class="share-poster-btn" v-if="true" @click="toBlindIdCard">
 			立即实名认证
@@ -14,6 +14,12 @@
 
 <script>
 	export default{
+		props:{
+			prePurchaseInfo:{
+				type:Object,
+				default:()=>{}
+			},
+		},
 		data(){
 			return {
 				// 是否已完成注册
@@ -22,7 +28,10 @@
 		},
 		methods:{
 			toRegister(){
-				this.$routerTo("/pages/login/LoginByMobile/GetVerifyCode/GetVerifyCode?name=share")
+				const prePurchaseId = this.prePurchaseInfo.prePurchaseId
+				const inviter=this.prePurchaseInfo.buyerId
+				const url=`/pages/login/LoginByMobile/GetVerifyCode/GetVerifyCode?name=share&inviter=${inviter}&prePurchaseId=${prePurchaseId}`
+				this.$routerTo(url)
 			},
 			toBlindIdCard(){
 				const url = `/subpageA/BindIdCard/BindIdCard`

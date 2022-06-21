@@ -1,8 +1,9 @@
 <template>
 	<view class="power-num-box">
-		<swiper class="number-of-power" :current="curDot" @change="swiperChange" :circular='true' :display-multiple-items="5">
-			<swiper-item v-for="i in list" :key="i">
-				<image src="@/static/images/default_avatar.png" mode=""></image>
+		<swiper class="number-of-power" :current="curDot" @change="swiperChange" :circular='circular' :display-multiple-items="5">
+			<swiper-item v-for="i in totalNum" :key="i">
+				<image v-if="powerList.length>0 && powerList[i-1].icon" :src="powerList[i-1].icon" mode=""></image>
+				<image v-else src="@/static/images/default_avatar.png" mode=""></image>
 			</swiper-item>
 		</swiper>
 		<view class="left-right-icon">
@@ -18,25 +19,29 @@
 
 <script>
 	export default {
+		props:{
+			powerList:{
+				type:Array,
+				default:()=>[]
+			},
+			totalNum:[Number,String]
+		},
 		data() {
 			return {
 				curDot:0,
 				circular:true,
-				list:[1,2,3,4,5,6,7,8,9,10]
 			}
-		},
-		mounted() {
 		},
 		methods: {
 			swiperChange(e){
 				this.curDot = e.detail.current;
 			},
 			leftImg(){
+				if(this.powerList.length)
 				this.circular = false
-				let num = this.list.length - 1
+				let num = this.powerList.length - 1
 				if (this.curDot <= 0) {
 					this.circular = true
-					// this.curDot = num
 					return
 				} else {
 					this.curDot--
@@ -44,10 +49,9 @@
 			},
 			rightImg(){
 				this.circular = true
-				let num = this.list.length - 1
+				let num = this.powerList.length - 1
 				if (this.curDot >= num) {
 					return
-					// this.curDot = 0
 				} else {
 					this.curDot++
 				}

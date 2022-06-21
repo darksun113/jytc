@@ -2,7 +2,7 @@
 	<view class="power-num-box">
 		<swiper class="number-of-power" :current="curDot" @change="swiperChange" :circular='circular' :display-multiple-items="5">
 			<swiper-item v-for="i in totalNum" :key="i">
-				<image v-if="powerList[i-1].icon" :src="powerList[i-1].icon" mode=""></image>
+				<image v-if="powerList.length>0 && powerList[i-1].icon" :src="powerList[i-1].icon" mode=""></image>
 				<image v-else src="@/static/images/default_avatar.png" mode=""></image>
 			</swiper-item>
 		</swiper>
@@ -32,15 +32,14 @@
 				circular:true,
 			}
 		},
-		mounted() {
-		},
 		methods: {
 			swiperChange(e){
 				this.curDot = e.detail.current;
 			},
 			leftImg(){
+				if(this.powerList.length)
 				this.circular = false
-				let num = this.list.length - 1
+				let num = this.powerList.length - 1
 				if (this.curDot <= 0) {
 					this.circular = true
 					return
@@ -50,7 +49,7 @@
 			},
 			rightImg(){
 				this.circular = true
-				let num = this.list.length - 1
+				let num = this.powerList.length - 1
 				if (this.curDot >= num) {
 					return
 				} else {

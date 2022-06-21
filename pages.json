@@ -50,7 +50,7 @@
 		"backgroundColor": "#090c47", //底部背景色
 		"fontSize": "20rpx", //字体大小
 		"spacing": "10rpx", //字体到图标的距离
-		"height": "156rpx", //底部高
+		"height": "78px", //底部高
 		"list": [{
 				"pagePath": "pages/home/home",
 				"iconPath": "static/tabBar/home_tab_icon.svg", //未选中时图片样式

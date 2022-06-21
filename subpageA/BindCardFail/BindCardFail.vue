@@ -21,7 +21,7 @@
 			};
 		},
 		onLoad(option) {
-			this.info = option.errInfo;
+			this.info = option.errMsg;
 		},
 		methods: {
 			toIdentity() {

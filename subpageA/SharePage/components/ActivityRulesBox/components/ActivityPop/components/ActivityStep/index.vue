@@ -14,26 +14,61 @@
 		</view>
 		<view class="bottom">
 			<view class="item">
-				<view>05-17</view>
-				<view>10:00</view>
+				<view>{{prePurchaseInfo.openTime | formatDate}}</view>
+				<view>{{prePurchaseInfo.openTime | formatTime}}</view>
 			</view>
 			<view class="item">
-				<view>05-23</view>
-				<view >10:00</view>
+				<view>{{curTime | formatDate}}</view>
+				<view>{{curTime | formatTime}}</view>
 			</view>
 			<view class="item">
-				<view>05-26</view>
-				<view >10:00</view>
+				<view>{{prePurchaseInfo.finishTime | formatDate}}</view>
+				<view>{{prePurchaseInfo.finishTime | formatTime}}</view>
 			</view>
 			<view class="item">
-				<view>06-01</view>
-				<view >10:00</view>
+				<view>{{prePurchaseInfo.rewardTime | formatDate}}</view>
+				<view>{{prePurchaseInfo.rewardTime | formatTime}}</view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	export default {
+		props:{
+			prePurchaseInfo:{
+				type:Object,
+				default:()=>{}
+			}
+		},
+		data(){
+			return {
+				curTime:parseInt(Date.now()/1000)
+			}
+		},
+		filters:{
+			formatDate(stamp){
+				if(!stamp){
+					return ""
+				}else{
+					const date = new Date(stamp*1000)
+					const M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
+					const D = date.getDate() < 10 ? '0' + date.getDate(): date.getDate()
+					return M + D 
+				}
+			},
+			formatTime(stamp){
+				if(!stamp){
+					return ""
+				}else{
+					const date = new Date(stamp*1000)
+					const H = date.getHours() + ':'
+					const M2 = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
+					return H + M2
+				}
+			}
+		}
+	}
 </script>
 
 <style lang="scss" scoped>

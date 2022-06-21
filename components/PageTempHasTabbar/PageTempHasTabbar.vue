@@ -1,6 +1,5 @@
 <template>
-	<!-- :style="{height:'calc('+pageHeight+'px - 156rpx)'}" -->
-	<view class="page" :style="{height:'calc('+pageHeight+'px - 156rpx)'}">
+	<view class="page" :style="{height:pageHeight+'px'}">
 		<slot></slot>
 	</view>
 </template>
@@ -19,9 +18,7 @@
 		methods: {
 			getPageHeight(){
 				const systemInfo=uni.getSystemInfoSync()
-				const top=systemInfo.windowTop
-				const windowHeight=systemInfo.screenHeight
-				this.pageHeight=windowHeight-top
+				this.pageHeight=systemInfo.windowHeight
 			}
 		}
 	}
@@ -33,6 +30,5 @@
 		padding: 0 30rpx;
 		color: #FFFFFF;
 		overflow: auto;
-		padding-bottom: 156rpx;
 	}
 </style>

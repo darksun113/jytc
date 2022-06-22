@@ -32,6 +32,9 @@
 		},
 		onLoad(opt) {
 			this.seriesId=opt.seriesId
+			
+		},
+		onShow() {
 			this.getSeriesDetail()
 		},
 		methods:{

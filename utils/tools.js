@@ -275,7 +275,7 @@ export function imgPathToBase64(url, cb) {
 		ctx = canvas.getContext('2d'),
 		img = new Image;
 	img.crossOrigin = 'Anonymous';
-	img.src = url;
+	img.src = /^data:image/.test(url) ? url : url + '?' + new Date().getTime();
 	img.onload = function() {
 		canvas.height = img.height;
 		canvas.width = img.width;

@@ -5,8 +5,8 @@
 			<image class="download_pic_icon" src="@/static/images/download_pic_icon.svg" @click="saveFile"></image>
 			<image v-if="posterUrl" :src="posterUrl" mode="" style="height: 740rpx;width: 100%;"></image>
 			<view class="poster-box" id="pagePoster" v-else>
-				<image class="poster-pic" src="@/static/images/demo3.png" mode="aspectFill"></image>
-				<view class="poster-content">
+				<image class="poster-pic" :src="posterImg_" mode="aspectFill" crossorigin="anonymous"></image>
+				<view class="poster-content" v-if="posterData.loadType==0">
 					<view class="poster-title nowrap">
 						收藏家 {{userName}} 邀请你助力抽中白名单机会
 					</view>
@@ -18,6 +18,37 @@
 							<view class="tip-2">
 								扫码打开金裕天成数字资产交易平台
 								一起玩转数字藏品
+							</view>
+						</view>
+						<view class="right" id="qrBox">
+							<canvas id="qrcode" canvas-id="qrcode" :style="{ width: `${size}px`, height: `${size}px` }"></canvas>
+						</view>
+					</view>
+				</view>
+				<view class="poster-goods-content" v-else>
+					<view class="poster-goods-title">
+						<view class="left nowrap">
+							珐琅彩荷花碗
+						</view>
+						<view class="right">
+							#2845/8000
+						</view>
+					</view>
+					<view class="poster-goods-detail">
+						<view class="left">
+							<view class="item">
+								<text class="title">持有者：</text>
+								<view class="info">
+									<img :src="posterData.avatar+'?'+Date.now()" crossorigin="anonymous">
+									<view class="nowrap">{{posterData.name}}</view>
+								</view>
+							</view>
+							<view class="item">
+								<text class="title">发行方：</text>
+								<view class="info">
+									<img :src="posterData.shopIcon+'?'+Date.now()" crossorigin="anonymous">
+									<view class="nowrap">{{posterData.shopName}}</view>
+								</view>
 							</view>
 						</view>
 						<view class="right" id="qrBox">
@@ -39,6 +70,7 @@
 <script>
 	import uQRCode from 'u-qrcode';
 	import FileSaver from 'file-saver'
+	import {imgPathToBase64} from "@/utils/tools.js"
 	export default {
 		name:"SharePoster",
 		props: {
@@ -50,25 +82,21 @@
 		},
 		data() {
 			return {
-				userName:uni.getStorageSync("userInfo").fullName,
+				userName:uni.getStorageSync("userInfo").name,
 				show: this.isOpenPoster,
 				size: 60,
-				backgroundColor:"#FFFFFF",
-				foregroundColor:"#000000",
-				posterUrl:null
+				posterUrl:null,
+				posterImg_:""
 			}
 		},
 		methods: {
 			initQrCode(){
-				const prePurchaseId=this.posterData.prePurchaseId
-				const userId=this.posterData.userId
-				// const codeUrl = "http://web.penglainft.com/#/goods_detail?=3a7425333ee4419094e13c381d0c9086&instanceId&loadType=1&materialType=1"
-				const codeUrl = `http://192.168.2.29:8080/#/subpageA/SharePage/SharePage?prePurchaseId=${prePurchaseId}$userId=${userId}`
+				if(this.posterUrl)return
 				this.size=document.getElementById("qrBox").clientWidth
 				const ctx = uni.createCanvasContext('qrcode');
 				const uqrcode = new uQRCode(
 				  {
-				    text: codeUrl,
+				    text: this.posterData.codeUrl,
 				    size: this.size
 				  },
 				  ctx
@@ -86,7 +114,11 @@
 				FileSaver.saveAs(this.posterUrl)
 			},
 			open() {
-				this.initQrCode()
+				// this.initQrCode()
+				imgPathToBase64(this.posterData.posterImg,(base)=>{
+					this.posterImg_=base
+					this.initQrCode()
+				})
 			},
 			close() {
 				this.$emit("close")
@@ -114,6 +146,7 @@
 						scrollY: 0, // html2canvas默认绘制视图内的页面，需要把scrollY，scrollX设置为0
 						scrollX: 0,
 						useCORS: true, //支持跨域
+						crossOrigin:"anonymous",
 						scale: 10, // 设置生成图片的像素比例，默认是1，如果生成的图片模糊的话可以开启该配置项
 					}).then((canvas) => {
 						// 生成成功
@@ -217,7 +250,6 @@
 
 					.right {
 						width: 120rpx;
-						// height: 120rpx;
 						min-width: 120rpx;
 						background-color: #FFFFFF;
 						border: 4rpx solid #FFF;
@@ -233,6 +265,84 @@
 				}
 			}
 
+			.poster-goods-content{
+				padding: 20rpx;
+				padding-top: 10rpx;
+				.poster-goods-title{
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					height: 44rpx;
+					view{
+						font-size: 32rpx;
+						font-family: PingFangSC-Medium, PingFang SC;
+						font-weight: 500;
+						color: #FFFFFF;
+						line-height: 44rpx;
+					}
+				}
+				.poster-goods-detail{
+					height: 120rpx;
+					margin-top: 20rpx;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					
+					.left {
+						height: 120rpx;
+						font-family: PingFangSC-Regular, PingFang SC;
+						display: flex;
+						flex-direction: column;
+						justify-content: end;
+						.item{
+							margin-top: 10px;
+							display: flex;
+							align-items: center;
+							.title{
+								max-width: 96rpx;
+								min-width: 96rpx;
+								font-size: 24rpx;
+								font-family: PingFangSC-Regular, PingFang SC;
+								font-weight: 400;
+								color: #CCCCCC;
+								line-height: 34rpx;
+							}
+							.info{
+								display: flex;
+								align-items: center;
+								img{
+									width: 32rpx;
+									min-width: 32rpx;
+									height: 32rpx;
+									border-radius: 50%;
+									margin-right: 10rpx;
+								}
+								view{
+									font-size: 24rpx;
+									font-family: PingFangSC-Regular, PingFang SC;
+									font-weight: 400;
+									color: #CCCCCC;
+									line-height: 34rpx;
+								}
+							}
+						}
+					}
+					.right {
+						width: 120rpx;
+						min-width: 120rpx;
+						background-color: #FFFFFF;
+						border: 4rpx solid #FFF;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						image {
+							width: 100%;
+							height: 100%;
+					
+						}
+					}
+				}
+			}
 		}
 
 		.close-btn {

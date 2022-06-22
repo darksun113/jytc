@@ -29,10 +29,27 @@
 			}
 		},
 		mounted() {
-			uni.$on("toOpenSharePoster",(data)=>{
-				this.posterData={...data}
+			uni.$on("toOpenSharePoster",()=>{
+				const name=uni.getStorageSync("userInfo").name
+				const avatar=uni.getStorageSync("userInfo").avatar.split("?")[0]
+				const posterImg = this.goodsData.image.split("?")[0]
+				this.posterData={
+					codeUrl : `http://h5.jialex.cn/#/subpageA/DetailPage/DetailPage?loadType=1&instanceId=${this.goodsData.instanceId}`,
+					name,
+					posterImg,
+					avatar,
+					shopName:this.goodsData.shopName,
+					shopIcon:this.goodsData.shopIcon.split("?")[0],
+					goodsName:this.goodsData.goodsName,
+					goodsCode:this.goodsData.goodsCode,
+					totalNum:this.goodsData.totalNumber,
+					loadType:1 // 0 邀请分享  1 分享把玩
+				}
 				this.isOpenPoster=true
 			})
+		},
+		beforeDestroy() {
+			uni.$off("toOpenSharePoster")
 		},
 		components:{
 			LoadModel,

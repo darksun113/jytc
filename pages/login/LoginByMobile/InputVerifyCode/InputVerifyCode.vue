@@ -32,6 +32,8 @@
 				phone:null,
 				inviter:"",
 				prePurchaseId:"",
+				// 分享把玩实例id
+				instanceId:""
 			}
 		},
 		onLoad(opt) {
@@ -39,6 +41,7 @@
 			this.slidingFigureId=opt.slidingFigureId
 			this.inviter=opt.inviter?opt.inviter:""
 			this.prePurchaseId=opt.prePurchaseId?opt.prePurchaseId:""
+			this.instanceId=opt.instanceId?opt.instanceId:""
 		},
 		mixins:[mixin],
 		methods: {
@@ -65,7 +68,13 @@
 						this.$updateUserInfo()
 						let timer = setTimeout(()=>{
 							clearTimeout(timer)
-							this.$routerTo(2,"back")
+							if(this.instanceId){
+								// 存在instanceId表明要跳转邀请者藏品详情页页
+								const url=`/subpageA/DetailPage/DetailPage?instanceId=${this.instanceId}&loadType=1`
+								this.$routerTo(url,'redirect')
+							}else{
+								this.$routerTo(2,"back")
+							}
 						},1000)
 					}else{
 						this.$toast(res.errorMsg)

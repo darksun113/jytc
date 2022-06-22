@@ -1,7 +1,7 @@
 <template>
 	<view class="pay-btn">
 		<view class="price-box">
-			待支付：<text class="price"> ¥ 18.88</text>
+			待支付：<text class="price"> ¥ {{(price/100).toFiexd(2)}}</text>
 		</view>
 		<view class="btn" @click="toPay">
 			去支付
@@ -11,7 +11,7 @@
 
 <script>
 	export default {
-		props: ["payType_","orderNo"],
+		props: ["payType_","orderNo","price"],
 		data() {
 			return {
 				appType: "H5",

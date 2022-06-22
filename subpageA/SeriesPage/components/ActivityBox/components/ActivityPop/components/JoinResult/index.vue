@@ -8,7 +8,7 @@
 				</text>
 			</view>
 			<view class="container">
-				获奖结果将于2022-06-01 10:00公布
+				获奖结果将于{{rewardTime_ |format}}公布
 				邀请好友完成任务，有机会获得白名单
 			</view>
 			<view class="share-poster-btn" v-if="true" @click="toOpenSharePoster">
@@ -23,10 +23,11 @@
 
 <script>
 	export default {
-		props:['isShow'],
+		props:['isShow',"rewardTime"],
 	    data() {
 	      return {
-	        show: this.isShow
+	        show: this.isShow,
+			rewardTime_:this.rewardTime
 	      }
 	    },
 	    methods: {
@@ -35,17 +36,33 @@
 	      },
 	      close() {
 	        this.$emit("close")
-			uni.$emit("joinSuccess")
 	      },
 		  toOpenSharePoster(){
 			  this.$emit("close")
-			  const data={a:44}
-			  uni.$emit("toOpenSharePoster",data)
+			  uni.$emit("toOpenSharePoster")
 		  }
 	    },
+		filters:{
+			format(stamp){
+				if(!stamp){
+					return ""
+				}else{
+					const date = new Date(stamp*1000)
+					const Y = date.getFullYear()
+					const M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) 
+					const D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
+					const H = date.getHours() < 10 ? '0' + date.getHours() : date.getHours()
+					const M2 = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
+					return Y + '-' + M + '-' + D + ' ' + H + ":" + M2
+				}
+			}
+		},
 		watch:{
 			isShow(val){
 				this.show=val
+			},
+			rewardTime(newVal){
+				this.rewardTime_=newVal
 			}
 		}
 	  }

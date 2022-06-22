@@ -18,7 +18,7 @@
 				</view>
 			</view>
 		</view>
-		<JoinResult :isShow='isShowStatus' @close="isShowStatus=false"></JoinResult>
+		<JoinResult :isShow='isShowStatus' @close="isShowStatus=false" :rewardTime="prePurchaseInfo.rewardTime"></JoinResult>
 		<SharePoster :isOpenPoster="isOpenPoster" @close="isOpenPoster=false" :posterData="posterData"></SharePoster>
 	</u-popup>
 </template>
@@ -28,6 +28,7 @@
 	import JoinButton from "./components/JoinButton"
 	import ActivityStatus from "./components/ActivityStatus"
 	import JoinResult from "./components/JoinResult/index.vue"
+	import {getFilePath} from "@/utils/tools.js"
 	export default {
 		props:['isShow',"prePurchaseId","joinStatus"],
 		data() {
@@ -49,11 +50,14 @@
 		},
 		mounted() {
 			uni.$on("toOpenSharePoster",()=>{
+				const prePurchaseId=this.prePurchaseId
+				const userId=uni.getStorageSync("userInfo").buyerId
+				this.posterData={
+					codeUrl :`http://h5.jialex.cn/#/subpageA/SharePage/SharePage?prePurchaseId=${prePurchaseId}&userId=${userId}`,
+					posterImg:this.prePurchaseInfo.seriesImg_.split("?")[0],
+					loadType:0 // 0 邀请分享  1 分享把玩
+				}
 				this.isOpenPoster=true
-			})
-			uni.$on("joinSuccess",()=>{
-				this.posterData.prePurchaseId=this.prePurchaseId
-				this.posterData.userId=uni.getStorageSync("userInfo").buyerId
 			})
 			uni.$on("joinSuccessShow",()=>{
 				this.getPrePurchase()
@@ -64,19 +68,16 @@
 		},
 		destroyed() {
 			uni.$off("toOpenSharePoster")
-			uni.$off("joinSuccess")
 			uni.$off("joinSuccessShow")
 		},
 		methods: {
-			joinSuccess(){
-				this.posterData.state=1
-			},
 			async getPrePurchase(){
 				try{
 					const res=await uni.$http("/series/prepurchase/detail",{
 						prePurchaseId:this.prePurchaseId
 					})
 					if(res.code==0){
+						res.data.seriesImg_ = await getFilePath(res.data.seriesImg)
 						this.prePurchaseInfo=res.data
 					}
 				}catch(e){

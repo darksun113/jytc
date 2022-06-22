@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import {  OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import {  MTLLoader, OBJLoader } from "three-obj-mtl-loader";
-import { GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
+// import { GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 export default{
 	props: {
 	    OBJPath: {	

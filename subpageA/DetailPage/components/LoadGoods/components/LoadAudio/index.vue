@@ -35,10 +35,6 @@
 				this.isOpenPre=false
 			},
 			toOpenModelPreImg(){
-				const data= {
-					image:require("@/static/images/demo2.png")
-				}
-				this.imgData={...data}
 				this.isOpenPre=true
 			},
 			toShare(){

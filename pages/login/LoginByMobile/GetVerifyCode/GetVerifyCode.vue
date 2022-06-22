@@ -47,6 +47,7 @@
 				checkGrop: [],
 				inviter:"",
 				prePurchaseId:"",
+				instanceId:"",
 				form:{
 					phone: null,
 				},
@@ -75,6 +76,7 @@
 		onLoad(opt) {
 			this.inviter=opt.inviter?opt.inviter:""
 			this.prePurchaseId=opt.prePurchaseId?opt.prePurchaseId:""
+			this.instanceId=opt.instanceId?opt.instanceId:""
 		},
 		mixins: [mixin],
 		methods: {
@@ -93,11 +95,11 @@
 			},
 			// 人机验证通过后自定义方法执行
 			doSomething(){
-				const url=`../InputVerifyCode/InputVerifyCode?phone=${this.form.phone}&slidingFigureId=${this.slidingFigureId}&inviter=${this.inviter}&prePurchaseId=${this.prePurchaseId}`
+				const url=`../InputVerifyCode/InputVerifyCode?phone=${this.form.phone}&slidingFigureId=${this.slidingFigureId}&inviter=${this.inviter}&prePurchaseId=${this.prePurchaseId}&instanceId=${this.instanceId}`
 				this.$routerTo(url)
 			},
 			toPwdLogin(){
-				const url=`../../loginByPwd/loginByPwd?inviter=${this.inviter}&prePurchaseId=${this.prePurchaseId}`
+				const url=`../../loginByPwd/loginByPwd?inviter=${this.inviter}&prePurchaseId=${this.prePurchaseId}&instanceId=${this.instanceId}`
 				this.$routerTo(url,"redirect")
 			}
 		}

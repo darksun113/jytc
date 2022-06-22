@@ -36,7 +36,7 @@
 			toDetailPage(){
 				const loadType=0
 				// materialType 类型  0模型 1图片 2视频 3音频
-				const url=`/subpageA/DetailPage/DetailPage?loadType=${loadType}&goodsId=${this.item.goodsId}&materialType=${this.item.materialType}`
+				const url=`/subpageA/DetailPage/DetailPage?loadType=${loadType}&goodsId=${this.item.goodsId}`
 				this.$routerTo(url)
 			}
 		}

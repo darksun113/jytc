@@ -6,7 +6,6 @@
 		<view class="author_content">
 			<view class="pic_box">
 				<img :src="authorInfo.icon" alt="">
-				<!-- <img src="@/static/images/demo1.png" alt=""> -->
 				<view class="author_name nowrap">
 					{{authorInfo.shopName}}
 					<!-- 深圳百纳维科技有限公司 -->

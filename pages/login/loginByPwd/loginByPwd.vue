@@ -60,6 +60,7 @@
 				isNeedPuzzle:true,
 				inviter:"",
 				prePurchaseId:"",
+				instanceId:"",
 				form:{
 					phone: null,
 					pwd:null,
@@ -97,6 +98,7 @@
 		onLoad(opt) {
 			this.inviter=opt.inviter?opt.inviter:""
 			this.prePurchaseId=opt.prePurchaseId?opt.prePurchaseId:""
+			this.instanceId=opt.instanceId?opt.instanceId:""
 		},
 		mixins: [mixin],
 		methods: {
@@ -154,7 +156,12 @@
 						this.$updateUserInfo()
 						let timer = setTimeout(()=>{
 							clearTimeout(timer)
-							this.$routerTo(1,"back")
+							if(this.instanceId){
+								const url=`/subpageA/DetailPage/DetailPage?instanceId=${this.instanceId}&loadType=1`
+								this.$routerTo(url,'redirect')
+							}else{
+								this.$routerTo(1,"back")
+							}
 						},1000)
 					}else{
 						this.$toast(res.errorMsg)
@@ -164,7 +171,7 @@
 				}
 			},
 			toPhoneLogin(){
-				const url="../LoginByMobile/GetVerifyCode/GetVerifyCode"
+				const url=`../LoginByMobile/GetVerifyCode/GetVerifyCode?instanceId=${this.instanceId}&inviter=${this.inviter}&prePurchaseId=${this.prePurchaseId}`
 				this.$routerTo(url,"redirect")
 			}
 		}

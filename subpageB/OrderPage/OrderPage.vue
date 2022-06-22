@@ -5,7 +5,7 @@
 			<OrderInfo :orderInfo="orderInfo"></OrderInfo>
 			<PayType v-if="orderInfo.status==0" @setPayType="setPayType"></PayType>
 		</view>
-		<PayButton v-if="orderInfo.status==0" :payType_="payType" :orderNo="orderNo"></PayButton>
+		<PayButton v-if="orderInfo.status==0" :payType_="payType" :orderNo="orderNo" :price="orderInfo.totalFee"></PayButton>
 	</PageTemp>
 </template>
 

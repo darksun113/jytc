@@ -1,6 +1,12 @@
 <template>
 	<view class="btn-box">
-		<view class="btn" @click="toOrder">
+		<view class="btn" style="background: #5C5A88;" v-if="goodsData.remainingNumber <= 0">
+			已售罄
+		</view>
+		<view class="btn" style="background: #5C5A88;" v-else-if="curTime - goodsData.startTime > 0">
+			即将开售
+		</view>
+		<view class="btn" @click="toOrder" v-else>
 			购买
 		</view>
 		<LoginTipPop name="goodsDetail" :isShow="isShow" @close="isShow=false"></LoginTipPop>
@@ -19,8 +25,11 @@
 		data() {
 			return {
 				isShow: false,
-				identityShow:false
+				identityShow:false,
+				curTime:parseInt(Date.now()/1000)
 			}
+		},
+		mounted() {
 		},
 		methods:{
 			toOrder(){
@@ -81,4 +90,5 @@
 			color: #000000;
 		}
 	}
+	
 </style>

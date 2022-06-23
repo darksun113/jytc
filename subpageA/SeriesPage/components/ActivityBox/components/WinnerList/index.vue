@@ -6,7 +6,7 @@
 			</view>
 			
 			<scroll-view v-if="hasData" scroll-y="true" @scrolltolower="updateList" class="activity-pop-container">
-				<ListItem v-for="i in 15" :key="i"></ListItem>
+				<ListItem v-for="(item,index) in winnerList" :key="index" :item="item"></ListItem>
 				<IsEnd v-if="isLastItem"></IsEnd>
 			</scroll-view>
 			<IsNoData v-else>
@@ -20,7 +20,7 @@
 	export default {
 		props:{
 			isShow:[Boolean],
-			purchaseId:[String,Number]
+			prePurchaseId:[String,Number]
 		},
 		data() {
 			return {
@@ -28,7 +28,6 @@
 				hasData:true,
 				isLastItem:false,
 				updatePage:1,
-				prePurchaseId:this.purchaseId,
 				winnerList:[],
 				shouldRequest:true
 			}
@@ -42,7 +41,6 @@
 							this.shouldRequest=false
 						}else{
 							this.winnerList=[...this.winnerList,...list]
-							this.updatePage++
 						}
 					})
 				}
@@ -68,6 +66,7 @@
 						if(res.data.list.length==0){
 							callback(0)
 						}else{
+							this.updatePage++
 							res.data.list.forEach(async item=>{
 								item.icon=await getFilePath(item.icon)
 							})
@@ -87,9 +86,6 @@
 		watch:{
 			isShow(newState){
 				this.show=newState
-			},
-			purchaseId(newVal){
-				this.prePurchaseId=newVal
 			}
 		}
 	}

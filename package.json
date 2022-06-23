@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "axios": "^0.27.2",
     "file-saver": "^2.0.5",
     "fingerprintjs2": "^2.1.4",
     "html2canvas": "^1.4.1",

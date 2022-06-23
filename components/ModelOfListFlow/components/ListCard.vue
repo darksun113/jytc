@@ -1,18 +1,27 @@
 <template>
 	<view class="series-box" @click="toSeriesDetailPage">
-		<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-if="item.goodsTotal==0">
+		<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-if="item.goodsTotal==0 && loadType==0">
 			已售罄
 		</view>
-		<view class="sell-tip" v-if="false">
-			<text>预购倒计时：</text>
-			<u-count-down :time="30 * 60 * 60 * 1000" format="DD:HH:mm:ss" @change="onChange" @finish="finish">
-				<view class="time">
-					<text class="time__item">{{ timeData.days }}天</text>
-					<text class="time__item">{{ timeData.hours>10?timeData.hours:'0'+timeData.hours}}时</text>
-					<text class="time__item">{{ timeData.minutes }}分</text>
-					<text class="time__item">{{ timeData.seconds }}秒</text>
-				</view>
-			</u-count-down>
+		<view v-else-if="loadType==1">
+			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-if="item.writeListStatus==2">
+				已使用
+			</view>
+			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-else-if="item.writeListStatus==1">
+				{{item.writeListStatus}}
+				已过期
+			</view>
+			<view class="sell-tip" v-else>
+				<text>预购倒计时：</text>
+				<u-count-down :time="((item.sellTime - 10*60) - curTime) * 1000" format="DD:HH:mm:ss" @change="onChange" @finish="finish">
+					<view class="time">
+						<text class="time__item">{{ timeData.days }}天</text>
+						<text class="time__item">{{ timeData.hours>10?timeData.hours:'0'+timeData.hours}}时</text>
+						<text class="time__item">{{ timeData.minutes }}分</text>
+						<text class="time__item">{{ timeData.seconds }}秒</text>
+					</view>
+				</u-count-down>
+			</view>
 		</view>
 		<image class="series-pic" :src="item.seriesImg" mode="aspectFill"></image>
 		<view class="series-info">
@@ -36,11 +45,13 @@
 			item:{
 				type:Object,
 				default:()=>{}
-			}
+			},
+			loadType:[Number,String]
 		},
 		data(){
 			return{
 				timeData: {},
+				curTime:parseInt(Date.now()/1000)
 			}
 		},
 		methods:{
@@ -50,7 +61,9 @@
 			onChange(e){
 				this.timeData = e
 			},
-			finish(){}
+			finish(){
+				// this.item.writeListStatus=1
+			}
 		}
 	}
 </script>

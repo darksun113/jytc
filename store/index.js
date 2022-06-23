@@ -32,8 +32,8 @@ export default new Vuex.Store({
 		},
 		countdown(state) {
 			state.second=60
+			state.isCount = true
 			const timer = setInterval(() => {
-				state.isCount = true
 				if (state.second > 0) {
 					state.second--
 				} else {
@@ -42,6 +42,9 @@ export default new Vuex.Store({
 					clearInterval(timer)
 				}
 			}, 1000);
+		},
+		changeIsCount(state,boo){
+			state.isCount=boo
 		},
 		resetCount(state) {
 			state.second = 60

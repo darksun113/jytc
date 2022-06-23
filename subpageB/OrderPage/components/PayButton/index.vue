@@ -1,7 +1,7 @@
 <template>
 	<view class="pay-btn">
 		<view class="price-box">
-			待支付：<text class="price"> ¥ {{(price/100).toFiexd(2)}}</text>
+			待支付：<text class="price"> ¥ {{(price/100).toFixed(2)}}</text>
 		</view>
 		<view class="btn" @click="toPay">
 			去支付
@@ -11,11 +11,16 @@
 
 <script>
 	export default {
-		props: ["payType_","orderNo","price"],
+		props:{
+			payType_:[String,Number],
+			orderNo:[String],
+			price:[String,Number]
+		},
 		data() {
 			return {
 				appType: "H5",
-				payType: this.payType_
+				payType: this.payType_,
+				timer:null
 			}
 		},
 		methods: {
@@ -82,6 +87,9 @@
 					})
 					if (res.code == 0) {
 						this.openPayWeb(res.data.h5Zfb.body)
+						this.timer=setInterval(()=>{
+							this.getOrderStatus()
+						},1000)
 					} else {
 						uni.showToast({
 							title: res.errorMsg,
@@ -90,6 +98,22 @@
 					}
 				} catch (error) {
 					throw new Error("系统错误", error)
+				}
+			},
+			async getOrderStatus(){
+				try{
+					const res = await uni.$http("/order/checkStatus",{
+						orderNo: this.orderNo
+					})
+					if(res.code==0){
+						if(res.data.status==2 || res.data.status==1){
+							clearInterval(this.timer)
+							const url = `../../../MyOrderCenter/MyOrderCenter?type=1`
+							this.$routerTo(url,'redirect')
+						}
+					}
+				}catch(e){
+					//TODO handle the exception
 				}
 			},
 			// 支付宝支付

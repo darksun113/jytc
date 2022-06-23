@@ -1,62 +1,84 @@
 <template>
 	<PageTemp>
-		<scroll-view class="pre-order" scroll-y="true" @scrolltolower="updateList">
+		<scroll-view class="pre-order" scroll-y="true" @scrolltolower="updateList" v-if="hasData">
 			<view class="container">
 				<view class="title">
 					已获得以下系列的预购名额
 				</view>
-				<ModelOfListFlow :seriesList="seriesList"></ModelOfListFlow>
-				<IsEnd></IsEnd>
+				<ModelOfListFlow :seriesList="seriesList" :loadType="1"></ModelOfListFlow>
+				<IsEnd v-if="isLastItem"></IsEnd>
 			</view>
 		</scroll-view>
+		<IsNoData v-else>
+			暂无数据
+		</IsNoData>
 	</PageTemp>
 </template>
 
 <script>
+	import {getFilesPath} from "@/utils/tools.js"
 	export default {
 		data() {
 			return {
-				seriesList:[
-					{
-						title:"漫威英雄系列",
-						image:require("@/static/images/demo2.png"),
-						author:"深圳百纳维科技有限公司",
-						authorIcon:require("@/static/images/demo1.png")
-					},
-					{
-						title:"超人系列",
-						image:require("@/static/images/demo3.png"),
-						author:"深圳百纳维科技有限公司",
-						authorIcon:require("@/static/images/demo1.png")
-					},{
-						title:"漫威英雄系列",
-						image:require("@/static/images/demo5.png"),
-						author:"深圳百纳维科技有限公司",
-						authorIcon:require("@/static/images/demo1.png")
-					},
-					{
-						title:"超人系列",
-						image:require("@/static/images/demo3.png"),
-						author:"深圳百纳维科技有限公司",
-						authorIcon:require("@/static/images/demo1.png")
-					},{
-						title:"漫威英雄系列",
-						image:require("@/static/images/demo5.png"),
-						author:"深圳百纳维科技有限公司",
-						authorIcon:require("@/static/images/demo1.png")
-					},
-					{
-						title:"超人系列",
-						image:require("@/static/images/demo3.png"),
-						author:"深圳百纳维科技有限公司",
-						authorIcon:require("@/static/images/demo1.png")
-					},
-				]
+				seriesList:[],
+				isLastItem:false,
+				hasData:true,
+				updatePage:1
 			};
+		},
+		onShow() {
+			this.init()
 		},
 		methods:{
 			updateList(){
-				console.log(123)
+				this.getWritelist(list=>{
+					if(list==0){
+						this.isLastItem=true
+					}else{
+						this.seriesList=[...this.seriesList,...list]
+					}
+				})
+			},
+			init(){
+				this.updatePage=1
+				this.getWritelist(list=>{
+					if(list==0){
+						this.hasData=false
+					}else{
+						this.seriesList=list
+					}
+				})
+			},
+			// 获取预购白名单
+			async getWritelist(callback){
+				try{
+					const res = await uni.$http("/series/prepurchase/writelist",{
+						page:this.updatePage,
+						size:10
+					})
+					if(res.code==0){
+						if(res.data.list.length==0){
+							callback(0)
+						}else{
+							this.updatePage++
+							res.data.list.forEach(async item=>{
+								const temp={
+									seriesImg:item.seriesImg,
+									shopIcon:item.shopIcon
+								}
+								const objData=await getFilesPath(temp)
+								Object.keys(objData).forEach(key=>{
+									item[key]=objData[key]
+								})
+							})
+							callback(res.data.list)
+						}
+					}else{
+						this.$toast(res.errorMsg)
+					}
+				}catch(e){
+					//TODO handle the exception
+				}
 			}
 		}
 	}

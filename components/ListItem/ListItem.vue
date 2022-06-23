@@ -1,19 +1,19 @@
 <template>
 	<view class="item-box">
-		<image class="avatar" src="../../static/images/default_avatar.png"></image>
+		<image class="avatar" :src="item.icon"></image>
 		<view class="right-info">
 			<view class="top">
 				<view class="name">
-					用户名
+					{{item.name}}
 				</view>
 				<view class="id-num">
 					<text style="min-width: 40rpx;font-size: 24rpx;">ID：</text>
-					<text class="nowrap_s" style="font-size: 24rpx;">123456776543217765</text>
+					<text class="nowrap_s" style="font-size: 24rpx;">{{item.buyerId}}</text>
 				</view>
 			</view>
 			<view class="block-hash">
 				<text style="min-width: 140rpx;font-size: 24rpx;">区块链地址：</text>
-				<text class="nowrap_s" style="font-size: 24rpx;">nfngj1235cas267nb29hnn87hfsu451b29hnn87hfsu451</text>
+				<text class="nowrap_s" style="font-size: 24rpx;">{{item.addr}}</text>
 			</view>
 		</view>
 	</view>
@@ -22,6 +22,12 @@
 <script>
 	export default {
 		name:"ListItem",
+		props:{
+			item:{
+				type:Object,
+				default:()=>{}
+			}
+		},
 		data() {
 			return {
 				

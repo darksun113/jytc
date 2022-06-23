@@ -12,6 +12,7 @@
 
 <script>
 	import OrderCard from "./components/OrderCard/index.vue"
+	import {getFilesPath} from "@/utils/tools.js"
 	export default{
 		components:{
 			OrderCard
@@ -51,11 +52,11 @@
 						page:this.updatePage
 					})
 					if(res.code==0){
-						if(res.data.list.length==0){
+						if(res.data.orders.length==0){
 							callback(0)
 						}else{
 							this.updatePage++
-							res.data.list.forEach(async item=>{
+							res.data.orders.forEach(async item=>{
 								const temp={
 									image:item.goods.image,
 									shopIcon:item.goods.shopIcon

@@ -54,7 +54,7 @@
 					uni.showLoading()
 					const res=await uploadFile(this.fileMd5,this.fileBlob)
 					if(res.status=='success'){
-						const res_= uni.$http("/user/editBuyerInfo",{
+						const res_= await uni.$http("/user/editBuyerInfo",{
 							name:this.$store.state.userInfo.name,
 							avatar:res.info
 						})

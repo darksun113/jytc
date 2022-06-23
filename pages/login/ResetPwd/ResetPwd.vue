@@ -32,9 +32,7 @@
 				this.step+=1
 			},
 			toLoginPage(){
-				uni.reLaunch({
-					url:"../loginByPwd/loginByPwd"
-				})
+				this.$routerTo(1,"back")
 			}
 		}
 		

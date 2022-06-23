@@ -1,6 +1,6 @@
 <template>
 	<view class="list_layout">
-		<ListCard :item="item" v-for="(item,index) in seriesList" :key="index" @toSeriesDetailPage="toSeriesDetailPage"></ListCard>
+		<ListCard :item="item" v-for="(item,index) in seriesList" :key="index" @toSeriesDetailPage="toSeriesDetailPage" :loadType="loadType"></ListCard>
 	</view>
 </template>
 
@@ -15,7 +15,8 @@
 			seriesList:{
 				type:Array,
 				default:()=>[]
-			}
+			},
+			loadType:[Number,String]
 		},
 		methods:{
 			toSeriesDetailPage(seriesId){

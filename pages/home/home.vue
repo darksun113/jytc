@@ -7,7 +7,7 @@
 				<view class="container">
 					<IsNoData v-if="!hasData">暂无数据</IsNoData>
 					<view v-else>
-						<ModelOfListFlow :seriesList="seriesList" v-if="showType==0"></ModelOfListFlow>
+						<ModelOfListFlow :seriesList="seriesList" v-if="showType==0" :loadType="0"></ModelOfListFlow>
 						<ModelOfWaterFall :seriesList="seriesList" v-else></ModelOfWaterFall>
 						<IsEnd v-if="isLastItem"></IsEnd>
 					</view>
@@ -29,6 +29,7 @@
 		data(){
 			return{
 				showType:0,
+				loadType:0,
 				hasData:true,
 				isLastItem:false,
 				updatePage:1,

@@ -1,11 +1,11 @@
 <template>
 	<PageTemp class="order-page">
 		<view class="main">
-			<OrderStatus :orderInfo="orderInfo"></OrderStatus>
-			<OrderInfo :orderInfo="orderInfo"></OrderInfo>
+			<OrderStatus :orderInfo="orderInfo"  v-if="orderInfo.goods"></OrderStatus>
+			<OrderInfo :orderInfo="orderInfo" v-if="orderInfo.goods"></OrderInfo>
 			<PayType v-if="orderInfo.status==0" @setPayType="setPayType"></PayType>
 		</view>
-		<PayButton v-if="orderInfo.status==0" :payType_="payType" :orderNo="orderNo" :price="orderInfo.totalFee"></PayButton>
+		<PayButton v-if="orderInfo.status==0" :payType_="payType" :orderNo="orderNo" :price="orderInfo.goods.goodsPrice"></PayButton>
 	</PageTemp>
 </template>
 
@@ -46,7 +46,7 @@
 					})
 					if(res.code==0){
 						const temp={
-							// image:res.data.order.goods.image,
+							image:res.data.order.goods.image,
 							shopIcon:res.data.order.goods.shopIcon
 						}
 						const objData=await getFilesPath(temp)

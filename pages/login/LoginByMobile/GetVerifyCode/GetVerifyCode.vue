@@ -24,14 +24,14 @@
 					</u-checkbox>
 				</u-checkbox-group>
 				<view class="agreement-text">
-					同意并遵守<text>《用户协议》</text>与<text>《隐私政策》</text>
+					同意并遵守<text @click="toUserAgreement">《用户协议》</text>与<text @click="toPrivacyPolicy">《隐私政策》</text>
 				</view>
 			</view>
 			<view :style="{opacity:checkGrop[0]=='agree' && !$store.state.isCount ?'1':'0.5'}" class="get-verification-code-btn" @click="getCode">
 				{{$store.state.isCount?$store.state.second+'秒后重新获取':'获取验证码'}}
 			</view>
 			<view class="to-pwd-page" @click="toPwdLogin">
-				使用帐号密码登录
+				使用手机号与密码登录
 			</view>
 		</view>
 		<PuzzleCode style="z-index:9999999" @resetPuzzle="starCheckRobot" :bind="$attrs" :show="isPuzzleShow"
@@ -101,6 +101,14 @@
 			toPwdLogin(){
 				const url=`../../loginByPwd/loginByPwd?inviter=${this.inviter}&prePurchaseId=${this.prePurchaseId}&instanceId=${this.instanceId}`
 				this.$routerTo(url,"redirect")
+			},
+			toUserAgreement(){
+				const url="/subpageC/UserAgreement/UserAgreement"
+				this.$routerTo(url)
+			},
+			toPrivacyPolicy(){
+				const url="/subpageC/PrivacyPolicy/PrivacyPolicy"
+				this.$routerTo(url)
 			}
 		}
 	}

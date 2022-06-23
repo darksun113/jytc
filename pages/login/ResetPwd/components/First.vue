@@ -72,7 +72,12 @@
 		methods:{
 			toSubmitCheck(){
 				this.$refs.uForms.validate().then(res => {
-					this.checkVerifyCode()
+					if(this.form.verifyCode.length==6){
+						this.checkVerifyCode()
+					}else{
+						this.$toast("验证码位数不正确")
+					}
+					
 				}).catch(errors => {
 					// this.$toast('校验失败')
 				})
@@ -85,12 +90,9 @@
 			  try {
 				const res = await uni.$http("/user/webResetPwdCheckVerifyCode", { ...this.form })
 				if (res.code == 0) {
-				  this.$emit("checkPhoneSuccess",res.data.resetPwdProof)
+					this.$emit("checkPhoneSuccess",res.data.resetPwdProof)
 				} else {
-					uni.showToast({
-						title:res.errorMsg,
-						icon:"error"
-					})
+					this.$toast(res.errorMsg)
 				}
 			  } catch (error) {
 				throw new Error("系统错误", error)

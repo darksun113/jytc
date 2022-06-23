@@ -293,7 +293,7 @@
 						font-family: PingFangSC-Regular, PingFang SC;
 						display: flex;
 						flex-direction: column;
-						justify-content: end;
+						justify-content: flex-end;
 						.item{
 							margin-top: 10px;
 							display: flex;

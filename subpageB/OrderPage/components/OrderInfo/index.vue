@@ -2,30 +2,30 @@
 	<view class="order-info">
 		<view class="goods">
 			<view class="left">
-				<image class="goods-pic" src="@/static/images/demo2.png" mode=""></image>
+				<image class="goods-pic" :src="orderInfo.goods.image" mode=""></image>
 			</view>
 			<view class="right">
 				<view class="goods-name nowrap">
-					故宫里的中国节-中秋
+					{{orderInfo.goods.goodsName}}
 				</view>
 				<view class="author">
-					<image class="author-pic" src="@/static/images/demo1.png" mode=""></image>
-					<view class="author-name nowrap">深圳百纳维科技有限公司</view>
+					<image class="author-pic" :src="orderInfo.goods.shopIcon" mode=""></image>
+					<view class="author-name nowrap">{{orderInfo.goods.shopName}}</view>
 				</view>
 			</view>
 		</view>
 		<view class="order-detail-box">
 			<view class="order-detail">
 				<view class="title">订单金额：</view>
-				<view class="detail price">¥ {{(goodsData.goods.goodsPrice/100).toFixed(2)}}</view>
+				<view class="detail price">¥ {{(orderInfo.goods.goodsPrice/100).toFixed(2)}}</view>
 			</view>
 			<view class="order-detail">
 				<view class="title">订单编号：</view>
-				<view class="detail">{{goodsData.orderNo}}</view>
+				<view class="detail">{{orderInfo.orderNo}}</view>
 			</view>
 			<view class="order-detail">
 				<view class="title">创建时间：</view>
-				<view class="detail">{{goodsData.createTime | format}}</view>
+				<view class="detail">{{orderInfo.createTime | format}}</view>
 			</view>
 		</view>
 	</view>
@@ -36,16 +36,11 @@
 		props:{
 			orderInfo:{
 				type:Object,
-				default:()=>{
-				}
+				default:()=>{}
 			}
 		},
 		data(){
-			return {
-				goodsData:{
-					goods:{}
-				}
-			}
+			return {}
 		},
 		filters:{
 			format(stamp){
@@ -61,11 +56,6 @@
 					const S = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
 					return Y + M + D + H + M2 + S
 				}
-			}
-		},
-		watch:{
-			orderInfo(data){
-				this.goodsData=data
 			}
 		}
 	}

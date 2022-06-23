@@ -2,9 +2,7 @@
 	<PageTemp>
 		<view class="login-page">
 			<view class="title-box">
-				<view class="title-text">
-					输入验证码
-				</view>
+				<view class="title-text">输入验证码</view>
 				<view class="title-tip">
 					<view class="tip-phone">
 						已发送到 {{phone}}

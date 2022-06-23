@@ -1,5 +1,6 @@
 import request from "./http.js"
 import store from "../store/index.js"
+import axios from "axios"
 import {
 	md,
 	pki
@@ -82,66 +83,67 @@ export function getFileMd5(file) {
 
 /* 文件上传 */
 export async function uploadFile(md5, file) {
-	try{
-		const fileData={}
+	try {
+		const fileData = {}
 		fileData.md5 = md5;
 		fileData.contentType = file.type;
-		fileData.filename=file.name
+		fileData.filename = file.name
 		fileData.size = file.size;
 		return await sendRequest(fileData, file);
-	}catch(e){
+	} catch (e) {
 		//TODO handle the exception
 	}
 }
-async function sendRequest(fileData,file){
-	try{
-		const res = await uni.$http("/file/applyupload",fileData);
-		if(res.code==0){
+async function sendRequest(fileData, file) {
+	try {
+		const res = await uni.$http("/file/applyupload", fileData);
+		if (res.code == 0) {
 			const uuid = res.data.uuid;
 			// hit为false，表示数据库没有file，执行上传
-			if(!res.data.hit){
-				const res_=await uni.request({
-					url:res.data.url,
+			if (!res.data.hit) {
+				let data = {
 					method: "put",
+					url: res.data.url,
 					headers: {
-						"Content-Type": this.fileData.contentType,
-						"Content-Md5": md5,
+						"Content-Type": fileData.contentType,
+						"Content-Md5": fileData.md5
 					},
-					data: file,
-					timeout:30*1000
-				})
+					data:file,
+					timeout: 30 * 1000,
+				}
+				const res_ = await axios({...data})
 				if (res_.status == 200) {
-					const res_1=uni.$http("/file/uploadsuccess", {uuid})
-					if(res_1.code==0){
+					const res_1 = await uni.$http("/file/uploadsuccess", {uuid})
+					if (res_1.code == 0) {
 						return {
-							status:"success",
-							info:uuid
+							status: "success",
+							info: uuid
 						}
-					}else{
+					} else {
 						return {
-							status:"fail",
-							data:res.errorMsg
+							status: "fail",
+							data: res_1.errorMsg
 						}
 					}
-				}else{
+				} else {
 					return {
-						status:"fail",
-						info:"上传服务器失败"
+						status: "fail",
+						info: "上传服务器失败"
 					}
 				}
-			}else{
+			} else {
 				return {
-					status:"success",
-					info:uuid
+					status: "success",
+					info: uuid
 				}
 			}
-		}else{
+		} else {
 			return {
-				status:"fail",
-				info:res.errorMsg
+				status: "fail",
+				info: res.errorMsg
 			}
 		}
-	}catch(e){
+	} catch (e) {
 		//TODO handle the exception
 	}
 }
@@ -198,7 +200,7 @@ export function compress(path, config) {
 				quality = config.quality;
 			}
 			let base64 = canvas.toDataURL("image/*", quality);
-			let blob = base64toFile(base64,"图片");
+			let blob = base64toFile(base64, "图片");
 			// 回调函数返回base64的值，也可根据自己的需求返回blob的值
 			resolve(blob);
 		};

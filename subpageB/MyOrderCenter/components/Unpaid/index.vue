@@ -4,7 +4,7 @@
 			暂无订单
 		</IsNoData>
 		<view v-else>
-			<OrderCard :item="item" :index="index" v-for="(item,index) in orderList" :key="index" @cancelOrder="cancelOrder"></OrderCard>
+			<OrderCard :item="item" :index="index" v-for="(item,index) in orderList" :key="index" @cancelOrder="cancelOrder" @spliceOrder="spliceOrder"></OrderCard>
 			<IsEnd v-if="isLastData"></IsEnd>
 		</view>
 		<CancelPop :isShow="isShow" :orderNo="cancelOrderNo" @close="isShow=false" @cancelSuccess="cancelSuccess"></CancelPop>
@@ -85,7 +85,11 @@
 			},
 			cancelSuccess(){
 				this.isShow=false
+				this.$toast("取消成功")
 				this.orderList.splice(this.cancelIdx,1)
+			},
+			spliceOrder(cancelIdx){
+				this.orderList.splice(cancelIdx,1)
 			},
 			updateList(){
 				const createTime=this.orderList[this.orderList.length-1].createTime

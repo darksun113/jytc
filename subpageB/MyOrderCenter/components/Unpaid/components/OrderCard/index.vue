@@ -3,9 +3,9 @@
 		<view class="item-top">
 			<view class="title-box">
 				<view class="author-box">
-					<image class="avatar" src="@/static/images/default_avatar.png" mode=""></image>
+					<image class="avatar" :src="item.goods.shopIcon" mode=""></image>
 					<view class="author nowrap">
-						深圳百纳维科技有限公司
+						{{item.goods.shopName}}
 					</view>
 				</view>
 				<view class="count-box">
@@ -15,25 +15,25 @@
 				</view>
 			</view>
 			<view class="order-time">
-				2022-02-01 15:30:00
+				{{item.updateTime | format}}
 			</view>
 		</view>
 		<view class="item-center">
-			<image class="goods-pic" src="@/static/images/demo2.png" mode="aspectFill"></image>
+			<image class="goods-pic" :src="item.goods.image" mode="aspectFill"></image>
 			<view class="goods-info">
 				<view class="goods-name nowrap_2">
-					此处可以显示十
+					{{item.goods.goodsName}}
 				</view>
 				<view>
-					<image v-if="item.type==0" class="goods-type" src="@/static/images/type_pic.svg" mode=""></image>
-					<image v-else-if="item.type==1" class="goods-type" src="@/static/images/type_3D.svg" mode="">
+					<image v-if="item.goods.materialType==0" class="goods-type" src="@/static/images/type_pic.svg" mode=""></image>
+					<image v-else-if="item.goods.materialType==1" class="goods-type" src="@/static/images/type_3D.svg" mode="">
 					</image>
-					<image v-else-if="item.type==2" class="goods-type" src="@/static/images/type_video.svg" mode="">
+					<image v-else-if="item.goods.materialType==2" class="goods-type" src="@/static/images/type_video.svg" mode="">
 					</image>
-					<image v-else-if="item.type==3" class="goods-type" src="@/static/images/type_audio.svg" mode="">
+					<image v-else-if="item.goods.materialType==3" class="goods-type" src="@/static/images/type_audio.svg" mode="">
 					</image>
 					<view class="price">
-						¥ 18.88
+						¥ {{(item.goods.goodsPrice/100).toFixed(2)}}
 					</view>
 				</view>
 			</view>
@@ -63,9 +63,24 @@
 				curTime:parseInt(Date.now()/1000)
 			}
 		},
+		filters:{
+			format(stamp){
+				if(!stamp){
+					return ""
+				}else{
+					const date = new Date(stamp*1000)
+					const Y = date.getFullYear() + '.'
+					const M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '.'
+					const D = date.getDate() < 10 ? '0' + date.getDate() + ' ' : date.getDate() + ' '
+					const H = date.getHours() + ':'
+					const M2 = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':'
+					return Y + M + D + H + M2 + "00"
+				}
+			},
+		},
 		methods: {
 			countEnd() {
-				console.log('countEnd')
+				this.$emit("spliceOrder",this.index)
 			},
 			toPay() {
 				const url = `/subpageB/OrderPage/OrderPage?orderNo=${this.item.orderNo}`

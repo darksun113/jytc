@@ -1,19 +1,19 @@
 <template>
 	<!-- status:0未支付 1已取消 2已支付 -->
-	<view v-if="goodsInfo.status == 0" class="topBox">
+	<view v-if="orderInfo.status == 0" class="topBox">
 		<image class="status-icon" src="../../static/images/payIng.svg" mode=""></image>
 		<view class="tabRight">
 			<view class="" style="font-size: 38rpx"> 待支付 </view>
 			<view class="nowrap" style="font-size: 28rpx; display: flex; align-items: center">
 				<view class=""> 交易剩余时间 </view>
 				<view style="width: 140rpx;padding-left: 10rpx;">
-					<u-count-down :time="goodsInfo.expireTime*1000 - curTime" format="HH:mm:ss" @finish="countEnd"></u-count-down>
+					<u-count-down :time="orderInfo.expireTime*1000 - curTime" format="HH:mm:ss" @finish="countEnd"></u-count-down>
 				</view>
 				<view >, 请及时付款！</view>
 			</view>
 		</view>
 	</view>
-	<view v-else-if="goodsInfo.status == 2" class="topBox" style="background-color: #f9fff6">
+	<view v-else-if="orderInfo.status == 2" class="topBox" style="background-color: #f9fff6">
 		<image class="status-icon" src="../../static/images/paySuccess.svg" mode=""></image>
 		<view class="tabRight">
 			<view class="" style="font-size: 38rpx; color: #7ecf55"> 支付成功 </view>
@@ -22,7 +22,7 @@
 			</view>
 		</view>
 	</view>
-	<view v-else-if="goodsInfo.status == 1" class="topBox">
+	<view v-else-if="orderInfo.status == 1" class="topBox">
 		<u-icon name="close-circle" size="50" color="#999999"></u-icon>
 		<view class="tabRight" style="font-size: 38rpx; color: #999999; line-height: 100rpx">
 			订单已取消
@@ -40,23 +40,15 @@
 		},
 		data(){
 			return{
-				goodsInfo:{
-					status:0
-				},
 				curTime:parseInt(Date.now())
 			}
 		},
 		methods:{
 			countEnd(){
-				this.goodsInfo.status=1
+				this.orderInfo.status=1
 			}
 		},
-		watch:{
-			orderInfo(data){
-				console.log(data,'data')
-				this.goodsInfo=data
-			}
-		}
+		watch:{}
 	}
 </script>
 

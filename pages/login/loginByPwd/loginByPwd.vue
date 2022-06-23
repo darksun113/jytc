@@ -2,12 +2,8 @@
 	<PageTemp>
 		<view class="login-page">
 			<view class="title-box">
-				<view class="title-text">
-					帐号密码登录
-				</view>
-				<view class="title-tip">
-					使用已注册手机号登录
-				</view>
+				<view class="title-text">手机号与密码登录</view>
+				<view class="title-tip">使用已注册手机号登录</view>
 			</view>
 			<view>
 				<u--form labelPosition="left" :model="form" :rules="rules" ref="uForm">
@@ -29,7 +25,7 @@
 					</u-checkbox>
 				</u-checkbox-group>
 				<view class="agreement-text">
-					同意并遵守<text>《用户协议》</text>与<text>《隐私政策》</text>
+					同意并遵守<text @click="toUserAgreement">《用户协议》</text>与<text @click="toPrivacyPolicy">《隐私政策》</text>
 				</view>
 			</view>
 			<view :style="{opacity:checkGrop[0]=='agree'?'1':'0.5'}" class="get-verification-code-btn" @click="getCode">
@@ -44,7 +40,7 @@
 				</view>
 			</view>
 		</view>
-		<PuzzleCode style="z-index:9999999" @resetPuzzle="starCheckRobot" :bind="$attrs" :show="isPuzzleShow"
+		<PuzzleCode style="z-index:9999999" :bind="$attrs" :show="isPuzzleShow"
 			success-text="验证成功" fail-text="验证失败" slider-text="拖动滑块完成拼图" @success="puzzleSuccess" @close="puzzleClose" />
 	</PageTemp>
 </template>
@@ -56,8 +52,6 @@
 		data() {
 			return {
 				checkGrop: [],
-				// 判断是否需要开启人机验证
-				isNeedPuzzle:true,
 				inviter:"",
 				prePurchaseId:"",
 				instanceId:"",
@@ -100,19 +94,26 @@
 			this.prePurchaseId=opt.prePurchaseId?opt.prePurchaseId:""
 			this.instanceId=opt.instanceId?opt.instanceId:""
 		},
+		onShow() {
+			this.init()
+		},
 		mixins: [mixin],
 		methods: {
+			init(){
+				this.form={
+					phone: null,
+					pwd:null,
+				}	
+				this.checkGrop=[]
+			},
 			getCode() {
 				this.$refs.uForm.validate().then(res => {
 					if (this.checkGrop[0] !== 'agree') {
 						this.$toast('请先阅读并勾选用户协议与隐私政策')
 						return
 					} else {
-						if(this.isNeedPuzzle){
-							this.starCheckRobot(1)
-						}else{
-							this.toLogin()
-						}
+						this.$store.commit("changeIsCount",false)
+						this.starCheckRobot(1)
 					}
 				}).catch(errors => {
 					// this.$toast('校验失败')
@@ -173,6 +174,14 @@
 			toPhoneLogin(){
 				const url=`../LoginByMobile/GetVerifyCode/GetVerifyCode?instanceId=${this.instanceId}&inviter=${this.inviter}&prePurchaseId=${this.prePurchaseId}`
 				this.$routerTo(url,"redirect")
+			},
+			toUserAgreement(){
+				const url="/subpageC/UserAgreement/UserAgreement"
+				this.$routerTo(url)
+			},
+			toPrivacyPolicy(){
+				const url="/subpageC/PrivacyPolicy/PrivacyPolicy"
+				this.$routerTo(url)
 			}
 		}
 	}

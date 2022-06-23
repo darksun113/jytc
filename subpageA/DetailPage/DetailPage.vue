@@ -75,7 +75,7 @@
 						const temp={
 							image:res.data.image,
 							shopIcon: res.data.shopIcon,
-							goodsDesc: res.data.goodsDesc,
+							description: res.data.description,
 						}
 						res.data.url?temp.url=res.data.url:''
 						res.data.mapping?temp.mapping=res.data.mapping:''
@@ -120,7 +120,6 @@
 					})
 				}else{
 					if(this.$checkLogin()){
-						// this.getGoodsDetail()
 						this.getGoodsInstanceDetail()
 					}else{
 						const instanceId=this.instanceId || ""
@@ -133,8 +132,8 @@
 		onLoad(opt) {
 			// loadType: 0 未购买  已购买
 			this.loadType=opt.loadType
-			this.goodsId=opt.goodsId || ""
-			this.instanceId=opt.instanceId || ""
+			this.goodsId=opt.goodsId?opt.goodsId:""
+			this.instanceId=opt.instanceId?opt.instanceId : ""
 		},
 		onShow() {
 			this.init()

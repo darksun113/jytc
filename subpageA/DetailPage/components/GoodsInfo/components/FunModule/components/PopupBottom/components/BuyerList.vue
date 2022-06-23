@@ -1,5 +1,5 @@
 <template>
-	<view class="buyer_popup" ontouchstart>
+	<view class="buyer_popup">
 		<view class="title">
 			最近购买
 		</view>
@@ -82,7 +82,7 @@
 							callback(0)
 						}else{
 							res.data.list.forEach(async item=>{
-								item.recipientIcon=await getFilePath(item.recipientIcon)
+								item.recipientIcon = await getFilePath(item.recipientIcon)
 								
 							})
 							callback(res.data.list,res.data.count)
@@ -108,6 +108,7 @@
 				}
 			},
 			init(){
+				
 				this.getBuyers(parseInt(Date.now()/1000),(list,count)=>{
 					if(list==0){
 						this.isNone=true

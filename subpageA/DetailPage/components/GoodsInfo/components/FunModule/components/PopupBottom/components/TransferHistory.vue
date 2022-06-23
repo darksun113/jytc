@@ -79,21 +79,20 @@
 		},
 		methods:{
 			getListPic(){
-				this.popupData.transferList.forEach(item=>{
+				this.popupData.transferList.forEach(async item=>{
 					const temp={
 						recipientIcon:item.recipientIcon,
 						transferIcon:item.transferIcon
 					}
-					getFilesPath(temp,data=>{
-						Object.keys(data).forEach(key=>{
-							item[key]=data[key]
-						})
+					const objData=await getFilesPath(temp)
+					Object.keys(objData).forEach(key=>{
+						item[key]=objData[key]
 					})
 				})
 			}
 		},
-		created(){
-			// this.getListPic()
+		mounted(){
+			this.getListPic()
 		},
 	}
 </script>

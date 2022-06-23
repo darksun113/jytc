@@ -1,9 +1,9 @@
 <template>
 	<view class="control-box">
-		<view class="control"  @click="toOpenModelPre">
+		<view class="control"  @click="toOpenModelPre" >
 			<img src="@/static/images/control_icon.svg" alt="">
 		</view>
-		<view class="control"  @click="toShare">
+		<view class="control"  @click="toShare" style="margin-left: 80rpx;" v-if="buyerName == userName">
 			<img src="@/static/images/share_icon.svg" alt="">
 		</view>
 	</view>
@@ -11,6 +11,14 @@
 
 <script>
 	export default{
+		props:{
+			buyerName:[String]
+		},
+		data(){
+			return{
+				userName:uni.getStorageSync("userInfo").name
+			}
+		},
 		methods:{
 			toOpenModelPre(){
 				this.$emit("preview")
@@ -26,7 +34,7 @@
 	.control-box{
 		display: flex;
 		width: 220rpx;
-		justify-content: space-between;
+		justify-content: center;
 		position: absolute;
 		left: 50%;
 		bottom: 20rpx;

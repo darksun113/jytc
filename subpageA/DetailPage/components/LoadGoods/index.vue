@@ -33,8 +33,9 @@
 				const name=uni.getStorageSync("userInfo").name
 				const avatar=uni.getStorageSync("userInfo").avatar.split("?")[0]
 				const posterImg = this.goodsData.image.split("?")[0]
+				const instanceId = this.goodsData.goodsInstanceId?this.goodsData.goodsInstanceId:""
 				this.posterData={
-					codeUrl : `http://h5.jialex.cn/#/subpageA/DetailPage/DetailPage?loadType=1&instanceId=${this.goodsData.instanceId}`,
+					codeUrl : `http://h5.jialex.cn/#/subpageA/DetailPage/DetailPage?loadType=1&instanceId=${instanceId}`,
 					name,
 					posterImg,
 					avatar,

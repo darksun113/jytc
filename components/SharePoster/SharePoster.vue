@@ -28,10 +28,10 @@
 				<view class="poster-goods-content" v-else>
 					<view class="poster-goods-title">
 						<view class="left nowrap">
-							珐琅彩荷花碗
+							{{posterData.name}}
 						</view>
 						<view class="right">
-							#2845/8000
+							#{{posterData.goodsCode}}/{{posterData.totalNum}}
 						</view>
 					</view>
 					<view class="poster-goods-detail">
@@ -114,6 +114,7 @@
 				FileSaver.saveAs(this.posterUrl)
 			},
 			open() {
+				console.log(this.posterData)
 				// this.initQrCode()
 				imgPathToBase64(this.posterData.posterImg,(base)=>{
 					this.posterImg_=base

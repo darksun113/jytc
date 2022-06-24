@@ -1,8 +1,11 @@
 <template>
 	<view class="load-video">
 		<view class="video-box">
-			<VideoPlayer ref="VideoPlayer" videoRef="video"  :videoData="goodsData"></VideoPlayer>
-			<!-- <video :src="goodsData.url" controls></video> -->
+			<!-- <VideoPlayer ref="VideoPlayer" videoRef="video"  :videoData="goodsData"></VideoPlayer> -->
+			<video class="video" id="demoVideo" :controls="false" :enable-progress-gesture="false" :show-center-play-btn="disable" 
+				src="https://shubantong.oss-cn-guangzhou.aliyuncs.com/538ff7c8-4beb-46f7-af43-fb0bc63380a7">
+				
+			</video>
 		</view>
 		<Control v-if="goodsData.loadType==1" @preview="toOpenModelPreVideo" @share="toShare" :buyerName="goodsData.buyerName"></Control>
 		<view class="lock_text" v-else>购买后可解锁高清观赏模式</view>

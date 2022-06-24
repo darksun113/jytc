@@ -14,7 +14,7 @@
 <script>
 	import CancelPop from "./components/CancelPop/index.vue"
 	import OrderCard from "./components/OrderCard/index.vue"
-	import {getFilesPath} from "@/utils/tools.js"
+	import {getFilePath} from "@/utils/tools.js"
 	export default{
 		components:{
 			OrderCard,
@@ -61,17 +61,10 @@
 							callback(0)
 						}else{
 							this.updatePage++
-							res.data.orders.forEach(async item=>{
-								const temp={
-									// image:item.goods.image,
-									shopIcon:item.goods.shopIcon
-								}
-								const objData = await getFilesPath(temp)
-								Object.keys(objData).forEach(key=>{
-									item.goods[key]=objData[key]
-								})
-								callback(item)
-							})
+							for (let i=0;i<res.data.orders.length;i++) {
+								res.data.orders[i].goods=await getFilePath(res.data.orders[i].goods,["image","shopIcon"])
+							}
+							callback(res.data.orders)
 						}
 					}
 				}catch(e){

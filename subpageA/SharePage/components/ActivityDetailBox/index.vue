@@ -12,6 +12,7 @@
 	import PowerNums from "./components/PowerNums/index.vue"
 	import RegisterAndBindCard from "./components/RegisterAndBindCard/index.vue"
 	import ToJoinActive from "./components/ToJoinActive/index.vue"
+	import {getFilePath} from "@/utils/tools.js"
 	export default{
 		props:{
 			prePurchaseInfo:{
@@ -26,8 +27,21 @@
 		data(){
 			return {
 				isJoin:true,
-				prePurchaseInfo_:this.prePurchaseInfo
+				prePurchaseInfo_:[]
 			}
+		},
+		methods:{
+			async getiIcon(data){
+				try{
+					data.userList=await getFilePath(data.userList,["icon"])
+					this.prePurchaseInfo_=data
+				}catch(e){
+					//TODO handle the exception
+				}
+			}
+		},
+		mounted() {
+			this.getiIcon(this.prePurchaseInfo)
 		},
 		components:{
 			PowerNums,
@@ -36,7 +50,7 @@
 		},
 		watch:{
 			prePurchaseInfo(data){
-				this.prePurchaseInfo_=data
+				this.getiIcon(data)
 			}
 		}
 	}

@@ -77,7 +77,7 @@
 						prePurchaseId:this.prePurchaseId
 					})
 					if(res.code==0){
-						res.data.seriesImg_ = await getFilePath(res.data.seriesImg)
+						res.data.seriesImg_ = await getFilePath(res.data,["seriesImg"])
 						this.prePurchaseInfo=res.data
 					}
 				}catch(e){

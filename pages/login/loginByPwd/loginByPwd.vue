@@ -47,7 +47,7 @@
 
 <script>
 	import mixin from "../mixins/PuzzleCodeMixin.js"
-	import {getFilePath,rsaEncrypt} from "@/utils/tools.js"
+	import {rsaEncrypt} from "@/utils/tools.js"
 	export default {
 		data() {
 			return {

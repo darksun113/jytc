@@ -2,7 +2,7 @@
 const proBaseUrl = "http://api.jialex.cn"
 const baseUrl =process.env.NODE_ENV=="development"?proBaseUrl : proBaseUrl;	
 const pathArr=[
-	baseUrl+"/series/getSeriesList"
+	baseUrl+"/series/getSeriesList",
 ]
 const request = (url = '', date = {}, type = 'POST', header = {}) => {
 	uni.showLoading()
@@ -14,16 +14,11 @@ const request = (url = '', date = {}, type = 'POST', header = {}) => {
 			data: date,
 			header: {
 				'Content-Type': 'application/json',
+				Authorization : token,
 				header,
 			},
 			dataType: 'json',
 		}
-		pathArr.forEach(item=>{
-			if(data.url!==item){
-				data.header.Authorization = token
-				return
-			}
-		})
 		uni.request({ ...data }).then((response) => {
 			let [error, res] = response;
 			if(res.data.code==1000){
@@ -39,7 +34,6 @@ const request = (url = '', date = {}, type = 'POST', header = {}) => {
 			let [err, res] = error;
 			reject(err)
 		})
-
 	});
 }
 function getToken() {

@@ -18,7 +18,7 @@
 </template>
 
 <script>
-	import {getFilePath,getFilesPath} from "@/utils/tools.js"
+	import {getFilePath} from "@/utils/tools.js"
 	import UserHeader from "./components/UserHeader/index.vue"
 	export default {
 		components:{
@@ -68,7 +68,7 @@
 						viewBuyerId:this.viewBuyerId
 					})
 					if(res.code==0){
-						res.data.avatar=await getFilePath(res.data.avatar)
+						res.data = await getFilePath(res.data,["avatar"])
 						this.userInfo=res.data
 					}else{
 						uni.showToast({

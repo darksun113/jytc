@@ -20,11 +20,8 @@
 				try{
 					const res = await uni.$http("/homepage/getBannerList",{})
 					if(res.code==0){
-						res.data.list.forEach(async item=>{
-							let url = await getFilePath(item.url)
-							item.url=url
-						})
-						this.bannerList=res.data.list
+						const list = await getFilePath(res.data.list,["url"])
+						this.bannerList=list
 					}
 				}catch(e){
 					//TODO handle the exception

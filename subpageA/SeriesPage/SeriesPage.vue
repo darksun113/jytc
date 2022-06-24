@@ -16,7 +16,7 @@
 	import ActivityDesBox from "./components/ActivityDesBox"
 	import ActivityBox from "./components/ActivityBox"
 	import GoodsList from "./components/GoodsList"
-	import { getFilesPath } from "@/utils/tools.js"
+	import { getFilePath } from "@/utils/tools.js"
 	export default {
 		components:{
 			Banner,
@@ -47,15 +47,9 @@
 						uni.setNavigationBarTitle({
 							title:res.data.seriesName
 						})
-						const temp={
-							seriesImg:res.data.seriesImg,
-							shopIcon:res.data.shopIcon,
-						}
-						const objData=await getFilesPath(temp)
-						Object.keys(objData).forEach(key=>{
-							res.data[key]=objData[key]
-						})
-						this.seriesInfo=res.data
+						const keysList=["seriesImg","shopIcon"]
+						const reqData=await getFilePath(res.data,keysList)
+						this.seriesInfo=reqData
 					}
 				}catch(e){
 					//TODO handle the exception

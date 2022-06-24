@@ -81,12 +81,11 @@
 						if(res.data.list.length==0){
 							callback(0)
 						}else{
-							res.data.list.forEach(async item=>{
-								item.recipientIcon = await getFilePath(item.recipientIcon)
-								
-							})
+							res.data.list = await getFilePath(res.data.list,["recipientIcon"])
 							callback(res.data.list,res.data.count)
 						}
+					}else{
+						this.$toast(res.errorMsg)
 					}
 				}catch(e){
 					//TODO handle the exception

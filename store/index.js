@@ -65,8 +65,7 @@ export default new Vuex.Store({
 			try {
 				const res = await uni.$http("/user/webGetAccountInfo", {})
 				if (res.code == 0) {
-					const avatar = await getFilePath(res.data.avatar)
-					res.data.avatar = avatar
+					res.data= await getFilePath(res.data,["avatar"])
 					context.commit("setUserInfo", res.data)
 					getMineInfo(res.data.buyerId)
 				}
@@ -78,8 +77,7 @@ export default new Vuex.Store({
 						})
 						if (res.code == 0) {
 							context.commit("setAvatarUuid", res.data.avatar)
-							const avatar = await getFilePath(res.data.avatar)
-							res.data.avatar = avatar
+							res.data= await getFilePath(res.data,["avatar"])
 							context.commit("setUserInfo", res.data)
 						} else {
 							uni.showToast({

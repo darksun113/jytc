@@ -9,7 +9,7 @@
 </template>
 
 <script>
-	import {getFilesPath} from "@/utils/tools.js"
+	import {getFilePath} from "@/utils/tools.js"
 	import UserBox from "./components/UserBox/index.vue"
 	import ActivityRulesBox from "./components/ActivityRulesBox/index.vue"
 	import ActivityDetailBox from "./components/ActivityDetailBox/index.vue"
@@ -34,15 +34,8 @@
 						buyerId:this.userId
 					})
 					if(res.code==0){
-						const temp={
-							avatar:res.data.avatar,
-							seriesImg:res.data.seriesImg,
-							shopIcon:res.data.shopIcon,
-						}
-						const objData = await getFilesPath(temp)
-						Object.keys(objData).forEach(key=>{
-							res.data[key]=objData[key]
-						})
+						const keysList=["avatar","shopIcon","seriesImg"]
+						res.data=await getFilePath(res.data,keysList)
 						this.prePurchaseInfo=res.data
 					}
 				}catch(e){

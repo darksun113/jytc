@@ -20,7 +20,7 @@
 <script>
 	import Banner from "./components/Banner/index.vue"
 	import StickyNav from "./components/StickyNav/index.vue"
-	import {getFilesPath} from "@/utils/tools.js"
+	import {getFilePath} from "@/utils/tools.js"
 	export default {
 		components:{
 			Banner,
@@ -74,17 +74,9 @@
 							callback(0)
 						}else{
 							this.updatePage++
-							res.data.list.forEach(async item=>{
-								const temp={
-									shopIcon:item.shopIcon,
-									seriesImg:item.seriesImg
-								}
-								const objData=await getFilesPath(temp)
-								Object.keys(objData).forEach(key=>{
-									item[key]=objData[key]
-								})
-							})
-							callback(res.data.list)
+							const keysList=["shopIcon","seriesImg"]
+							const list = await getFilePath(res.data.list,keysList)
+							callback(list)
 						}
 					}else{
 						this.$toast(res.errorMsg)

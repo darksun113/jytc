@@ -5,33 +5,50 @@ import {
 	md,
 	pki
 } from "node-forge";
-// 获取单张图片
-export async function getFilePath(uuid) {
-	try {
-		const reg_result = uuid.indexOf("https://")
-		if (reg_result == 0) {
-			return uuid
-		} else {
-			const path = store.state.filePath[uuid]
-			if (!path) {
-				const res = await request("/file/applydownload", {
-					uuid
-				})
-				store.commit("saveFilePath", {
-					uuid,
-					path: res.data.url
-				})
-				return res.data.url
-			} else {
-				return path
-			}
+
+// 获取多张图片
+// data:object|array
+// keysList:string[] 
+export async function getFilePath(data,keysList){
+	try{
+		if((!Array.isArray(data) || data.toString() !== "[object Object]") && !Array.isArray(keysList)){
+			debugger
+			console.error("getFilePath(a,b) 当前参数不正确，请确保a为object或array 且b为array")
+			return
 		}
-	} catch (error) {
-		throw new Error("系统错误", error)
+		if(Array.isArray(data)){
+			const temp={}
+			keysList.forEach(key=>{
+				temp[key]=""
+			})
+			for(let i=0;i<data.length;i++){
+				Object.keys(temp).forEach(key=>{
+					temp[key]=data[i][key]
+				})
+				const objData = await getFilesPath_(temp)
+				Object.keys(objData).forEach(key=>{
+					data[i][key] = objData[key]
+				})
+			}
+			return data
+		}else if(data.toString() == "[object Object]"){
+			const temp={}
+			keysList.forEach(key=>{
+				temp[key]=data[key]
+			})
+			const objData = await getFilesPath_(temp)
+			Object.keys(objData).forEach(key=>{
+				data[key] = objData[key]
+			})
+			return data
+		}
+	}catch(e){
+		//TODO handle the exception
 	}
 }
-// 获取多张图片
-export async function getFilesPath(data) {
+
+// 获取图片请求
+async function getFilesPath_(data) {
 	try {
 		const result = {}
 		const length = Object.keys(data).length
@@ -47,12 +64,16 @@ export async function getFilesPath(data) {
 					const res = await request("/file/applydownload", {
 						uuid: data[key]
 					})
-					store.commit("saveFilePath", {
-						uuid: data[key],
-						path: res.data.url
-					})
-					result[key] = res.data.url
-					idx++
+					if(res.code==0){
+						store.commit("saveFilePath", {
+							uuid: data[key],
+							path: res.data.url
+						})
+						result[key] = res.data.url
+						idx++
+					}else{
+						console.error(res.errorMsg)
+					}
 				} else {
 					result[key] = path
 					idx++

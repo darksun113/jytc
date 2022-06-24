@@ -67,9 +67,7 @@
 							callback(0)
 						}else{
 							this.updatePage++
-							res.data.list.forEach(async item=>{
-								item.icon=await getFilePath(item.icon)
-							})
+							res.data.list=await getFilePath(res.data.list,['icon'])
 							callback(res.data.list)
 						}
 					}

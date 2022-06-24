@@ -12,7 +12,6 @@
 						</view>
 						<view>
 							{{popupData.buyerName}}
-							<!-- 张三 -->
 						</view>
 					</view>
 					<view class="rz_info_item">
@@ -21,7 +20,6 @@
 						</view>
 						<view>
 							{{popupData.collectionTime| formatDate}}
-							<!-- 2022-02-01 -->
 						</view>
 					</view>
 					<view class="rz_info_item">
@@ -30,7 +28,6 @@
 						</view>
 						<view>
 							{{popupData.buyerHash}}
-							<!-- ZXf08292c1e85285ff35e1a10c4af0ZXf08292c1e85285ff35e1a10c4af0ZXf08292c1 -->
 						</view>
 					</view>
 					<view class="rz_info_item">
@@ -39,7 +36,6 @@
 						</view>
 						<view>
 							{{popupData.hash}}
-							<!-- ZXf08292c1e85285ff35e1a10c4af0ZXf08292c1e85285ff35e1a10c4af0ZXf08292c1 -->
 						</view>
 					</view>
 					<view class="rz_info_item">
@@ -48,7 +44,6 @@
 						</view>
 						<view>
 							{{popupData.height}}
-							<!-- 90290236 -->
 						</view>
 					</view>
 					<view class="rz_info_item">
@@ -57,7 +52,6 @@
 						</view>
 						<view>
 							{{popupData.tokenId}}
-							<!-- 364589540657598123 -->
 						</view>
 					</view>
 				</view>

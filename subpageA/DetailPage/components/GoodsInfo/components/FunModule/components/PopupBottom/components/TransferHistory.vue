@@ -49,7 +49,7 @@
 </template>
 
 <script>
-	import {getFilesPath} from "@/utils/tools.js"
+	import {getFilePath} from "@/utils/tools.js"
 	export default {
 		props:{
 			popupData:{
@@ -78,17 +78,13 @@
 			
 		},
 		methods:{
-			getListPic(){
-				this.popupData.transferList.forEach(async item=>{
-					const temp={
-						recipientIcon:item.recipientIcon,
-						transferIcon:item.transferIcon
-					}
-					const objData=await getFilesPath(temp)
-					Object.keys(objData).forEach(key=>{
-						item[key]=objData[key]
-					})
-				})
+			async getListPic(){
+				try{
+					const keysList=["recipientIcon","transferIcon"]
+					this.popupData.transferList=await getFilePath(this.popupData.transferList,keysList)
+				}catch(e){
+					//TODO handle the exception
+				}
 			}
 		},
 		mounted(){

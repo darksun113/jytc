@@ -8,12 +8,10 @@
 				<img :src="authorInfo.icon" alt="">
 				<view class="author_name nowrap">
 					{{authorInfo.shopName}}
-					<!-- 深圳百纳维科技有限公司 -->
 				</view>
 			</view>
 			<view class="author_des">
 				{{authorInfo.description}}
-				<!-- 此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊此处是发行方的介绍啊 -->
 			</view>
 		</view>
 	</view>
@@ -41,7 +39,7 @@
 				try{
 					const res=await uni.$http("/homepage/getShopDescription",{shopId:this.popupData.shopId})
 					if(res.code==0){
-						res.data.icon=await getFilePath(res.data.icon)
+						res.data=await getFilePath(res.data,["icon"])
 						this.authorInfo=res.data
 					}
 				}catch(e){

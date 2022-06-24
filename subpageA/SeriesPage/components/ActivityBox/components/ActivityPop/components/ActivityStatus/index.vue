@@ -28,17 +28,24 @@
 			}
 		},
 		components:{PowerNums},
+		mounted() {
+			this.getIcon(this.prePurchaseInfo)
+		},
 		methods:{
 			toOpenSharePoster(){
 				uni.$emit("toOpenSharePoster")
+			},
+			async getIcon(list){
+				try{
+					this.powerList=await getFilePath(list,["icon"])
+				}catch(e){
+					//TODO handle the exception
+				}
 			}
 		},
 		watch:{
 			prePurchaseInfo(newList){
-				newList.forEach(async item=>{
-					item.icon=await getFilePath(item.icon)
-				})
-				this.powerList=newList
+				this.getIcon(newList)
 			},
 			totalNum(num){
 				this.totalNum_=num

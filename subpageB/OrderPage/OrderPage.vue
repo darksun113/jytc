@@ -14,7 +14,7 @@
 	import OrderInfo from "./components/OrderInfo/index.vue"
 	import PayType from "./components/PayType/index.vue"
 	import PayButton from "./components/PayButton/index.vue"
-	import {getFilesPath} from "@/utils/tools.js"
+	import {getFilePath} from "@/utils/tools.js"
 	export default {
 		components:{
 			OrderStatus,
@@ -45,14 +45,7 @@
 						orderNo:this.orderNo
 					})
 					if(res.code==0){
-						const temp={
-							image:res.data.order.goods.image,
-							shopIcon:res.data.order.goods.shopIcon
-						}
-						const objData=await getFilesPath(temp)
-						Object.keys(objData).forEach(key=>{
-							res.data.order.goods[key]=objData[key]
-						})
+						res.data.order.goods=await getFilePath(res.data.order.goods,["image","shopIcon"])
 						this.orderInfo=res.data.order
 					}else{
 						uni.showToast({

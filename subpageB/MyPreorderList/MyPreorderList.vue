@@ -16,7 +16,7 @@
 </template>
 
 <script>
-	import {getFilesPath} from "@/utils/tools.js"
+	import {getFilePath} from "@/utils/tools.js"
 	export default {
 		data() {
 			return {
@@ -61,16 +61,7 @@
 							callback(0)
 						}else{
 							this.updatePage++
-							res.data.list.forEach(async item=>{
-								const temp={
-									seriesImg:item.seriesImg,
-									shopIcon:item.shopIcon
-								}
-								const objData=await getFilesPath(temp)
-								Object.keys(objData).forEach(key=>{
-									item[key]=objData[key]
-								})
-							})
+							res.data.list=await getFilePath(res.data.list,["seriesImg","shopIcon"])
 							callback(res.data.list)
 						}
 					}else{

@@ -61,11 +61,9 @@
 						if(res.data.list.length==0){
 							callback(0)
 						}else{
-							res.data.list.forEach(async item=>{
-								item.image = await getFilePath(item.image)
-							})
+							const list=await getFilePath(res.data.list,["image"])
 							this.updatePage++
-							callback(res.data.list,res.data.total)
+							callback(list,res.data.total)
 						}
 					}
 				}catch(e){

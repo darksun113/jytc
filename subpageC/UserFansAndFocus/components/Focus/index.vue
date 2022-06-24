@@ -74,9 +74,7 @@
 						if(res.data.list.length==0){
 							callback(0)
 						}else{
-							res.data.list.forEach(async item=>{
-								item.avatar=await getFilePath(item.avatar)
-							})
+							res.data.list = await getFilePath(res.data.list,["avatar"])
 							callback(res.data.list)
 						}
 					}

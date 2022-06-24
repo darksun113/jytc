@@ -11,7 +11,7 @@
 </template>
 
 <script>
-	import {getFilesPath} from "@/utils/tools.js"
+	import {getFilePath} from "@/utils/tools.js"
 	export default {
 		data() {
 			return {
@@ -31,22 +31,21 @@
 			updateList(){
 				if(this.isCanReq)return;
 				const startTime=this.goodsList[this.goodsList.length-1].startTime
-				this.getGoodsList(startTime,(item=>{
+				this.getGoodsList(startTime,list=>{
 					if(item==0){
 						this.isCanReq=false
+						this.isEnd=true
 					}else{
-						this.goodsList.push(item)
-						this.goodsList=this.goodsList.sort((a,b)=>b.startTime-a.startTime)
+						this.goodsList=[...this.goodsList,...list]
 					}
-				}))
+				})
 			},
 			init(){
-				this.getGoodsList(parseInt(Date.now()/1000),(item)=>{
+				this.getGoodsList(parseInt(Date.now()/1000),(list)=>{
 					if(item==0){
 						this.hasData=false
 					}else{
-						this.goodsList.push(item)
-						this.goodsList=this.goodsList.sort((a,b)=>b.startTime-a.startTime)
+						this.goodsList=list
 					}
 				})
 			},
@@ -62,17 +61,8 @@
 						if(res.data.list.length==0){
 							callback(0)
 						}else{
-							res.data.list.forEach(async item=>{
-								const temp={
-									shopIcon:item.shopIcon,
-									image:item.image
-								}
-								const obj = await getFilesPath(temp)
-								Object.keys(obj).forEach(keys=>{
-									item[keys]=obj[keys]
-								})
-								callback(item)
-							})
+							res.data.list=await getFilePath(res.data.list,["shopIcon","image"])
+							callback(res.data.list)
 						}
 					}else{
 						this.$toast(res.errorMsg)

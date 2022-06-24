@@ -12,7 +12,7 @@
 
 <script>
 	import OrderCard from "./components/OrderCard/index.vue"
-	import {getFilesPath} from "@/utils/tools.js"
+	import {getFilePath} from "@/utils/tools.js"
 	export default{
 		components:{
 			OrderCard
@@ -33,12 +33,11 @@
 			init(){
 				this.updatePage=1
 				this.orderList=[]
-				this.getOrderList(parseInt(Date.now()/1000),item=>{
-					if(item==0){
+				this.getOrderList(parseInt(Date.now()/1000),list=>{
+					if(list==0){
 						this.isNoData=true
 					}else{
-						this.orderList.push(item)
-						this.orderList=this.orderList.sort((a,b)=>a.createTime-b.createTime)
+						this.orderList=list
 					}
 				})
 			},
@@ -56,17 +55,10 @@
 							callback(0)
 						}else{
 							this.updatePage++
-							res.data.orders.forEach(async item=>{
-								const temp={
-									image:item.goods.image,
-									shopIcon:item.goods.shopIcon
-								}
-								const objData = await getFilesPath(temp)
-								Object.keys(objData).forEach(key=>{
-									item.goods[key]=objData[key]
-								})
-								callback(item)
-							})
+							for (let i=0;i<res.data.orders.length;i++) {
+								res.data.orders[i].goods=await getFilePath(res.data.orders[i].goods,["image","shopIcon"])
+							}
+							callback(res.data.orders)
 						}
 					}
 				}catch(e){
@@ -76,13 +68,12 @@
 			updateList(){
 				if(this.shouldRequest){
 					const createTime=this.orderList[this.orderList.length-1].createTime
-					this.getOrderList(createTime,item=>{
-						if(item==0){
+					this.getOrderList(createTime,list=>{
+						if(list==0){
 							this.isLastData=true
 							this.shouldRequest=false
 						}else{
-							this.orderList.push(item)
-							this.orderList=this.orderList.sort((a,b)=>a.createTime-b.createTime)
+							this.orderList=[...this.orderList,...list]
 						}
 					})
 				}

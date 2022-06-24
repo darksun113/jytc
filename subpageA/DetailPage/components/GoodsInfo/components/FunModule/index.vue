@@ -60,7 +60,7 @@
 			</view>
 			<view class="buyer_box">
 				<view class="player_avatar">
-					<image :src="item.recipientIcon" v-for="(item ,index) in buyerList" :key="index"></image>
+					<image v-if="buyerList.length>0" :src="item.recipientIcon" v-for="(item ,index) in buyerList" :key="index"></image>
 				</view>
 				<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg"></image>
 			</view>

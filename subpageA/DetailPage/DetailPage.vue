@@ -46,7 +46,7 @@
 						const objData= await getFilePath(resData,keysList)
 						this.goodsData=objData
 						this.goodsData.loadType=this.loadType
-						this.goodsData.modelType=2
+						this.goodsData.modelType=3
 						uni.setNavigationBarTitle({
 							title:resData.goodsName
 						})
@@ -89,7 +89,7 @@
 				try{
 					const res=await uni.$http("/goods/getBuyers",{goodsId:this.goodsId,size:3})
 					if(res.code==0){
-						res.data.list=getFilePath(res.data.list,["recipientIcon"])
+						res.data.list= await getFilePath(res.data.list,["recipientIcon"])
 						callback(res.data.list)
 					}
 				}catch(e){

@@ -5,7 +5,6 @@ const baseUrl =process.env.NODE_ENV=="development"?proBaseUrl : proBaseUrl;
 const request = (url = '', date = {}, type = 'POST', header = {}) => {
 	uni.showLoading()
 	const token = getToken()
-	// console.log(url)
 	return new Promise((resolve, reject) => {
 		let data = {
 			method: type,
@@ -20,8 +19,6 @@ const request = (url = '', date = {}, type = 'POST', header = {}) => {
 		}
 		uni.request({ ...data }).then((response) => {
 			let [error, res] = response;
-			console.log(res)
-			console.log(url,'url')
 			if(res.data.code==1000){
 				if(url!=="/goods/getGoodsInstanceDetail"){
 					uni.showToast({

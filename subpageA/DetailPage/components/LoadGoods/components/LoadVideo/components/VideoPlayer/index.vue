@@ -29,6 +29,7 @@
 				this.player = new MuiPlayer({
 					container: '#mui-player',
 					// title:'标题',
+					// src: this.videoData.url,
 					src: this.videoData.url,
 					autoplay: true,
 					muted: true,

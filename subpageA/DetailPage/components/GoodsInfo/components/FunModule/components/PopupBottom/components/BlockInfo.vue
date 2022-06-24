@@ -26,10 +26,10 @@
 				</view>
 				<view class="item_info">
 					<view style="font-size: 12px;color: #888888;margin-bottom: 20rpx;">
-						百纳维联盟链数字藏品合约标准
+						至信链开放联盟链-智能合约标准
 					</view>
 					<view>
-						ERC-721
+						NRC-721
 					</view>
 				</view>
 			</view>

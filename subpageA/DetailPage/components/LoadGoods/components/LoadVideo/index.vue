@@ -2,6 +2,7 @@
 	<view class="load-video">
 		<view class="video-box">
 			<VideoPlayer ref="VideoPlayer" videoRef="video"  :videoData="goodsData"></VideoPlayer>
+			<!-- <video :src="goodsData.url" controls></video> -->
 		</view>
 		<Control v-if="goodsData.loadType==1" @preview="toOpenModelPreVideo" @share="toShare" :buyerName="goodsData.buyerName"></Control>
 		<view class="lock_text" v-else>购买后可解锁高清观赏模式</view>

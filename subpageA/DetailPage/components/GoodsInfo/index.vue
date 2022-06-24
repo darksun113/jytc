@@ -9,11 +9,7 @@
 			</view>
 		</view>
 		<view class="tags-box">
-			<view class="tags">
-				<view class="tag">神兽系列</view>
-				<view class="tag">山海经</view>
-				<view class="tag">国风</view>
-			</view>
+			<view class="tags"></view>
 			<view class="goodsCode_box" v-if="goodsData.loadType==1">
 				<view class="goodsCode">#{{goodsData.goodsCode}}/{{goodsData.totalNumber}}</view>
 			</view>
@@ -57,7 +53,6 @@
 	.goods-info{
 		padding: 40rpx;
 		color: #FFFFFF;
-		// padding-bottom: 164rpx;
 		.goods-price-box{
 			height: 100rpx;
 			display: flex;

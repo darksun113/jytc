@@ -34,6 +34,12 @@
 					muted: true,
 					loop: true,
 					pageHead:false,//非全屏模式下，是否显示播放器头部操作控件
+					videoAttribute:[
+						{
+							attrKey:'webkit-controlslist',
+							attrValue:"nodownload"
+						}
+					]
 				})
 				this.player.toggleControls(false)
 			}

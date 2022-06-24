@@ -1,6 +1,6 @@
 <template>
 	<PageTemp>
-		<view class="detail-page">
+		<view class="detail-page" :style="{paddingBottom:loadType==0?'204rpx':'0'}">
 			<LoadGoods v-if="JSON.stringify(goodsData)!=='{}'" :goodsData="goodsData"></LoadGoods>
 			<GoodsInfo v-if="JSON.stringify(goodsData)!=='{}'" :goodsData="goodsData" :buyerList="buyerList"></GoodsInfo>
 			<ButtonBox v-if="JSON.stringify(goodsData)!=='{}' && loadType==0" :goodsData="goodsData" ></ButtonBox>
@@ -133,6 +133,5 @@
 	height: 100%;
 	overflow: auto;
 	position: relative;
-	padding-bottom: 204rpx;
 }
 </style>

@@ -42,9 +42,10 @@
 			},
 			init(){
 				this.getGoodsList(parseInt(Date.now()/1000),(list)=>{
-					if(item==0){
+					if(list==0){
 						this.hasData=false
 					}else{
+						console.log(list,55)
 						this.goodsList=list
 					}
 				})

@@ -3,8 +3,8 @@
 		<image class="goods-pic" :src="goodsData.image" mode="aspectFill"></image>
 		<Control  v-if="goodsData.loadType==1" @preview="toOpenModelPreImg" @share="toShare" :buyerName="goodsData.buyerName"></Control>
 		<view class="lock_text" v-else>购买后可解锁高清观赏模式</view>
-		<Preview :isShow="isOpenPre" @close="isOpenPre=false">
-			<PreviewModel :audioData="goodsData" @close="closePreviewModel"></PreviewModel>
+		<Preview :isShow="isOpenPre" @close="closePreviewModel">
+			<PreviewModel :audioData="goodsData" ref="preAudio"></PreviewModel>
 		</Preview>
 	</view>
 </template>
@@ -30,9 +30,15 @@
 			Control,
 			PreviewModel
 		},
+		mounted() {
+			uni.$on("destroyAudio",()=>{
+				this.$refs.preAudio.destroy()
+			})
+		},
 		methods:{
 			closePreviewModel(){
 				this.isOpenPre=false
+				this.$refs.preAudio.destroy()
 			},
 			toOpenModelPreImg(){
 				this.isOpenPre=true

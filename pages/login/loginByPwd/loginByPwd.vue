@@ -163,6 +163,7 @@
 								const url=`/subpageA/DetailPage/DetailPage?instanceId=${this.instanceId}&loadType=1`
 								this.$routerTo(url,'redirect')
 							}else{
+								const routes = getCurrentPages()
 								if(routes.length>=2){
 									this.$routerTo(1,"back")
 								}else{

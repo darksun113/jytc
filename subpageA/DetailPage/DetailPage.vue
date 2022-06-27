@@ -29,6 +29,10 @@
 				instanceId:""
 			}
 		},
+		onHide() {
+			uni.$emit("destroyAudio")
+			uni.$off("destroyAudio")
+		},
 		onUnload() {
 			uni.$off("toOpenSharePoster")
 		},

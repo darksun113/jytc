@@ -87,6 +87,7 @@
 					})
 					if (res.code == 0) {
 						this.openPayWeb(res.data.h5Zfb.body)
+						uni.setStorageSync("orderNo",this.orderNo)
 						this.timer=setInterval(()=>{
 							this.getOrderStatus()
 						},1000)

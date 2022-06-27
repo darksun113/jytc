@@ -28,8 +28,6 @@
 			this.init()
 			
 		},
-		destroyed() {
-		},
 		methods: {
 			init(){
 				this.audioDom = uni.createInnerAudioContext();
@@ -45,6 +43,10 @@
 			pause(){
 				this.audioDom.pause()
 				this.isPlay=!this.isPlay
+			},
+			destroy(){
+				this.audioDom.pause()
+				this.audioDom.destroy()
 			}
 		}
 	}

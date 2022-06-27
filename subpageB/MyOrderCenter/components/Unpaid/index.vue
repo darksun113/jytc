@@ -39,11 +39,11 @@
 			init(){
 				this.updatePage=1
 				this.orderList=[]
-				this.getOrderList(parseInt(Date.now()/1000),item=>{
-					if(item==0){
+				this.getOrderList(parseInt(Date.now()/1000),list=>{
+					if(list==0){
 						this.isNoData=true
 					}else{
-						this.orderList=this.orderList.push(item).sort((a,b)=>a.createTime-b.createTime)
+						this.orderList=list
 					}
 				})
 			},
@@ -86,11 +86,11 @@
 			},
 			updateList(){
 				const createTime=this.orderList[this.orderList.length-1].createTime
-				this.getOrderList(createTime,item=>{
-					if(item==0){
+				this.getOrderList(createTime,list=>{
+					if(list==0){
 						this.isLastData=true
 					}else{
-						this.orderList=this.orderList.push(item).sort((a,b)=>a.createTime-b.createTime)
+						this.orderList=[...this.orderList,...list] 
 					}
 				})
 			}

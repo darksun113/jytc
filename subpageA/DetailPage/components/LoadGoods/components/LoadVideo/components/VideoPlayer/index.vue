@@ -1,10 +1,24 @@
 <template>
-	<view id="mui-player"></view>
+	<video 
+		class="video" 
+		id="player"
+		webkit-playsinline="true"
+		playsinline="true"
+		x5-playsinline="true"
+		x5-video-player-fullscreen="true"
+		x5-video-player-type="h5" 
+		:enable-progress-gesture="false"
+		:controls="false"
+		preload="auto"
+		muted 
+		autoplay
+		loop
+		:poster="videoData.image"
+		:src="videoData.url">
+	</video>
 </template>
 
 <script>
-	import 'mui-player/dist/mui-player.min.css'
-	import MuiPlayer from 'mui-player'
 	export default {
 		props: {
 			videoData: {
@@ -14,50 +28,37 @@
 		},
 		data() {
 			return {
-				player: null,
+				video:null
 			}
 		},
 		mounted() {
-			this.initVideo()
+			this.isWeiXin()
 		},
 		destroyed() {
-			this.player.destory()
 		},
 		methods: {
-			initVideo() {
-				this.player = new MuiPlayer({
-					container: '#mui-player',
-					// title:'标题',
-					// src: this.videoData.url,
-					src: "https://cdn.uviewui.com/uview/resources/video.mp4",
-					// src: "https://taxi-test001.oss-cn-hangzhou.aliyuncs.com/videos/New%203D%20video-10-13-2.m4v?versionId=CAEQHRiBgMCs6szj4xciIGM4MTYyYjk5ZjExNzRiZTJiMTIxZTFhNWQ5NWJmYjZm",
-					autoplay: true,
-					preload:"auto",
-					muted: true,
-					loop: true,
-					pageHead:false,//非全屏模式下，是否显示播放器头部操作控件
-					videoAttribute:[
-						{
-							attrKey:'webkit-controlslist',
-							attrValue:"nodownload"
-						}
-					]
-				})
-				this.player.toggleControls(false)
-			}
+			//判断是否微信环境
+			isWeiXin() {
+			    var ua = window.navigator.userAgent.toLowerCase();
+			    if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+					document.addEventListener('WeixinJSBridgeReady', function(){
+					    this.video = document.getElementById("player");
+					    this.video.play();
+					}, false);
+			    } else {
+			        return false; // 普通浏览器中打开
+			    }
+			},
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	#mui-player {
-		width: 100% !important;
-		height: 100% !important;
+	.video {
+		width: 100% ;
+		height: 100% ;
 	}
-	::v-deep .mini-progress{
-		display: none;
-	}
-	::v-deep .mplayer-footer{
-		display: none;
+	::v-deep .uni-video-cover{
+		// display: none;
 	}
 </style>

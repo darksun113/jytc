@@ -1,8 +1,7 @@
 <template>
     <div class="agreement_page">
         <div class="container">
-            <view class="info" style="text-align: center;">蓬莱数藏用户协议</view>
-            <view class="info">数版通平台用户协议</view>
+            <view class="info" style="text-align: center;">数版通平台用户协议</view>
             <view class="info">欢迎使用数版通平台及服务!</view>
             <view class="info">【审慎阅读】</view>
             <view class="info">请您务必审慎阅读、充分理解协议中相关条款内容，其中包括∶</view>

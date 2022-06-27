@@ -29,9 +29,7 @@
 			initVideo() {
 				this.player = new MuiPlayer({
 					container: '#mui-pre-player',
-					// src: this.videoData.url,
-					// src: "https://cdn.uviewui.com/uview/resources/video.mp4",
-					src: "https://taxi-test001.oss-cn-hangzhou.aliyuncs.com/videos/New%203D%20video-10-13-2.m4v?versionId=CAEQHRiBgMCs6szj4xciIGM4MTYyYjk5ZjExNzRiZTJiMTIxZTFhNWQ5NWJmYjZm",
+					src: this.videoData.url,
 					autoplay: true,
 					muted: true,
 					loop: true,

@@ -71,7 +71,14 @@
 								const url=`/subpageA/DetailPage/DetailPage?instanceId=${this.instanceId}&loadType=1`
 								this.$routerTo(url,'redirect')
 							}else{
-								this.$routerTo(2,"back")
+								const routes = getCurrentPages()
+								if(routes.length>2){
+									this.$routerTo(2,"back")
+								}else{
+									uni.reLaunch({
+										url:"/pages/home/home"
+									})
+								}
 							}
 						},1000)
 					}else{

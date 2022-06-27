@@ -93,6 +93,8 @@
 			this.inviter=opt.inviter?opt.inviter:""
 			this.prePurchaseId=opt.prePurchaseId?opt.prePurchaseId:""
 			this.instanceId=opt.instanceId?opt.instanceId:""
+			let routes = getCurrentPages()
+			console.log(routes.length,routes,"routes")
 		},
 		onShow() {
 			this.init()
@@ -161,7 +163,13 @@
 								const url=`/subpageA/DetailPage/DetailPage?instanceId=${this.instanceId}&loadType=1`
 								this.$routerTo(url,'redirect')
 							}else{
-								this.$routerTo(1,"back")
+								if(routes.length>=2){
+									this.$routerTo(1,"back")
+								}else{
+									uni.reLaunch({
+										url:"/pages/home/home"
+									})
+								}
 							}
 						},1000)
 					}else{

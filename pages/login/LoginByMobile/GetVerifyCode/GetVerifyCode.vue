@@ -77,6 +77,8 @@
 			this.inviter=opt.inviter?opt.inviter:""
 			this.prePurchaseId=opt.prePurchaseId?opt.prePurchaseId:""
 			this.instanceId=opt.instanceId?opt.instanceId:""
+			let routes = getCurrentPages()
+			console.log(routes.length,"routes")
 		},
 		mixins: [mixin],
 		methods: {

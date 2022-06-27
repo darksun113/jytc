@@ -7,7 +7,7 @@
 		<view class="btn" @click="toOrder" v-else-if="goodsData.selling==1">
 			购买
 		</view>
-		<view class="btn" style="background: #5C5A88;" v-else-if="curTime - goodsData.startTime > 0">
+		<view class="btn" style="background: #5C5A88;" v-else-if="curTime - goodsData.startTime < 0">
 			即将开售
 		</view>
 		<view class="btn" @click="toOrder" v-else>

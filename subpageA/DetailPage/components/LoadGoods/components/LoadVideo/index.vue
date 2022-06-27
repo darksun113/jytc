@@ -1,11 +1,22 @@
 <template>
 	<view class="load-video">
 		<view class="video-box">
-			<!-- <VideoPlayer ref="VideoPlayer" videoRef="video"  :videoData="goodsData"></VideoPlayer> -->
-			<video class="video" id="demoVideo" :controls="false" :enable-progress-gesture="false" :show-center-play-btn="disable" 
-				src="https://shubantong.oss-cn-guangzhou.aliyuncs.com/538ff7c8-4beb-46f7-af43-fb0bc63380a7">
-				
-			</video>
+			<VideoPlayer ref="VideoPlayer" videoRef="video"  :videoData="goodsData"></VideoPlayer>
+			<!-- https://cdn.uviewui.com/uview/resources/video.mp4 -->
+			<!-- https://shubantong.oss-cn-guangzhou.aliyuncs.com/538ff7c8-4beb-46f7-af43-fb0bc63380a7 -->
+		<!-- 	<video class="video"
+				webkit-playsinline="true"
+				loop
+				x5-video-player-type="h5"
+				:enable-progress-gesture="false" 
+				playsinline
+				muted
+				preload="auto"
+				autoplay="true"
+				style="width: 100%;height: 100%;object-fit: fill"
+				:controls="false"
+				src="https://taxi-test001.oss-cn-hangzhou.aliyuncs.com/videos/New%203D%20video-10-13-2.m4v?versionId=CAEQHRiBgMCs6szj4xciIGM4MTYyYjk5ZjExNzRiZTJiMTIxZTFhNWQ5NWJmYjZm">
+			</video> -->
 		</view>
 		<Control v-if="goodsData.loadType==1" @preview="toOpenModelPreVideo" @share="toShare" :buyerName="goodsData.buyerName"></Control>
 		<view class="lock_text" v-else>购买后可解锁高清观赏模式</view>

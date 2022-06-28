@@ -54,7 +54,7 @@
 				const userId=uni.getStorageSync("userInfo").buyerId
 				this.posterData={
 					codeUrl :`http://h5.jialex.cn/#/subpageA/SharePage/SharePage?prePurchaseId=${prePurchaseId}&userId=${userId}`,
-					posterImg:this.prePurchaseInfo.seriesImg_.split("?")[0],
+					posterImg:this.prePurchaseInfo.seriesImg.split("?")[0],
 					loadType:0 // 0 邀请分享  1 分享把玩
 				}
 				this.isOpenPoster=true
@@ -77,7 +77,7 @@
 						prePurchaseId:this.prePurchaseId
 					})
 					if(res.code==0){
-						res.data.seriesImg_ = await getFilePath(res.data,["seriesImg"])
+						res.data = await getFilePath(res.data,["seriesImg"])
 						this.prePurchaseInfo=res.data
 					}
 				}catch(e){

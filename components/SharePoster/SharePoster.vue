@@ -114,7 +114,6 @@
 				FileSaver.saveAs(this.posterUrl)
 			},
 			open() {
-				console.log(this.posterData)
 				// this.initQrCode()
 				imgPathToBase64(this.posterData.posterImg,(base)=>{
 					this.posterImg_=base

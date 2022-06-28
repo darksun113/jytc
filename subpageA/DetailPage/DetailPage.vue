@@ -113,12 +113,12 @@
 						this.toLogin()
 					}
 				}
-			}
-		},
-		toLogin(){
-			const instanceId=this.instanceId || ""
-			const url=`/pages/login/LoginByMobile/GetVerifyCode/GetVerifyCode?instanceId=${instanceId}`
-			this.$routerTo(url,'redirect')
+			},
+			toLogin(){
+				const instanceId=this.instanceId || ""
+				const url=`/pages/login/LoginByMobile/GetVerifyCode/GetVerifyCode?instanceId=${instanceId}`
+				this.$routerTo(url,'redirect')
+			},
 		},
 		onLoad(opt) {
 			// loadType: 0 未购买  已购买

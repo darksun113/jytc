@@ -4,7 +4,7 @@
 			<image :src="prePurchaseInfo.seriesImg"></image>
 		</view>
 		<view class="right-info">
-			<view class="goods-name">{{prePurchaseInfo.seriesName}}</view>
+			<view class="goods-name nowrap">{{prePurchaseInfo.seriesName}}</view>
 			<view class="author-box">
 				<image :src="prePurchaseInfo.shopIcon"></image>
 				<text>{{prePurchaseInfo.shopName}}</text>

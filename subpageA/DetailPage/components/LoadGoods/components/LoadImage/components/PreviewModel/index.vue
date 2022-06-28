@@ -3,7 +3,7 @@
 		<img class="close_icon" src="@/static/images/close_preview_icon.svg" alt="" @click="$emit('close')">
 		<view class="scaleImg">
 			<movable-area>
-				<movable-view direction="all" scale-value="1" scale-min="0.1" scale="true" scale-max="8">
+				<movable-view direction="all" scale-value="1" scale-min="0.1" scale="true" scale-max="8" :damping="100" out-of-bounds="false">
 					<img :src="goodsData.image" alt="">
 				</movable-view>
 			</movable-area>
@@ -19,16 +19,7 @@
 				default: () => {}
 			}
 		},
-		methods: {
-			// 缩小
-			shrink() {
-
-			},
-			// 放大
-			magnify() {
-
-			}
-		}
+		methods: {}
 	}
 </script>
 
@@ -37,6 +28,9 @@
 		width: 100vw;
 		height: 100vh;
 		background: rgba(0, 0, 0, .8);
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		.close_icon {
 			width: 64rpx;
 			height: 64rpx;
@@ -49,14 +43,13 @@
 		.scaleImg {
 			width: 630rpx;
 			height:630rpx;
-
 			&>movable-area {
+				width: 100vh;
 				height: 100vh;
-				width: 100%;
-				position: fixed;
-				overflow: hidden;
-				left: 0;
-				top: 0;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
 				z-index: 1000;
 
 				movable-view {
@@ -68,8 +61,6 @@
 					top: 50%;
 					img {
 						width: 630rpx;
-						
-						
 					}
 				}
 

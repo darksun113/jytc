@@ -1,6 +1,7 @@
-const devBaseUrl = "http://120.197.126.61:18940";
+// const devBaseUrl = "http://120.197.126.61:18940";
+const devBaseUrl = "http://192.168.2.108:18940"
 const proBaseUrl = "http://api.jialex.cn"
-const baseUrl =process.env.NODE_ENV=="development"?proBaseUrl : proBaseUrl;	
+const baseUrl =process.env.NODE_ENV=="development"?devBaseUrl : proBaseUrl;	
 
 const request = (url = '', date = {}, type = 'POST', header = {}) => {
 	uni.showLoading()
@@ -30,7 +31,7 @@ const request = (url = '', date = {}, type = 'POST', header = {}) => {
 						uni.reLaunch({
 							url:"/pages/home/home"
 						})
-					},2000)
+					},1000)
 				}
 				uni.removeStorageSync("token")
 				uni.hideLoading()

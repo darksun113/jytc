@@ -42,7 +42,8 @@ export default {
 						uni.hideLoading()
                         this.countdown()
 						uni.showToast({
-							title:'发送成功'
+							title:'发送成功',
+							icon:"success"
 						})
 						this.doSomething()
                     } else if (res.code == 20004) {

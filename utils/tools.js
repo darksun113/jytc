@@ -12,7 +12,6 @@ import {
 export async function getFilePath(data,keysList){
 	try{
 		if((!Array.isArray(data) || data.toString() !== "[object Object]") && !Array.isArray(keysList)){
-			debugger
 			console.error("getFilePath(a,b) 当前参数不正确，请确保a为object或array 且b为array")
 			return
 		}
@@ -23,7 +22,12 @@ export async function getFilePath(data,keysList){
 			})
 			for(let i=0;i<data.length;i++){
 				Object.keys(temp).forEach(key=>{
-					temp[key]=data[i][key]
+					if(data[i][key]){
+						temp[key]=data[i][key]
+					}else{
+						console.error(key+"无内容，请检查")
+						return
+					}
 				})
 				const objData = await getFilesPath_(temp)
 				Object.keys(objData).forEach(key=>{
@@ -34,7 +38,12 @@ export async function getFilePath(data,keysList){
 		}else if(data.toString() == "[object Object]"){
 			const temp={}
 			keysList.forEach(key=>{
-				temp[key]=data[key]
+				if(data[key]){
+					temp[key]=data[key]
+				}else{
+					console.error(key+"无内容，请检查")
+					return
+				}
 			})
 			const objData = await getFilesPath_(temp)
 			Object.keys(objData).forEach(key=>{

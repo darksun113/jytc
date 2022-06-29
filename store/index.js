@@ -68,6 +68,11 @@ export default new Vuex.Store({
 					res.data= await getFilePath(res.data,["avatar"])
 					context.commit("setUserInfo", res.data)
 					getMineInfo(res.data.buyerId)
+				}else{
+					uni.showToast({
+						title: res.errorMsg,
+						icon: "error"
+					})
 				}
 				async function getMineInfo(viewBuyerId) {
 					try {

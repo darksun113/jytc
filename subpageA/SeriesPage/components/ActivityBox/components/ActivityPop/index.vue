@@ -53,7 +53,8 @@
 				const prePurchaseId=this.prePurchaseId
 				const userId=uni.getStorageSync("userInfo").buyerId
 				this.posterData={
-					codeUrl :`http://h5.jialex.cn/#/subpageA/SharePage/SharePage?prePurchaseId=${prePurchaseId}&userId=${userId}`,
+					// codeUrl :`http://h5.jialex.cn/#/subpageA/SharePage/SharePage?prePurchaseId=${prePurchaseId}&userId=${userId}`,
+					codeUrl :`http://192.168.2.29:8080/#/subpageA/SharePage/SharePage?prePurchaseId=${prePurchaseId}&userId=${userId}`,
 					posterImg:this.prePurchaseInfo.seriesImg.split("?")[0],
 					loadType:0 // 0 邀请分享  1 分享把玩
 				}

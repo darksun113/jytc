@@ -4,7 +4,7 @@
 			暂无订单
 		</IsNoData>
 		<view v-else>
-			<OrderCard :item="item" :index="index" v-for="(item,index) in orderList" :key="index" @cancelOrder="cancelOrder" @spliceOrder="spliceOrder"></OrderCard>
+			<OrderCard :item="item" :index_="index" v-for="(item,index) in orderList" :key="index" @cancelOrder="cancelOrder" @spliceOrder="spliceOrder"></OrderCard>
 			<IsEnd v-if="isLastData"></IsEnd>
 		</view>
 		<CancelPop :isShow="isShow" :orderNo="cancelOrderNo" @close="isShow=false" @cancelSuccess="cancelSuccess"></CancelPop>
@@ -71,7 +71,8 @@
 					//TODO handle the exception
 				}
 			},
-			cancelOrder(orderNo,index){
+			cancelOrder(data){
+				const {orderNo,index}=data
 				this.cancelOrderNo=orderNo
 				this.cancelIdx=index
 				this.isShow=true
@@ -80,6 +81,9 @@
 				this.isShow=false
 				this.$toast("取消成功")
 				this.orderList.splice(this.cancelIdx,1)
+				if(this.orderList.length==0){
+					this.isNoData=true
+				}
 			},
 			spliceOrder(cancelIdx){
 				this.orderList.splice(cancelIdx,1)

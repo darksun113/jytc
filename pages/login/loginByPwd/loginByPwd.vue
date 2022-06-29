@@ -94,7 +94,6 @@
 			this.prePurchaseId=opt.prePurchaseId?opt.prePurchaseId:""
 			this.instanceId=opt.instanceId?opt.instanceId:""
 			let routes = getCurrentPages()
-			console.log(routes.length,routes,"routes")
 		},
 		onShow() {
 			this.init()

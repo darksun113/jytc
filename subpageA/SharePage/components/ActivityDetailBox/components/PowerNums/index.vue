@@ -1,17 +1,25 @@
 <template>
 	<view class="power-num-box">
-		<swiper class="number-of-power" :current="curDot" @change="swiperChange" :circular='circular' :display-multiple-items="5">
-			<swiper-item v-for="i in totalNum" :key="i">
-				<image v-if="powerList.length>0 && powerList[i-1].icon" :src="powerList[i-1].icon" mode=""></image>
+		<view class="number-of-power" v-if="totalNum<=5">
+			<view v-for="i in totalNum" :key="i">
+				<image v-if="powerList[i-1]" :src="powerList[i-1].icon" mode=""></image>
 				<image v-else src="@/static/images/default_avatar.png" mode=""></image>
-			</swiper-item>
-		</swiper>
-		<view class="left-right-icon">
-			<view class="left-back" @click.stop="leftImg">
-				<u-icon name="arrow-left" color="#666666"></u-icon>
 			</view>
-			<view class="right-forword" @click.stop="rightImg">
-				<u-icon name="arrow-right" color="#666666"></u-icon>
+		</view>
+		<view v-else>
+			<swiper class="number-of-power" :current="curDot" @change="swiperChange" :circular='circular' :display-multiple-items="5">
+				<swiper-item v-for="i in totalNum" :key="i">
+					<image v-if="powerList[i-1]" :src="powerList[i-1].icon" mode=""></image>
+					<image v-else src="@/static/images/default_avatar.png" mode=""></image>
+				</swiper-item>
+			</swiper>
+			<view class="left-right-icon">
+				<view class="left-back" @click.stop="leftImg">
+					<u-icon name="arrow-left" color="#666666"></u-icon>
+				</view>
+				<view class="right-forword" @click.stop="rightImg">
+					<u-icon name="arrow-right" color="#666666"></u-icon>
+				</view>
 			</view>
 		</view>
 	</view>
@@ -39,7 +47,6 @@
 			leftImg(){
 				if(this.powerList.length)
 				this.circular = false
-				let num = this.powerList.length - 1
 				if (this.curDot <= 0) {
 					this.circular = true
 					return
@@ -49,7 +56,7 @@
 			},
 			rightImg(){
 				this.circular = true
-				let num = this.powerList.length - 1
+				let num = this.totalNum - 5
 				if (this.curDot >= num) {
 					return
 				} else {
@@ -71,7 +78,8 @@
 			margin: 0 auto;
 			width: 496rpx;
 			margin-top: 20rpx;
-			text-align: center;
+			display: flex;
+			justify-content: space-around;
 			overflow: auto;
 			white-space: nowrap;
 			image{

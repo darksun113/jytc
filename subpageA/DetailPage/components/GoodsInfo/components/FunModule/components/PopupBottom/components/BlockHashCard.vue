@@ -40,14 +40,6 @@
 					</view>
 					<view class="rz_info_item">
 						<view>
-							区块高度
-						</view>
-						<view>
-							{{popupData.height}}
-						</view>
-					</view>
-					<view class="rz_info_item">
-						<view>
 							令牌ID
 						</view>
 						<view>

@@ -1,18 +1,32 @@
 <template>
 	<view style="margin-top: 40rpx;">
-		<view class="power-success-tip">
+		<view class="power-success-tip" >
 			<image src="@/static/images/join_success_icon.svg" mode=""></image>
 			<view class="">
 				已成功为TA助力
 			</view>
 		</view>
-		<view class="share-poster-btn" v-if="true">
+		<view class="share-poster-btn" @click="toJoinActive">
 			我也要参与	
 		</view>
 	</view>
 </template>
 
 <script>
+	export default {
+		props:["seriesId"],
+		data(){
+			return{
+				token:uni.getStorageSync("token")||""
+			}
+		},
+		methods:{
+			toJoinActive(){
+				const url=`/subpageA/SeriesPage/SeriesPage?seriesId=${this.seriesId}`
+				this.$routerTo(url,"redirect")
+			}
+		}
+	}
 </script>
 
 <style lang="scss" scoped>

@@ -45,7 +45,6 @@
 					if(list==0){
 						this.hasData=false
 					}else{
-						console.log(list,55)
 						this.goodsList=list
 					}
 				})

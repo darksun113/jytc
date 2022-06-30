@@ -40,14 +40,14 @@
 								<text class="title">持有者：</text>
 								<view class="info">
 									<img :src="posterData.avatar+'?'+Date.now()" crossorigin="anonymous">
-									<view class="nowrap">{{posterData.name}}</view>
+									<view class="name nowrap">{{posterData.name}}</view>
 								</view>
 							</view>
 							<view class="item">
 								<text class="title">发行方：</text>
 								<view class="info">
 									<img :src="posterData.shopIcon+'?'+Date.now()" crossorigin="anonymous">
-									<view class="nowrap">{{posterData.shopName}}</view>
+									<view class="name nowrap">{{posterData.shopName}}</view>
 								</view>
 							</view>
 						</view>
@@ -114,7 +114,6 @@
 				FileSaver.saveAs(this.posterUrl)
 			},
 			open() {
-				// this.initQrCode()
 				imgPathToBase64(this.posterData.posterImg,(base)=>{
 					this.posterImg_=base
 					this.initQrCode()
@@ -323,6 +322,9 @@
 									font-weight: 400;
 									color: #CCCCCC;
 									line-height: 34rpx;
+								}
+								.name{
+									max-width: 260rpx;
 								}
 							}
 						}

@@ -5,13 +5,13 @@
 	"pages": [{
 		"path": "pages/home/home",
 		"style": {
-			"navigationBarTitleText": "首页",
+			"navigationBarTitleText": "数版通",
 			"navigationBarTextStyle": "white"
 		}
 	}, {
 		"path": "pages/user/user",
 		"style": {
-			"navigationBarTitleText": "我的",
+			"navigationBarTitleText": "数版通",
 			"enablePullDownRefresh": false
 		}
 

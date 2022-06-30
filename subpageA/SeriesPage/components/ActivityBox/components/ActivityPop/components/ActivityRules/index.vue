@@ -25,7 +25,7 @@
 		},
 		computed:{
 			introduceInfoText(){
-				return this.info.replace(/\//g,"<br />")
+				return this.info.replace(/\n/g,"<br/>")
 			}
 		},
 		watch:{

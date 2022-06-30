@@ -15,7 +15,7 @@
 		props:["activityRule"],
 		computed:{
 			introduceInfoText(){
-				return this.activityRule.replace(/\//g,"<br />")
+				return this.info.replace(/\n/g,"<br/>")
 			}
 		},
 	}

@@ -191,25 +191,21 @@
 					"enablePullDownRefresh": false
 				}
 
-			}    ,{
-                    "path" : "UserAgreement/UserAgreement",
-                    "style" :                                                                                    
-                {
-                    "navigationBarTitleText": "用户协议",
-                    "enablePullDownRefresh": false
-                }
-                
-                }
-                ,{
-                    "path" : "PrivacyPolicy/PrivacyPolicy",
-                    "style" :                                                                                    
-                {
-                    "navigationBarTitleText": "隐私政策",
-                    "enablePullDownRefresh": false
-                }
-                
-                }
-            ]
+			}, {
+				"path": "UserAgreement/UserAgreement",
+				"style": {
+					"navigationBarTitleText": "用户协议",
+					"enablePullDownRefresh": false
+				}
+
+			}, {
+				"path": "PrivacyPolicy/PrivacyPolicy",
+				"style": {
+					"navigationBarTitleText": "隐私政策",
+					"enablePullDownRefresh": false
+				}
+
+			}]
 		}
 	],
 	"globalStyle": {

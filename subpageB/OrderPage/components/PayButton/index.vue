@@ -86,8 +86,8 @@
 						payType: "ZFB"
 					})
 					if (res.code == 0) {
-						this.openPayWeb(res.data.h5Zfb.body)
 						uni.setStorageSync("orderNo",this.orderNo)
+						this.openPayWeb(res.data.h5Zfb.body)
 					} else {
 						uni.showToast({
 							title: res.errorMsg,
@@ -107,7 +107,6 @@
 					document.body.appendChild(formElement);
 					formElement.firstChild.submit(); //进行跳转
 					document.body.removeChild(formElement);
-					this.isToPay = true
 				}
 			},
 

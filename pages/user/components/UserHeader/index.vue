@@ -1,6 +1,6 @@
 <template>
 	<view class="user-header-default" v-if="!checkLogin">
-		<image class="default-avatar" src="@/static/images/default_avatar.png"></image>
+		<image class="default-avatar" src="@/static/images/user_avatar_default.png"></image>
 		<view class="login-text" @click="toLogin">
 			<view style="margin-right: 40rpx;">注册 / 登录</view>
 			<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>

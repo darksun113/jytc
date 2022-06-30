@@ -162,13 +162,20 @@
 								const url=`/subpageA/DetailPage/DetailPage?instanceId=${this.instanceId}&loadType=1`
 								this.$routerTo(url,'redirect')
 							}else{
-								const routes = getCurrentPages()
-								if(routes.length>=2){
-									this.$routerTo(1,"back")
-								}else{
+								if(this.inviter && this.$store.state.userInfo.certificationStatus==1){
+									// 如果有inviter，且已实名，表面是老用户，不能参加预购助力
 									uni.reLaunch({
 										url:"/pages/home/home"
 									})
+								}else{
+									const routes = getCurrentPages()
+									if(routes.length>=2){
+										this.$routerTo(1,"back")
+									}else{
+										uni.reLaunch({
+											url:"/pages/home/home"
+										})
+									}
 								}
 							}
 						},1000)

@@ -1,9 +1,9 @@
 <template>
 	<PageTemp>
 		<view class="share-page">
-			<UserBox :prePurchaseInfo="prePurchaseInfo"></UserBox>
-			<ActivityRulesBox :prePurchaseInfo="prePurchaseInfo"></ActivityRulesBox>
-			<ActivityDetailBox :prePurchaseInfo="prePurchaseInfo"></ActivityDetailBox>
+			<UserBox :prePurchaseInfo="prePurchaseInfo" v-if="isLodad"></UserBox>
+			<ActivityRulesBox :prePurchaseInfo="prePurchaseInfo" v-if="isLodad"></ActivityRulesBox>
+			<ActivityDetailBox :prePurchaseInfo="prePurchaseInfo" v-if="isLodad"></ActivityDetailBox>
 		</view>
 	</PageTemp>
 </template>
@@ -24,7 +24,8 @@
 			return {
 				prePurchaseId:"",
 				userId:"",
-				prePurchaseInfo:{}
+				prePurchaseInfo:{},
+				isLodad:false
 			}
 		},
 		methods: {
@@ -37,6 +38,7 @@
 					if(res.code==0){
 						const keysList=["avatar","shopIcon","seriesImg"]
 						res.data=await getFilePath(res.data,keysList)
+						this.isLodad=true
 						this.prePurchaseInfo=res.data
 					}
 				}catch(e){

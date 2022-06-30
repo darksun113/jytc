@@ -1,6 +1,8 @@
 <template>
 	<view class="activity-status">
-		<view class="title-count" v-if="prePurchaseInfo_.userList && prePurchaseInfo_.userList.length<prePurchaseInfo_.peopleNum">还差 {{prePurchaseInfo_.peopleNum - prePurchaseInfo_.userList.length}} 人即可参与抽奖</view>
+		<view class="title-count" v-if="prePurchaseInfo_.userList.length < prePurchaseInfo_.peopleNum">
+			还差 {{prePurchaseInfo_.peopleNum - prePurchaseInfo_.userList.length}} 人即可参与抽奖
+		</view>
 		<view class="title-count" v-else></view>
 		<PowerNums :powerList="prePurchaseInfo_.userList" :totalNum="prePurchaseInfo_.peopleNum"></PowerNums>
 		<view v-if="prePurchaseInfo_.userList.length==prePurchaseInfo_.peopleNum" class="power-success-tip">
@@ -20,17 +22,15 @@
 		props:{
 			prePurchaseInfo:{
 				type:Object,
-				default:()=>{
-					return {
-						userList:[]
-					}
-				}
+				default:()=>{}
 			}
 		},
 		data(){
 			return {
 				isJoin:true,
-				prePurchaseInfo_:{}
+				prePurchaseInfo_:{
+					userList:[]
+				}
 			}
 		},
 		methods:{

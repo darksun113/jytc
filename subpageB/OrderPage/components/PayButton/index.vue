@@ -88,9 +88,6 @@
 					if (res.code == 0) {
 						this.openPayWeb(res.data.h5Zfb.body)
 						uni.setStorageSync("orderNo",this.orderNo)
-						this.timer=setInterval(()=>{
-							this.getOrderStatus()
-						},1000)
 					} else {
 						uni.showToast({
 							title: res.errorMsg,
@@ -99,22 +96,6 @@
 					}
 				} catch (error) {
 					throw new Error("系统错误", error)
-				}
-			},
-			async getOrderStatus(){
-				try{
-					const res = await uni.$http("/order/checkStatus",{
-						orderNo: this.orderNo
-					})
-					if(res.code==0){
-						if(res.data.status==2 || res.data.status==1){
-							clearInterval(this.timer)
-							const url = `../../../MyOrderCenter/MyOrderCenter?type=1`
-							this.$routerTo(url,'redirect')
-						}
-					}
-				}catch(e){
-					//TODO handle the exception
 				}
 			},
 			// 支付宝支付

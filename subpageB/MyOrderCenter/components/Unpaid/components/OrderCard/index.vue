@@ -25,13 +25,10 @@
 					{{item.goods.goodsName}}
 				</view>
 				<view>
-					<image v-if="item.goods.materialType==0" class="goods-type" src="@/static/images/type_pic.svg" mode=""></image>
-					<image v-else-if="item.goods.materialType==1" class="goods-type" src="@/static/images/type_3D.svg" mode="">
-					</image>
-					<image v-else-if="item.goods.materialType==2" class="goods-type" src="@/static/images/type_video.svg" mode="">
-					</image>
-					<image v-else-if="item.goods.materialType==3" class="goods-type" src="@/static/images/type_audio.svg" mode="">
-					</image>
+					<image v-if="item.goods.materialType==0" class="goods-type" src="@/static/images/type_3D.svg"></image>
+					<image v-else-if="item.goods.materialType==1" class="goods-type" src="@/static/images/type_pic.svg"></image>
+					<image v-else-if="item.goods.materialType==2" class="goods-type" src="@/static/images/type_video.svg"></image>
+					<image v-else-if="item.goods.materialType==3" class="goods-type" src="@/static/images/type_audio.svg"></image>
 					<view class="price">
 						¥ {{(item.goods.goodsPrice/100).toFixed(2)}}
 					</view>

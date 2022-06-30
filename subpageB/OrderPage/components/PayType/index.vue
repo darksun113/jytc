@@ -6,7 +6,7 @@
 			<view>支付宝</view>
 			<image v-show="payType=='aliPay'" class="check-icon" style="width: 28rpx;height: 24rpx;" src="../../static/images/check.svg"></image>
 		</view>
-		<view class="type-item" @click="selectPayType('wxPay')">
+		<!-- <view class="type-item" @click="selectPayType('wxPay')">
 			<image src="../../static/images/wx_pay.svg" mode=""></image>
 			<view>微信支付</view>
 			<image v-show="payType=='wxPay'" class="check-icon" style="width: 28rpx;height: 24rpx;" src="../../static/images/check.svg"></image>
@@ -15,7 +15,7 @@
 			<image src="../../static/images/uni_pay.svg" mode=""></image>
 			<view>银联支付</view>
 			<image v-show="payType=='uniPay'" class="check-icon" style="width: 28rpx;height: 24rpx;" src="../../static/images/check.svg"></image>
-		</view>
+		</view> -->
 	</view>
 </template>
 

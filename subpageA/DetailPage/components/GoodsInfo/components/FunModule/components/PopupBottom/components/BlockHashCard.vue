@@ -7,44 +7,24 @@
 			<view class="renzheng_box">
 				<view class=" renzheng_pic_info">
 					<view class="rz_info_item">
-						<view >
-							收藏家
-						</view>
-						<view>
-							{{popupData.buyerName}}
-						</view>
+						<view >收藏家</view>
+						<view>{{popupData.buyerName}}</view>
 					</view>
 					<view class="rz_info_item">
-						<view>
-							收藏时间
-						</view>
-						<view>
-							{{popupData.collectionTime| formatDate}}
-						</view>
+						<view>收藏时间</view>
+						<view>{{popupData.collectionTime| formatDate}}</view>
 					</view>
 					<view class="rz_info_item">
-						<view>
-							区块链身份
-						</view>
-						<view>
-							{{popupData.buyerHash}}
-						</view>
+						<view>区块链身份</view>
+						<view>{{popupData.buyerHash}}</view>
 					</view>
 					<view class="rz_info_item">
-						<view>
-							区块链地址
-						</view>
-						<view>
-							{{popupData.hash}}
-						</view>
+						<view>区块链地址</view>
+						<view>{{popupData.hash}}</view>
 					</view>
 					<view class="rz_info_item">
-						<view>
-							令牌ID
-						</view>
-						<view>
-							{{popupData.tokenId}}
-						</view>
+						<view>令牌ID</view>
+						<view>{{popupData.tokenId}}</view>
 					</view>
 				</view>
 			</view>

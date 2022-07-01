@@ -5,7 +5,9 @@
 			<image class="download_pic_icon" src="@/static/images/download_pic_icon.svg" @click="saveFile"></image>
 			<image v-if="posterUrl" :src="posterUrl" mode="" style="height: 740rpx;width: 100%;"></image>
 			<view class="poster-box" id="pagePoster" v-else>
-				<image class="poster-pic" :src="posterImg_" mode="aspectFill" crossorigin="anonymous"></image>
+				<view class="poster-pic">
+					<img :src="posterData.posterImg" crossorigin="anonymous">
+				</view>
 				<view class="poster-content" v-if="posterData.loadType==0">
 					<view class="poster-title nowrap">
 						收藏家 {{userName}} 邀请你助力抽中白名单机会
@@ -70,7 +72,7 @@
 <script>
 	import uQRCode from 'u-qrcode';
 	import FileSaver from 'file-saver'
-	import {imgPathToBase64} from "@/utils/tools.js"
+	import {imgPathToBase64,blobToBase64} from "@/utils/tools.js"
 	export default {
 		name:"SharePoster",
 		props: {
@@ -114,10 +116,7 @@
 				FileSaver.saveAs(this.posterUrl)
 			},
 			open() {
-				imgPathToBase64(this.posterData.posterImg,(base)=>{
-					this.posterImg_=base
-					this.initQrCode()
-				})
+				this.initQrCode()
 			},
 			close() {
 				this.$emit("close")
@@ -200,6 +199,16 @@
 				height: 516rpx;
 				background: #000000;
 				border-radius: 20rpx 20rpx 0 0;
+				overflow: hidden;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				img{
+					width:100% ;
+					height: 100%;
+					object-fit: cover;
+					
+				}
 			}
 
 

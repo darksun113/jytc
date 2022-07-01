@@ -100,14 +100,7 @@
 							callback(0)
 						}else{
 							res.data.list.forEach(async item=>{
-								const temp={
-									image:item.image,
-									shopIcon:item.shopIcon
-								}
-								const objData=await getFilesPath(temp)
-								Object.keys(objData).forEach(key=>{
-									item[key]=objData[key]
-								})
+								res.data.list=await getFilePath(res.data.list,["image","shopIcon"])
 							})
 							callback(res.data.list)
 						}

@@ -15,7 +15,7 @@
 					inactiveColor="#2C2E69"></u-switch>
 			</view>
 			<view class="pricavy-item">
-				<text>粉丝</text>
+				<text>好友</text>
 				<u-switch v-model="pricavyForm.friend_1" asyncChange @change="change('friend_1',6)"
 					activeColor="#A5A6FF" inactiveColor="#2C2E69"></u-switch>
 			</view>
@@ -35,7 +35,7 @@
 					inactiveColor="#2C2E69"></u-switch>
 			</view>
 			<view class="pricavy-item">
-				<text>粉丝</text>
+				<text>好友</text>
 				<u-switch v-model="pricavyForm.friend_2" asyncChange @change="change('friend_2',9)"
 					activeColor="#A5A6FF" inactiveColor="#2C2E69"></u-switch>
 			</view>
@@ -55,7 +55,7 @@
 					inactiveColor="#2C2E69"></u-switch>
 			</view>
 			<view class="pricavy-item">
-				<text>粉丝</text>
+				<text>好友</text>
 				<u-switch v-model="pricavyForm.friend_3" asyncChange @change="change('friend_3',12)"
 					activeColor="#A5A6FF" inactiveColor="#2C2E69"></u-switch>
 			</view>

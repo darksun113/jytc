@@ -27,8 +27,11 @@
 				<view class="item" @click="toFansPage(1)">
 					<text style="margin-right: 10rpx;color: #CCC;">关注</text>{{userInfo.followNumber}}
 				</view>
-				<view class="item" @click="toFocus">
-					{{isFocus? "取消关注":"关注"}}
+				<view class="item" @click="toFocus(0)" v-if="userInfo.ifFollow==1">
+					关注
+				</view>
+				<view class="item" @click="toFocus(1)" v-else>
+					取消关注
 				</view>
 			</view>
 		</view>
@@ -49,8 +52,21 @@
 			}
 		},
 		methods:{
-			toFocus(){
-				this.isFocus=!this.isFocus
+			async toFocus(type){
+				try{
+					const res=await uni.$http("/user/follow",{
+						followId:this.userInfo.buyerId,
+						type
+					})
+					if(res.code==0){
+						this.userInfo.ifFollow=type
+						type==0?this.userInfo.fansNumber++:this.userInfo.fansNumber--
+					}else{
+						this.$toast(res.errorMsg)
+					}
+				}catch(e){
+					//TODO handle the exception
+				}
 			},
 			toLogin(){
 				const url="/pages/login/LoginByMobile/GetVerifyCode/GetVerifyCode?name=user"

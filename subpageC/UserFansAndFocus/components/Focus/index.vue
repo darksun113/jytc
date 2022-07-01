@@ -11,7 +11,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="operate">
+			<view class="operate" v-if="item.buyerId!==userId">
 				<view @click.stop="focus(0,item.buyerId,index)" class="btn" v-if="item.relation==0">关注</view>
 				<view @click.stop="focus(0,item.buyerId,index)" class="btn" v-if="item.relation==2">相互关注</view>
 				<view @click.stop="focus(1,item.buyerId,index)" class="btn" v-else-if="item.relation==1 || item.relation==3">已关注</view>
@@ -30,6 +30,7 @@
 <script>
 	import { getFilePath } from "@/utils/tools.js"
 	export default{
+		props:["userId"],
 		data(){
 			return {
 				focusList:[],
@@ -83,6 +84,7 @@
 				}
 			},
 			toOtherPage(buyerId){
+				if(buyerId==this.userId)return
 				this.$emit("toOtherPage",buyerId)
 			},
 			async focus(type,followId,index){

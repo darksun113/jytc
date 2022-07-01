@@ -2,8 +2,8 @@
 	<view class="fans-focus">
 		<NavBar :current="curTab" @changeTab="changeTab"></NavBar>
 		<view class="main">
-			<Fans @toOtherPage="toOtherPage" v-if="curTab==0"></Fans>
-			<Focus @toOtherPage="toOtherPage" v-else></Focus>
+			<Fans @toOtherPage="toOtherPage" v-if="curTab==0" :userId="userId"></Fans>
+			<Focus @toOtherPage="toOtherPage" :userId="userId" v-else></Focus>
 		</view>
 	</view>
 </template>
@@ -20,7 +20,8 @@
 		},
 		data() {
 			return {
-				curTab:0
+				curTab:0,
+				userId:uni.getStorageSync("userInfo").buyerId
 			}
 		},
 		onLoad(opt) {

@@ -1,17 +1,7 @@
 <template>
 	<view class="u-drawdown-item">
-		<u-overlay
-			customStyle="top: 126px"
-			:show="show"
-			:closeOnClickOverlay="closeOnClickOverlay"
-			@click="overlayClick"
-		></u-overlay>
-		<view
-			class="u-drawdown-item__content"
-			:style="[style]"
-			:animation="animationData"
-			ref="animation"
-		>
+		<u-overlay customStyle="top: 126px" :show="show" :closeOnClickOverlay="closeOnClickOverlay" @click="overlayClick"></u-overlay>
+		<view class="u-drawdown-item__content" :style="[style]" :animation="animationData" ref="animation" >
 			<slot />
 		</view>
 	</view>

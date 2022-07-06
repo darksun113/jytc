@@ -1,31 +1,11 @@
 <template>
 	<view class="u-drawdown">
-		<view
-			class="u-dropdown__menu"
-			:style="{
-				height: $u.addUnit(height)
-			}"
-			ref="u-dropdown__menu"
-		>
-			<view
-				class="u-dropdown__menu__item"
-				v-for="(item, index) in menuList"
-				:key="index"
-				@tap.stop="clickHandler(item, index)"
-			>
+		<view class="u-dropdown__menu" :style="{height: $u.addUnit(height)}" ref="u-dropdown__menu">
+			<view class="u-dropdown__menu__item" v-for="(item, index) in menuList" :key="index" @tap.stop="clickHandler(item, index)">
 				<view class="u-dropdown__menu__item__content">
-					<text
-						class="u-dropdown__menu__item__content__text"
-						:style="[index === current ? activeStyle : inactiveStyle]"
-					>{{item.title}}</text>
-					<view
-						class="u-dropdown__menu__item__content__arrow"
-						:class="[index === current && 'u-dropdown__menu__item__content__arrow--rotate']"
-					>
-						<u-icon
-							:name="menuIcon"
-							:size="$u.addUnit(menuIconSize)"
-						></u-icon>
+					<text class="u-dropdown__menu__item__content__text" :style="[index === current ? activeStyle : inactiveStyle]">{{item.title}}</text>
+					<view class="u-dropdown__menu__item__content__arrow" :class="[index === current && 'u-dropdown__menu__item__content__arrow--rotate']">
+						<u-icon :name="menuIcon" :size="$u.addUnit(menuIconSize)"></u-icon>
 					</view>
 				</view>
 			</view>

@@ -55,9 +55,7 @@
 					//TODO handle the exception
 				}
 			},
-			updateList(){
-				this.$refs.GoodsList.updateList()
-			}
+			updateList(){}
 		}
 	}
 </script>

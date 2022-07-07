@@ -1,7 +1,7 @@
 <template>
 	<view class="fun-module">
 		<!-- 链上信息 -->
-		<view class="options_box" v-if="goodsData.loadType==0" @click="toOpenBlockPopup(1)">
+		<view class="options_box" v-if="goodsData.loadType==0 || goodsData.loadType==3" @click="toOpenBlockPopup(1)">
 			<view class="options_right">
 				<image class="options-icon" src="./static/images/block_info_icon.svg" mode=""></image>
 				<view class="options_info">

@@ -101,7 +101,7 @@
 				}
 			},
 			async init(){
-				if(this.loadType==0){
+				if(this.loadType==0 || this.loadType==3){
 					this.getGoodsDetail()
 					this.getBuyers(list=>{
 						this.buyerList=list
@@ -121,7 +121,7 @@
 			},
 		},
 		onLoad(opt) {
-			// loadType: 0 未购买  已购买
+			// loadType: 0 未购买  1 已购买  2 后台预览
 			this.loadType=opt.loadType
 			this.goodsId=opt.goodsId?opt.goodsId:""
 			this.instanceId=opt.instanceId?opt.instanceId : ""

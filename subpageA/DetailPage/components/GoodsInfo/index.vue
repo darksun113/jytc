@@ -1,6 +1,6 @@
 <template>
 	<view class="goods-info">
-		<view class="goods-price-box" v-if="goodsData.loadType==0">
+		<view class="goods-price-box" v-if="goodsData.loadType==0 || goodsData.loadType==3">
 			<view class="price">
 				¥ {{(goodsData.goodsPrice/100).toFixed(2)}}
 			</view>

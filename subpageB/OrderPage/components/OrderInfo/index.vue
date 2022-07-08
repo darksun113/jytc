@@ -2,7 +2,7 @@
 	<view class="order-info">
 		<view class="goods">
 			<view class="left">
-				<image class="goods-pic" :src="orderInfo.goods.image" mode=""></image>
+				<image class="goods-pic" :src="orderInfo.goods.image" mode="aspectFill"></image>
 			</view>
 			<view class="right">
 				<view class="goods-name nowrap">

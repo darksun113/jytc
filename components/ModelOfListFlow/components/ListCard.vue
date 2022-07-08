@@ -8,7 +8,6 @@
 				已使用
 			</view>
 			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-else-if="item.writeListStatus==1">
-				{{item.writeListStatus}}
 				已过期
 			</view>
 			<view class="sell-tip" v-else>

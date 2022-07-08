@@ -37,7 +37,6 @@
 		methods:{
 			async cancelOrder(){
 				try{
-					this.$emit("cancelSuccess")
 					const res=await uni.$http("/order/cancel",{orderNo:this.orderNo})
 					if(res.code==0){
 						this.$emit("cancelSuccess")

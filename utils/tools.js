@@ -297,9 +297,7 @@ function dataUrlToBase64(str) {
 	return array[array.length - 1]
 }
 
-function getNewFileId() {
-	return Date.now() + String(index++)
-}
+
 
 // path转base64
 export function imgPathToBase64(url, cb) {
@@ -419,4 +417,68 @@ export function base64ToPath(base64) {
 		}
 		reject(new Error('not support'))
 	})
+}
+function getNewFileId() {
+	return Date.now() + String(index++)
+}
+// 图片格式转换
+export async function formatImg(file, type,cb) {
+    try {
+        let resFile = null;
+        let urlData = "";
+        // 把image 转换为 canvas对象
+        const imgToCanvas = (image) => {
+            const canvas = document.createElement("canvas");
+            canvas.width = image.width;
+            canvas.height = image.height;
+            canvas.getContext("2d").drawImage(image, 0, 0);
+            return canvas;
+        }
+        //canvas转换为image
+        const canvasToImg = (canvas, type) => {
+            const src = canvas.toDataURL(type);
+            return src;
+        }
+        // base64转blob
+        const Base64UrlToBlob= (urlData)=> {
+            let arr = urlData.split(",");
+            let mime = arr[0].match(/:(.*?);/)[1];
+            let bstr = atob(arr[1]);
+            let n = bstr.length;
+            let u8arr = new Uint8Array(n);
+            while (n--) {
+                u8arr[n] = bstr.charCodeAt(n);
+            }
+            return new Blob([u8arr], {type: mime})
+        }
+        //获取图片信息
+        const getImg = (fn)=>{
+            let imgFile = new FileReader();
+            try {
+                // 使用FileReader来把文件读入内存，并且读取文件中的数据。 readAsDataURL方法可以在浏览器主线程中异步访问文件系统，读取文件中的数据，且读取后 result 为 DataURL, DataURL 可直接 赋值给 img.src
+                imgFile.readAsDataURL(file);
+                imgFile.onload = function (e) {
+                    let image = new Image();
+                    image.src = e.target.result; //base64数据
+                    image.onload = async function () {
+                        fn(image);
+                    }
+                }
+            } catch (e) {
+                console.log("请上传图片！" + e);
+            }
+        }
+        getImg(async image => {
+            let can = await imgToCanvas(image)
+            urlData = await canvasToImg(can, type)
+            resFile = await Base64UrlToBlob(urlData)
+            cb({
+                urlData,
+                resFile
+            })
+        })
+    } catch (error) {
+        throw new Error("系统错误")
+    }
+    
 }

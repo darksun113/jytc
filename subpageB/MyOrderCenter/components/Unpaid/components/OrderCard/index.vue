@@ -77,7 +77,7 @@
 		},
 		methods: {
 			countEnd() {
-				this.$emit("spliceOrder",this.index)
+				this.$emit("countEnd",this.index)
 			},
 			toPay() {
 				const url = `/subpageB/OrderPage/OrderPage?orderNo=${this.item.orderNo}`

@@ -109,6 +109,7 @@
 					font-size: 32rpx;
 					line-height: 44rpx;
 					margin-right: 20rpx;
+					max-width: 400rpx;
 				}
 				.real-name{
 					width: 88rpx;

@@ -1,11 +1,21 @@
 <template>
 	<view class="goods-info">
 		<view class="goods-price-box" v-if="goodsData.loadType==0 || goodsData.loadType==3">
-			<view class="price">
-				¥ {{(goodsData.goodsPrice/100).toFixed(2)}}
+			<view>
+				<view class="price">
+					¥ {{(goodsData.goodsPrice/100).toFixed(2)}}
+				</view>
+				<view class="limit">
+					<text>{{goodsData.remainingNumber}}/{{goodsData.totalNumber}}份</text>
+				</view>
 			</view>
-			<view class="limit">
-				<text>限量{{goodsData.totalNumber}}份</text>
+			<view class="level-tags" >
+				<!-- <image src="@/static/levelTags/level_01.png" mode=""></image> -->
+				<image src="@/static/levelTags/level_02.png" mode=""></image>
+				<!-- <image src="@/static/levelTags/level_03.png" mode=""></image> -->
+				<!-- <image src="@/static/levelTags/level_04.png" mode=""></image> -->
+				<!-- <image src="@/static/levelTags/level_05.png" mode=""></image> -->
+				<!-- <image src="@/static/levelTags/level_06.png" mode=""></image> -->
 			</view>
 		</view>
 		<view class="tags-box">
@@ -54,7 +64,6 @@
 		padding: 40rpx;
 		color: #FFFFFF;
 		.goods-price-box{
-			height: 100rpx;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -70,6 +79,14 @@
 					font-family: PingFangSC-Regular, PingFang SC;
 					color: #A5A6FF;
 					line-height: 34rpx;
+				}
+			}
+			.level-tags{
+				image{
+					width: 120rpx;
+					height: 120rpx;
+					border-radius: 50%;
+					overflow: hidden;
 				}
 			}
 		}

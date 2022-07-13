@@ -30,7 +30,7 @@
 		<view class="account-item">
 			<view class="title">注册时间</view>
 			<view class="info" style="display: flex;align-items: center;color: #888;">
-				<!-- {{$store.state.userInfo.phone}} -->
+				<!-- {{$store.state.userInfo.createTime | format}} -->
 				{{parseInt(Date.now()/1000) | format}}
 			</view>
 		</view>

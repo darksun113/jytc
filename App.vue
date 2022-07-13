@@ -3,6 +3,7 @@
 	export default {
 		onLaunch: function() {
 			this.getBrowserCode()
+			this.resetFilePath()
 		},
 		onShow: function() {
 			// uni.navigateTo({

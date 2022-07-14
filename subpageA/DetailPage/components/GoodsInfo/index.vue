@@ -5,17 +5,20 @@
 				<view class="price">
 					¥ {{(goodsData.goodsPrice/100).toFixed(2)}}
 				</view>
-				<view class="limit">
+				<view class="limit" v-if="goodsData.labelType">
 					<text>{{goodsData.remainingNumber}}/{{goodsData.totalNumber}}份</text>
 				</view>
 			</view>
-			<view class="level-tags" >
-				<!-- <image src="@/static/levelTags/level_01.png" mode=""></image> -->
-				<image src="@/static/levelTags/level_02.png" mode=""></image>
-				<!-- <image src="@/static/levelTags/level_03.png" mode=""></image> -->
-				<!-- <image src="@/static/levelTags/level_04.png" mode=""></image> -->
-				<!-- <image src="@/static/levelTags/level_05.png" mode=""></image> -->
-				<!-- <image src="@/static/levelTags/level_06.png" mode=""></image> -->
+			<view class="level-tags" v-if="goodsData.labelType">
+				<image v-if="goodsData.labelType=='热销'" src="@/static/levelTags/level_01.png" mode=""></image>
+				<image v-else-if="goodsData.labelType=='稀有'" src="@/static/levelTags/level_02.png" mode=""></image>
+				<image v-else-if="goodsData.labelType=='史诗'" src="@/static/levelTags/level_03.png" mode=""></image>
+				<image v-else-if="goodsData.labelType=='传说'" src="@/static/levelTags/level_04.png" mode=""></image>
+				<image v-else-if="goodsData.labelType=='神话'" src="@/static/levelTags/level_05.png" mode=""></image>
+				<image v-else-if="goodsData.labelType=='不朽'" src="@/static/levelTags/level_06.png" mode=""></image>
+			</view>
+			<view class="limit" v-else>
+				<text>{{goodsData.remainingNumber}}/{{goodsData.totalNumber}}份</text>
 			</view>
 		</view>
 		<view class="tags-box">

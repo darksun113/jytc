@@ -104,7 +104,6 @@
 
 <style lang="scss" scoped>
 	.fun-module {
-		margin-top: 40rpx;
 
 		.options_box {
 			display: flex;

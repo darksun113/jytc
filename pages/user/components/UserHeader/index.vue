@@ -58,7 +58,7 @@
 				this.$routerTo(url)
 			},
 			toFansPage(type){
-				const url=`/subpageC/UserFansAndFocus/UserFansAndFocus?type=${type}`
+				const url=`/subpageC/UserFansAndFocus/UserFansAndFocus?type=${type}&viewBuyerId=${this.$store.state.userInfo.buyerId}`
 				this.$routerTo(url)
 			},
 			toMyObjects(){

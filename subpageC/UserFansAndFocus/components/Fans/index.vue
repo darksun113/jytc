@@ -30,7 +30,7 @@
 <script>
 	import {getFilePath} from "@/utils/tools.js"
 	export default{
-		props:["userId"],
+		props:["userId","viewBuyerId"],
 		data(){
 			return {
 				privacyAuth:0,
@@ -65,7 +65,7 @@
 			},
 			async getFansList(createTime,callback){
 				try{
-					const viewBuyerId=uni.getStorageSync("viewBuyerId")
+					const viewBuyerId=this.viewBuyerId
 					const res=await uni.$http("/user/getFollowOrFansList",{viewBuyerId,type:2,size:10,createTime})
 					if(res.code==0){
 						this.privacyAuth=res.data.privacyAuth

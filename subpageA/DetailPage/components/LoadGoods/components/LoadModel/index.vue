@@ -69,32 +69,6 @@
 		height: 100%;
 		position: relative;
 
-		.control-box {
-			display: flex;
-			width: 220rpx;
-			justify-content: space-between;
-			position: absolute;
-			left: 50%;
-			bottom: 20rpx;
-			transform: translateX(-50%);
-
-			.control {
-				width: 60rpx;
-				height: 60rpx;
-				background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);
-				;
-				border-radius: 50%;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-
-				img {
-					width: 28rpx;
-					height: 28rpx;
-				}
-			}
-		}
-
 		.lock_text {
 			height: 28rpx;
 			font-size: 20rpx;

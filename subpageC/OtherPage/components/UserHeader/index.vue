@@ -73,7 +73,7 @@
 				this.$routerTo(url)
 			},
 			toFansPage(type){
-				const url=`/subpageC/UserFansAndFocus/UserFansAndFocus?type=${type}`
+				const url=`/subpageC/UserFansAndFocus/UserFansAndFocus?type=${type}&viewBuyerId=${this.userInfo.buyerId}`
 				this.$routerTo(url)
 			},
 			copy(info){

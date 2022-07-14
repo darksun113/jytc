@@ -1,16 +1,14 @@
 <template>
 	<PageTempHasTabbar>
 		<scroll-view class="home" scroll-y="true" @scrolltolower="updateList">
-			<view>
-				<Banner></Banner>
-				<StickyNav @changeShowType="changeShowType"></StickyNav>
-				<view class="container">
-					<IsNoData v-if="!hasData">暂无数据</IsNoData>
-					<view v-else>
-						<ModelOfListFlow :seriesList="seriesList" v-if="showType==0" :loadType="0"></ModelOfListFlow>
-						<ModelOfWaterFall :seriesList="seriesList" v-else></ModelOfWaterFall>
-						<IsEnd v-if="isLastItem"></IsEnd>
-					</view>
+			<Banner></Banner>
+			<StickyNav @changeShowType="changeShowType"></StickyNav>
+			<view class="container">
+				<IsNoData v-if="!hasData">暂无数据</IsNoData>
+				<view v-else>
+					<ModelOfListFlow :seriesList="seriesList" v-if="showType==0" :loadType="0"></ModelOfListFlow>
+					<ModelOfWaterFall :seriesList="seriesList" v-else></ModelOfWaterFall>
+					<IsEnd v-if="isLastItem"></IsEnd>
 				</view>
 			</view>
 		</scroll-view>
@@ -41,6 +39,19 @@
 			this.updatePage=1
 			this.init()
 		},
+		// 下拉刷新
+		onPullDownRefresh() {
+			this.updatePage=1
+			this.init()
+		},
+		// 上拉加载
+		onReachBottom() {
+			console.log('上拉加载')
+			setTimeout(() => {
+				console.log('上拉加载停止')
+				uni.stopPullDownRefresh()
+			},1000)
+		},
 		methods:{
 			changeShowType(type){
 				this.showType=type
@@ -64,6 +75,7 @@
 					}else{
 						this.seriesList=list
 					}
+					uni.stopPullDownRefresh()
 				})
 			},
 			async getSeriesList(callback){

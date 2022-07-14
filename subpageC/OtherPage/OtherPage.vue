@@ -36,7 +36,6 @@
 		},
 		onLoad(opt) {
 			this.viewBuyerId=opt.otherId
-			uni.setStorageSync("viewBuyerId",opt.otherId)
 		},
 		onShow() {
 			this.init()

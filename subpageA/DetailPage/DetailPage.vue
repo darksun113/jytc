@@ -50,7 +50,7 @@
 						const objData= await getFilePath(resData,keysList)
 						this.goodsData=objData
 						this.goodsData.loadType=this.loadType
-						this.goodsData.modelType=2
+						this.goodsData.modelType=4
 						uni.setNavigationBarTitle({
 							title:resData.goodsName
 						})
@@ -76,7 +76,7 @@
 						const objData=await getFilePath(res.data,keysList)
 						this.goodsData=objData
 						this.goodsData.loadType=this.loadType
-						this.goodsData.modelType=2
+						this.goodsData.modelType=4
 						uni.setNavigationBarTitle({
 							title:res.data.goodsName
 						})

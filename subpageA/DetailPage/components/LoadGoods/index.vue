@@ -1,5 +1,6 @@
 <template>
-	<view class="show-box">
+	<view class="show-box" :style="{height:goodsData.loadType==0 ? '668rpx':'780rpx'}">
+		<ShowCode :goodsData="loadData" v-if="goodsData.loadType==1"></ShowCode>
 		<LoadModel  :goodsData="loadData" v-if="loadData.materialType==0"></LoadModel>
 		<LoadImage  :goodsData="loadData" v-else-if="loadData.materialType==1"></LoadImage>
 		<LoadVideo  :goodsData="loadData" v-else-if="loadData.materialType==2"></LoadVideo>
@@ -13,6 +14,7 @@
 	import LoadImage from "./components/LoadImage/index.vue"
 	import LoadVideo from "./components/LoadVideo/index.vue"
 	import LoadAudio from "./components/LoadAudio/index.vue"
+	import ShowCode from "./components/ShowCode/index.vue"
 	export default{
 		props:{
 			// materialType 类型 0 模型  1 图片  2 视频  3 音频
@@ -56,7 +58,8 @@
 			LoadModel,
 			LoadImage,
 			LoadVideo,
-			LoadAudio
+			LoadAudio,
+			ShowCode
 		},
 		watch:{
 			goodsData(data){
@@ -68,7 +71,6 @@
 
 <style lang="scss" scoped>
 	.show-box{
-		height: 668rpx;
 		background: #0E0E0E;
 		border: 2rpx solid #21201F;
 	}

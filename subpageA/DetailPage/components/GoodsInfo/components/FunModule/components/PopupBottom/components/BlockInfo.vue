@@ -70,7 +70,7 @@
 			font-size: 28rpx;
 			line-height: 40rpx;
 			.item_title{
-				color: #F9E0A8;
+				color: #A5A6FF ;
 			}
 			.item_info{
 				margin-top: 20rpx;

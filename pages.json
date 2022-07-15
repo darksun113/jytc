@@ -6,7 +6,6 @@
 		"path": "pages/home/home",
 		"style": {
 			"navigationBarTitleText": "数版通",
-			"enablePullDownRefresh":true,
 			"navigationBarTextStyle": "white"
 		}
 	}, {

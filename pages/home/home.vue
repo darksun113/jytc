@@ -1,5 +1,5 @@
 <template>
-	<PageTempHasTabbar>
+	<PageTemp style="padding: 0 30rpx;">
 		<scroll-view class="home" scroll-y="true" @scrolltolower="updateList">
 			<Banner></Banner>
 			<StickyNav @changeShowType="changeShowType"></StickyNav>
@@ -12,7 +12,7 @@
 				</view>
 			</view>
 		</scroll-view>
-	</PageTempHasTabbar>
+	</PageTemp>
 </template>
 
 <script>
@@ -36,21 +36,7 @@
 			}
 		},
 		onShow() {
-			this.updatePage=1
 			this.init()
-		},
-		// 下拉刷新
-		onPullDownRefresh() {
-			this.updatePage=1
-			this.init()
-		},
-		// 上拉加载
-		onReachBottom() {
-			console.log('上拉加载')
-			setTimeout(() => {
-				console.log('上拉加载停止')
-				uni.stopPullDownRefresh()
-			},1000)
 		},
 		methods:{
 			changeShowType(type){
@@ -69,6 +55,9 @@
 				}
 			},
 			init(){
+				this.updatePage=1
+				this.shouldRequest=true
+				this.isLastItem=false
 				this.getSeriesList(list=>{
 					if(list==0){
 						this.hasData=false
@@ -104,6 +93,7 @@
 <style lang="scss" scoped>
 	.home{
 		height: 100%;
+		width: 100%;
 		overflow: auto;
 		color: #FFFFFF;
 	}

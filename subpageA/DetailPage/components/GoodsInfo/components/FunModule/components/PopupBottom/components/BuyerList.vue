@@ -167,6 +167,9 @@
 					width: 85%;
 					height: 140rpx;
 					padding: 18rpx 0;
+					display: flex;
+					flex-direction: column;
+					justify-content: space-between;
 					.right_top {
 						width: 100%;
 						height: 50rpx;

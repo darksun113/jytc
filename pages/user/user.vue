@@ -1,12 +1,12 @@
 <template>
-	<PageTempHasTabbar>
+	<PageTemp style="padding: 0 30rpx;">
 		<view class="user-page">
 			<UserHeader :isLogin="isLogin"></UserHeader>
 			<UserOrder :isLogin="isLogin"></UserOrder>
 			<UserMenu :isLogin="isLogin"></UserMenu>
 		</view>
 		<LoginTipPop name="user" :isShow="isShow" @close="isShow=false"></LoginTipPop>
-	</PageTempHasTabbar>
+	</PageTemp>
 </template>
 
 <script>

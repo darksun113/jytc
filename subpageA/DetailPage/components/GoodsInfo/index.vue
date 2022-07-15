@@ -23,9 +23,6 @@
 		</view>
 		<view class="tags-box">
 			<view class="tags"></view>
-			<view class="goodsCode_box" v-if="goodsData.loadType==1">
-				<view class="goodsCode">#{{goodsData.goodsCode}}/{{goodsData.totalNumber}}</view>
-			</view>
 		</view>
 		<FunModule :goodsData="goodsData" :buyerList="buyerList"></FunModule>
 		<view class="goods-introduce">

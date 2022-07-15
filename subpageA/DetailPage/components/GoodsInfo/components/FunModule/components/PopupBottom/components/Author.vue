@@ -75,18 +75,16 @@
 				border-radius: 50%;
 			}
 			.author_name{
+				font-size: 32rpx;
+				font-family: PingFangSC-Medium, PingFang SC;
+				font-weight: 500;
+				color: #A5A6FF;
+				line-height: 44rpx;
 				margin-top: 40rpx;
-				height: 40rpx;
-				font-size: 28rpx;
-				font-family: PingFangSC-Regular, PingFang SC;
-				font-weight: 400;
-				color: #F9E0A8;
-				line-height: 40rpx;
 			}
 		}
 		.author_des{
-			margin-top: 20rpx;
-			height: 160rpx;
+			margin-top: 40rpx;
 			font-size: 24rpx;
 			font-family: PingFangSC-Regular, PingFang SC;
 			font-weight: 400;

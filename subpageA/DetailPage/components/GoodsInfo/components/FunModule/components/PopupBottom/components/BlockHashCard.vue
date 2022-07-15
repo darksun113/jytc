@@ -16,15 +16,15 @@
 					</view>
 					<view class="rz_info_item">
 						<view>区块链身份</view>
-						<view>{{popupData.buyerHash}}</view>
+						<view>{{popupData.buyerHash || "null"}}</view>
 					</view>
 					<view class="rz_info_item">
 						<view>区块链地址</view>
-						<view>{{popupData.hash}}</view>
+						<view>{{popupData.hash || "null"}}</view>
 					</view>
 					<view class="rz_info_item">
 						<view>令牌ID</view>
-						<view>{{popupData.tokenId}}</view>
+						<view>{{popupData.tokenId || "null"}}</view>
 					</view>
 				</view>
 			</view>

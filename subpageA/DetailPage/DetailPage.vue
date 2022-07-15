@@ -132,7 +132,7 @@
 	}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .detail-page{
 	height: 100%;
 	overflow: auto;

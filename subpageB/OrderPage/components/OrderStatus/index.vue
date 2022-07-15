@@ -6,7 +6,7 @@
 			<view class="" style="font-size: 38rpx"> 待支付 </view>
 			<view class="nowrap" style="font-size: 28rpx; display: flex; align-items: center">
 				<view class=""> 交易剩余时间 </view>
-				<view style="width: 140rpx;padding-left: 10rpx;">
+				<view style="width: 120rpx;padding-left: 10rpx;">
 					<u-count-down :time="orderInfo.expireTime*1000 - curTime" format="HH:mm:ss" @finish="countEnd"></u-count-down>
 				</view>
 				<view >, 请及时付款！</view>

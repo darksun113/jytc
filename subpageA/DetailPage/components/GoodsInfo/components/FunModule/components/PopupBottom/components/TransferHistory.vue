@@ -137,6 +137,7 @@
 					justify-content: space-between;
 					align-items: center;
 					height: 68rpx;
+					font-family: PingFangSC-Regular, PingFang SC;
 		
 					.sender {
 						flex: 6;
@@ -153,7 +154,7 @@
 						flex: 2;
 						width: 76rpx;
 						text-align: center;
-						color: #ffd690;
+						color: #A6A4FF;
 					}
 		
 					.recipient {

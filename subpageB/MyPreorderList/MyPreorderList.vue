@@ -2,7 +2,7 @@
 	<PageTemp>
 		<scroll-view class="pre-order" scroll-y="true" @scrolltolower="updateList" v-if="hasData">
 			<view class="container">
-				<view class="title">
+				<view class="title" v-if="seriesList.length>0">
 					已获得以下系列的预购名额
 				</view>
 				<ModelOfListFlow :seriesList="seriesList" :loadType="1"></ModelOfListFlow>

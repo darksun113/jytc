@@ -5,7 +5,6 @@
 			</image>
 			<view class="succText"> 认证成功 </view>
 			<view style="margin-top: 26px" class="textcss"> 身份信息认证成功</view>
-			<view class="textcss">快去买买买吧</view>
 		</view>
 	</PageTemp>
 </template>

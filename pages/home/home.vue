@@ -38,6 +38,11 @@
 		onShow() {
 			this.init()
 		},
+		onHide() {
+			if(this.isLastItem){
+				this.seriesList=[]
+			}
+		},
 		methods:{
 			changeShowType(type){
 				this.showType=type

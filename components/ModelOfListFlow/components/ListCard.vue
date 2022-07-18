@@ -10,7 +10,7 @@
 			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-else-if="item.writeListStatus==1">
 				已过期
 			</view>
-			<view class="sell-tip" v-else>
+			<view class="sell-tip" v-else-if="(item.sellTime - 10*60) - curTime > 0">
 				<text>预购倒计时：</text>
 				<u-count-down :time="((item.sellTime - 10*60) - curTime) * 1000" format="DD:HH:mm:ss" @change="onChange" @finish="finish">
 					<view class="time">

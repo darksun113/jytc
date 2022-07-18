@@ -59,6 +59,9 @@
 	}
 	.series-pic{
 		width: 100%;
+		max-height: 690rpx;
+		min-height: 300rpx;
+		object-fit: cover;
 		border-radius: 20rpx;
 	}
 	.series-info{

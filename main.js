@@ -7,7 +7,10 @@ import uView from "uview-ui"
 
 // 自定义方法
 import { routerTo } from '@/utils/routerTo.js' //公共方法
-
+import wechat from '@/libs/jsm/w-share.js'
+if (wechat.isWechat()) {
+  Vue.prototype.$wechat = wechat;
+}
 Vue.prototype.$store = store
 Vue.config.productionTip = false
 uni.$http = request;
@@ -27,7 +30,8 @@ Vue.prototype.$checkLogin = function() {
 Vue.prototype.$toast = function(text) {
 	uni.showToast({
 		title:text,
-		icon:"none"
+		icon:"none",
+		duration:1500
 	})
 }
 Vue.prototype.$updateUserInfo=function(){

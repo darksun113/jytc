@@ -1,5 +1,6 @@
 <template>
 	<PageTemp>
+		
 		<view class="login-page">
 			<view class="title-box">
 				<view class="title-text">
@@ -27,11 +28,19 @@
 					同意并遵守<text @click="toUserAgreement">《用户协议》</text>与<text @click="toPrivacyPolicy">《隐私政策》</text>
 				</view>
 			</view>
-			<view :style="{opacity:checkGrop[0]=='agree' && !$store.state.isCount ?'1':'0.5'}" class="get-verification-code-btn" @click="getCode">
+			<view :style="{opacity:checkGrop[0]=='agree' && !$store.state.isCount ?'1':'0.5'}"
+				class="get-verification-code-btn" @click="getCode">
 				{{$store.state.isCount?$store.state.second+'秒后重新获取':'获取验证码'}}
 			</view>
 			<view class="to-pwd-page" @click="toPwdLogin">
 				使用手机号与密码登录
+			</view>
+		</view>
+		<view class="bottom-side-otherLogin">
+			<text>其他社交账号登录</text>
+			<view class="login-module">
+				<image src="https://xuezhifu-resource.oss-cn-hangzhou.aliyuncs.com/newxuefu/mwx/wx.png" v-if="isWeixin" @click="getWeChatCode"></image>
+				<image src="https://xuezhifu-resource.oss-cn-hangzhou.aliyuncs.com/newxuefu/mwx/wx.png" @click="getWeChatCode"></image>
 			</view>
 		</view>
 		<PuzzleCode style="z-index:9999999" @resetPuzzle="starCheckRobot" :bind="$attrs" :show="isPuzzleShow"
@@ -40,22 +49,23 @@
 </template>
 
 <script>
+	import {getWeChatCode} from "@/libs/jsm/wxLogin.js"
 	import mixin from "../../mixins/PuzzleCodeMixin.js"
 	export default {
 		data() {
 			return {
+				isWeixin: false,
 				checkGrop: [],
-				inviter:"",
-				prePurchaseId:"",
-				instanceId:"",
-				form:{
+				inviter: "",
+				prePurchaseId: "",
+				instanceId: "",
+				form: {
 					phone: null,
 				},
 				rules: {
-					phone:[
-						{
-							required: true, 
-							message: '请输入手机号', 
+					phone: [{
+							required: true,
+							message: '请输入手机号',
 							// 可以单个或者同时写两个触发验证方式 
 							trigger: ['blur'],
 						},
@@ -67,16 +77,21 @@
 							},
 							message: '手机号码不正确',
 							// 触发器可以同时用blur和change
-							trigger: ['blur','change'],
+							trigger: ['blur', 'change'],
 						}
 					]
 				},
 			}
 		},
 		onLoad(opt) {
-			this.inviter=opt.inviter?opt.inviter:""
-			this.prePurchaseId=opt.prePurchaseId?opt.prePurchaseId:""
-			this.instanceId=opt.instanceId?opt.instanceId:""
+			this.inviter = opt.inviter ? opt.inviter : ""
+			this.prePurchaseId = opt.prePurchaseId ? opt.prePurchaseId : ""
+			this.instanceId = opt.instanceId ? opt.instanceId : ""
+			if(this.isWechat()){
+				this.isWeixin=true
+			}else{
+				this.isWeixin=false
+			}
 		},
 		mixins: [mixin],
 		methods: {
@@ -94,29 +109,37 @@
 				})
 			},
 			// 人机验证通过后自定义方法执行
-			doSomething(){
-				const url=`../InputVerifyCode/InputVerifyCode?phone=${this.form.phone}&slidingFigureId=${this.slidingFigureId}&inviter=${this.inviter}&prePurchaseId=${this.prePurchaseId}&instanceId=${this.instanceId}`
+			doSomething() {
+				const url =
+					`../InputVerifyCode/InputVerifyCode?phone=${this.form.phone}&slidingFigureId=${this.slidingFigureId}&inviter=${this.inviter}&prePurchaseId=${this.prePurchaseId}&instanceId=${this.instanceId}`
 				this.$routerTo(url)
 			},
-			toPwdLogin(){
-				const url=`../../loginByPwd/loginByPwd?inviter=${this.inviter}&prePurchaseId=${this.prePurchaseId}&instanceId=${this.instanceId}`
-				this.$routerTo(url,"redirect")
+			toPwdLogin() {
+				const url =
+					`../../loginByPwd/loginByPwd?inviter=${this.inviter}&prePurchaseId=${this.prePurchaseId}&instanceId=${this.instanceId}`
+				this.$routerTo(url, "redirect")
 			},
-			toUserAgreement(){
-				const url="/subpageC/UserAgreement/UserAgreement"
+			toUserAgreement() {
+				const url = "/subpageC/UserAgreement/UserAgreement"
 				this.$routerTo(url)
 			},
-			toPrivacyPolicy(){
-				const url="/subpageC/PrivacyPolicy/PrivacyPolicy"
+			toPrivacyPolicy() {
+				const url = "/subpageC/PrivacyPolicy/PrivacyPolicy"
 				this.$routerTo(url)
-			}
+			},
+			getWeChatCode,
+			// 判断是否微信浏览器环境
+			isWechat() {
+				return String(navigator.userAgent.toLowerCase().match(/MicroMessenger/i)) === "micromessenger";
+			},
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.login-page{
+	.login-page {
 		padding: 96rpx 100rpx;
+
 		.title-box {
 			.title-text {
 				font-size: 42rpx;
@@ -125,7 +148,7 @@
 				color: #FFFFFF;
 				line-height: 48rpx;
 			}
-		
+
 			.title-tip {
 				margin-top: 40rpx;
 				font-size: 28rpx;
@@ -135,24 +158,24 @@
 				line-height: 48rpx;
 			}
 		}
-		
+
 		.agreement-check {
 			margin-top: 60rpx;
 			display: flex;
 			align-items: center;
-		
+
 			.agreement-text {
 				font-size: 24rpx;
 				font-family: PingFangSC-Regular, PingFang SC;
 				color: #999999;
 				line-height: 44rpx;
-		
+
 				text {
 					color: #FFFFFF;
 				}
 			}
 		}
-		
+
 		.get-verification-code-btn {
 			margin: 0 auto;
 			margin-top: 60rpx;
@@ -167,13 +190,28 @@
 			line-height: 88rpx;
 			text-align: center;
 		}
-		.to-pwd-page{
+
+		.to-pwd-page {
 			margin-top: 40rpx;
 			font-size: 28rpx;
 			font-family: PingFangSC-Regular, PingFang SC;
 			font-weight: 400;
 			color: #FFFFFF;
 			line-height: 44rpx;
+		}
+	}
+	.bottom-side-otherLogin{
+		padding: 0 100rpx;
+		.login-module{
+			width: 50%;
+			margin: 0 auto;
+			margin-top: 40rpx;
+			display: flex;
+			justify-content: space-around;
+			image{
+				width: 60rpx;
+				height: 60rpx;
+			}
 		}
 	}
 	::v-deep .u-form-item__body__right__message {

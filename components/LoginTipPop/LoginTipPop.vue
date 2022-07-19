@@ -29,6 +29,9 @@
 				show:this.isShow
 			}
 		},
+		mounted() {
+			
+		},
 		watch:{
 			isShow(newVal){
 				this.show=newVal

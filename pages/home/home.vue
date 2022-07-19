@@ -18,76 +18,81 @@
 <script>
 	import Banner from "./components/Banner/index.vue"
 	import StickyNav from "./components/StickyNav/index.vue"
-	import {getFilePath} from "@/utils/tools.js"
+	import {
+		getFilePath
+	} from "@/utils/tools.js"
 	export default {
-		components:{
+		components: {
 			Banner,
 			StickyNav
 		},
-		data(){
-			return{
-				showType:0,
-				loadType:0,
-				hasData:true,
-				isLastItem:false,
-				updatePage:1,
-				seriesList:[],
-				shouldRequest:true
+		data() {
+			return {
+				showType: 0,
+				loadType: 0,
+				hasData: true,
+				isLastItem: false,
+				updatePage: 1,
+				seriesList: [],
+				shouldRequest: true
 			}
 		},
 		onShow() {
 			this.init()
 		},
 		onHide() {
-			if(this.isLastItem){
-				this.seriesList=[]
+			if (this.isLastItem) {
+				this.seriesList = []
 			}
 		},
-		methods:{
-			changeShowType(type){
-				this.showType=type
+		methods: {
+			changeShowType(type) {
+				this.showType = type
 			},
 			updateList() {
-				if(this.shouldRequest){
-					this.getSeriesList(list=>{
-						if(list==0){
-							this.isLastItem=true
-							this.shouldRequest=false
-						}else{
-							this.seriesList=[...this.seriesList,...list]
+				if (this.shouldRequest) {
+					this.getSeriesList(list => {
+						if (list == 0) {
+							this.isLastItem = true
+							this.shouldRequest = false
+						} else {
+							this.seriesList = [...this.seriesList, ...list]
 						}
 					})
 				}
 			},
-			init(){
-				this.updatePage=1
-				this.shouldRequest=true
-				this.isLastItem=false
-				this.getSeriesList(list=>{
-					if(list==0){
-						this.hasData=false
-					}else{
-						this.seriesList=list
+			init() {
+				this.updatePage = 1
+				this.shouldRequest = true
+				this.isLastItem = false
+				this.getSeriesList(list => {
+					if (list == 0) {
+						this.hasData = false
+					} else {
+						this.seriesList = list
 					}
 					uni.stopPullDownRefresh()
 				})
 			},
-			async getSeriesList(callback){
-				try{
-					const res=await uni.$http("/series/getSeriesList",{page:this.updatePage,size:10})
-					if(res.code==0){
-						if(res.data.list==0){
+			async getSeriesList(callback) {
+				try {
+					const res = await uni.$http("/series/getSeriesList", {
+						page: this.updatePage,
+						size: 10
+					})
+					if (res.code == 0) {
+						if (res.data.list == 0) {
 							callback(0)
-						}else{
+						} else {
 							this.updatePage++
-							const keysList=["shopIcon","seriesImg"]
-							const list = await getFilePath(res.data.list,keysList)
+							const keysList = ["shopIcon", "seriesImg"]
+							const list = await getFilePath(res.data.list, keysList)
 							callback(list)
 						}
-					}else{
+					} else {
 						this.$toast(res.errorMsg)
 					}
-				}catch(e){
+				} catch (e) {
 					//TODO handle the exception
 				}
 			}
@@ -96,7 +101,7 @@
 </script>
 
 <style lang="scss" scoped>
-	.home{
+	.home {
 		height: 100%;
 		width: 100%;
 		overflow: auto;

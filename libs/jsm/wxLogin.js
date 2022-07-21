@@ -1,61 +1,60 @@
-//方法:用来提取code
-function getUrlCode(name) {
-	return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [,
-		''
-	])[1].replace(/\+/g, '%20')) || null
-}
+
 //请求微信接口，用来获取code
-export function getWeChatCode() {
-	let local = encodeURIComponent(window.location.href); //获取当前页面地址作为回调地址
-	let appid = 'wx77ab6a9325b8ac8b'
+export function getWeChatLogin() {
+	let local = window.location.href.split("?")[0]; //获取当前页面地址作为回调地址
+	let appid = 'wx47b1eb99e2d12615'
 	//通过微信官方接口获取code之后，会重新刷新设置的回调地址【redirect_uri】
 	window.location.href =
-		"https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appid + "&redirect_uri=" + local +
-		"&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
+		"https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appid + "&redirect_uri=" + local + "&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
 }
+
+//方法:用来提取code
+function getUrlCode(name) {
+	return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.href) || [,''])[1].replace(/\+/g, '%20')) || null
+}
+
 //把code传递给后台接口，静默登录
 async function getOpenidAndUserinfo(code) {
 	try {
-		const res = await uni.$http("api/login", {
+		const res = await uni.$http("/user/wechatAuthorizedLogin", {
 			code
 		})
 		if (res.code == 0) {
-			afterLogin(res)
+			afterLogin(res,code)
 		} else {
-			$toast(res.errorMsg)
+			uni.showToast({
+				title:res.errorMsg,
+				icon:"none"
+			})
 		}
 	} catch (e) {
 		//TODO handle the exception
 	}
 }
 //检查浏览器地址栏中微信接口返回的code
-function checkWeChatCode() {
+export function checkWeChatCode() {
 	let code = getUrlCode('code')
-	uni.showToast({
-		title: `微信code=${code}`,
-		icon: "none"
-	})
 	if (code) {
 		getOpenidAndUserinfo(code)
 	}
 }
 
-function afterLogin(res) {
-	let user = res.data.user
-	uni.setStorageSync('token', res.data.token);
-	let u = {
-		avatar: user.avatar ? user.avatar : avatar,
-		mobile: user.mobile,
-		nickname: user.nickname ? user.nickname : '土肥圆'
-	}
-	uni.setStorage({
-		key: 'u',
-		data: u,
-		success: () => {
-			let url = uni.getStorageSync('redirect')
+function afterLogin(res,code) {
+	if(res.data.token){
+		uni.setStorageSync("token",res.data.token)
+		uni.showToast({
+			title:"登录成功",
+			icon:"success",
+			duration:2000
+		})
+		setTimeout(()=>{
 			uni.reLaunch({
-				url: url ? url : '/pages/index'
+				url:"/pages/home/home"
 			})
-		}
-	});
+		},2000)
+	}else{
+		uni.navigateTo({
+			url:`/pages/login/BindingPhone/BindingPhone?code=${code}&type=1`
+		})
+	}
 }

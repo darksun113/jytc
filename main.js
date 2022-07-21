@@ -7,9 +7,11 @@ import uView from "uview-ui"
 
 // 自定义方法
 import { routerTo } from '@/utils/routerTo.js' //公共方法
-import wechat from '@/libs/jsm/w-share.js'
-if (wechat.isWechat()) {
-  Vue.prototype.$wechat = wechat;
+import {myshare,isWechat} from '@/libs/jsm/w-share.js'
+if (isWechat()) {
+	Vue.prototype.$wShare = myshare;
+}else{
+	Vue.prototype.$wShare=()=>{}
 }
 Vue.prototype.$store = store
 Vue.config.productionTip = false
@@ -27,10 +29,10 @@ Vue.prototype.$checkLogin = function() {
 	const token = uni.getStorageSync("token") || ''
 	return token ? true : false
 }
-Vue.prototype.$toast = function(text) {
+Vue.prototype.$toast = function(text,icon="none") {
 	uni.showToast({
 		title:text,
-		icon:"none",
+		icon,
 		duration:1500
 	})
 }

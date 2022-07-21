@@ -6,14 +6,10 @@
 			this.resetFilePath()
 		},
 		onShow: function() {
-			// uni.navigateTo({
-			// 	url:"./subpageA/SharePage/SharePage?prePurchaseId=b99e662276954616b8d6bc4f22a474c5&userId=404408492136"
-			// })
-			
+			// this.watchRouter()
 		},
-		onHide: function() {
-		},
-		methods:{
+		onHide: function() {},
+		methods: {
 			resetFilePath() {
 				let time = setInterval(() => {
 					this.$store.commit("resetFilePath")
@@ -30,6 +26,29 @@
 				})
 				// #endif
 			},
+			watchRouter() {
+				let that = this;
+				uni.addInterceptor('navigateTo', { //监听跳转
+					success(e) {
+						that.$wShare();
+					}
+				})
+				uni.addInterceptor('redirectTo', { //监听关闭本页面跳转
+					success(e) {
+						that.$wShare();
+					}
+				})
+				uni.addInterceptor('switchTab', { //监听tabBar跳转
+					success(e) {
+						that.$wShare();
+					}
+				})
+				uni.addInterceptor('navigateBack', { //监听返回
+					success(e) {
+						that.$wShare();
+					}
+				})
+			}
 		}
 	}
 </script>

@@ -40,6 +40,9 @@
 				</view>
 			</view>
 		</view>
+		<view class="bottom-side-otherLogin">
+			<WxAndQqLogin></WxAndQqLogin>
+		</view>
 		<PuzzleCode style="z-index:9999999" :bind="$attrs" :show="isPuzzleShow"
 			success-text="验证成功" fail-text="验证失败" slider-text="拖动滑块完成拼图" @success="puzzleSuccess" @close="puzzleClose" />
 	</PageTemp>
@@ -162,7 +165,7 @@
 								const url=`/subpageA/DetailPage/DetailPage?instanceId=${this.instanceId}&loadType=1`
 								this.$routerTo(url,'redirect')
 							}else{
-								if(this.inviter && this.$store.state.userInfo.certificationStatus==1){
+								if(this.inviter && this.$store.state.userInfo.certificationStatus==1 ||this.from=="share"){
 									// 如果有inviter，且已实名，表面是老用户，不能参加预购助力
 									uni.reLaunch({
 										url:"/pages/home/home"
@@ -187,7 +190,7 @@
 				}
 			},
 			toPhoneLogin(){
-				const url=`../LoginByMobile/GetVerifyCode/GetVerifyCode?instanceId=${this.instanceId}&inviter=${this.inviter}&prePurchaseId=${this.prePurchaseId}`
+				const url=`../LoginByMobile/GetVerifyCode/GetVerifyCode?instanceId=${this.instanceId}&inviter=${this.inviter}&prePurchaseId=${this.prePurchaseId}&from=${this.from}`
 				this.$routerTo(url,"redirect")
 			},
 			toUserAgreement(){
@@ -269,6 +272,9 @@
 			color: #6667AB;
 			line-height: 44rpx;
 		}
+	}
+	.bottom-side-otherLogin{
+		padding: 0 100rpx;
 	}
 	::v-deep .u-form-item__body__right__message {
 		position: absolute;

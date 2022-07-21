@@ -162,7 +162,9 @@
 
 <script>
     export default {
-		
+		onShow() {
+			
+		}
     }
 </script>
 

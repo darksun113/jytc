@@ -61,6 +61,7 @@
 			this.prePurchaseId=opt.prePurchaseId
 			this.userId=opt.userId
 			this.getBrowserCode()
+			
 		},
 		onShow() {
 			this.getPrePurchase()

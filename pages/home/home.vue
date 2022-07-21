@@ -18,9 +18,7 @@
 <script>
 	import Banner from "./components/Banner/index.vue"
 	import StickyNav from "./components/StickyNav/index.vue"
-	import {
-		getFilePath
-	} from "@/utils/tools.js"
+	import { getFilePath } from "@/utils/tools.js"
 	export default {
 		components: {
 			Banner,
@@ -39,6 +37,9 @@
 		},
 		onShow() {
 			this.init()
+		},
+		onLoad() {
+			
 		},
 		onHide() {
 			if (this.isLastItem) {

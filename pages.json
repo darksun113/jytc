@@ -43,6 +43,13 @@
 			"enablePullDownRefresh": false
 		}
 
+	}, {
+		"path": "pages/login/BindingPhone/BindingPhone",
+		"style": {
+			"navigationBarTitleText": "手机号绑定",
+			"enablePullDownRefresh": false
+		}
+
 	}],
 	"tabBar": {
 		"color": "#6667AB", //字体颜色
@@ -205,7 +212,16 @@
 					"enablePullDownRefresh": false
 				}
 
-			}]
+			}    ,{
+                    "path" : "UserSharePage/UserSharePage",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ]
 		}
 	],
 	"globalStyle": {

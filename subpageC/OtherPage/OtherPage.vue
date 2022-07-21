@@ -39,6 +39,7 @@
 		},
 		onShow() {
 			this.init()
+			
 		},
 		methods:{
 			updateList(){

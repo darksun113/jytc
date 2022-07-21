@@ -36,29 +36,24 @@
 				使用手机号与密码登录
 			</view>
 		</view>
-		<view class="bottom-side-otherLogin">
-			<text>其他社交账号登录</text>
-			<view class="login-module">
-				<image src="https://xuezhifu-resource.oss-cn-hangzhou.aliyuncs.com/newxuefu/mwx/wx.png" v-if="isWeixin" @click="getWeChatCode"></image>
-				<image src="https://xuezhifu-resource.oss-cn-hangzhou.aliyuncs.com/newxuefu/mwx/wx.png" @click="getWeChatCode"></image>
-			</view>
+		<view class="bottom-side-otherLogin" v-if="this.inviter == ''">
+			<WxAndQqLogin></WxAndQqLogin>
 		</view>
 		<PuzzleCode style="z-index:9999999" @resetPuzzle="starCheckRobot" :bind="$attrs" :show="isPuzzleShow"
-			success-text="验证成功" fail-text="验证失败" slider-text="拖动滑块完成拼图" @success="puzzleSuccess" @close="puzzleClose" />
+			success-text="验证成功" fail-text="验证失败" slider-text="拖动滑块完成拼图" @success="puzzleSuccess" @close="puzzleClose"/>
 	</PageTemp>
 </template>
 
 <script>
-	import {getWeChatCode} from "@/libs/jsm/wxLogin.js"
 	import mixin from "../../mixins/PuzzleCodeMixin.js"
 	export default {
 		data() {
 			return {
-				isWeixin: false,
 				checkGrop: [],
 				inviter: "",
 				prePurchaseId: "",
 				instanceId: "",
+				from:"",
 				form: {
 					phone: null,
 				},
@@ -87,11 +82,7 @@
 			this.inviter = opt.inviter ? opt.inviter : ""
 			this.prePurchaseId = opt.prePurchaseId ? opt.prePurchaseId : ""
 			this.instanceId = opt.instanceId ? opt.instanceId : ""
-			if(this.isWechat()){
-				this.isWeixin=true
-			}else{
-				this.isWeixin=false
-			}
+			this.from = opt.from ? opt.from : ""
 		},
 		mixins: [mixin],
 		methods: {
@@ -111,12 +102,12 @@
 			// 人机验证通过后自定义方法执行
 			doSomething() {
 				const url =
-					`../InputVerifyCode/InputVerifyCode?phone=${this.form.phone}&slidingFigureId=${this.slidingFigureId}&inviter=${this.inviter}&prePurchaseId=${this.prePurchaseId}&instanceId=${this.instanceId}`
+					`../InputVerifyCode/InputVerifyCode?phone=${this.form.phone}&slidingFigureId=${this.slidingFigureId}&inviter=${this.inviter}&prePurchaseId=${this.prePurchaseId}&instanceId=${this.instanceId}&from=${this.from}`
 				this.$routerTo(url)
 			},
 			toPwdLogin() {
 				const url =
-					`../../loginByPwd/loginByPwd?inviter=${this.inviter}&prePurchaseId=${this.prePurchaseId}&instanceId=${this.instanceId}`
+					`../../loginByPwd/loginByPwd?inviter=${this.inviter}&prePurchaseId=${this.prePurchaseId}&instanceId=${this.instanceId}&from=${this.from}`
 				this.$routerTo(url, "redirect")
 			},
 			toUserAgreement() {
@@ -126,12 +117,7 @@
 			toPrivacyPolicy() {
 				const url = "/subpageC/PrivacyPolicy/PrivacyPolicy"
 				this.$routerTo(url)
-			},
-			getWeChatCode,
-			// 判断是否微信浏览器环境
-			isWechat() {
-				return String(navigator.userAgent.toLowerCase().match(/MicroMessenger/i)) === "micromessenger";
-			},
+			}
 		}
 	}
 </script>
@@ -202,17 +188,6 @@
 	}
 	.bottom-side-otherLogin{
 		padding: 0 100rpx;
-		.login-module{
-			width: 50%;
-			margin: 0 auto;
-			margin-top: 40rpx;
-			display: flex;
-			justify-content: space-around;
-			image{
-				width: 60rpx;
-				height: 60rpx;
-			}
-		}
 	}
 	::v-deep .u-form-item__body__right__message {
 		position: absolute;

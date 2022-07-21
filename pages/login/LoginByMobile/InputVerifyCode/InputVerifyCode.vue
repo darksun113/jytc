@@ -71,7 +71,7 @@
 								const url=`/subpageA/DetailPage/DetailPage?instanceId=${this.instanceId}&loadType=1`
 								this.$routerTo(url,'redirect')
 							}else{
-								if(this.inviter && this.$store.state.userInfo.certificationStatus==1){
+								if(this.inviter && this.$store.state.userInfo.certificationStatus==1||this.from=="share"){
 									// 如果有inviter，且已实名，表面是老用户，不能参加预购助力
 									uni.reLaunch({
 										url:"/pages/home/home"

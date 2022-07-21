@@ -275,24 +275,24 @@
             <view class="info">使用目的：帮助用户使用微信支付功能</view>
             <view class="info">数据类型：用户标识信息、网络IP地址、订单金额</view>
             <view class="info">隐私权政策链接∶：https://www.wechat.com/zh_cn/privacy_policy.html</view>
-            <view class="info">处理方式： 采取去标识、加密等方式传输和处理</view>
-            <view class="info">公司名称： 财付通支付科技有限公司</view>
+            <view class="info">处理方式： 采取去标识、加密等方式传输和处理</view>
+            <view class="info">公司名称： 财付通支付科技有限公司</view>
             <view class="info">适用操作系统∶安卓、iOS</view>
             <view class="info"></view>
             <view class="info">至信链实名认证SDK:</view>
             <view class="info">使用目的：验证企业用户和个人用户的真实合法性</view>
             <view class="info">数据类型：网络信息</view>
             <view class="info">官网链接：https://privacy.qq.com/policy/tencent-privacypolicy</view>
-            <view class="info">处理方式： 通过加密传输和处理的安全处理方式</view>
-            <view class="info">公司名称： 深圳市腾讯计算机系统有限公司</view>
+            <view class="info">处理方式： 通过加密传输和处理的安全处理方式</view>
+            <view class="info">公司名称： 深圳市腾讯计算机系统有限公司</view>
             <view class="info">适用操作系统∶安卓、iOS</view>
             <view class="info"></view>
             <view class="info">腾讯云短信SDK:</view>
             <view class="info">使用目的：向用户发送手机短信验证码</view>
             <view class="info">数据类型：网络信息</view>
             <view class="info">官网链接：https://www.tenpay.com/v3/helpcenter/low/privacy.shtml</view>
-            <view class="info">处理方式： 通过加密传输和处理的安全处理方式</view>
-            <view class="info">公司名称： 深圳市腾讯计算机系统有限公司</view>
+            <view class="info">处理方式： 通过加密传输和处理的安全处理方式</view>
+            <view class="info">公司名称： 深圳市腾讯计算机系统有限公司</view>
             <view class="info">适用操作系统∶安卓、iOS</view>
             <view class="info"></view>
             <view class="info"></view>
@@ -322,7 +322,10 @@
 
 <script>
     export default {
-        methods:{}
+        methods:{},
+		onShow() {
+			
+		}
     }
 </script>
 

@@ -6,7 +6,7 @@
 			this.resetFilePath()
 		},
 		onShow: function() {
-			// this.watchRouter()
+			this.watchRouter()
 		},
 		onHide: function() {},
 		methods: {

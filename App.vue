@@ -4,6 +4,7 @@
 		onLaunch: function() {
 			this.getBrowserCode()
 			this.resetFilePath()
+			this.$wShare();
 		},
 		onShow: function() {
 			this.watchRouter()

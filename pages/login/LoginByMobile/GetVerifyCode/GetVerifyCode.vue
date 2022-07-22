@@ -14,7 +14,7 @@
 				<u--form labelPosition="left" :model="form" :rules="rules" ref="uForm">
 					<u-form-item label="" prop="phone" ref="phone">
 						<u--input placeholder="请输入手机号码" v-model="form.phone" type="number" suffixIconStyle="color:#000"
-							color="#FFFFFF" border="bottom" :customStyle="{marginTop:'90rpx'}" :focus="true" clearable>
+							color="#FFFFFF" border="bottom" :customStyle="{marginTop:'90rpx'}" clearable>
 						</u--input>
 					</u-form-item>
 				</u--form>

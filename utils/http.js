@@ -34,6 +34,8 @@ const request = (url = '', date = {}, type = 'POST', header = {}) => {
 					},1000)
 				}
 				uni.removeStorageSync("token")
+				uni.removeStorageSync("userInfo")
+				uni.removeStorageSync("viewBuyerId")
 				uni.hideLoading()
 				return
 			}

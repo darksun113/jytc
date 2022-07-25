@@ -8,7 +8,7 @@
 		</Preview>
 		<Control v-if="goodsData.loadType==1" @preview="toOpenModelPre3D" @share="toShare" :buyerName="goodsData.buyerName"></Control>
 		<view class="lock_text" v-else>
-			购买后可解锁高清观赏模式
+			购买后可在我的藏品进行高清观赏
 		</view>
 	</view>
 </template>

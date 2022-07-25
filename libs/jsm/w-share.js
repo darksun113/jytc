@@ -8,16 +8,15 @@ var wxj = require('jweixin-module')
  */
 export async function myshare(){
 	try {
-		const link = "http://h5.jytc-test.binavy.com/" // 获取当前页面的地址参数
-		const res = uni.$http("/user/JS_SDK_signature", {
-			url: link
-		})
+		// const link = "http://h5.jytc-test.binavy.com/" // 获取当前页面的地址参数
+		const link = "https://h5.jialex.cn/" // 获取当前页面的地址参数
+		const res = await uni.$http("/user/jsSdkSignature", {url: link})
 		if(res.code==0){
 			wxj.config({
 				debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
 				appId: res.data.appId||"wx47b1eb99e2d12615", // 必填，公众号的唯一标识
-				timestamp: Number(res.data.timestamp), // 必填，生成签名的时间戳
-				nonceStr: res.data.nonceStr, // 必填，生成签名的随机串
+				timestamp: res.data.timestamp, // 必填，生成签名的时间戳
+				nonceStr: res.data.noncestr, // 必填，生成签名的随机串
 				signature: res.data.signature, // 必填，签名
 				jsApiList: [
 					"checkJsApi",

@@ -9,7 +9,6 @@
 		onShow: function() {
 			this.watchRouter()
 		},
-		onHide: function() {},
 		methods: {
 			resetFilePath() {
 				let time = setInterval(() => {

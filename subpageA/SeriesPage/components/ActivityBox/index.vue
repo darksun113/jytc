@@ -22,9 +22,9 @@
 				<view class="active-tip-info-title">
 					预购活动已开启
 				</view>
-				<view class="active-tip-info-count">
+				<!-- <view class="active-tip-info-count">
 					{{seriesInfo.joinNumber}}人参与
-				</view>
+				</view> -->
 			</view>
 			<view class="active-btn-box">
 				<view class="custom-style" @click="toJoin">
@@ -38,9 +38,9 @@
 				<view class="active-tip-info-title">
 					查看获得预购资格名单
 				</view>
-				<view class="active-tip-info-count">
+				<!-- <view class="active-tip-info-count">
 					{{seriesInfo.joinNumber}}人参与
-				</view>
+				</view> -->
 			</view>
 			<view class="active-btn-box">
 				<view class="custom-style" @click="toViewWinnerList">

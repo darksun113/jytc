@@ -11,7 +11,7 @@
 </template>
 
 <script>
-	import {getWeChatLogin,checkWeChatCode} from "@/libs/jsm/wx-login.js"
+	import {getWeChatLogin} from "@/libs/jsm/wx-login.js"
 	export default{
 		name:"WxAndQqLogin",
 		data(){
@@ -21,7 +21,6 @@
 		},
 		mounted() {
 			this.isWeixin=this.isWechat()
-			checkWeChatCode()
 		},
 		methods:{
 			getWeChatLogin,

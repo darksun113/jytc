@@ -56,7 +56,7 @@ function afterLogin(res,code) {
 			})
 		},1500)
 	}else{
-		uni.navigateTo({
+		uni.redirectTo({
 			url:`/pages/login/BindingPhone/BindingPhone?code=${code}&type=1`
 		})
 	}

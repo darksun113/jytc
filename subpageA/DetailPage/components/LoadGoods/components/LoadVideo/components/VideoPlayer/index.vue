@@ -1,6 +1,6 @@
 <template>
 	<video 
-		class="video" 
+		class="video"
 		id="player"
 		webkit-playsinline="true"
 		playsinline="true"
@@ -10,7 +10,7 @@
 		:enable-progress-gesture="false"
 		:controls="false"
 		preload="auto"
-		muted 
+		:muted="videoData.loadType==1?false:true" 
 		autoplay
 		loop
 		:poster="videoData.image"
@@ -33,6 +33,7 @@
 		},
 		mounted() {
 			this.isWeiXin()
+			this.setVideo()
 		},
 		destroyed() {
 		},
@@ -49,6 +50,15 @@
 			        return false; // 普通浏览器中打开
 			    }
 			},
+			setVideo(){
+				if(this.videoData.loadType==1)return
+				const videoNode = document.getElementById("player").childNodes[0].childNodes[0]
+				videoNode.addEventListener('timeupdate',()=>{
+					if(videoNode.currentTime>5){
+						videoNode.currentTime=0
+					}
+				})
+			}
 		}
 	}
 </script>

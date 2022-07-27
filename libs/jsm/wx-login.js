@@ -2,7 +2,7 @@
 //请求微信接口，用来获取code
 export function getWeChatLogin() {
 	let local = window.location.href.split("&code")[0]; //获取当前页面地址作为回调地址
-	let appid = 'wx47b1eb99e2d12615'
+	let appid = 'wx54ab5619521ee3b0'
 	//通过微信官方接口获取code之后，会重新刷新设置的回调地址【redirect_uri】
 	window.location.href =
 		"https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appid + "&redirect_uri=" + local + "&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";

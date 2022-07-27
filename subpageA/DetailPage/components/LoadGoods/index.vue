@@ -38,7 +38,7 @@
 				const instanceId = this.goodsData.goodsInstanceId?this.goodsData.goodsInstanceId:""
 				const baseCodeUrl = process.env.NODE_ENV=="development" ? "http://192.168.2.27:8080":"https://h5.jialex.cn"
 				this.posterData={
-					codeUrl : `${baseCodeUrl}/#/subpageA/DetailPage/DetailPage?loadType=1&instanceId=${instanceId}`,
+					codeUrl : `${baseCodeUrl}/subpageA/DetailPage/DetailPage?loadType=1&instanceId=${instanceId}`,
 					name,
 					posterImg,
 					avatar,

@@ -55,15 +55,17 @@
 				const price_l_to_h = () => {
 					this.goodsList = this.goodsList.sort((a, b) => a.goodsPrice - b.goodsPrice)
 				}
-				const total_h_to_l = () => {
-					this.goodsList = this.goodsList.sort((a, b) => b.goodsPrice - a.goodsPrice)
+				const sell_h_to_l = () => {
+					this.goodsList = this.goodsList.sort((a, b) => {
+						return (b.totalNumber - b.remainingNumber) - (a.totalNumber - a.remainingNumber)
+					})
 				}
 				const defaultList = () => {
 					this.goodsList = this.goodsList_default
 				}
 				switch (type) {
 					case "销量最高":
-						total_h_to_l()
+						sell_h_to_l()
 						break;
 					case "价格高到低":
 						price_h_to_l()

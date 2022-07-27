@@ -3,6 +3,7 @@
 </template>
 
 <script>
+	import {checkWeChatCode} from "@/libs/jsm/wx-login.js"
 	export default {
 		data() {
 			return {
@@ -10,11 +11,9 @@
 			};
 		},
 		onShow() {
-			// uni.showLoading({title:"登录中"})
+			checkWeChatCode()
 		},
-		onHide() {
-			// uni.hideLoading()
-		}
+		onHide() {}
 	}
 </script>
 

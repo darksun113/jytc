@@ -1,5 +1,7 @@
 <template>
-	<u-swiper bgColor="transparent" :circular="true" :list="bannerList" @click="toBannerLink" imgMode="aspectFill" keyName="url" @change="e => current = e.current" :autoplay="true" indicator indicatorMode="dot">
+	<u-swiper bgColor="transparent" :circular="true" :list="bannerList" @click="toBannerLink" 
+		imgMode="aspectFill" keyName="url" :height="screenWidth*140/375"
+		@change="e => current = e.current" :autoplay="true" indicator indicatorMode="dot">
 		<view slot="indicator" class="indicator">
 			<view class="indicator__dot" v-for="(item, index) in bannerList" :key="index" :class="[index === current && 'indicator__dot--active']"></view>
 		</view>
@@ -12,7 +14,8 @@
 		data() {
 			return {
 				current:0,
-				bannerList: []
+				bannerList: [],
+				screenWidth:uni.getSystemInfoSync().screenWidth
 			}
 		},
 		methods:{
@@ -37,6 +40,7 @@
 			},
 			init(){
 				this.getBanner()
+				// console.log(uni.getSystemInfoSync())
 			}
 		},
 		mounted() {

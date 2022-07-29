@@ -45,7 +45,7 @@
 						return
 					}
 					const res=await uni.$http("/user/editBuyerInfo",{
-						name:this.renameValue,
+						name:this.renameValue.trim(),
 						avatar:this.$store.state.avatarUuid
 					})
 					if(res.code==0){

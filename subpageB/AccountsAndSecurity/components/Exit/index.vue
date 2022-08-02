@@ -38,7 +38,8 @@
 					})
 					if(res.code==0){
 						uni.removeStorageSync("token")
-						uni.removeStorageSync("userId")
+						uni.removeStorageSync("viewBuyerId")
+						uni.removeStorageSync("userInfo")
 						this.$routerTo(1,"back")
 					}
 				}catch(e){

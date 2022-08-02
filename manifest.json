@@ -75,7 +75,18 @@
                 "enable" : true
             }
         },
-        "title" : "金裕天成"
+        "title" : "金裕天成",
+        "template" : "index.html",
+        "sdkConfigs" : {
+            "maps" : {
+                "google" : {
+                    "key" : ""
+                }
+            }
+        },
+        "router" : {
+            "mode" : "history"
+        }
     },
     "plus" : {
         "splashscreen" : {

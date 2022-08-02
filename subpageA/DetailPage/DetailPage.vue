@@ -125,6 +125,7 @@
 			this.loadType=opt.loadType
 			this.goodsId=opt.goodsId?opt.goodsId:""
 			this.instanceId=opt.instanceId?opt.instanceId : ""
+			
 		},
 		onShow() {
 			this.init()

@@ -82,6 +82,7 @@
 			};
 		},
 		onShow() {
+			
 			this.getPrivacySet(item => {
 				let type = ""
 				switch (item.type) {

@@ -26,6 +26,9 @@
 				isChangeAvatar:false
 			};
 		},
+		onLoad() {
+			
+		},
 		onShow() {
 			this.$updateUserInfo()
 		},

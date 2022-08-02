@@ -31,6 +31,9 @@
 				this.isShow=true
 			})
 		},
+		onLoad() {
+			
+		},
 		onHide() {
 			uni.$off("showLogin")
 		},

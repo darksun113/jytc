@@ -11,7 +11,7 @@
 		<view class="user-info">
 			<view class="name-box">
 				<view class="name nowrap">{{$store.state.userInfo.name}}</view>
-				<view class="real-name" v-if="$store.state.userInfo.certificationStatus!==1">未认证</view>
+				<view class="real-name" v-if="$store.state.userInfo.certificationStatus!==1" @click.self="toBindCard">未认证</view>
 			</view>
 			<view class="user-info-item">
 				<view class="id-style">
@@ -75,7 +75,12 @@
 						})
 					}
 				}); 
-			}
+			},
+			toBindCard(){
+				if(this.$store.state.userInfo.certificationStatus==0){
+					this.$routerTo("/subpageA/BindIdCard/BindIdCard")
+				}
+			},
 		},
 		watch:{
 			isLogin(boo){

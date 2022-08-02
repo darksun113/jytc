@@ -14,7 +14,7 @@
 		</view>
 		<view class="account-item">
 			<view class="title">手机号</view>
-			<view class="info" style="display: flex;align-items: center;">
+			<view class="info" style="display: flex;align-items: center;color: #888;">
 				{{$store.state.userInfo.phone}}
 			</view>
 		</view>

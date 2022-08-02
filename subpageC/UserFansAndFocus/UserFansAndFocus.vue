@@ -25,6 +25,9 @@
 				userId:uni.getStorageSync("userInfo").buyerId
 			}
 		},
+		onShow() {
+			
+		},
 		onLoad(opt) {
 			this.curTab=opt.type
 			this.viewBuyerId=opt.viewBuyerId

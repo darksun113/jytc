@@ -23,6 +23,10 @@
 		},
 		onShow() {
 			this.init()
+			
+		},
+		onLoad() {
+			
 		},
 		onHide() {
 			this.goodsList=[]

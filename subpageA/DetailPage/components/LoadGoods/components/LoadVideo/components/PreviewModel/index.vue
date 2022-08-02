@@ -31,7 +31,7 @@
 					container: '#mui-pre-player',
 					src: this.videoData.url,
 					autoplay: true,
-					muted: true,
+					muted: false,
 					loop: true,
 					autoOrientaion:true,
 					pageHead:false,//非全屏模式下，是否显示播放器头部操作控件

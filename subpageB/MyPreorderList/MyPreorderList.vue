@@ -29,6 +29,9 @@
 		onShow() {
 			this.init()
 		},
+		onLoad() {
+			
+		},
 		methods:{
 			updateList(){
 				this.getWritelist(list=>{

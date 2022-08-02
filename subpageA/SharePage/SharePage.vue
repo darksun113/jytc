@@ -40,6 +40,8 @@
 						res.data=await getFilePath(res.data,keysList)
 						this.isLodad=true
 						this.prePurchaseInfo=res.data
+					}else{
+						this.$toast(res.errorMsg)
 					}
 				}catch(e){
 					//TODO handle the exception
@@ -61,6 +63,7 @@
 			this.prePurchaseId=opt.prePurchaseId
 			this.userId=opt.userId
 			this.getBrowserCode()
+			
 		},
 		onShow() {
 			this.getPrePurchase()

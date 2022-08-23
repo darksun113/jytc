@@ -106,7 +106,19 @@
 			// 微信
 			async wxPay() {
 				try {
-					//alert("try")
+					//是否是微信浏览器
+					if (/(micromessenger)/i.test(navigator.userAgent)){
+						//是否电脑微信或者微信开发者工具
+						if(/(WindowsWechat)/i.test(navigator.userAgent) || /(wechatdevtools)/i.test(navigator.userAgent)){
+							// alert('电脑微信或者微信开发者工具')
+						}else{
+							//手机微信打开的浏览器
+							// alert('手机微信')
+						}
+					} else {
+						// alert('其他浏览器')
+					}
+					
 					const res = await uni.$http("/payment/prepay", {
 						orderNo: this.orderNo,
 						appType: 'H5',

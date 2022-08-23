@@ -2,7 +2,11 @@
 	<view class="main">
 		<view class="item">
 			<view class="card-info">
-				<image class="bank-icon" src="../../../../static/images/qq.svg" mode=""></image>
+				<view class="icon-container">
+					<view class="icon-bg">
+						<image class="bank-icon" :src="getIcon(p_name)" mode=""></image>
+					</view>
+				</view>
 				<view class="info">
 					<view class="left-part">
 						<view class="name">{{ p_name }}</view>
@@ -12,7 +16,14 @@
 				</view>
 			</view>
 		</view>
-	<button class="unbind-btn" @click="unbind">解除绑定</button>
+		<button class="unbind-btn" @click="open">解除绑定</button>
+		<u-popup class="pop" :show="shows" mode="center">
+			<view class="txt">是否要解绑银行卡</view>
+			<view class="choice">
+				<view class="left" @click="cancel">取消</view>
+				<view class="right" @click="unbind()">确定</view>
+			</view>
+		</u-popup>
 	</view>
 </template>
 
@@ -22,20 +33,29 @@
 			return {
 				p_name:null,
 				p_card_num:null,
-				p_id:null
+				p_id:null,
+				shows:false
 			}
 		},
 		onLoad(opt) {
 			this.p_name= opt.p_name
 			this.p_card_num= opt.p_card_num
 			this.p_id=opt.p_id
+			this.shows=false
 		},
 		methods: {
+			open(){
+				this.shows=true
+			},
+			cancel(){
+				this.shows=false
+			},
 			async unbind(){
 				try{
-					const res= await uni.$http("payment/cancelProtocol",{
+					const res=await uni.$http("/payment/cancelProtocol",{
 						"id": this.p_id,
 					})
+					console.log(res)
 					if(res.code==0){
 						alert("解除绑定成功")
 						this.$routerTo(`/subpageB/MyCards/MyCards`)
@@ -43,9 +63,12 @@
 						alert("发生错误")
 					}
 				}catch(e){
-					
+					alert("alsjfoweihf")
 				}
 				
+			},
+			getIcon(icon){
+				return require("@/static/bank_images/"+icon+".svg")
 			},
 		}
 	}
@@ -70,11 +93,20 @@
 				display: flex;
 				background: #0A0C47;
 				margin-bottom:40rpx;
-				.bank-icon{
-					border-radius: 50%;
-					width: 100rpx;
-					height: 100rpx;
+				.icon-container{
 					padding: 40rpx 0rpx 40rpx 40rpx;
+					.icon-bg{
+						width: 100rpx;
+						height: 100rpx;
+						background-color: white;
+						border-radius: 50%;
+						.bank-icon{
+							padding:16rpx;
+							width: 70rpx;
+							height: 70rpx;
+						}
+					}
+					
 				}
 				.info{
 					color: #FFFFFF;
@@ -101,6 +133,37 @@
 					}
 				}
 			}			
+		}
+		.pop{
+			display: flex;
+			flex-direction: column;
+			font-size: 32rpx;
+			border-radius: 30rpx;
+			.txt{
+				padding-top: 36rpx;
+				text-align: center;
+				align-items: center;
+				width: 640rpx;
+				height: 128rpx;
+				background-color: #0A0C47;
+			}
+			.choice{
+				border-top: rgba(255,255,255,0.2) solid 1rpx;
+				text-align: center;
+				width: 640rpx;
+				height: 110rpx;
+				background-color: #0A0C47;;
+				display: flex;
+				.left{
+					padding-top: 30rpx;
+					width: 320rpx;
+					border-right: rgba(255,255,255,0.2) solid 1rpx;
+				}
+				.right{
+					padding-top: 30rpx;
+					width: 320rpx;
+				}
+			}
 		}
 	}
 	.unbind-btn{

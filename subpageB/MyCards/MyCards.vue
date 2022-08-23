@@ -139,7 +139,7 @@
 						background-color: white;
 						border-radius: 50%;
 						.bank-icon{
-							padding:15rpx;
+							padding:16rpx;
 							width: 70rpx;
 							height: 70rpx;
 						}

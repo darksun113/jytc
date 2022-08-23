@@ -1,6 +1,5 @@
 <template>
 	<PageTemp>
-		
 		<view class="login-page">
 			<view class="title-box">
 				<view class="title-text">

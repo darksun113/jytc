@@ -15,6 +15,13 @@
 			</view>
 			<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>
 		</view>
+		<view class="item-box" @click="toSubmenu(5)">
+			<view class="item-right">
+				<image src="@/static/images/my_cards.svg" mode=""></image>
+				我的银行卡
+			</view>
+			<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>
+		</view>
 		<view class="item-box" @click="toSubmenu(2)">
 			<view class="item-right" >
 				<image src="@/static/images/account_security_icon.svg" mode=""></image>
@@ -69,8 +76,11 @@
 					break;
 					case 4 : fn_to("PlatformAbout")
 					break;
+					case 5 : fn_to("MyCards")
+					break;
 				}
 			}
+			
 		},
 		watch:{
 			isLogin(boo){

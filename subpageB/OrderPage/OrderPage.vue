@@ -3,9 +3,9 @@
 		<view class="main">
 			<OrderStatus :orderInfo="orderInfo"  v-if="orderInfo.goods"></OrderStatus>
 			<OrderInfo :orderInfo="orderInfo" v-if="orderInfo.goods"></OrderInfo>
-			<PayType v-if="orderInfo.status==0" @setPayType="setPayType"></PayType>
+			<PayType v-if="orderInfo.status==0" @setPayType="setPayType" @setCard="setCard"></PayType>
 		</view>
-		<PayButton v-if="orderInfo.status==0" :payType_="payType" :orderNo="orderNo" :price="orderInfo.goods.goodsPrice"></PayButton>
+		<PayButton v-if="orderInfo.status==0" :payType_="payType" :orderNo="orderNo" :price="orderInfo.goods.goodsPrice" :cardId_="cardId"></PayButton>
 	</PageTemp>
 </template>
 
@@ -20,7 +20,7 @@
 			OrderStatus,
 			OrderInfo,
 			PayType,
-			PayButton
+			PayButton,
 		},
 		onLoad(opt) {
 			this.orderNo=opt.orderNo?opt.orderNo : uni.getStorageSync("orderNo")
@@ -33,12 +33,16 @@
 			return {
 				orderNo:"",
 				payType:"aliPay",
-				orderInfo:{}
+				orderInfo:{},
+				cardId:""
 			};
 		},
 		methods:{
 			setPayType(type){
 				this.payType=type
+			},
+			setCard(id){
+				this.cardId=id
 			},
 			async getOrderInfo(){
 				try{

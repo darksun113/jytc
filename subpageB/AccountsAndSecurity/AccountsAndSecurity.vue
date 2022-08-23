@@ -62,7 +62,7 @@
 		margin-bottom: 20rpx;
 		.title{
 			font-size: 32rpx;
-			font-family: PingFangSC-Regular, PingFang SC;
+			font-family: PingFangSC-Regular, sans-serif;
 			font-weight: 400;
 			color: #FFFFFF;
 		}

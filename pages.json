@@ -60,6 +60,15 @@
             }
             
         }
+        ,{
+            "path" : "components/IsNoCards/IsNoCards",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#6667AB", //字体颜色
@@ -190,7 +199,35 @@
 					"enablePullDownRefresh": false
 				}
 
-			}]
+			}    ,{
+                    "path" : "MyCards/MyCards",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "银行卡",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+				
+                ,{
+                    "path" : "MyCards/components/DelCards/index",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "我的银行卡",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+                ,{	
+                    "path" : "MyCards/components/AddCard2/index",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "添加银行卡",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ]
 		},
 		{
 			"root": "subpageC",

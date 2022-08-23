@@ -27,7 +27,6 @@
 		},
 		onLoad(opt) {
 			this.current=opt.type
-			
 		},
 		methods: {
 			changeTab(cur){

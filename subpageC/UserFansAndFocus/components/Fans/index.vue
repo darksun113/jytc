@@ -133,7 +133,6 @@
 				.info{
 					display: flex;
 					flex-direction: column;
-					justify-content: space-around;
 					color: #FFFFFF;
 					.name{
 						font-size: 32rpx;

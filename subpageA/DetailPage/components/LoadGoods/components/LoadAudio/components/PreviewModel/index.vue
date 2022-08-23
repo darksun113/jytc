@@ -79,7 +79,7 @@
 			transform: translate(-50%,-50%);
 			border-radius: 50%;
 			overflow: hidden;
-			background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);
+			background: #28D8E5;
 			display: flex;
 			justify-content: center;
 			align-items: center;

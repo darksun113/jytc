@@ -28,7 +28,7 @@
 
 <style lang="scss" scoped>
 	.active_box{
-		background: #0A0C47;
+		background: #333;
 		border-radius: 8rpx;
 		padding: 40rpx;
 		font-family: PingFangSC-Regular, PingFang SC;

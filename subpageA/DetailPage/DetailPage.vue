@@ -1,6 +1,6 @@
 <template>
 	<PageTemp>
-		<view class="detail-page" :style="{paddingBottom:loadType==0?'204rpx':'0'}">
+		<view class="detail-page" :style="{paddingBottom:loadType==0?'156rpx':'0'}">
 			<LoadGoods v-if="JSON.stringify(goodsData)!=='{}'" :goodsData="goodsData"></LoadGoods>
 			<GoodsInfo v-if="JSON.stringify(goodsData)!=='{}'" :goodsData="goodsData" :buyerList="buyerList"></GoodsInfo>
 			<ButtonBox v-if="JSON.stringify(goodsData)!=='{}' && loadType==0" :goodsData="goodsData" ></ButtonBox>
@@ -51,9 +51,6 @@
 						this.goodsData=objData
 						this.goodsData.loadType=this.loadType
 						this.goodsData.modelType=4
-						uni.setNavigationBarTitle({
-							title:resData.goodsName
-						})
 					}else{
 						uni.showToast({
 							title:res.errorMsg,
@@ -77,9 +74,6 @@
 						this.goodsData=objData
 						this.goodsData.loadType=this.loadType
 						this.goodsData.modelType=4
-						uni.setNavigationBarTitle({
-							title:res.data.goodsName
-						})
 					}else if(res.code == 1000){
 						this.toLogin()
 					}else{

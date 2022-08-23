@@ -66,7 +66,7 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			background:#0A0C47;
+			background:#333;
 			border-radius: 16rpx;
 			text-align: center;
 			.token_tip{

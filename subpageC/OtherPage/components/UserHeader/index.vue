@@ -123,7 +123,7 @@
 					width: 88rpx;
 					min-width: 88rpx;
 					height: 32rpx;
-					background: #6667AB;
+					background: #666;
 					border-radius: 4rpx;
 					text-align: center;
 					font-size: 20rpx;
@@ -161,7 +161,7 @@
 					line-height: 60rpx;
 					&:last-child{
 						width: 160rpx;
-						background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);
+						background: #28D8E5;
 						border-radius: 30rpx;
 						font-size: 28rpx;
 						font-family: PingFangSC-Medium, PingFang SC;

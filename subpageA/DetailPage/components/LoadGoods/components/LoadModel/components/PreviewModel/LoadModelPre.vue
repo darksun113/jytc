@@ -1,7 +1,7 @@
 <template>
     <view style="position:relative">
         <view  id="model_pre" ref="modelPre"></view>
-        <u-loading-icon :show="showIf" color="#A5A6FF" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)"></u-loading-icon>
+        <u-loading-icon :show="showIf" color="#28D8E5" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)"></u-loading-icon>
     </view>
 </template>
  

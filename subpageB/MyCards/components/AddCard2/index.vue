@@ -242,7 +242,7 @@
 					width:260rpx;
 					height: 88rpx;
 					color:black;
-					background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);
+					background: #28D8E5;
 					margin-left: 20rpx;
 					padding: 0rpx 22rpx 20rpx 20rpx;
 					border-radius: 8rpx;
@@ -254,7 +254,7 @@
 			height: 88rpx;
 			text-align: center;
 			font-weight: 500;
-			background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);
+			background: #28D8E5;
 			border-radius: 8rpx;
 			margin-top: 60rpx;
 			padding-top: 20rpx;

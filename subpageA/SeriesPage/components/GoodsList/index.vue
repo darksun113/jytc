@@ -119,7 +119,7 @@
 			font-size: 24rpx;
 			font-family: PingFangSC-Regular, PingFang SC;
 			font-weight: 400;
-			color: #999AFF;
+			color: #28D8E5 ;
 			line-height: 34rpx;
 			position: relative;
 			display: flex;
@@ -129,6 +129,7 @@
 			.sort {
 				display: flex;
 				align-items: center;
+				color: #999999;
 			}
 		}
 
@@ -141,12 +142,12 @@
 	}
 
 	::v-deep .u-picker {
-		background-color: #0A0C47;
+		background-color: #333;
 		box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.1000);
 	}
 
 	::v-deep .uni-picker-view-content {
-		background-color: #0A0C47;
+		background-color: #333;
 		box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.1000);
 	}
 

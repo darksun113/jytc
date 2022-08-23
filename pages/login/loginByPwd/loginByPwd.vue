@@ -21,7 +21,7 @@
 			</view>
 			<view class="agreement-check">
 				<u-checkbox-group v-model="checkGrop">
-					<u-checkbox activeColor="#9A98ED" inactiveColor="#999999" name="agree" iconColor="#000" size="14">
+					<u-checkbox activeColor="#28D8E5" inactiveColor="#999999" name="agree" iconColor="#000" size="14">
 					</u-checkbox>
 				</u-checkbox-group>
 				<view class="agreement-text">
@@ -249,7 +249,7 @@
 			margin-top: 60rpx;
 			width: 550rpx;
 			height: 88rpx;
-			background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);
+			background: #28D8E5;
 			border-radius: 16rpx;
 			font-size: 32rpx;
 			font-family: PingFangSC-Medium, PingFang SC;
@@ -266,10 +266,10 @@
 			line-height: 44rpx;
 		}
 		.forget{
-			font-size: 28rpx;
-			font-family: PingFangSC-Regular, PingFang SC;
+			font-size: 24rpx;
 			font-weight: 400;
-			color: #6667AB;
+			font-family: SourceHanSansCN-Regular, SourceHanSansCN;
+			color: #28D8E5;
 			line-height: 44rpx;
 		}
 	}

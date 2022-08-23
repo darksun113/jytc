@@ -18,8 +18,8 @@
 				</view>
 			</u-form-item>
 		</u--form>
-		<u-button text="下一步" :custom-style="{color:'#000',marginTop:'150rpx',fontFamily: 'PingFangSC-Regular, PingFang SC',height:'100rpx',
-		opacity:form.verifyCode.length==6?'1':'0.5',borderRadius: '16rpx'}" @click="toSubmitCheck" color="linear-gradient(180deg, #70D0FF 0%, #D575FF 100%)"></u-button>
+		<u-button text="下一步" :custom-style="{color:'#000',marginTop:'150rpx',fontSize:'32rpx', fontFamily: 'PingFangSC-Regular, PingFang SC',height:'100rpx',
+		opacity:form.verifyCode.length==6?'1':'0.5',borderRadius: '16rpx'}" @click="toSubmitCheck" color="#28D8E5"></u-button>
 	</view>	
 </template>
 
@@ -113,7 +113,7 @@
 		margin-left: 40rpx;
 		width: 260rpx;
 		height: 88rpx;
-		background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);
+		background: #28D8E5;
 		border-radius: 16rpx;
 		font-size: 32rpx;
 		font-family: PingFangSC-Medium, PingFang SC;

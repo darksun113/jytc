@@ -84,9 +84,9 @@
 	}
 .series-box{
 	color: #FFFFFF;
-	width: 690rpx;
-	height: 852rpx;
-	background: #0A0C47;
+	// width: 670rpx;
+	height: 840rpx;
+	background: #333;
 	border-radius: 20rpx;
 	margin-bottom: 40rpx;
 	overflow: hidden;
@@ -95,7 +95,7 @@
 		position: absolute;
 		background: rgba(0, 0, 0, .7);
 		padding: 10rpx 20rpx;
-		border-radius: 4px;
+		border-radius: 30rpx;
 		font-size: 28rpx;
 		font-family: PingFangSC-Semibold, PingFang SC;
 		left: 40rpx;
@@ -105,12 +105,14 @@
 		align-items: center;
 	}
 	.series-pic{
-		width: 690rpx;
-		height: 690rpx;
+		width: 670rpx;
+		height: 670rpx;
 		border-radius: 20rpx;
 	}
 	.series-info{
 		padding: 30rpx 40rpx;
+		background: url("../../../static/images/card_bg.png") no-repeat right bottom;
+		background-size: auto 140%;
 		.series-title{
 			height: 44rpx;
 			font-size: 32rpx;
@@ -136,6 +138,7 @@
 				font-family: PingFangSC-Regular, PingFang SC;
 				font-weight: 400;
 				line-height: 40rpx;
+				color: #999;
 			}
 		}
 	}

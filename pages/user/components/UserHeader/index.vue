@@ -117,14 +117,12 @@
 					max-width: 400rpx;
 				}
 				.real-name{
-					width: 88rpx;
 					min-width: 88rpx;
-					height: 32rpx;
-					background: #6667AB;
+					padding: 4rpx 14rpx;
+					background: #666;
 					border-radius: 4rpx;
 					text-align: center;
 					font-size: 20rpx;
-					line-height: 32rpx;
 				}
 			}
 			.user-info-item{

@@ -14,7 +14,7 @@
 				<view class="txt">请输入验证码</view>
 			</view>
 			<view class="body">
-				<u-code-input class="input" v-model="verifyCode" :hairline="true" mode="line" color="#9A98ED" @finish="finish"></u-code-input>
+				<u-code-input class="input" v-model="verifyCode" :hairline="true" mode="line" color="#28D8E5" @finish="finish"></u-code-input>
 			</view>
 			<u-button class="resend" @click="resend">重新发送</u-button>
 		</u-popup>

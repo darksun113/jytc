@@ -1,5 +1,5 @@
 <template>
-	<PageTemp style="padding: 0 30rpx;">
+	<PageTemp style="padding: 0 40rpx;">
 		<view class="user-page">
 			<UserHeader :isLogin="isLogin"></UserHeader>
 			<UserOrder :isLogin="isLogin"></UserOrder>

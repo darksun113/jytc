@@ -1,17 +1,24 @@
 <template>
-	<view class="btn-box">
-		<view class="btn" style="background: #5C5A88;" v-if="goodsData.remainingNumber <= 0">
-			已售罄
-		</view>
-		<!-- 预购白名单 -->
-		<view class="btn" @click="toOrder" v-else-if="goodsData.selling==1">
-			购买
-		</view>
-		<view class="btn" style="background: #5C5A88;" v-else-if="curTime - goodsData.startTime < 0">
-			即将开售
-		</view>
-		<view class="btn" @click="toOrder" v-else>
-			购买
+	<view>
+		<view class="btn-box">
+			<view class="price">
+				¥ {{(goodsData.goodsPrice/100).toFixed(2)}}
+			</view>
+			<view class="">
+				<view class="btn" style="background: #007980;" v-if="goodsData.remainingNumber <= 0">
+					已售罄
+				</view>
+				<!-- 预购白名单 -->
+				<view class="btn" @click="toOrder" v-else-if="goodsData.selling==1">
+					购买
+				</view>
+				<view class="btn" style="background: #007980;" v-else-if="curTime - goodsData.startTime < 0">
+					即将开售
+				</view>
+				<view class="btn" @click="toOrder" v-else>
+					购买
+				</view>
+			</view>
 		</view>
 		<LoginTipPop name="goodsDetail" :isShow="isShow" @close="isShow=false"></LoginTipPop>
 		<IdentityAuthPopup :show="identityShow" @close="identityShow=false"></IdentityAuthPopup>
@@ -70,23 +77,30 @@
 <style lang="scss" scoped>
 	.btn-box{
 		width: 100%;
-		height: 208;
-		background: #0A0C47;
-		padding: 20rpx 40rpx;
-		padding-bottom: 80rpx;
+		height: 156rpx;
+		background: #333;
+		padding: 0 40rpx;
+		// padding-bottom: 80rpx;
 		position: fixed;
 		left: 0;
 		bottom: 0;
 		display: flex;
 		align-items: center;
-		justify-content: center;
+		justify-content: space-between;
 		font-weight: 500;
+		.price{
+			font-size: 48rpx;
+			font-family: Roboto-Medium, Roboto;
+			font-weight: 500;
+			color: #FFFFFF;
+			line-height: 56rpx;
+		}
 		.btn{
-			width: 100%;
-			height: 84rpx;
+			width: 400rpx;
+			height: 80rpx;
 			text-align: center;
-			background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);
-			border-radius: 8rpx;
+			background: #28D8E5;
+			border-radius: 20rpx;
 			font-size: 32rpx;
 			font-family: PingFangSC-Medium, PingFang SC;
 			font-weight: 500;

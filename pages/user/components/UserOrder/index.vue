@@ -45,7 +45,7 @@
 		margin-top: 40rpx;
 		height: 216rpx;
 		padding: 40rpx;
-		background: #0A0C47;
+		background: #333;
 		border-radius: 8rpx;
 		.title{
 			font-size: 36rpx;

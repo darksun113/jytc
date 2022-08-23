@@ -1,5 +1,5 @@
 <template>
-	<PageTemp style="padding: 0 30rpx;">
+	<PageTemp style="padding: 0 40rpx;">
 		<scroll-view class="home" scroll-y="true" @scrolltolower="updateList">
 			<Banner></Banner>
 			<StickyNav @changeShowType="changeShowType"></StickyNav>

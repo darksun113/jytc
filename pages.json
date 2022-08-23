@@ -71,11 +71,12 @@
         }
     ],
 	"tabBar": {
-		"color": "#6667AB", //字体颜色
+		"color": "#666", //字体颜色
 		"selectedColor": "#FFFFFF", //选中时字体颜色
-		"backgroundColor": "#090c47", //底部背景色
+		"backgroundColor": "#000", //底部背景色
 		"fontSize": "20rpx", //字体大小
 		"spacing": "10rpx", //字体到图标的距离
+		"fontFamily":"SourceHanSansCN-Medium, SourceHanSansCN",
 		"height": "78px", //底部高
 		"list": [{
 				"pagePath": "pages/home/home",
@@ -120,7 +121,7 @@
 			}, {
 				"path": "DetailPage/DetailPage",
 				"style": {
-					"navigationBarTitleText": "",
+					"navigationBarTitleText": "数版通",
 					"enablePullDownRefresh": false
 				}
 

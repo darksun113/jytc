@@ -64,7 +64,7 @@
 	.activity-pop{
 		height: 70vh;
 		width: 100%;
-		background: #0A0C47;
+		background: #333;
 		color: #FFFFFF;
 		.title-rules{
 			font-size: 32rpx;
@@ -85,7 +85,7 @@
 					font-size: 36rpx;
 					font-family: PingFangSC-Medium, PingFang SC;
 					font-weight: 500;
-					color: #A5A6FF;
+					color: #28D8E5;
 					line-height: 50rpx;
 					text-align: center;
 					padding: 0 34rpx;

@@ -1,7 +1,7 @@
 <template>
     <div style="height:100%;width:100%;position:relative">
         <div  id="model" ref="model" style="width:100%;height:100%" ></div>
-		<u-loading-icon :show="showIf" color="#A5A6FF" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)"></u-loading-icon>
+		<u-loading-icon :show="showIf" color="#28D8E5" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)"></u-loading-icon>
     </div>
 </template>
  

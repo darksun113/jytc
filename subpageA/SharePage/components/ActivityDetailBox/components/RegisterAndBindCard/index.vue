@@ -3,7 +3,7 @@
 		<view class="power-tip">
 			完成以下操作立即帮TA助力
 		</view>
-		<view class="share-poster-btn" :style="{background:$store.state.token?'#5C5A88':'linear-gradient(180deg, #70D0FF 0%, #D575FF 100%)'}" v-if="true" @click="toRegister">
+		<view class="share-poster-btn" :style="{background:$store.state.token?'#5C5A88':'#28D8E5'}" v-if="true" @click="toRegister">
 			{{$store.state.token?"已完成注册":"立即注册"}}
 		</view>
 		<view class="share-poster-btn" v-if="true" @click="toBlindIdCard">
@@ -55,7 +55,7 @@
 		margin-top: 24rpx;
 		width: 496rpx;
 		height: 100rpx;
-		background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);
+		background: #28D8E5;
 		border-radius: 8rpx;
 		font-size: 32rpx;
 		font-family: PingFangSC-Medium, PingFang SC;

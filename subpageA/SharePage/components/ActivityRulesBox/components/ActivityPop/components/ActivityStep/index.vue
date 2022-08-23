@@ -95,7 +95,7 @@
 				width: 20rpx;
 				height: 20rpx;
 				border-radius: 50%;
-				background: #A5A6FF;
+				background: #28D8E5;
 				z-index: 1;
 			}
 			&::before{

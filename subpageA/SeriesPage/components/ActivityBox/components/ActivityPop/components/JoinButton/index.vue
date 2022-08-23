@@ -72,7 +72,7 @@
 			margin-top: 20rpx;
 			width: 570rpx;
 			height: 88rpx;
-			background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);
+			background: #28D8E5;
 			border-radius: 8rpx;
 			font-size: 32rpx;
 			font-family: PingFangSC-Medium, PingFang SC;

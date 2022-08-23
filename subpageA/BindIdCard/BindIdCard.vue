@@ -29,10 +29,8 @@
 				</view>
 			</view>
 			<view class="flexsel" style="">
-				<image @click="queren" v-if="querenif" style="width: 14px; height: 28rpx"
-					src="../static/images/xuanzhong.svg" mode=""></image>
-				<image v-else @click="queren" style="width: 28rpx; height: 28r" src="../static/images/xuanzhongno.svg"
-					mode=""></image>
+				<image @click="queren" v-if="querenif" style="width: 28rpx; height: 28rpx" src="../static/images/xuanzhong.svg" mode=""></image>
+				<image v-else @click="queren" style="width: 28rpx; height: 28rpx" src="../static/images/xuanzhongno.svg" mode=""></image>
 				<view v-if="tipShow" class="gouxuan" :style="{display:querenif?'none':'block'}">请先勾选协议</view>
 				<text style="margin-left: 20rpx; font-size: 28rpx; color: #cccccc">我确定认证信息属实本人真实信息</text>
 			</view>
@@ -258,7 +256,7 @@
 	.buttonb {
 		width: 570rpx;
 		height: 88rpx;
-		background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);
+		background: #28D8E5;
 		line-height: 88rpx;
 		color: #000;
 		margin-top: 28rpx;
@@ -268,7 +266,7 @@
 	.duihao {
 		width: 28rpx;
 		height: 28rpx;
-		background-color: rgba(128, 102, 234, 1);
+		background-color: #28D8E5;
 		border-radius: 20rpx;
 		display: flex;
 		align-items: center;

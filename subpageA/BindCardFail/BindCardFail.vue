@@ -39,18 +39,6 @@
 		justify-content: center;
 		align-items: center;
 	}
-	.renStyle {
-		margin-top: 30px;
-		width: 248px;
-		height: 50px;
-		background: linear-gradient(180deg, #F9ECCD 0%, #CFA06E 100%);
-		border-radius: 8rpx;
-		line-height: 50px;
-		font-size: 18px;
-		font-family: PingFangSC-Medium, PingFang SC;
-		font-weight: 500;
-		color: #000000;
-	}
 
 	.uni-button:after {
 		border: 0px solid rgba(0, 0, 0, .2);
@@ -69,7 +57,7 @@
 	.boxsu {
 		width: 300px;
 		height: 300px;
-		background-color:  #0A0C47;
+		background-color:  #333;
 		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
 		border-radius: 16px;
 		display: flex;
@@ -80,7 +68,7 @@
 		.buttonb {
 			width: 100%;
 			height: 88rpx;
-			background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);
+			background: #28D8E5;
 			line-height: 88rpx;
 			color: #000;
 			margin-top: 28rpx;

@@ -90,7 +90,7 @@
 <style lang="scss" scoped>
 	.pop-box{
 		width: 640rpx;
-		background: #0A0C47;
+		background: #333;
 		border-radius: 16rpx;
 		.main{
 			font-size: 28rpx;

@@ -13,7 +13,7 @@
 				</view>
 			</view>
 			<view class="code-box">
-				<u-code-input v-model="verifyCode" :hairline="true" mode="line" color="#9A98ED" @finish="finish"></u-code-input>
+				<u-code-input v-model="verifyCode" :hairline="true" mode="line" color="#28D8E5" @finish="finish"></u-code-input>
 			</view>
 		</view>
 		<PuzzleCode style="z-index:9999999" @resetPuzzle="starCheckRobot" :bind="$attrs" :show="isPuzzleShow"
@@ -130,7 +130,7 @@
 					font-size: 24rpx;
 					font-family: PingFangSC-Regular, PingFang SC;
 					font-weight: 400;
-					color: #A5A6FF;
+					color: #28D8E5;
 					line-height: 48rpx;
 				}
 			}

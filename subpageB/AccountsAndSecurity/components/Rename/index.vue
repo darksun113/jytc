@@ -71,7 +71,7 @@
 <style lang="scss" scoped>
 	.pop-box{
 		width: 640rpx;
-		background: #0A0C47;
+		background: #333;
 		overflow: hidden;
 		border-radius: 16rpx;
 		.main{

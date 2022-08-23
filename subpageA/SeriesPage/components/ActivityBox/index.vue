@@ -120,7 +120,7 @@
 	.active-tip{
 		padding: 40rpx;
 		margin-top: 40rpx;
-		background: #0A0C47;
+		background: #333;
 		border-radius: 8rpx;
 		color: #FFFFFF;
 		display: flex;
@@ -152,7 +152,7 @@
 				font-family: PingFangSC-Medium, PingFang SC;
 				line-height: 72rpx;
 				font-weight: 500;
-				background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);
+				background: #28D8E5;
 			}
 		}
 	}

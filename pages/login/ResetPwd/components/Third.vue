@@ -9,7 +9,7 @@
 				请妥善保管您的个人信息
 			</view>
 			<u-button text="重新登录" :custom-style="{color:'#000',marginTop:'40rpx',height:'100rpx',borderRadius: '16rpx'}"
-				@click="toLoginPage" color="linear-gradient(180deg, #70D0FF 0%, #D575FF 100%)"></u-button>
+				@click="toLoginPage" color="#28D8E5"></u-button>
 		</view>
 	</view>
 </template>
@@ -35,7 +35,7 @@
 		.card {
 			width: 600rpx;
 			height: 600rpx;
-			background: #0A0C47;
+			background: #333;
 			;
 			box-shadow: 0px 0px 20rpx 0px rgba(0, 0, 0, 0.08);
 			border-radius: 20rpx;

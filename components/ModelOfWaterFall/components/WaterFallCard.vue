@@ -38,17 +38,17 @@
 <style lang="scss" scoped>
 .series-box{
 	color: #FFFFFF;
-	background: #0A0C47;
-	border-radius: 20rpx;
+	background: #333;
+	border-radius: 40rpx;
 	margin-bottom: 40rpx;
 	overflow: hidden;
-	width: 336rpx;
+	width: 324rpx;
 	position: relative;
 	.sell-tip{
 		position: absolute;
 		background: rgba(0, 0, 0, .7);
 		padding: 10rpx 20rpx;
-		border-radius: 4px;
+		border-radius: 30rpx;
 		font-size: 28rpx;
 		font-family: PingFangSC-Regular, PingFang SC;
 		left: 20rpx;
@@ -62,10 +62,12 @@
 		max-height: 690rpx;
 		min-height: 300rpx;
 		object-fit: cover;
-		border-radius: 20rpx;
+		border-radius: 40rpx;
 	}
 	.series-info{
-		padding: 30rpx 40rpx;
+		padding: 10rpx 20rpx 26rpx;
+		background: url("../../../static/images/card_bg.png") no-repeat right bottom;
+		background-size: auto 80%;
 		.series-title{
 			height: 44rpx;
 			font-size: 32rpx;
@@ -87,10 +89,11 @@
 			}
 			.author-name{
 				height: 40rpx;
-				font-size: 28rpx;
+				font-size: 20rpx;
 				font-family: PingFangSC-Regular, PingFang SC;
 				font-weight: 400;
 				line-height: 40rpx;
+				color: #999;
 			}
 		}
 	}

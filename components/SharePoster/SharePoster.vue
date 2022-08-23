@@ -191,7 +191,7 @@
 			width: 588rpx;
 			margin: 0 auto;
 			height: 740rpx;
-			background: #0A0C47;
+			background: #333;
 			border-radius: 20rpx;
 			position: relative;
 			.poster-pic {
@@ -251,7 +251,7 @@
 							font-size: 20rpx;
 							font-family: PingFangSC-Regular, PingFang SC;
 							font-weight: 400;
-							color: #A5A6FF;
+							color: #28D8E5;
 							line-height: 34rpx;
 						}
 					}

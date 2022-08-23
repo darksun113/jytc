@@ -129,7 +129,7 @@
 			padding-top: 40rpx;
 			.card-info{
 				display: flex;
-				background: #0A0C47;
+				background: #333;
 				margin-bottom:40rpx;
 				.icon-container{
 					padding: 40rpx 0rpx 40rpx 40rpx;
@@ -175,7 +175,7 @@
 		.add-cards-btn{
 			display: flex;
 			color: #000000;
-			background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);
+			background: #28D8E5;
 			font-family: PingFangSC-Medium, PingFang SC;
 			font-weight: 900;
 			.add-container{
@@ -213,12 +213,12 @@
 				font-size: 28rpx;
 				font-family: PingFangSC-Regular, PingFang SC;
 				font-weight: 400;
-				color: #A5A6FF;
+				color: #28D8E5;
 				line-height: 40rpx;
 			}
 		}
 		.nono-btn{
-			background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);
+			background: #28D8E5;
 			border-radius: 8rpx;
 			font-size: 32rpx;
 			font-family: PingFangSC-Medium, PingFang SC;

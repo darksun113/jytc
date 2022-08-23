@@ -55,7 +55,7 @@
 
 <style lang="scss" scoped>
 .card-of-object{
-	background: #0A0C47;
+	background: #333;
 	border-radius: 8rpx;
 	margin-bottom: 40rpx;
 	overflow: hidden;
@@ -106,12 +106,12 @@
 			display: flex;
 			.code{
 				padding: 6rpx 10rpx;
-				background: linear-gradient(90deg, #70D0FF 0%, #D575FF 100%);
+				// background: linear-gradient(90deg, #70D0FF 0%, #D575FF 100%);
 				border-radius: 4rpx;
 				font-size: 24rpx;
 				font-family: PingFangSC-Semibold, PingFang SC;
-				font-weight: 600;
-				color: #000000;
+				font-weight: 700;
+				color: #28D8E5;
 				line-height: 34rpx;
 			}
 		}

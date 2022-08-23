@@ -26,7 +26,7 @@
 
 <style lang="scss" scoped>
 	.page{
-		background: #04030A;
+		background: #222;
 		color: #FFFFFF;
 		overflow: auto;
 	}

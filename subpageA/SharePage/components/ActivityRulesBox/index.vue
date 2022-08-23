@@ -47,7 +47,7 @@
 	}
 	.rules-des-box{
 		height: 252rpx;
-		background: #0A0C47;
+		background: #333;
 		border-radius: 8rpx;
 		padding: 8rpx;
 		margin-top: 60rpx;
@@ -99,7 +99,7 @@
 				font-size: 24rpx;
 				font-family: PingFangSC-Regular, PingFang SC;
 				font-weight: 400;
-				color: #A5A6FF;
+				color: #28D8E5;
 				line-height: 68rpx;
 				image{
 					margin-right: 16rpx;

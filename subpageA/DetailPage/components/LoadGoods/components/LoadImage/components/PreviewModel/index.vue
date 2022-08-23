@@ -83,7 +83,7 @@
 				width: 80rpx;
 				height: 80rpx;
 				border-radius: 50%;
-				background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);
+				background: #28D8E5;
 				display: flex;
 				justify-content: center;
 				align-items: center;

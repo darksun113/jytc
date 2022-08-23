@@ -74,7 +74,7 @@
 <style lang="scss" scoped>
 	.account-item{
 		height: 124rpx;
-		background: #0A0C47;
+		background: #333;
 		border-radius: 32rpx;
 		display: flex;
 		justify-content: space-between;

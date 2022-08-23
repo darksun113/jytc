@@ -22,7 +22,7 @@
 			</u--form>
 			<u-button text="确认" :custom-style="{color:'#000',marginTop:'150rpx',fontFamily: 'PingFangSC-Regular, PingFang SC',height:'100rpx',
 				opacity:form.verifyCode.length==6?'1':'0.5',borderRadius: '16rpx'}" @click="toBindPhone"
-				color="linear-gradient(180deg, #70D0FF 0%, #D575FF 100%)"></u-button>
+				color="#28D8E5"></u-button>
 		</view>
 	</PageTemp>
 </template>
@@ -156,7 +156,7 @@
 				margin-left: 40rpx;
 				width: 260rpx;
 				height: 88rpx;
-				background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);
+				background: #28D8E5;
 				border-radius: 16rpx;
 				font-size: 32rpx;
 				font-family: PingFangSC-Medium, PingFang SC;

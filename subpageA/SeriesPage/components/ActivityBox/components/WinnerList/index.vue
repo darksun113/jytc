@@ -93,7 +93,7 @@
 	.winner-pop{
 		height: 70vh;
 		width: 100%;
-		background: #0A0C47;
+		background: #333;
 		color: #FFFFFF;
 		.title-rules{
 			font-size: 32rpx;

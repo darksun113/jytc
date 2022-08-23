@@ -1,7 +1,7 @@
 <template>
 	<PageTemp class="page">
 		<view class="boxsu">
-			<image class="succsstyle" src="../static/images/success.png" mode="">
+			<image class="succsstyle" src="../static/images/success.svg" mode="">
 			</image>
 			<view class="succText"> 认证成功 </view>
 			<view style="margin-top: 26px" class="textcss"> 身份信息认证成功</view>
@@ -42,7 +42,7 @@
 	.boxsu {
 		width: 300px;
 		height: 300px;
-		background-color: #0A0C47;
+		background-color: #333;
 		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
 		border-radius: 16px;
 		display: flex;

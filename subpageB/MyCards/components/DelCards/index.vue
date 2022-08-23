@@ -68,7 +68,7 @@
 			padding-top: 40rpx;
 			.card-info{
 				display: flex;
-				background: #0A0C47;
+				background: #333;
 				margin-bottom:40rpx;
 				.bank-icon{
 					border-radius: 50%;
@@ -106,7 +106,7 @@
 	.unbind-btn{
 		width: 100%;
 		color: #000000;
-		background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);
+		background: #28D8E5;
 		font-family: PingFangSC-Medium, PingFang SC;
 		font-weight: 900;
 		text-align: center;

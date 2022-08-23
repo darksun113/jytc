@@ -47,7 +47,7 @@
 .goods-box{
 	color: #FFFFFF;
 	width: 336rpx;
-	background: #0A0C47;
+	background: #333;
 	border-radius: 8rpx;
 	margin-bottom: 20rpx;
 	overflow: hidden;

@@ -1,11 +1,11 @@
 <template>
 	<view class="goods-info">
-		<view class="goods-price-box" v-if="goodsData.loadType==0 || goodsData.loadType==3">
+		<view class="goods-name-box" v-if="goodsData.loadType==0 || goodsData.loadType==3">
 			<view>
-				<view class="price">
-					¥ {{(goodsData.goodsPrice/100).toFixed(2)}}
+				<view class="name">
+					{{goodsData.goodsName}}
 				</view>
-				<view class="limit" v-if="goodsData.labelType">
+				<view class="limit">
 					<text>{{goodsData.remainingNumber}}/{{goodsData.totalNumber}}份</text>
 				</view>
 			</view>
@@ -16,9 +16,6 @@
 				<image v-else-if="goodsData.labelType=='传说'" src="@/static/levelTags/level_04.png" mode=""></image>
 				<image v-else-if="goodsData.labelType=='神话'" src="@/static/levelTags/level_05.png" mode=""></image>
 				<image v-else-if="goodsData.labelType=='不朽'" src="@/static/levelTags/level_06.png" mode=""></image>
-			</view>
-			<view class="limit" v-else>
-				<text>{{goodsData.remainingNumber}}/{{goodsData.totalNumber}}份</text>
 			</view>
 		</view>
 		<view class="tags-box">
@@ -63,12 +60,12 @@
 	.goods-info{
 		padding: 40rpx;
 		color: #FFFFFF;
-		.goods-price-box{
+		.goods-name-box{
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			.price{
-				font-size: 72rpx;
+			.name{
+				font-size: 48rpx;
 				font-family: PingFangSC-Medium, PingFang SC;
 				font-weight: 500;
 				line-height: 100rpx;
@@ -77,7 +74,7 @@
 				text{
 					font-size: 24rpx;
 					font-family: PingFangSC-Regular, PingFang SC;
-					color: #A5A6FF;
+					color: #28D8E5;
 					line-height: 34rpx;
 				}
 			}
@@ -100,7 +97,7 @@
 				.tag{
 					margin-right: 10rpx;
 					padding: 8rpx 16rpx;
-					background: #A5A6FF;
+					background: #28D8E5;
 					border-radius: 4rpx;
 					font-size: 20rpx;
 					font-family: PingFangSC-Regular, PingFang SC;
@@ -128,7 +125,7 @@
 		.digital-collection-tip{
 			margin-top: 40rpx;
 			padding: 40rpx;
-			background: #0A0C47;
+			background: #333;
 			border-radius: 20rpx;
 			.title{
 				font-size: 36rpx;

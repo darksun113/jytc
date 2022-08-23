@@ -24,6 +24,6 @@
 	overflow: hidden;
 	font-family: PingFangSC-Regular, PingFang SC;
 	font-weight: 400;
-	color: #6667AB;
+	color: #666;
 }
 </style>

@@ -74,7 +74,7 @@
 	}
 	.join-res-box{
 		width: 600rpx;
-		background: #0A0C47;
+		background: #333;
 		border-radius: 20rpx;
 		position: relative;
 		padding: 60rpx 28rpx;
@@ -102,7 +102,7 @@
 			margin-top: 40rpx;
 			width: 496rpx;
 			height: 100rpx;
-			background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);
+			background: #28D8E5;
 			border-radius: 8rpx;
 			font-size: 16px;
 			font-family: PingFangSC-Medium, PingFang SC;

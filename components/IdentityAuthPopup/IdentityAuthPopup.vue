@@ -53,7 +53,7 @@
 		width: 600rpx;
 		height: 696rpx;
 		flex-direction: column;
-		background-color: #0A0C47;
+		background-color: #333;
 		display: flex;
 		justify-content: center;
 		border-radius: 20rpx;
@@ -75,8 +75,8 @@
 			margin-top: 60rpx;
 			width: 496rpx;
 			height: 100rpx;
-			background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);
-			border-radius: 8rpx;
+			background: #28D8E5;
+			border-radius: 20rpx;
 			line-height: 100rpx;
 			font-size: 36rpx;
 			font-family: PingFangSC-Medium, PingFang SC;

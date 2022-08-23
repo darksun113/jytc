@@ -61,7 +61,7 @@
 
 <style lang="scss" scoped>
 	.activity-status{
-		background: #0A0C47;;
+		background: #333;;
 		border-radius: 8rpx;
 		padding: 40rpx;
 		box-sizing: border-box;

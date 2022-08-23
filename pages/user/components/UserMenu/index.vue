@@ -92,7 +92,7 @@
 
 <style lang="scss" scoped>
 	.user-menu{
-		background: #0A0C47;
+		background: #333;
 		border-radius: 8rpx;
 		padding: 40rpx;
 		padding-bottom: 0;

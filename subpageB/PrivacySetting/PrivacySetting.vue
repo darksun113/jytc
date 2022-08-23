@@ -6,18 +6,18 @@
 			</view>
 			<view class="pricavy-item">
 				<text>陌生人</text>
-				<u-switch v-model="pricavyForm.stranger_1" activeColor="#28D8E5" asyncChange
-					@change="change('stranger_1',4)" inactiveColor="#2C2E69"></u-switch>
+				<u-switch v-model="pricavyForm.stranger_1" activeColor="#AAAAAA" asyncChange
+					@change="change('stranger_1',4)" inactiveColor="#222222"></u-switch>
 			</view>
 			<view class="pricavy-item">
 				<text>粉丝</text>
-				<u-switch v-model="pricavyForm.fans_1" asyncChange @change="change('fans_1',5)" activeColor="#28D8E5"
-					inactiveColor="#2C2E69"></u-switch>
+				<u-switch v-model="pricavyForm.fans_1" asyncChange @change="change('fans_1',5)" activeColor="#AAAAAA"
+					inactiveColor="#222222"></u-switch>
 			</view>
 			<view class="pricavy-item">
 				<text>好友</text>
 				<u-switch v-model="pricavyForm.friend_1" asyncChange @change="change('friend_1',6)"
-					activeColor="#28D8E5" inactiveColor="#2C2E69"></u-switch>
+					activeColor="#AAAAAA" inactiveColor="#222222"></u-switch>
 			</view>
 		</view>
 		<view class="pricavy-box" v-if="show">
@@ -27,17 +27,17 @@
 			<view class="pricavy-item">
 				<text>陌生人</text>
 				<u-switch v-model="pricavyForm.stranger_2" asyncChange @change="change('stranger_2',7)"
-					activeColor="#28D8E5" inactiveColor="#2C2E69"></u-switch>
+					activeColor="#AAAAAA" inactiveColor="#222222"></u-switch>
 			</view>
 			<view class="pricavy-item">
 				<text>粉丝</text>
-				<u-switch v-model="pricavyForm.fans_2" asyncChange @change="change('fans_2',8)" activeColor="#28D8E5"
-					inactiveColor="#2C2E69"></u-switch>
+				<u-switch v-model="pricavyForm.fans_2" asyncChange @change="change('fans_2',8)" activeColor="#AAAAAA"
+					inactiveColor="#222222"></u-switch>
 			</view>
 			<view class="pricavy-item">
 				<text>好友</text>
 				<u-switch v-model="pricavyForm.friend_2" asyncChange @change="change('friend_2',9)"
-					activeColor="#28D8E5" inactiveColor="#2C2E69"></u-switch>
+					activeColor="#AAAAAA" inactiveColor="#222222"></u-switch>
 			</view>
 		</view>
 		<view class="pricavy-box" v-if="show">
@@ -47,17 +47,17 @@
 			<view class="pricavy-item">
 				<text>陌生人</text>
 				<u-switch v-model="pricavyForm.stranger_3" asyncChange @change="change('stranger_3',10)"
-					activeColor="#28D8E5" inactiveColor="#2C2E69"></u-switch>
+					activeColor="#AAAAAA" inactiveColor="#222222"></u-switch>
 			</view>
 			<view class="pricavy-item">
 				<text>粉丝</text>
-				<u-switch v-model="pricavyForm.fans_3" asyncChange @change="change('fans_3',11)" activeColor="#28D8E5"
-					inactiveColor="#2C2E69"></u-switch>
+				<u-switch v-model="pricavyForm.fans_3" asyncChange @change="change('fans_3',11)" activeColor="#AAAAAA"
+					inactiveColor="#222222"></u-switch>
 			</view>
 			<view class="pricavy-item">
 				<text>好友</text>
 				<u-switch v-model="pricavyForm.friend_3" asyncChange @change="change('friend_3',12)"
-					activeColor="#28D8E5" inactiveColor="#2C2E69"></u-switch>
+					activeColor="#AAAAAA" inactiveColor="#222222"></u-switch>
 			</view>
 		</view>
 	</PageTemp>

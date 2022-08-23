@@ -41,10 +41,9 @@
 			font-size: 24rpx;
 			padding: 6rpx 10rpx;
 			font-family: PingFangSC-Semibold, PingFang SC;
-			font-weight: 600;
-			color: #000000;
+			font-weight: 700;
+			color: #28D8E5;
 			line-height: 34rpx;
-			background: linear-gradient(90deg, #70D0FF 0%, #D575FF 100%);
 			border-radius: 2px;
 		}
 		.level-tags{

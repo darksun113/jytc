@@ -1,11 +1,11 @@
 <template>
 	<view class="goods-info">
-		<view class="goods-name-box" v-if="goodsData.loadType==0 || goodsData.loadType==3">
+		<view class="goods-name-box" >
 			<view>
 				<view class="name">
 					{{goodsData.goodsName}}
 				</view>
-				<view class="limit">
+				<view class="limit" v-if="goodsData.loadType==0">
 					<text>{{goodsData.remainingNumber}}/{{goodsData.totalNumber}}份</text>
 				</view>
 			</view>

@@ -27,7 +27,7 @@
 		font-size: 28rpx;
 		font-family: PingFangSC-Regular, PingFang SC;
 		font-weight: 400;
-		color: #28D8E5;
+		color: #999999;
 		line-height: 40rpx;
 	}
 }

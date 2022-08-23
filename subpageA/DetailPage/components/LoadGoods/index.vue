@@ -72,7 +72,7 @@
 
 <style lang="scss" scoped>
 	.show-box{
-		background: #0E0E0E;
+		background: #0E0E0E ;
 		border: 2rpx solid #21201F;
 	}
 </style>

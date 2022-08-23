@@ -132,5 +132,6 @@
 	height: 100%;
 	overflow: auto;
 	position: relative;
+	background: #04030A;;
 }
 </style>

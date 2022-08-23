@@ -60,7 +60,9 @@
 .content{
 	height: 60vh;
 	background: #21201F;
-	padding: 40rpx;
-	padding-top: 30rpx;
+	padding-top: 44rpx;
+}
+::v-deep .u-popup__content__close--top-right{
+	top: 44rpx;
 }
 </style>

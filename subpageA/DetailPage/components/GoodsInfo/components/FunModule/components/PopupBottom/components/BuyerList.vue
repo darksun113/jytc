@@ -16,7 +16,7 @@
 							<view class="name">
 								{{ item.recipientName }}
 							</view>
-							<view style="color: #CCCCCC;">
+							<view style="color: #ccc;font-size: 24rpx;">
 								{{ item.createTime | format }}
 							</view>
 						</view>
@@ -137,7 +137,7 @@
 	overflow: hidden;
 	.title{
 		text-align: center;
-		height: 44rpx;
+		padding-bottom: 44rpx;
 		font-size: 32rpx;
 		font-family: PingFangSC-Medium, PingFang SC;
 		font-weight: 500;
@@ -147,6 +147,8 @@
 	.buyer_content{
 		height: calc(100% - 44rpx);
 		overflow: auto;
+		padding: 0 40rpx;
+		border-top: 2rpx solid rgba(255, 255, 255, 0.1);
 		.box{
 			height: 100%;
 			overflow: auto;
@@ -166,25 +168,21 @@
 				.boxRight {
 					width: 85%;
 					height: 140rpx;
-					padding: 18rpx 0;
+					padding: 32rpx 0;
 					display: flex;
 					flex-direction: column;
 					justify-content: space-between;
 					.right_top {
 						width: 100%;
-						height: 50rpx;
-						line-height: 50rpx;
 						display: flex;
 						justify-content: space-between;
-						font-size: 24rpx;
-						font-family: PingFangSC-Regular, PingFang SC;
+						font-size: 28rpx;
+						font-family: SourceHanSansCN-Regular, SourceHanSansCN;
 						font-weight: 400;
 						color: #ffffff;
 					}
 					.right_top1 {
 						width: 100%;
-						height: 50rpx;
-						line-height: 50rpx;
 						display: flex;
 						justify-content: space-between;
 						font-size: 24rpx;

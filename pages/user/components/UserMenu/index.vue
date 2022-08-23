@@ -92,9 +92,7 @@
 
 <style lang="scss" scoped>
 	.user-menu{
-		background: #333;
 		border-radius: 8rpx;
-		padding: 40rpx;
 		padding-bottom: 0;
 		margin-top: 40rpx;
 		color: #FFFFFF;
@@ -103,15 +101,16 @@
 			font-family: PingFangSC-Medium, PingFang SC;
 			font-weight: 500;
 			line-height: 50rpx;
+			margin-bottom: 20rpx;
+			padding-left: 40rpx;
 		}
 		.item-box{
-			padding: 40rpx 0;
-			border-bottom: 2rpx solid rgba(255, 255, 255, .2);
+			padding: 40rpx;
+			background: #333;
 			display: flex;
 			justify-content: space-between;
-			&:last-child{
-				border: none;
-			}
+			margin-bottom: 20rpx;
+			border-radius: 8rpx;
 			.item-right{
 				display: flex;
 				align-items: center;

@@ -1,65 +1,67 @@
 <template>
-	<view class="main">
-		<u--form class="input-form">
-			<view class="line">
-				<view class="left">卡号</view>
-				<view class="right">
-					<u-form-item  label="" prop="card_num" ref="card_num">
-						<u--input class="u-input" placeholder="银行卡卡号" v-model="form.card_num" type="number" suffixIconStyle="color:#000"
-							color="#FFFFFF" border="" clearable>
-						</u--input>
-					</u-form-item>
+	<PageTemp>
+		<view class="main">
+			<u--form class="input-form">
+				<view class="line">
+					<view class="left">卡号</view>
+					<view class="right">
+						<u-form-item  label="" prop="card_num" ref="card_num">
+							<u--input class="u-input" placeholder="银行卡卡号" v-model="form.card_num" type="number" suffixIconStyle="color:#000"
+								color="#FFFFFF" border="" clearable>
+							</u--input>
+						</u-form-item>
+					</view>
 				</view>
-			</view>
-			<hr>
-			<view class="line">
-				<view class="left">持卡人</view>
-				<view class="right">
-					<u-form-item  label="" prop="name" ref="name">
-						<u--input class="u-input" placeholder="持卡人姓名" v-model="form.name" type="text" suffixIconStyle="color:#000"
-							color="#FFFFFF" border="" clearable>
-						</u--input>
-					</u-form-item>
+				<hr>
+				<view class="line">
+					<view class="left">持卡人</view>
+					<view class="right">
+						<u-form-item  label="" prop="name" ref="name">
+							<u--input class="u-input" placeholder="持卡人姓名" v-model="form.name" type="text" suffixIconStyle="color:#000"
+								color="#FFFFFF" border="" clearable>
+							</u--input>
+						</u-form-item>
+					</view>
 				</view>
-			</view>
-			<hr>
-			<view class="line">
-				<view class="left">身份证号</view>
-				<view class="right">
-					<u-form-item  label="" prop="id" ref="id">
-						<u--input class="u-input" placeholder="持卡人身份证号码" v-model="form.id" type="text" suffixIconStyle="color:#000"
-							color="#FFFFFF" border="" clearable>
-						</u--input>
-					</u-form-item>
+				<hr>
+				<view class="line">
+					<view class="left">身份证号</view>
+					<view class="right">
+						<u-form-item  label="" prop="id" ref="id">
+							<u--input class="u-input" placeholder="持卡人身份证号码" v-model="form.id" type="text" suffixIconStyle="color:#000"
+								color="#FFFFFF" border="" clearable>
+							</u--input>
+						</u-form-item>
+					</view>
 				</view>
-			</view>
-			<hr>
-			<view class="line">
-				<view class="left">手机号</view>
-				<view class="right">
-					<u-form-item  label="" prop="phone" ref="phone">
-						<u--input class="u-input" placeholder="银行预留手机号" v-model="form.phone" type="text" suffixIconStyle="color:#000"
-							color="#FFFFFF" border="" clearable>
-						</u--input>
-					</u-form-item>
+				<hr>
+				<view class="line">
+					<view class="left">手机号</view>
+					<view class="right">
+						<u-form-item  label="" prop="phone" ref="phone">
+							<u--input class="u-input" placeholder="银行预留手机号" v-model="form.phone" type="text" suffixIconStyle="color:#000"
+								color="#FFFFFF" border="" clearable>
+							</u--input>
+						</u-form-item>
+					</view>
 				</view>
-			</view>
-			<hr>
-			<view class="line">
-				<view class="verify-left-input">
-					<u-form-item class="verify-left-form-item" label="" prop="code" ref="code">
-						<u--input class="verify-left-u-input" placeholder="请输入验证码" type="text" suffixIconStyle="color:#000"
-							color="#FFFFFF" border="" v-model:value="verifyCode" clearable>
-						</u--input>
-					</u-form-item>
-					<hr>
+				<hr>
+				<view class="line">
+					<view class="verify-left-input">
+						<u-form-item class="verify-left-form-item" label="" prop="code" ref="code">
+							<u--input class="verify-left-u-input" placeholder="请输入验证码" type="text" suffixIconStyle="color:#000"
+								color="#FFFFFF" border="" v-model:value="verifyCode" clearable>
+							</u--input>
+						</u-form-item>
+						<hr>
+					</view>
+					<button  v-bind:disabled="disb" class="verify-right" @click="verify">{{ timer }}</button >
 				</view>
-				<button  v-bind:disabled="disb" class="verify-right" @click="verify">{{ timer }}</button >
-			</view>
-		</u--form>
-
-		<view class="done-btn" @click="done">完成</view>
-	</view>
+			</u--form>
+		
+			<view class="done-btn" @click="done">完成</view>
+		</view>
+	</PageTemp>
 </template>
 
 <script>
@@ -188,7 +190,7 @@
 	
 	.main{
 		font-size: 32rpx;
-		height: 100vh;
+		height: 100%;
 		color: white;
 		display: flex;
 		flex-direction: column;

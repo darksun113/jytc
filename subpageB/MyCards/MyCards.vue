@@ -39,7 +39,7 @@
 	export default {
 		data() {
 			return {
-				hasCard:true,
+				hasCard:false,
 				isEnd:false,
 				isCanReq:true,
 				cardList:[],

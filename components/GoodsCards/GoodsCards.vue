@@ -62,7 +62,7 @@
 			height: 100%;
 		}
 		.goods-count{
-			padding: 2rpx 4rpx;
+			padding: 6rpx 4rpx;
 			background: rgba(10, 12, 71, .5);
 			border-radius: 2px;
 			font-size: 20rpx;

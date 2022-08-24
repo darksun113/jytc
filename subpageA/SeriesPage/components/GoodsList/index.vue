@@ -3,7 +3,7 @@
 		<view class="list-title">
 			<view>该系列下有{{listTotal}}种藏品</view>
 			<view class="sort" @click="show = true">
-				{{dropdownTitle}}
+				<text style="margin-right: 20rpx;">{{dropdownTitle}}</text>
 				<u-icon name="arrow-down"></u-icon>
 			</view>
 		</view>

@@ -11,7 +11,7 @@ export default {
 		        case 1:return -90;
 		        case 2:return -25;
 		        case 3:return -25;
-		        case 4:return 0;
+		        case 4:return -35;
 		    }
 		},
         initLight() {

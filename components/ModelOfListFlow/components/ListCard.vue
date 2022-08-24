@@ -87,7 +87,7 @@
 	// width: 670rpx;
 	height: 840rpx;
 	background: #333;
-	border-radius: 20rpx;
+	border-radius: 30rpx;
 	margin-bottom: 40rpx;
 	overflow: hidden;
 	position: relative;
@@ -107,7 +107,7 @@
 	.series-pic{
 		width: 670rpx;
 		height: 670rpx;
-		border-radius: 20rpx;
+		border-radius: 30rpx;
 	}
 	.series-info{
 		padding: 30rpx 40rpx;

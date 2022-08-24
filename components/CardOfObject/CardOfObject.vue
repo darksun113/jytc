@@ -56,7 +56,7 @@
 <style lang="scss" scoped>
 .card-of-object{
 	background: #333;
-	border-radius: 8rpx;
+	border-radius: 20rpx;
 	margin-bottom: 40rpx;
 	overflow: hidden;
 	padding: 8rpx;
@@ -67,11 +67,11 @@
 		width: 236rpx;
 		height: 236rpx;
 		min-width: 236rpx;
-		border-radius: 8rpx;
+		border-radius: 20rpx;
 		.goods-pic{
 			width: 100%;
 			height: 100%;
-			border-radius: 8rpx;
+			border-radius: 20rpx;
 			background: #000000;
 		}
 		.icon{
@@ -106,7 +106,6 @@
 			display: flex;
 			.code{
 				padding: 6rpx 10rpx;
-				// background: linear-gradient(90deg, #70D0FF 0%, #D575FF 100%);
 				border-radius: 4rpx;
 				font-size: 24rpx;
 				font-family: PingFangSC-Semibold, PingFang SC;

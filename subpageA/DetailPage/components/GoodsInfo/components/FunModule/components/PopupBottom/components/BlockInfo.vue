@@ -62,8 +62,12 @@
 		line-height: 44rpx;
 	}
 	.item_box{
-		height: calc(100% - 44rpx);
+		height: calc(100% - 88rpx);
 		overflow: auto;
+		padding: 40rpx;
+		padding-top: 0;
+		margin-top: 40rpx;
+		border-top: 2rpx solid rgba(255, 255, 255, 0.1);
 		.item{
 			margin-top: 60rpx;
 			font-family: PingFangSC-Regular, PingFang SC;

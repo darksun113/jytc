@@ -60,7 +60,7 @@
 	.block_popup {
 		height: 100%;
 		overflow: hidden;
-	
+		
 		.title {
 			text-align: center;
 			height: 44rpx;
@@ -72,9 +72,12 @@
 		}
 
 		.item_box {
-			height: calc(100% - 44rpx);
+			height: calc(100% - 88rpx);
 			overflow: auto;
-			
+			padding: 40rpx;
+			padding-top: 0;
+			margin-top: 40rpx;
+			border-top: 2rpx solid rgba(255, 255, 255, 0.1);
 			.renzheng_box {
 				margin-top: 60rpx;
 				width: 100%;

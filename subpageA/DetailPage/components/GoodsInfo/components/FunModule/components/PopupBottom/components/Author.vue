@@ -64,8 +64,12 @@
 		line-height: 44rpx;
 	}
 	.author_content{
-		height: calc(100% - 44rpx);
+		height: calc(100% - 84rpx);
 		overflow: auto;
+		padding: 40rpx;
+		padding-top: 0;
+		margin-top: 40rpx;
+		border-top: 2rpx solid rgba(255, 255, 255, 0.1);
 		.pic_box{
 			margin-top: 60rpx;
 			text-align: center;

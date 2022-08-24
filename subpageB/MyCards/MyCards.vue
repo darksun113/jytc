@@ -27,7 +27,7 @@
 			</button>
 		</scroll-view>
 		
-		<IsNoCards v-else v-else>
+		<IsNoCards v-else>
 			<view class="container">
 				<image src="../../static/images/no_card.svg"></image>
 				<text class="nono-txt">暂无银行卡，快去添加吧</text>
@@ -35,7 +35,7 @@
 			<button class="nono-btn" @click="addCard">添加</button>
 		</IsNoCards>
 	</PageTemp>
-	
+
 </template>
 
 <script>
@@ -121,7 +121,7 @@
 <style lang="scss" scoped>
 	.list{
 		box-sizing: border-box;
-		height: 100vh;
+		height: 100%;
 		overflow: auto;
 		padding-left: 40rpx;
 		padding-right: 40rpx;
@@ -208,7 +208,7 @@
 			font-size: 28rpx;
 			font-family: PingFangSC-Regular, PingFang SC;
 			font-weight: 400;
-			color: #28D8E5;
+			color: #999;
 			line-height: 40rpx;
 		}
 	}
@@ -221,5 +221,4 @@
 		font-weight: 500;
 		color: #000000;
 	}
-	
 </style>

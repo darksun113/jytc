@@ -55,7 +55,9 @@
 						</u-form-item>
 						<hr>
 					</view>
-					<button  v-bind:disabled="disb" class="verify-right" @click="verify">{{ timer }}</button >
+					<button :style="{opacity:!second ?'1':'0.5'}" v-bind:disabled="disb" class="verify-right" @click="verify">
+						{{ second ? timer +'秒后重新获取' :"获取验证码" }}
+					</button >
 				</view>
 			</u--form>
 		
@@ -73,6 +75,7 @@
 				disb: false,
 				timer: "获取验证码",
 				verifyCode:"",
+				second:0,
 				form:{
 					card_num:"",
 					name:"",
@@ -114,7 +117,7 @@
 				}
 			}
 		},
-		onShow(){
+		beforeDestroy() {
 			this.init()
 		},
 		methods: {
@@ -135,12 +138,18 @@
 						"verifyCode": this.verifyCode// 手机验证码
 					})
 					if(res.code==0){
-						//res.data.state = SUCCESS
-						alert("绑定成功")
+						//res.data.state 值为 SUCCESS
+						uni.showToast({
+							title: "绑定成功",
+							icon: 'success'
+						})
 						this.$routerTo(`/subpageB/MyCards/MyCards`)
 					}else{
-						//res.data.state = FAIL
-						alert("绑定失败")
+						//res.data.state 值为 FAIL
+						uni.showToast({
+							title: "绑定失败",
+							icon: 'error'
+						})
 					}
 				}catch(e){
 					//TODO handle the exception
@@ -159,23 +168,32 @@
 						"phone": phone // 手机号
 					})
 					if(res.code==0){
-						this.requestNo = res.data.requestNo
 						var c = 60
 						this.disb = true
+						this.requestNo = res.data.requestNo
+						uni.showToast({
+							title: "验证码已发送",
+							icon: 'success'
+						})
 						const authTimer = setInterval(() => {
 							c--
 							this.timer= c
+							this.second = c
 							if (this.timer <= 0) {
 							  this.disb = false
 							  this.timer = "重新获取"
 							  clearInterval(authTimer)
+							  console.log(this.second)
 							}
 						}, 1000)
 					}else{
 						this.$toast(res.errorMsg)
 					}
 				}catch(e){
-					alert("输入信息有误")
+					uni.showToast({
+						title: res.errorMsg,
+						icon: 'error'
+					})
 					//TODO handle the exception
 				}
 			}
@@ -241,7 +259,7 @@
 				}
 				.verify-right{
 					text-align: center;
-					width:260rpx;
+					width:380rpx;
 					height: 88rpx;
 					color:black;
 					background: #28D8E5;

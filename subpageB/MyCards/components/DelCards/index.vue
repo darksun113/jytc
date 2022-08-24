@@ -59,13 +59,22 @@
 					})
 					console.log(res)
 					if(res.code==0){
-						alert("解除绑定成功")
+						uni.showToast({
+							title: "解除绑定失败",
+							icon: 'error'
+						})
 						this.$routerTo(`/subpageB/MyCards/MyCards`)
 					}else{
-						alert("发生错误")
+						uni.showToast({
+							title: "发生错误",
+							icon: 'error'
+						})
 					}
 				}catch(e){
-					alert("alsjfoweihf")
+					uni.showToast({
+						title: "发生错误",
+						icon: 'error'
+					})
 				}
 				
 			},

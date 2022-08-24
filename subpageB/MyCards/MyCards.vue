@@ -61,9 +61,9 @@
 				this.cardList=[]
 				this.getCardList(list=>{
 					if(list==0){
-						hasCard=false;
+						this.hasCard=false;
 					}else{
-						hasCard=true;
+						this.hasCard=true;
 						this.cardList=list;
 					}
 				})

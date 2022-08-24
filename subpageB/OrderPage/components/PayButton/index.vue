@@ -103,6 +103,35 @@
 					//TODO handle the exception
 				}
 			},
+			// 检查登录平台
+			async checkWx(){
+				// 是否是微信浏览器
+				if (/(micromessenger)/i.test(navigator.userAgent)){
+					// 是否电脑微信或者微信开发者工具
+					if(/(WindowsWechat)/i.test(navigator.userAgent) || /(wechatdevtools)/i.test(navigator.userAgent)){
+						// alert('电脑微信或者微信开发者工具')
+						uni.showToast({
+						title:"请在手机端微信打开",
+						icon:"error"
+					})
+					}else{
+						// 通过验证，确定是手机微信登录
+						// 查有没有关注公众号，接口检查唯一id
+						if(0==0){
+							// 如果已关注，继续支付流程
+							this.isWx=true
+						}else{
+							// 未关注则无法支付
+							this.check_shows=true
+						}
+					}
+				} else {
+					// alert('其他浏览器')
+					// 弹窗 pop
+					this.check_shows=true
+				}
+			},
+
 			// 微信
 			async wxPay() {
 				try {

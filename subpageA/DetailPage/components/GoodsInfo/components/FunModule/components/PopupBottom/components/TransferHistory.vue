@@ -41,7 +41,7 @@
 							</view>
 						</view>
 					</view>
-					<IsEnd></IsEnd>
+					<IsEnd ></IsEnd>
 				</view>
 			</view>
 		</view>
@@ -81,7 +81,7 @@
 			async getListPic(){
 				try{
 					const keysList=["recipientIcon","transferIcon"]
-					this.popupData.transferList=await getFilePath(this.popupData.transferList,keysList)
+					this.popupData.transferList = await getFilePath(this.popupData.transferList,keysList)
 				}catch(e){
 					//TODO handle the exception
 				}
@@ -109,7 +109,10 @@
 	.item_box{
 		height: calc(100% - 104rpx);
 		overflow: auto;
-		margin-top: 60rpx;
+		padding: 40rpx;
+		padding-top: 0;
+		margin-top: 40rpx;
+		border-top: 2rpx solid rgba(255, 255, 255, 0.1);
 		.transfer_box {
 			position: relative;
 			border-radius: 0px 0px 32rpx 32rpx;
@@ -152,9 +155,12 @@
 		
 					.transfer_type {
 						flex: 2;
-						width: 76rpx;
 						text-align: center;
-						color: #A6A4FF;
+						font-size: 24rpx;
+						font-family: SourceHanSansCN-Regular, SourceHanSansCN;
+						font-weight: 400;
+						color: #28D8E5;
+						margin: 0 30rpx;
 					}
 		
 					.recipient {

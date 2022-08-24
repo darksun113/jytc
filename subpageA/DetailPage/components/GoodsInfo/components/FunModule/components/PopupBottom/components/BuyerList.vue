@@ -145,7 +145,7 @@
 		line-height: 44rpx;
 	}
 	.buyer_content{
-		height: calc(100% - 44rpx);
+		height: calc(100% - 88rpx);
 		overflow: auto;
 		padding: 0 40rpx;
 		border-top: 2rpx solid rgba(255, 255, 255, 0.1);

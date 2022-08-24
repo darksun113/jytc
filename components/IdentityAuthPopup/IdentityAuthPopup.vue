@@ -7,7 +7,7 @@
 				<p>购买内容需要进行身份认证</p>
 			</view>
 			<button @click="toAutonym" class="renStyle">立即认证</button>
-			<view @click="$emit('close')" class="font16" style="margin-top:20px;cursor: pointer;">稍后再去</view>
+			<view @click="$emit('close')" class="font16" style="margin-top:60rpx;cursor: pointer;">稍后再去</view>
 		</view>
 	</u-popup>
 </template>
@@ -74,10 +74,10 @@
 		.renStyle {
 			margin-top: 60rpx;
 			width: 496rpx;
-			height: 100rpx;
+			height: 80rpx;
 			background: #28D8E5;
 			border-radius: 20rpx;
-			line-height: 100rpx;
+			line-height: 80rpx;
 			font-size: 36rpx;
 			font-family: PingFangSC-Medium, PingFang SC;
 			font-weight: 500;

@@ -122,7 +122,7 @@
 						width: 100%;
 						height: 100%;
 						content: '';
-						background: url("../../static/images/check_icon.svg") no-repeat center center rgba(0, 0, 0, .5);
+						background: url("../../static/images/check_icon.svg") no-repeat center center rgba(0, 0, 0, .8);
 						background-size: 80rpx 60rpx;
 						position: absolute;
 						left: 0;

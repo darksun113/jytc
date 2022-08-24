@@ -1,38 +1,40 @@
 <template>
-	<scroll-view class="list" v-if="hasCard==true" scroll-y="true" @scrolltolower="updateList">
-		<view class="cards">
-			<view class="item" v-for="(item,index) in cardList" :key="index" @click="unBindPage(index)">
-				<view class="card-info">
-					<view class="icon-container">
-						<view class="icon-bg">
-							<image class="bank-icon" :src="getIcon(item.bankName)" mode=""></image>
+	<PageTemp>
+		<scroll-view class="list" v-if="hasCard==true" scroll-y="true" @scrolltolower="updateList">
+			<view class="cards">
+				<view class="item" v-for="(item,index) in cardList" :key="index" @click="unBindPage(index)">
+					<view class="card-info">
+						<view class="icon-container">
+							<view class="icon-bg">
+								<image class="bank-icon" :src="getIcon(item.bankName)" mode=""></image>
+							</view>
 						</view>
-					</view>
-					<view class="info">
-						<view class="left-part">
-							<view class="name">{{ item.bankName }}</view>
-							<view class="card-type">储蓄卡</view>
+						<view class="info">
+							<view class="left-part">
+								<view class="name">{{ item.bankName }}</view>
+								<view class="card-type">储蓄卡</view>
+							</view>
+							<view class="right-part">**** {{ four_digit[index] }}</view>
 						</view>
-						<view class="right-part">**** {{ four_digit[index] }}</view>
 					</view>
 				</view>
 			</view>
-		</view>
-		<button class="add-cards-btn" @click="addCard">
-			<view class="add-container">
-				<image class="add-icon" src="../../static/images/plus.svg"></image>
-				<view vlass="add-txt">添加银行卡</view>
+			<button class="add-cards-btn" @click="addCard">
+				<view class="add-container">
+					<image class="add-icon" src="../../static/images/plus.svg"></image>
+					<view vlass="add-txt">添加银行卡</view>
+				</view>
+			</button>
+		</scroll-view>
+		
+		<IsNoCards v-else>
+			<view class="container">
+				<image src="../../static/images/no_card.svg"></image>
+				<text class="nono-txt">暂无银行卡，快去添加吧</text>
 			</view>
-		</button>
-	</scroll-view>
-	
-	<IsNoCards v-else class="nono" v-else>
-		<view class="container">
-			<image src="../../static/images/no_card.svg"></image>
-			<text class="nono-txt">暂无银行卡，快去添加吧</text>
-		</view>
-		<button class="nono-btn" @click="addCard">添加</button>
-	</IsNoCards>
+			<button class="nono-btn" @click="addCard">添加</button>
+		</IsNoCards>
+	</PageTemp>
 </template>
 
 <script>
@@ -118,7 +120,7 @@
 <style lang="scss" scoped>
 	.list{
 		box-sizing: border-box;
-		height: 100vh;
+		height: 100%;
 		overflow: auto;
 		padding-left: 40rpx;
 		padding-right: 40rpx;
@@ -192,39 +194,31 @@
 			}
 		}
 	}
-	.nono{
-		height: 100vh;
-		color: #FFFFFF;
+	.container{
 		display: flex;
 		flex-direction: column;
-		
-		padding-left: 120rpx;
-		padding-right: 120rpx;
-		.container{
-			display: flex;
-			flex-direction: column;
+		padding-bottom: 40rpx;
+		image{
+			width: 100%;
+			height: 280rpx;
 			padding-bottom: 40rpx;
-			image{
-				width: 100%;
-				height: 280rpx;
-				padding-bottom: 40rpx;
-			}
-			.nono-txt{
-				font-size: 28rpx;
-				font-family: PingFangSC-Regular, PingFang SC;
-				font-weight: 400;
-				color: #28D8E5;
-				line-height: 40rpx;
-			}
 		}
-		.nono-btn{
-			background: #28D8E5;
-			border-radius: 8rpx;
-			font-size: 32rpx;
-			font-family: PingFangSC-Medium, PingFang SC;
-			font-weight: 500;
-			color: #000000;
+		.nono-txt{
+			font-size: 28rpx;
+			font-family: PingFangSC-Regular, PingFang SC;
+			font-weight: 400;
+			color: #999;
+			line-height: 40rpx;
 		}
+	}
+	.nono-btn{
+		background: #28D8E5;
+		border-radius: 8rpx;
+		width: 496rpx;
+		font-size: 32rpx;
+		font-family: PingFangSC-Medium, PingFang SC;
+		font-weight: 500;
+		color: #000000;
 	}
 	
 	

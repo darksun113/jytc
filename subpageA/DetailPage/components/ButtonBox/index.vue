@@ -5,14 +5,14 @@
 				¥ {{(goodsData.goodsPrice/100).toFixed(2)}}
 			</view>
 			<view class="">
-				<view class="btn" style="background: #007980;" v-if="goodsData.remainingNumber <= 0">
+				<view class="btn" style="opacity: 0.65;" v-if="goodsData.remainingNumber <= 0">
 					已售罄
 				</view>
 				<!-- 预购白名单 -->
 				<view class="btn" @click="toOrder" v-else-if="goodsData.selling==1">
 					购买
 				</view>
-				<view class="btn" style="background: #007980;" v-else-if="curTime - goodsData.startTime < 0">
+				<view class="btn" style="opacity: 0.65;" v-else-if="curTime - goodsData.startTime < 0">
 					即将开售
 				</view>
 				<view class="btn" @click="toOrder" v-else>
@@ -99,7 +99,7 @@
 			width: 400rpx;
 			height: 80rpx;
 			text-align: center;
-			background: #28D8E5;
+			background: linear-gradient(90deg, #FFFFFF 0%, #28D8E5 50%, #C058F6 100%);
 			border-radius: 20rpx;
 			font-size: 32rpx;
 			font-family: PingFangSC-Medium, PingFang SC;

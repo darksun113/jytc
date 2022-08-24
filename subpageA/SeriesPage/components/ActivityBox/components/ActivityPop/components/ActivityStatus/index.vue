@@ -56,7 +56,7 @@
 
 <style lang="scss" scoped>
 	.activity-status{
-		background: #2C2E69;
+		background: #333;
 		border-radius: 8rpx;
 		padding: 40rpx;
 		box-sizing: border-box;
@@ -88,14 +88,14 @@
 			margin: 0 auto;
 			margin-top: 40rpx;
 			width: 496rpx;
-			height: 100rpx;
+			height: 80rpx;
 			background: #28D8E5;
-			border-radius: 8rpx;
+			border-radius: 20rpx;
 			font-size: 32rpx;
 			font-family: PingFangSC-Medium, PingFang SC;
 			font-weight: 500;
 			color: #000000;
-			line-height: 100rpx;
+			line-height: 80rpx;
 			text-align: center;
 		}
 	}

@@ -3,8 +3,7 @@
 export function getWeChatLogin() {
 	// let local = window.location.href.split("&code")[0]; //获取当前页面地址作为回调地址
 	const devLocal = "http://192.168.2.27:8081/pages/login/QuickLoginTemp/QuickLoginTemp"; //获取当前页面地址作为回调地址
-	//const proLocal = "https://h5.jialex.cn/pages/login/QuickLoginTemp/QuickLoginTemp"; //获取当前页面地址作为回调地址
-	const proLocal = "http://h5.jytc-test.binavy.com/pages/login/QuickLoginTemp/QuickLoginTemp"
+	const proLocal = "https://h5.jialex.cn/pages/login/QuickLoginTemp/QuickLoginTemp"; //获取当前页面地址作为回调地址
 	const local = process.env.NODE_ENV == "development" ? devLocal : proLocal
 	let appid = 'wx54ab5619521ee3b0'
 	//通过微信官方接口获取code之后，会重新刷新设置的回调地址【redirect_uri】

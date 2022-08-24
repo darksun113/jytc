@@ -33,7 +33,7 @@
 		},
 		methods:{
 			updateList(){
-				if(this.isCanReq)return;
+				if(!this.isCanReq)return;
 				const startTime=this.goodsList[this.goodsList.length-1].startTime
 				this.getGoodsList(startTime,list=>{
 					if(item==0){

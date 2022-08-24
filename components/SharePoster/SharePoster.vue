@@ -88,7 +88,6 @@
 				show: this.isOpenPoster,
 				size: 60,
 				posterUrl:null,
-				posterImg_:""
 			}
 		},
 		methods: {
@@ -247,7 +246,7 @@
 						}
 
 						.tip-2 {
-							width: 320rpx;
+							width: 380rpx;
 							font-size: 20rpx;
 							font-family: PingFangSC-Regular, PingFang SC;
 							font-weight: 400;
@@ -360,8 +359,8 @@
 			margin-top: 60rpx;
 			width: 620rpx;
 			height: 84rpx;
-			background: #5C5A88;
-			border-radius: 8rpx;
+			background: #007980;
+			border-radius: 20rpx;
 			font-size: 18px;
 			font-family: PingFangSC-Medium, PingFang SC;
 			font-weight: 500;

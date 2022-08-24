@@ -101,7 +101,7 @@
 			&::before{
 				width: 100%;
 				height: 1px;
-				background: #4E4C8B;
+				background: #28D8E5;
 				content: '';
 				position: absolute;
 				left: 0;

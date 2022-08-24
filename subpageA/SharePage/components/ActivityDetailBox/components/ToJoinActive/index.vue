@@ -1,7 +1,7 @@
 <template>
 	<view style="margin-top: 40rpx;">
 		<view class="power-success-tip" >
-			<image src="@/static/images/join_success_icon.svg" mode=""></image>
+			<image src="@/static/images/check_icon.svg" mode=""></image>
 			<view class="">
 				已成功为TA助力
 			</view>

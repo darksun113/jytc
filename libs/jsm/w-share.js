@@ -8,8 +8,7 @@ var wxj = require('jweixin-module')
  */
 export async function myshare(){
 	try {
-		const link = "http://h5.jytc-test.binavy.com/" // 获取当前页面的地址参数
-		//const link = "https://h5.jialex.cn/" // 获取当前页面的地址参数
+		const link = "https://h5.jialex.cn/" // 获取当前页面的地址参数
 		const res = await uni.$http("/user/jsSdkSignature", {url: link})
 		if(res.code==0){
 			wxj.config({

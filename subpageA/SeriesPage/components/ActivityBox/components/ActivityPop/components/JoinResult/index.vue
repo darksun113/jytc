@@ -2,7 +2,7 @@
 	<u-popup :show="show" mode="center" @open="open" overlayOpacity="0.8" :closeOnClickOverlay="false" bgColor="transparent">
 		<view class="join-res-box">
 			<view class="title-box">
-				<image src="@/static/images/join_success_icon.svg" mode=""></image>
+				<image src="@/static/images/check_icon.svg" mode=""></image>
 				<text class="">
 					已参与
 				</text>
@@ -103,7 +103,7 @@
 			width: 496rpx;
 			height: 100rpx;
 			background: #28D8E5;
-			border-radius: 8rpx;
+			border-radius: 20rpx;
 			font-size: 16px;
 			font-family: PingFangSC-Medium, PingFang SC;
 			font-weight: 500;

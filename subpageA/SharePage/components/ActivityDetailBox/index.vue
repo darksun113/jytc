@@ -6,7 +6,7 @@
 		<view class="title-count" v-else></view>
 		<PowerNums :powerList="prePurchaseInfo_.userList" :totalNum="prePurchaseInfo_.peopleNum"></PowerNums>
 		<view v-if="prePurchaseInfo_.userList.length==prePurchaseInfo_.peopleNum" class="power-success-tip">
-			<image src="@/static/images/join_success_icon.svg" mode=""></image>助力已完成
+			<image src="@/static/images/check_icon.svg" mode=""></image>助力已完成
 		</view>
 		<RegisterAndBindCard v-else-if="!$store.state.userInfo.certificationStatus || $store.state.userInfo.certificationStatus==0" :prePurchaseInfo="prePurchaseInfo_"></RegisterAndBindCard>
 		<ToJoinActive v-else :seriesId="prePurchaseInfo_.seriesId"></ToJoinActive>

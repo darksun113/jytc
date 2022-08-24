@@ -52,10 +52,11 @@
 			uni.$on("toOpenSharePoster",()=>{
 				const prePurchaseId=this.prePurchaseId
 				const userId=uni.getStorageSync("userInfo").buyerId
-				const baseCodeUrl = process.env.NODE_ENV=="development" ? "http://192.168.2.27:8080":"http://h5.jytc-test.binavy.com/"
+				const baseCodeUrl = process.env.NODE_ENV=="development" ? "http://192.168.2.11:8080":"http://h5.jytc-test.binavy.com/"
 				this.posterData={
 					codeUrl :`${baseCodeUrl}/subpageA/SharePage/SharePage?prePurchaseId=${prePurchaseId}&userId=${userId}`,
-					posterImg:this.prePurchaseInfo.seriesImg.split("?")[0],
+					posterImg:this.prePurchaseInfo.seriesImg,
+					// posterImg:this.prePurchaseInfo.seriesImg.split("?")[0],
 					loadType:0 // 0 邀请分享  1 分享把玩
 				}
 				this.isOpenPoster=true
@@ -110,7 +111,7 @@
 	.activity-pop{
 		height: 70vh;
 		width: 100%;
-		background: #333;
+		background: #222;
 		color: #FFFFFF;
 		.title-rules{
 			font-size: 32rpx;

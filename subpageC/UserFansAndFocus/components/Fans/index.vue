@@ -18,6 +18,7 @@
 			</view>
 		</view>
 		<IsEnd v-if="isLastData"></IsEnd>
+		<u-modal :show="show" content='确定取消关注此人吗?' @confirm="confirm" @cancel="show=false" :showCancelButton="true" confirmColor="#fff" cancelColor="#aaa"></u-modal>
 	</scroll-view>
 	<SecurityControls v-else-if="privacyAuth">
 		由于该用户隐私设置，粉丝列表不可见
@@ -36,7 +37,10 @@
 				privacyAuth:0,
 				hasData:true,
 				isLastData:false,
-				fansList:[]
+				fansList:[],
+				show:false,
+				followId:"",
+				type:""
 			}
 		},
 		mounted() {
@@ -87,16 +91,39 @@
 				if(buyerId==this.userId)return
 				this.$emit("toOtherPage",buyerId)
 			},
-			async focus(type,followId,index){
+			async confirm(){
 				try{
 					// type 1 取消关注  0 关注
 					const res=await uni.$http("/user/follow",{
-						followId,
-						type
+						followId:this.followId,
+						type:this.type
 					})
 					if(res.code==0){
 						this.init()
-						
+					}else{
+						this.$toast(res.errorMsg)
+					}
+				}catch(e){
+					//TODO handle the exception
+				}
+			},
+			async focus(type,followId,index){
+				try{
+					if(type==1){
+						this.followId=followId
+						this.type=type
+						this.show=true
+					}else{
+						// type 1 取消关注  0 关注
+						const res=await uni.$http("/user/follow",{
+							followId,
+							type
+						})	
+						if(res.code==0){
+							this.init()
+						}else{
+							this.$toast(res.errorMsg)
+						}
 					}
 				}catch(e){
 					//TODO handle the exception

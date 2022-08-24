@@ -18,6 +18,7 @@
 			</view>
 		</view>
 		<IsEnd v-if="isLastData"></IsEnd>
+		<u-modal :show="show" content='确定取消关注此人吗?' @confirm="confirm" @cancel="show=false" :showCancelButton="true" confirmColor="#fff" cancelColor="#aaa"></u-modal>
 	</scroll-view>
 	<SecurityControls v-else-if="privacyAuth==1">
 		由于该用户隐私设置，关注列表不可见
@@ -25,6 +26,7 @@
 	<IsNoData v-else>
 		暂无关注
 	</IsNoData>
+	
 </template>
 
 <script>
@@ -36,7 +38,10 @@
 				focusList:[],
 				hasData:true,
 				isLastData:false,
-				privacyAuth:0
+				privacyAuth:0,
+				followId:"",
+				type:"",
+				show:false
 			}
 		},
 		mounted() {
@@ -87,18 +92,41 @@
 				if(buyerId==this.userId)return
 				this.$emit("toOtherPage",buyerId)
 			},
-			async focus(type,followId,index){
+			async confirm(){
 				try{
 					// type 1 取消关注  0 关注
 					const res=await uni.$http("/user/follow",{
-						followId,
-						type
-					})	
+						followId:this.followId,
+						type:this.type
+					})
 					if(res.code==0){
 						// this.focusList[index].relation=res.data.relation
 						this.init()
 					}else{
 						this.$toast(res.errorMsg)
+					}
+				}catch(e){
+					//TODO handle the exception
+				}
+			},
+			async focus(type,followId,index){
+				try{
+					if(type==1){
+						this.followId=followId
+						this.type=type
+						this.show=true
+					}else{
+						// type 1 取消关注  0 关注
+						const res=await uni.$http("/user/follow",{
+							followId,
+							type
+						})	
+						if(res.code==0){
+							// this.focusList[index].relation=res.data.relation
+							this.init()
+						}else{
+							this.$toast(res.errorMsg)
+						}
 					}
 				}catch(e){
 					//TODO handle the exception
@@ -172,6 +200,30 @@
 				}
 			}
 			
+		}
+	}
+	::v-deep .u-popup__content{
+		background: #333;
+		
+		.u-modal__content__text{
+			text-align: center;
+			font-size: 32rpx;
+			font-family: SourceHanSansCN-Regular, SourceHanSansCN;
+			font-weight: 400;
+			color: #FFFFFF;
+			line-height: 48rpx;
+		}
+		.u-line{
+			border-color: rgba(255,255,255,0.2) !important;
+		}
+		.u-modal__button-group__wrapper__text{
+			font-size: 36rpx;
+			font-family: SourceHanSansCN-Medium, SourceHanSansCN;
+			font-weight: 500;
+			line-height: 54rpx;
+		}
+		.u-modal__button-group__wrapper--hover{
+			background-color: #333;
 		}
 	}
 </style>

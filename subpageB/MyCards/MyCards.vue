@@ -47,10 +47,9 @@
 				icon:""
 			};
 		},
-		mounted() {
-			this.init(); 
+		onShow(){
+			this.init();
 		},
-		
 		methods: {
 			test(){
 				console.log(this.cardList)

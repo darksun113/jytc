@@ -60,6 +60,7 @@
 					if(list==0){
 						hasCard=false;
 					}else{
+						hasCard=true;
 						this.cardList=list;
 					}
 				})

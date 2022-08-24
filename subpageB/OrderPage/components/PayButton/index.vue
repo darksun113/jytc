@@ -18,7 +18,23 @@
 			</view>
 			<u-button class="resend" @click="resend">重新发送</u-button>
 		</u-popup>
-		<!-- <one @getCard="setCard"></one> -->
+		<u-popup class="pop2" :show="check_shows" mode="center">
+			<view class="check_head">
+				<view class="check_headtxt">支付提示</view>
+				<image class="x" @click="closeCpop" src="/subpageB/OrderPage/static/images/x.svg"></image>
+			</view>
+			<view class="check_body">
+				<view>因微信支付限制，需关注平台公众号后在微信</view>
+				<view>浏览器打开平台才可使用微信进行支付！</view>
+				<br>
+				<view>第1步：打开微信添加朋友</view>
+				<view>第2步：在搜索里输入公众号名称</view>
+				<view>第3步：关注公众号即可在公众号开启网页</view>
+			</view>
+			<view class="copy" @click="copy">
+				<button class="copy-btn">点击复制名称</button>
+			</view>
+		</u-popup>
 		<view/>
 	</view>
 </template>
@@ -49,9 +65,11 @@
 				payType: this.payType_,
 				timer: null,
 				shows: false,
+				check_shows: false,
 				paygateBizSn: null,
 				verifyCode:"",
-				cardId: this.cardId_
+				cardId: this.cardId_,
+				isWx:false,
 			}
 		},
 		methods: {
@@ -64,7 +82,10 @@
 						this.bankPay()
 						break;
 					case 'wxPay':
-						this.wxPay()
+						this.checkWx()
+						if(this.isWx){
+							this.wxPay()
+						}
 						break;
 					case 'aliPay':
 						this.aliPay()
@@ -75,6 +96,9 @@
 			},
 			closePop(){
 				this.shows=false
+			},
+			closeCpop(){
+				this.check_shows=false
 			},
 			async bankPay(){
 				try{
@@ -103,22 +127,32 @@
 					//TODO handle the exception
 				}
 			},
+			// 检查登录平台
+			async checkWx(){
+				//是否是微信浏览器
+				if (/(micromessenger)/i.test(navigator.userAgent)){
+					//是否电脑微信或者微信开发者工具
+					if(/(WindowsWechat)/i.test(navigator.userAgent) || /(wechatdevtools)/i.test(navigator.userAgent)){
+						// alert('电脑微信或者微信开发者工具')
+						uni.showToast({
+						title:"请在手机端微信打开",
+						icon:"error"
+					})
+					}else{
+						//正常走，查有没有关注公众号，唯一id
+						//手机微信打开的浏览器
+						// alert('手机微信')
+						this.isWx=true
+					}
+				} else {
+					// alert('其他浏览器')
+					//弹窗 pop
+					this.check_shows=true
+				}
+			},
 			// 微信
 			async wxPay() {
 				try {
-					//是否是微信浏览器
-					if (/(micromessenger)/i.test(navigator.userAgent)){
-						//是否电脑微信或者微信开发者工具
-						if(/(WindowsWechat)/i.test(navigator.userAgent) || /(wechatdevtools)/i.test(navigator.userAgent)){
-							// alert('电脑微信或者微信开发者工具')
-						}else{
-							//手机微信打开的浏览器
-							// alert('手机微信')
-						}
-					} else {
-						// alert('其他浏览器')
-					}
-					
 					const res = await uni.$http("/payment/prepay", {
 						orderNo: this.orderNo,
 						appType: 'H5',
@@ -286,7 +320,7 @@
 		display: flex;
 		flex-direction: column;
 		.head{
-			display: flex;
+
 			image{
 				width: 38rpx;
 				height: 64rpx;
@@ -310,6 +344,42 @@
 			color: royalblue;
 			background-color: white;
 			border-color: #FFFFFF;
+		}
+	}
+	.pop2{
+		color: black;	
+		display: flex;
+		flex-direction: column;
+		font-size: 32rpx;
+		border-radius: 20rpx;
+		.check_head{
+			height: 124rpx;
+			display: flex;
+			text-align: center;
+			border-bottom: 2rpx solid #EEEEEE;
+			.check_headtxt{
+				padding: 40rpx 180rpx 40rpx 260rpx;
+			}
+			.x{
+				width: 32rpx;
+				height: 32rpx;
+			}
+		}
+		.check_body{
+			padding: 40rpx 30rpx;
+			display: flex;
+			flex-direction: column;
+		}
+		.copy{
+			padding: 0rpx 160rpx 40rpx;
+			.copy-btn{
+				font-size: 28rpx;
+				font-family: PingFangSC-Medium, PingFang SC;
+				font-weight: 500;
+				border-radius: 44rpx;
+				background-color: white;
+				
+			}
 		}
 	}
 </style>

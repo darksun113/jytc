@@ -26,7 +26,6 @@
 			<view>微信支付</view>
 			<image v-show="payType=='wxPay'" class="check-icon" style="width: 28rpx;height: 24rpx;" src="../../static/images/check.svg"></image>
 		</view>
-		<view @click="tst">test2</view>
 		<u-popup class="pop" :show="Shows" mode="bottom">
 			<view class="head">
 				<image @click="closePop" src="../../static/images/return.svg"></image>

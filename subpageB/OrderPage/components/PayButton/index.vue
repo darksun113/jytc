@@ -105,9 +105,9 @@
 			},
 			// 检查登录平台
 			async checkWx(){
-				//是否是微信浏览器
+				// 是否是微信浏览器
 				if (/(micromessenger)/i.test(navigator.userAgent)){
-					//是否电脑微信或者微信开发者工具
+					// 是否电脑微信或者微信开发者工具
 					if(/(WindowsWechat)/i.test(navigator.userAgent) || /(wechatdevtools)/i.test(navigator.userAgent)){
 						// alert('电脑微信或者微信开发者工具')
 						uni.showToast({

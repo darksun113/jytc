@@ -56,6 +56,11 @@
 				
 			}
 		},
+		mounted(){
+			if(uni.getStorageSync("isWxPay")=="wxPay"){
+				this.wxPay()
+			}
+		},
 		methods: {
 			test(){
 				console.log(this.cardId)
@@ -66,10 +71,7 @@
 						this.bankPay()
 						break;
 					case 'wxPay':
-						checkWx();
-						if(this.isWx){
-							this.wxPay()
-						}
+						this.wxPay()
 						break;
 					case 'aliPay':
 						this.aliPay()
@@ -116,9 +118,9 @@
 					if(/(WindowsWechat)/i.test(navigator.userAgent) || /(wechatdevtools)/i.test(navigator.userAgent)){
 						// alert('电脑微信或者微信开发者工具')
 						uni.showToast({
-						title:"请在手机端微信打开",
-						icon:"error"
-					})
+							title:"请在手机端微信打开",
+							icon:"error"
+						})
 					}else{
 						// 通过验证，确定是手机微信登录
 						// 查有没有关注公众号，接口检查唯一id
@@ -140,42 +142,48 @@
 			// 微信
 			async wxPay() {
 				try {
-					const res = await uni.$http("/payment/prepay", {
-						orderNo: this.orderNo,
-						appType: 'H5',
-						payType: "YSWX"
-					})
-					if (res.code == 0) {
-						this.visible = true
-						function onBridgeReady(){
-							WeixinJSBridge.invoke(
-							'getBrandWCPayRequest', {
-								"appId":res.data.h5YsWx.appId,     //公众号ID，由商户传入     
-								"timeStamp":res.data.h5YsWx.timeStamp,         //时间戳，自1970年以来的秒数     
-								"nonceStr":res.data.h5YsWx.nonceStr, //随机串     
-								"package":res.data.h5YsWx.packageStr,     
-								"signType":res.data.h5YsWx.signType,         //微信签名方式：     
-								"paySign":res.data.h5YsWx.paySign //微信签名 
-							},
-							function(res){
-								if(res.err_msg == "get_brand_wcpay_request:ok" ){
-								// 使用以上方式判断前端返回,微信团队郑重提示：
-								//res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
-								}
-							}); 
-						}
-						if (typeof WeixinJSBridge == "undefined"){
-							if( document.addEventListener ){
-								document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-							}else if (document.attachEvent){
-								document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
-								document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+					this.checkWx()
+					if(this.isWx){
+						const res = await uni.$http("/payment/prepay", {
+							orderNo: this.orderNo,
+							appType: 'H5',
+							payType: "YSWX"
+						})
+						const _this = this
+						if (res.code == 0) {
+							this.visible = true
+							function onBridgeReady(){
+								WeixinJSBridge.invoke(
+								'getBrandWCPayRequest', {
+									"appId":res.data.h5YsWx.appId,     //公众号ID，由商户传入     
+									"timeStamp":res.data.h5YsWx.timeStamp,         //时间戳，自1970年以来的秒数     
+									"nonceStr":res.data.h5YsWx.nonceStr, //随机串     
+									"package":res.data.h5YsWx.packageStr,     
+									"signType":res.data.h5YsWx.signType,         //微信签名方式：     
+									"paySign":res.data.h5YsWx.paySign //微信签名 
+								},
+								function(res){
+									if(res.err_msg == "get_brand_wcpay_request:ok" ){
+										// 微信支付成功
+										uni.removeStorageSync("isWxPay")
+										_this.$emit("updateOrderInfo")
+									}
+								}); 
 							}
-						}else{
-							onBridgeReady();
+							if (typeof WeixinJSBridge == "undefined"){
+								if( document.addEventListener ){
+									document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+								}else if (document.attachEvent){
+									document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+									document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+								}
+							}else{
+								onBridgeReady();
+							}
+						}else if(res.code == 9){
+							// 未授权
+							getWeChatAuthorization()
 						}
-					}else if(res.code == 9){
-						// 未授权
 					}
 				} catch (error) {
 					throw new Error("系统错误", error)

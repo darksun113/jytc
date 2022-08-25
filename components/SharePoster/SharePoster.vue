@@ -214,7 +214,8 @@
 			.poster-content {
 				padding: 20rpx;
 				padding-top: 10rpx;
-
+				background: url("../../static/images/card_bg.png") no-repeat right center;
+				background-size: auto 160%; 
 				.poster-title {
 					font-size: 32rpx;
 					font-family: PingFangSC-Medium, PingFang SC;
@@ -238,8 +239,8 @@
 						font-family: PingFangSC-Regular, PingFang SC;
 
 						.tip {
+							width: 420rpx;
 							font-size: 24rpx;
-
 							font-weight: 400;
 							color: #CCCCCC;
 							line-height: 34rpx;
@@ -248,7 +249,6 @@
 						.tip-2 {
 							width: 380rpx;
 							font-size: 20rpx;
-							font-family: PingFangSC-Regular, PingFang SC;
 							font-weight: 400;
 							color: #28D8E5;
 							line-height: 34rpx;

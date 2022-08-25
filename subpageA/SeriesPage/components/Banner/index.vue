@@ -57,7 +57,7 @@
 			bottom: 20rpx;
 			width: 690rpx;
 			height: 80rpx;
-			background: rgba(10, 12, 71, .5);
+			background: rgba(0, 0, 0, .5);
 			border-radius: 8rpx;
 			font-size: 32rpx;
 			font-family: PingFangSC-Regular, PingFang SC;

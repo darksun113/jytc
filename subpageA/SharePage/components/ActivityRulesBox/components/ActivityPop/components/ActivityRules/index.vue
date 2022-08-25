@@ -12,12 +12,22 @@
 
 <script>
 	export default {
-		props:["activityRule"],
+		props:["prePurchaseInfo"],
+		data(){
+			return {
+				info: this.prePurchaseInfo.activityRule
+			}
+		},
 		computed:{
 			introduceInfoText(){
 				return this.info.replace(/\n/g,"<br/>")
 			}
 		},
+		watch:{
+			prePurchaseInfo(data){
+				this.info=data.activityRule
+			}
+		}
 	}
 </script>
 

@@ -10,7 +10,7 @@
 					<view class="timer-title"> 活动时间</view>
 					<ActivityStep :prePurchaseInfo="prePurchaseInfo"></ActivityStep>
 				</view>
-				<ActivityRules :activityRule="prePurchaseInfo.activityRule"></ActivityRules>
+				<ActivityRules :prePurchaseInfo="prePurchaseInfo"></ActivityRules>
 			</view>
 		</view>
 	</u-popup>

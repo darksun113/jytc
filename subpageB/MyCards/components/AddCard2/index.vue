@@ -60,8 +60,15 @@
 					</button >
 				</view>
 			</u--form>
-		
 			<view class="done-btn" @click="done">完成</view>
+			<view class="bottom">
+				<view class"bottom-head">
+					<view class="bottom-head-txt">提示：银行卡绑定仅支持下方银行的储蓄卡</view>
+				</view>
+				<view class="bottom-body">
+					
+				</view>
+			</view>
 		</view>
 	</PageTemp>
 </template>

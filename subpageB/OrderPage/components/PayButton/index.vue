@@ -25,7 +25,7 @@
 
 <script>
 	let jweixin = require('jweixin-module')
-	import {getWeChatAuthorization} from "@/libs/jsm/wx-login.js"
+	import {getWeChatAuthorization,checkWeChatCode} from "@/libs/jsm/wx-login.js"
 	export function isWechatBrowser() {
 		let status = navigator.userAgent.toLowerCase();
 		if (status.match(/MicroMessenger/i) == "micromessenger") {
@@ -53,13 +53,13 @@
 				verifyCode:"",
 				cardId: this.cardId_,
 				isWx:false
-				
 			}
 		},
-		mounted(){
-			if(uni.getStorageSync("isWxPay")=="wxPay"){
+		async mounted(){
+			await checkWeChatCode(()=>{
+				uni.hideLoading()
 				this.wxPay()
-			}
+			})
 		},
 		methods: {
 			test(){
@@ -93,12 +93,12 @@
 					})
 					// alert("this.show: ",this.new_Show)
 					if (res.code == 0) {
-						
 						this.$nextTick(()=>{
 							this.shows=true
 						})
 						// alert("this.show: ",this.new_Show)
 						// console.log(res.data.h5YsKj.body)
+						uni.removeStorageSync("isWxPay")
 						this.paygateBizSn=res.data.h5YsKj.body
 					} else {
 						uni.showToast({
@@ -142,8 +142,8 @@
 			// 微信
 			async wxPay() {
 				try {
-					this.checkWx()
-					if(this.isWx){
+					// this.checkWx()
+					// if(!this.isWx){
 						const res = await uni.$http("/payment/prepay", {
 							orderNo: this.orderNo,
 							appType: 'H5',
@@ -183,8 +183,10 @@
 						}else if(res.code == 9){
 							// 未授权
 							getWeChatAuthorization()
+						}else{
+							this.$toast(res.errorMsg)
 						}
-					}
+					// }
 				} catch (error) {
 					throw new Error("系统错误", error)
 				}
@@ -233,6 +235,7 @@
 			},
 			// 支付宝支付
 			openPayWeb(body) {
+				uni.removeStorageSync("isWxPay")
 				const formElement = document.createElement("div");
 				formElement.style.display = "display:none;";
 				formElement.innerHTML = body; //去到from

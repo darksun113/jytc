@@ -52,7 +52,7 @@
 			uni.$on("toOpenSharePoster",()=>{
 				const prePurchaseId=this.prePurchaseId
 				const userId=uni.getStorageSync("userInfo").buyerId
-				const baseCodeUrl = process.env.NODE_ENV=="development" ? "http://192.168.2.11:8080":"http://h5.jytc-test.binavy.com/"
+				const baseCodeUrl = process.env.NODE_ENV=="development" ? "http://192.168.2.11:8080":"https://h5.jialex.cn/"
 				this.posterData={
 					codeUrl :`${baseCodeUrl}/subpageA/SharePage/SharePage?prePurchaseId=${prePurchaseId}&userId=${userId}`,
 					posterImg:this.prePurchaseInfo.seriesImg,

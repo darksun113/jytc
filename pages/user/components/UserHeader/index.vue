@@ -16,14 +16,14 @@
 			<view class="user-info-item">
 				<view class="id-style">
 					<view>ID：</view> 
-					<view class="nowrap_s" style="max-width: 300rpx;">{{$store.state.userInfo.buyerId}}</view>
+					<view class="nowrap_s" style="max-width: 280rpx;">{{$store.state.userInfo.buyerId}}</view>
 				</view>
 				<image class="copy-icon" src="@/static/images/copy_icon.svg" @click="copy($store.state.userInfo.buyerId)"></image>
 			</view>
 			<view class="user-info-item">
 				<view class="id-style">
-					<view style="min-width: 164rpx;">区块链地址：</view> 
-					<view class="nowrap_s" style="max-width: 300rpx;">{{$store.state.userInfo.blockchainAddress}}</view>
+					<view style="min-width: 168rpx;">区块链地址：</view> 
+					<view class="nowrap_s" style="max-width: 280rpx;">{{$store.state.userInfo.blockchainAddress}}</view>
 				</view>
 				<image class="copy-icon" src="@/static/images/copy_icon.svg" @click="copy($store.state.userInfo.blockchainAddress)"></image>
 			</view>
@@ -132,7 +132,6 @@
 				.id-style{
 					display: flex;
 					font-size: 28rpx;
-					max-width: 500rpx;
 					font-family: PingFangSC-Regular, PingFang SC;
 					font-weight: 400;
 					color: #FFFFFF;

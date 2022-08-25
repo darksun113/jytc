@@ -17,7 +17,7 @@
 					<view class="left">持卡人</view>
 					<view class="right">
 						<u-form-item  label="" prop="name" ref="name">
-							<u--input class="u-input" placeholder="持卡人姓名" v-model="form.name" type="text" suffixIconStyle="color:#000"
+							<u--input class="u-input" @change="nameInput(form.name)" placeholder="持卡人姓名" v-model:value="form.name" type="text" suffixIconStyle="color:#000"
 								color="#FFFFFF" border="" clearable>
 							</u--input>
 						</u-form-item>
@@ -28,7 +28,7 @@
 					<view class="left">身份证号</view>
 					<view class="right">
 						<u-form-item  label="" prop="id" ref="id">
-							<u--input class="u-input" placeholder="持卡人身份证号码" v-model="form.id" type="text" suffixIconStyle="color:#000"
+							<u--input class="u-input" @change="idInput(form.id)" maxlength="18" placeholder="持卡人身份证号码" v-model:value="form.id" type="text" suffixIconStyle="color:#000"
 								color="#FFFFFF" border="" clearable>
 							</u--input>
 						</u-form-item>
@@ -39,7 +39,7 @@
 					<view class="left">手机号</view>
 					<view class="right">
 						<u-form-item  label="" prop="phone" ref="phone">
-							<u--input class="u-input" placeholder="银行预留手机号" v-model="form.phone" type="text" suffixIconStyle="color:#000"
+							<u--input class="u-input" maxlength="11" placeholder="银行预留手机号" v-model="form.phone" type="text" suffixIconStyle="color:#000"
 								color="#FFFFFF" border="" clearable>
 							</u--input>
 						</u-form-item>
@@ -49,8 +49,8 @@
 				<view class="line">
 					<view class="verify-left-input">
 						<u-form-item class="verify-left-form-item" label="" prop="code" ref="code">
-							<u--input class="verify-left-u-input" placeholder="请输入验证码" type="text" suffixIconStyle="color:#000"
-								color="#FFFFFF" border="" v-model:value="verifyCode" clearable>
+							<u--input class="verify-left-u-input" placeholder="请输入验证码" type="number" suffixIconStyle="color:#000"
+								color="#FFFFFF" border="" v-model:value="verifyCode" @input="input" clearable>
 							</u--input>
 						</u-form-item>
 						<hr>
@@ -82,15 +82,16 @@
 					id:"",
 					phone:""
 				},
+				historyStr:"",
+				tmp:"",
+				historyName:"",
+				n_tmp:"",
 				rules:{
 					card_num:[
 						{
 							required: true,
 							message: '请输入银行卡卡号', 
 							trigger: ['blur'],
-						},
-						{
-							max: 18
 						}
 					],
 					name:[
@@ -121,6 +122,44 @@
 			this.init()
 		},
 		methods: {
+			async idInput(value){
+				var reg=/[0-9]/
+				var reg_x=/[X]/
+				if(value.length==0){
+					this.historyStr=""
+				}else{
+					this.tmp=value.substr(value.length-1)
+					if(value.length<18){
+						if(reg.test(this.tmp)){
+							this.historyStr=await value
+						}else{
+							// 非数字
+							this.form.id = await this.historyStr
+						}
+					}else{
+						if(reg.test(this.tmp)||reg_x.test(this.tmp)){
+							this.historyStr=await value
+						}else{
+							this.form.id = await this.historyStr
+						}
+					}
+				}
+			},
+			async nameInput(value){
+				var reg=/[\u4e00-\u9fa5]/
+				if(value.length==0){
+					this.historyName=""
+				}else{
+					this.n_tmp=value.substr(value.length-1)
+					if(reg.test(this.n_tmp)){
+						this.historyName = await value
+						console.log(this.historyName)
+					}else{
+						// 非数字
+						this.form.name = await this.historyName
+					}
+				}
+			},
 			init(){
 				this.form={
 					card_num:null,

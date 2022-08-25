@@ -87,15 +87,12 @@
 				this.$emit("setPayType",type)
 			},
 			init(){
+				const wxPay = uni.getStorageSync("isWxPay")
+				if(wxPay=='wxPay'){
+					this.payType="wxPay"
+				}
 				this.cardList=[]
 				this.getCardList()
-				// console.log(this.cardList)
-				// //set default card value
-				// if(this.cardList.length>0){
-				// 	this.selected_card_name=this.cardList[0].bankName
-				// 	this.selected_card_num=this.cardList[0].bankNo
-				// 	this.p_ext=this.cardList[0].ext
-				// }
 			},
 			updateList(){
 				if(this.isCanReq)return;

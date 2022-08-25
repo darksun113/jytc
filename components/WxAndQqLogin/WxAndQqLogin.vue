@@ -28,15 +28,6 @@
 			isWechat() {
 				return String(navigator.userAgent.toLowerCase().match(/MicroMessenger/i)) === "micromessenger";
 			},
-			// loginQQ(){
-			// 	QC.Login.showPopup({
-			// 		appId:"1112149835",
-			// 		redirectURI:"http://192.168.2.27:8080/pages/home/home"
-			// 	})
-			// 	// uni.navigateTo({
-			// 	// 	url:"/pages/login/BindingPhone/BindingPhone"
-			// 	// })
-			// }
 		}
 	}
 </script>

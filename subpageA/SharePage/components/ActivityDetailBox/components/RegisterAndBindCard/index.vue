@@ -6,7 +6,7 @@
 		<view class="share-poster-btn" :style="{background:$store.state.token?'#007980':'#28D8E5'}" v-if="true" @click="toRegister">
 			{{$store.state.token?"已完成注册":"立即注册"}}
 		</view>
-		<view class="share-poster-btn" v-if="true" @click="toBlindIdCard">
+		<view class="share-poster-btn" :style="{background:!$store.state.token?'#007980':'#28D8E5'}" @click="toBlindIdCard">
 			立即实名认证
 		</view>
 	</view>
@@ -35,7 +35,7 @@
 				this.$routerTo(url)
 			},
 			toBlindIdCard(){
-				if(this.$checkLogin())return
+				if(!this.$store.state.token)return
 				const url = `/subpageA/BindIdCard/BindIdCard`
 				this.$routerTo(url)
 			}

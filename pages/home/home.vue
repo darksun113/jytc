@@ -1,7 +1,8 @@
 <template>
 	<PageTemp style="padding: 0 40rpx;">
 		<scroll-view class="home" scroll-y="true" @scrolltolower="updateList">
-			<Banner></Banner>
+			<!-- <Search /> -->
+			<Banner />
 			<StickyNav @changeShowType="changeShowType"></StickyNav>
 			<view class="container">
 				<IsNoData v-if="!hasData">暂无数据</IsNoData>
@@ -18,11 +19,13 @@
 <script>
 	import Banner from "./components/Banner/index.vue"
 	import StickyNav from "./components/StickyNav/index.vue"
+	import Search from "./components/Search"
 	import { getFilePath } from "@/utils/tools.js"
 	export default {
 		components: {
 			Banner,
-			StickyNav
+			StickyNav,
+			Search
 		},
 		data() {
 			return {

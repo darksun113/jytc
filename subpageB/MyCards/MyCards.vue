@@ -35,6 +35,7 @@
 			<button class="nono-btn" @click="addCard">添加</button>
 		</IsNoCards>
 	</PageTemp>
+
 </template>
 
 <script>
@@ -60,9 +61,9 @@
 				this.cardList=[]
 				this.getCardList(list=>{
 					if(list==0){
-						hasCard=false;
+						this.hasCard=false;
 					}else{
-						hasCard=true;
+						this.hasCard=true;
 						this.cardList=list;
 					}
 				})
@@ -212,14 +213,12 @@
 		}
 	}
 	.nono-btn{
+		width: 496rpx;
 		background: #28D8E5;
 		border-radius: 8rpx;
-		width: 496rpx;
 		font-size: 32rpx;
 		font-family: PingFangSC-Medium, PingFang SC;
 		font-weight: 500;
 		color: #000000;
 	}
-	
-	
 </style>

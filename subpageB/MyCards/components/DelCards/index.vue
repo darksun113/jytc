@@ -1,30 +1,32 @@
 <template>
-	<view class="main">
-		<view class="item">
-			<view class="card-info">
-				<view class="icon-container">
-					<view class="icon-bg">
-						<image class="bank-icon" :src="getIcon(p_name)" mode=""></image>
+	<PageTemp>
+		<view class="main">
+			<view class="item">
+				<view class="card-info">
+					<view class="icon-container">
+						<view class="icon-bg">
+							<image class="bank-icon" :src="getIcon(p_name)" mode=""></image>
+						</view>
 					</view>
-				</view>
-				<view class="info">
-					<view class="left-part">
-						<view class="name">{{ p_name }}</view>
-						<view class="card-type">储蓄卡</view>
+					<view class="info">
+						<view class="left-part">
+							<view class="name">{{ p_name }}</view>
+							<view class="card-type">储蓄卡</view>
+						</view>
+						<view class="right-part">**** {{ p_card_num }}</view>
 					</view>
-					<view class="right-part">**** {{ p_card_num }}</view>
 				</view>
 			</view>
+			<button class="unbind-btn" @click="open">解除绑定</button>
+			<u-popup class="pop" :show="shows" mode="center">
+				<view class="txt">是否要解绑银行卡</view>
+				<view class="choice">
+					<view class="left" @click="cancel">取消</view>
+					<view class="right" @click="unbind()">确定</view>
+				</view>
+			</u-popup>
 		</view>
-		<button class="unbind-btn" @click="open">解除绑定</button>
-		<u-popup class="pop" :show="shows" mode="center">
-			<view class="txt">是否要解绑银行卡</view>
-			<view class="choice">
-				<view class="left" @click="cancel">取消</view>
-				<view class="right" @click="unbind()">确定</view>
-			</view>
-		</u-popup>
-	</view>
+	</PageTemp>
 </template>
 
 <script>
@@ -57,13 +59,22 @@
 					})
 					console.log(res)
 					if(res.code==0){
-						alert("解除绑定成功")
+						uni.showToast({
+							title: "解除绑定失败",
+							icon: 'error'
+						})
 						this.$routerTo(`/subpageB/MyCards/MyCards`)
 					}else{
-						alert("发生错误")
+						uni.showToast({
+							title: "发生错误",
+							icon: 'error'
+						})
 					}
 				}catch(e){
-					alert("alsjfoweihf")
+					uni.showToast({
+						title: "发生错误",
+						icon: 'error'
+					})
 				}
 				
 			},
@@ -76,7 +87,7 @@
 
 <style lang="less">
 	.main{
-		height: 100vh;
+		height: 100%;
 		overflow: auto;
 		color: #FFFFFF;
 		display: flex;

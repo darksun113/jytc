@@ -25,7 +25,7 @@
 
 <script>
 	let jweixin = require('jweixin-module')
-	
+	import {getWeChatAuthorization} from "@/libs/jsm/wx-login.js"
 	export function isWechatBrowser() {
 		let status = navigator.userAgent.toLowerCase();
 		if (status.match(/MicroMessenger/i) == "micromessenger") {
@@ -182,6 +182,8 @@
 						}else{
 							onBridgeReady();
 						}
+					}else if(res.code == 9){
+						// 未授权
 					}
 				} catch (error) {
 					throw new Error("系统错误", error)

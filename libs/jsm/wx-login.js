@@ -12,8 +12,8 @@ function getLocal(){
 	}
 }
 
-//请求微信接口，用来获取code
-export function getWeChatLogin() {
+//请求微信接口，用来获取授权code
+export function getWeChatAuthorization() {
 	let appid = 'wx54ab5619521ee3b0'
 	//通过微信官方接口获取code之后，会重新刷新设置的回调地址【redirect_uri】
 	window.location.href = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appid + "&redirect_uri=" + localURL + "&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect";
@@ -57,8 +57,10 @@ function afterAuthorization(res,code) {
 		uni.setStorageSync("token",res.data.token)
 		const reg_url="https://h5.jialex.cn/subpageB/OrderPage/OrderPage"
 		if(reg_url == localURL){
+			// 授权支付
 			setPay()
 		}else{
+			// 授权登录
 			afterLogin()
 		}
 	}else{

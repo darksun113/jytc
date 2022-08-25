@@ -1,10 +1,12 @@
 
 var localURL = getLocal()
 function getLocal(){
-	const reg_url="https://h5.jialex.cn/subpageB/OrderPage/OrderPage"
+	const reg_url="http://h5.jytc-test.binavy.com/subpageB/OrderPage/OrderPage"
+	// const reg_url="https://h5.jialex.cn/subpageB/OrderPage/OrderPage"
 	const pay_local_test = window.location.href.split("?")[0]; //获取当前页面地址作为回调地址
 	const payLocal = window.location.href.split("&code")[0]; //获取当前页面地址作为回调地址
-	const proLocal = "https://h5.jialex.cn/pages/login/QuickLoginTemp/QuickLoginTemp"; //获取当前页面地址作为回调地址
+	const proLocal = "http://h5.jytc-test.binavy.com/pages/login/QuickLoginTemp/QuickLoginTemp"; //获取当前页面地址作为回调地址
+	// const proLocal = "https://h5.jialex.cn/pages/login/QuickLoginTemp/QuickLoginTemp"; //获取当前页面地址作为回调地址
 	if(reg_url == pay_local_test){
 		return payLocal
 	}else{
@@ -55,7 +57,8 @@ async function getOpenidAndUserinfo(code) {
 function afterAuthorization(res,code) {
 	if(res.data.token){
 		uni.setStorageSync("token",res.data.token)
-		const reg_url="https://h5.jialex.cn/subpageB/OrderPage/OrderPage"
+		const reg_url="http://h5.jytc-test.binavy.com/subpageB/OrderPage/OrderPage"
+		// const reg_url="https://h5.jialex.cn/subpageB/OrderPage/OrderPage"
 		if(reg_url == localURL){
 			// 授权支付
 			setPay()

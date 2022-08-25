@@ -3,16 +3,21 @@
 		<view class="title">请选择支付方式</view>
 		<view class="type-item-bank" @click="selectPayType('bankPay')">
 			<image src="../../static/images/ccb.svg" mode=""></image>
-			<view class="card-info">
+			<view class="cardinfo-box">
 				<view class="txt1">银行卡支付</view>
-				<view class="txt2" v-if="this.cardList.length!==0"> 
-					{{ selected_card_name }} 储蓄卡 ({{ selected_card_num }})
+				
+				<view class="change-box">
+					<view class="txt2" v-if="this.cardList.length!==0">
+						{{ selected_card_name }} 储蓄卡 ({{ selected_card_num }})
+					</view>
+					<view class="change">
+						<view class="bg" @click="changeCard">
+							<view class="bg-txt">添加/更换银行卡</view>
+						</view>
+					</view>
 				</view>
-			</view>
-			<view class="change">
-				<view class="bg" @click="changeCard">
-					<view class="bg-txt">更改</view>
-				</view>
+				
+				
 			</view>
 			<image v-show="payType=='bankPay'" class="check-icon" style="width: 28rpx;height: 24rpx;" src="../../static/images/check.svg"></image>
 		</view>
@@ -171,34 +176,35 @@
 				height: 48rpx;
 				padding-top: 20rpx;
 			}
-			.card-info{
-				padding-top: 18rpx;
-				padding-left: 40rpx;
-				padding-right: 20rpx;
+			.cardinfo-box{
+				padding: 18rpx 20rpx 0rpx 40rpx;
+				display: flex;
+				flex-direction: column;
 				.txt1{
 					font-size: 28rpx;
 				}
-				.txt2{
-					font-size: 24rpx;
+				.change-box{
+					width: 556rpx;
+					display: flex;
 					padding-bottom: 20rpx;
-				}
-			}
-			.change{
-				font-size: 24rpx;
-				font-weight: 400;
-				color: #FFFFFF;
-				line-height: 34rpx;
-				padding-top: 36rpx;
-				.bg{
-					width: 80rpx;
-					height: 64rpx;
-					background: #999999;
-					border-radius: 10px 10px 10px 0px;
-					.bg-txt{
-						padding: 16rpx
+					.txt2{
+						font-size: 24rpx;
+						padding-right: 52rpx;
+					}
+					.change{
+						font-size: 24rpx;
+						font-weight: 400;
+						color: #FFFFFF;
+						.bg{
+							.bg-txt{
+								color: #4C88BD;
+							}
+						}
 					}
 				}
+				
 			}
+			
 			.check-icon {
 				position: absolute;
 				right: 20rpx;

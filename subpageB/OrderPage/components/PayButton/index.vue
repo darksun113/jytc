@@ -18,8 +18,25 @@
 			</view>
 			<u-button class="resend" @click="resend">重新发送</u-button>
 		</u-popup>
-		<!-- <one @getCard="setCard"></one> -->
-		<view/>
+		<u-popup class="pop2" :show="check_shows" :round="10" mode="center">
+			<view class="check_head">
+				<view class="check_headtxt">支付提示</view>
+				<image class="x" @click="closeCpop" src="../../static/images/x.svg"></image>
+			</view>
+			<view class="check_body">
+				<view>因微信支付限制，需关注平台公众号后在微信</view>
+				<view>浏览器打开平台才可使用微信进行支付！</view>
+				<br>
+				<view>第1步：打开微信添加朋友</view>
+				<view>第2步：在搜索里输入公众号名称</view>
+				<view>第3步：关注公众号即可在公众号开启网页</view>
+			</view>
+			<view class="copy" >
+				<button class="copy-btn" @click="copy">
+					点击复制名称
+				</button>
+			</view>
+		</u-popup>
 	</view>
 </template>
 
@@ -52,7 +69,8 @@
 				paygateBizSn: null,
 				verifyCode:"",
 				cardId: this.cardId_,
-				isWx:false
+				isWx:false,
+				check_shows: false,
 			}
 		},
 		async mounted(){
@@ -82,6 +100,9 @@
 			},
 			closePop(){
 				this.shows=false
+			},
+			closeCpop(){
+				this.check_shows=false
 			},
 			async bankPay(){
 				try{
@@ -142,8 +163,8 @@
 			// 微信
 			async wxPay() {
 				try {
-					// this.checkWx()
-					// if(!this.isWx){
+					this.checkWx()
+					if(!this.isWx){
 						const res = await uni.$http("/payment/prepay", {
 							orderNo: this.orderNo,
 							appType: 'H5',
@@ -186,7 +207,7 @@
 						}else{
 							this.$toast(res.errorMsg)
 						}
-					// }
+					}
 				} catch (error) {
 					throw new Error("系统错误", error)
 				}
@@ -346,4 +367,49 @@
 			border-color: #FFFFFF;
 		}
 	}
+	.pop2{
+			width: 600rpx;
+			color: black;
+			display: flex;
+			flex-direction: column;
+			font-size: 32rpx;
+			border-radius: 20rpx;
+			.check_head{
+				height: 124rpx;
+				display: flex;
+				text-align: center;
+				border-bottom: 2rpx solid #EEEEEE;
+				.check_headtxt{
+					font-size: 32rpx;
+					font-weight: 500;
+					padding: 40rpx 180rpx 40rpx 240rpx;
+				}
+				.x{
+					width: 32rpx;
+					height: 32rpx;
+					padding: 46rpx 40rpx 0rpx 0rpx;
+				}
+			}
+			.check_body{
+				font-size: 28rpx;
+				padding: 40rpx 30rpx;
+				display: flex;
+				flex-direction: column;
+			}
+			.copy{
+				padding: 0rpx 160rpx 40rpx;
+				.copy-btn{
+					width: 280rpx;
+					height: 64rpx;
+					font-weight: 500;
+					color: #000000;
+					background: linear-gradient(180deg, #70D0FF 0%, #D575FF 100%);	
+					text-align: center;
+					font-size: 28rpx;
+					font-family: PingFangSC-Medium, PingFang SC;
+					border-radius: 44rpx;
+					background-color: white;
+				}
+			}
+		}
 </style>

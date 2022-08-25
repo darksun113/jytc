@@ -39,7 +39,7 @@
 					<view class="left">手机号</view>
 					<view class="right">
 						<u-form-item  label="" prop="phone" ref="phone">
-							<u--input class="u-input" maxlength="11" placeholder="银行预留手机号" v-model="form.phone" type="text" suffixIconStyle="color:#000"
+							<u--input class="u-input" maxlength="11" placeholder="银行预留手机号" v-model="form.phone" type="number" suffixIconStyle="color:#000"
 								color="#FFFFFF" border="" clearable>
 							</u--input>
 						</u-form-item>
@@ -60,8 +60,25 @@
 					</button >
 				</view>
 			</u--form>
-		
 			<view class="done-btn" @click="done">完成</view>
+			<view class="bottom">
+				<view class="bottom-head">
+					<view class="bottom-head-txt">提示：银行卡绑定仅支持下方银行的储蓄卡</view>
+				</view>
+				
+				<view class="bottom-body">
+					<view class="items" v-for="(item,index) in bankList" :key="index">
+						<view class="item">
+							<view class="item-icon">
+								<image class="the-icon" :src="item.icon"></image>
+							</view>
+							<view class="item-name">
+								{{ item.name }}
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
 		</view>
 	</PageTemp>
 </template>
@@ -86,36 +103,56 @@
 				tmp:"",
 				historyName:"",
 				n_tmp:"",
-				rules:{
-					card_num:[
-						{
-							required: true,
-							message: '请输入银行卡卡号', 
-							trigger: ['blur'],
-						}
-					],
-					name:[
-						{
-							required: true,
-							message: '请输入持卡人姓名', 
-							trigger: ['blur'],
-						}
-					],
-					id:[
-						{
-							required: true,
-							message: '请输入身份证号', 
-							trigger: ['blur'],
-						}
-					],
-					phone:[
-						{
-							required: true,
-							message: '请输入预留手机号', 
-							trigger: ['blur'],
-						}
-					],
-				}
+				bankList:[
+					{
+						name:"工商银行",
+						icon:"../../../../static/bank_images/工商银行.svg"
+					},
+					{
+						name:"建设银行",
+						icon:"../../../../static/bank_images/建设银行.svg"
+					},
+					{
+						name:"民生银行",
+						icon:"../../../../static/bank_images/民生银行.svg"
+					},
+					{
+						name:"光大银行",
+						icon:"../../../../static/bank_images/光大银行.svg"
+					},
+					{
+						name:"浦发银行",
+						icon:"../../../../static/bank_images/浦发银行.svg"
+					},
+					{
+						name:"平安银行",
+						icon:"../../../../static/bank_images/平安银行.svg"
+					},
+					{
+						name:"华夏银行",
+						icon:"../../../../static/bank_images/华夏银行.svg"
+					},
+					{
+						name:"中信银行",
+						icon:"../../../../static/bank_images/中信银行.svg"
+					},
+					{
+						name:"广发银行",
+						icon:"../../../../static/bank_images/广发银行.svg"
+					},
+					{
+						name:"渤海银行",
+						icon:"../../../../static/bank_images/渤海银行.svg"
+					},
+					{
+						name:"浙商银行",
+						icon:"../../../../static/bank_images/浙商银行.svg"
+					},
+					{
+						name:"上海银行",
+						icon:"../../../../static/bank_images/上海银行.svg"
+					},
+				]
 			}
 		},
 		beforeDestroy() {
@@ -318,6 +355,49 @@
 			margin-top: 60rpx;
 			padding-top: 20rpx;
 			padding-bottom: 20rpx;
+		}
+		.bottom{
+			display: flex;
+			flex-direction: column;
+			font-size: 24rpx;
+			font-family: SourceHanSansCN-Regular, SourceHanSansCN;
+			font-weight: 400;
+			color: #FFFFFF;
+			line-height: 36rpx;
+			.bottom-head{
+				padding-top: 180rpx;
+			}
+			.bottom-body{
+				width: 700rpx;
+				padding-top: 40rpx;
+				display: flex;
+				flex-wrap: wrap;
+				.items{
+					display: flex;
+					flex-direction: column;
+					padding-right: 42rpx;
+					.item{
+						display: flex;
+						.item-icon{
+							width: 34rpx;
+							height: 34rpx;
+							background-color: white;
+							border-radius: 50%;
+							.the-icon{
+								padding:4rpx;
+								width: 26rpx;
+								height: 26rpx;
+							}
+						}
+						.item-name{
+							width: 102rpx;
+							padding-left: 10rpx;
+						}
+					}
+				}
+			}
+
+			
 		}
 	}
 </style>

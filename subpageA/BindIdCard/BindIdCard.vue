@@ -45,6 +45,7 @@
 </template>
 
 <script>
+	import { checkAI } from "@/utils/tools.js"
 	export default {
 		name: "BindIdCard",
 		data() {
@@ -64,6 +65,9 @@
 					'任何未满18周岁的未成年人均不得注册帐号或实名验证。本平台将依赖您提供的个人信息判断用户是否为未成年人。此外，如果您不具有完全民事行为能力，请在法定监护人（以下简称"监护人"）的陪同下判断是否实名认证。您点击确认或其他类似按钮并继续实名认证即视为您已经取得监护人的必要同意。'
 				],
 			};
+		},
+		onLoad(){
+			checkAI(2)
 		},
 		methods: {
 			warningTip() {

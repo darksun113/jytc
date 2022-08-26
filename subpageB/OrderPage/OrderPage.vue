@@ -15,6 +15,7 @@
 	import PayType from "./components/PayType/index.vue"
 	import PayButton from "./components/PayButton/index.vue"
 	import {getFilePath} from "@/utils/tools.js"
+	import { checkAI } from "@/utils/tools.js"
 	export default {
 		components:{
 			OrderStatus,
@@ -24,6 +25,7 @@
 		},
 		onLoad(opt) {
 			this.orderNo=opt.orderNo?opt.orderNo : uni.getStorageSync("orderNo")
+			checkAI(4)
 		},
 		onShow() {
 			this.getOrderInfo()

@@ -21,6 +21,7 @@
 	import StickyNav from "./components/StickyNav/index.vue"
 	import Search from "./components/Search"
 	import { getFilePath } from "@/utils/tools.js"
+	import { checkAI } from "@/utils/tools.js"
 	export default {
 		components: {
 			Banner,
@@ -40,9 +41,10 @@
 		},
 		onShow() {
 			this.init()
+			this.getUrl()
 		},
 		onLoad() {
-			
+			checkAI(1)
 		},
 		onHide() {
 			if (this.isLastItem) {
@@ -50,6 +52,23 @@
 			}
 		},
 		methods: {
+			getUrl() {
+				var pages = getCurrentPages() //获取加载的页面
+				var currentPage = pages[pages.length - 1] //获取当前页面的对象
+				var url = currentPage.route //当前页面url
+				var options = currentPage.options //如果要获取url中所带的参数可以查看options
+				//参数多时通过&拼接url的参数
+				var urlWithArgs = url + '?'
+				for (var key in options) {
+					var value = options[key]
+					if(key=="code"&&value=="ai"){
+						uni.setStorage({
+						   key: 'isAI',
+						   data: true
+						})
+					}
+				}
+			},
 			changeShowType(type) {
 				this.showType = type
 			},

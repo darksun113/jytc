@@ -65,7 +65,6 @@
 				<view class="bottom-head">
 					<view class="bottom-head-txt">提示：银行卡绑定仅支持下方银行的储蓄卡</view>
 				</view>
-				
 				<view class="bottom-body">
 					<view class="items" v-for="(item,index) in bankList" :key="index">
 						<view class="item-icon">
@@ -289,7 +288,7 @@
 		overflow: auto;
 		font-family: PingFangSC-Regular, sans-serif;
 		box-sizing: border-box;
-		padding: 160rpx 40rpx 0rpx 40rpx;
+		padding: 146rpx 40rpx 0rpx 40rpx;
 		
 		.input-form{
 			display: flex;
@@ -300,7 +299,7 @@
 			.line{
 				display: flex;
 				padding-top: 30rpx;
-				padding-bottom: 30rpx;
+				padding-bottom:22rpx;
 				.left{
 					width: 128rpx;
 					padding-top: 10rpx;
@@ -373,17 +372,7 @@
 				.items{
 					width: 25%;
 					display: flex;
-					margin-top:10rpx ;
-					// padding-right: 42rpx;
-					// &:nth-child(4){
-					// 	padding-right: 0;
-					// }
-					// &:nth-child(8){
-					// 	padding-right: 0;
-					// }
-					// &:nth-child(12){
-					// 	padding-right: 0;
-					// }
+					margin-bottom:30rpx ;
 					.item-icon{
 						width: 34rpx;
 						height: 34rpx;

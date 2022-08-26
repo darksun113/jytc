@@ -11,7 +11,7 @@
 </template>
 
 <script>
-	import {getWeChatAuthorization} from "@/libs/jsm/wx-login.js"
+	import {getWeChatAuthorization} from "@/libs/jsm/wx-authorization.js"
 	export default{
 		name:"WxAndQqLogin",
 		data(){

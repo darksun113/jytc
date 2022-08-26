@@ -42,7 +42,7 @@
 
 <script>
 	let jweixin = require('jweixin-module')
-	import {getWeChatAuthorization,checkWeChatCode} from "@/libs/jsm/wx-login.js"
+	import {getWeChatAuthorization,checkWeChatCode} from "@/libs/jsm/wx-authorization.js"
 	export function isWechatBrowser() {
 		let status = navigator.userAgent.toLowerCase();
 		if (status.match(/MicroMessenger/i) == "micromessenger") {

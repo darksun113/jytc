@@ -3,7 +3,7 @@
 </template>
 
 <script>
-	import {checkWeChatCode} from "@/libs/jsm/wx-login.js"
+	import {checkWeChatCode} from "@/libs/jsm/wx-authorization.js"
 	export default {
 		data() {
 			return {

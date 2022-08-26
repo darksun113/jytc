@@ -33,9 +33,10 @@
 		</view>
 		<u-popup class="pop" :show="Shows" mode="bottom">
 			<view class="head">
-				<image @click="closePop" src="../../static/images/return.svg"></image>
-				<view class="txt">请选择银行卡</view>
+				<view class="txt">选择银行卡</view>
+				<image @click="closePop" src="../../static/images/x.svg"></image>
 			</view>
+			
 			<scroll-view class="list" scroll-y="true" @scrolltolower="updateList">
 				<view class="cards" v-for="(item,index) in cardList" :key="index" >
 					<view class="card-info">
@@ -241,16 +242,17 @@
 			flex-direction: column;
 			.head{
 				display: flex;
-				image{
-					width: 38rpx;
-					height: 64rpx;
-					padding: 20rpx 0rpx 20rpx 20rpx;
-				}
+				border-bottom: 2rpx solid #EEEEEE;
+				padding-top: 26rpx;
 				.txt{
 					color: #000000;
-					padding-top: 26rpx;
-					padding-left: 220rpx;
+					padding-left: 260rpx;
 					font-size: 36rpx;
+				}
+				image{
+					width: 36rpx;
+					height: 36rpx;
+					padding: 0rpx 0rpx 20rpx 222rpx;
 				}
 			}
 			.list{

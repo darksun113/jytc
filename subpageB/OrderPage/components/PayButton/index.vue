@@ -168,7 +168,7 @@
 			async wxPay() {
 				try {
 					this.checkWx()
-					if(!this.isWx){
+					if(this.isWx){
 						const res = await uni.$http("/payment/prepay", {
 							orderNo: this.orderNo,
 							appType: 'H5',

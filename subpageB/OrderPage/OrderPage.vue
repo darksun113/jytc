@@ -31,7 +31,7 @@
 		data() {
 			return {
 				orderNo:"",
-				payType:"aliPay",
+				payType:"bankPay",
 				orderInfo:{},
 				cardId:""
 			};

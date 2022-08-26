@@ -51,7 +51,7 @@
 					</u-radio-group>
 				</view>
 				<button class="add-cards-btn" @click="addCard">
-					<image class="add-icon" src="../../static/images/plus.svg"></image>
+					<image class="add-icon" src="../../static/images/plus2.svg"></image>
 					<view vlass="add-txt">添加银行卡</view>
 					<image class="arrow" src="../../static/images/right_arrow.svg"></image>
 				</button>
@@ -219,7 +219,6 @@
 			display: flex;
 			align-items: center;
 			font-size: 28rpx;
-			font-family: PingFangSC-Regular, PingFang SC;
 			color: #000000;
 			line-height: 30px;
 			border-top: 2rpx solid #EEE;
@@ -243,16 +242,15 @@
 			.head{
 				display: flex;
 				border-bottom: 2rpx solid #EEEEEE;
-				padding-top: 26rpx;
-				.txt{
-					color: #000000;
-					padding-left: 260rpx;
-					font-size: 36rpx;
-				}
+				padding: 40rpx 40rpx 40rpx 296rpx;
+				font-size: 32rpx;
+				font-weight: 500;
+				color: #000000;
+				line-height: 44rpx;
 				image{
 					width: 36rpx;
 					height: 36rpx;
-					padding: 0rpx 0rpx 20rpx 222rpx;
+					padding: 0rpx 0rpx 0rpx 222rpx;
 				}
 			}
 			.list{

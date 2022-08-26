@@ -24,7 +24,6 @@
 		},
 		onLoad(opt) {
 			this.orderNo=opt.orderNo?opt.orderNo : uni.getStorageSync("orderNo")
-			
 		},
 		onShow() {
 			this.getOrderInfo()

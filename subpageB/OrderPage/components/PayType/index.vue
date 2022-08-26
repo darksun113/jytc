@@ -84,8 +84,6 @@
 		mounted() {
 			this.init();
 		},
-		onLoad(){
-		},
 		methods:{
 			selectPayType(type){
 				this.payType=type
@@ -94,7 +92,8 @@
 			init(){
 				const wxPay = uni.getStorageSync("isWxPay")
 				if(wxPay=='wxPay'){
-					this.payType="wxPay"
+					this.payType = "wxPay"
+					this.$emit("setPayType",this.payType)
 				}
 				this.cardList=[]
 				this.getCardList()

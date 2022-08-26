@@ -7,7 +7,7 @@
 				<CardOfObject v-for="(item,index) in goodsList" :key="index" :item="item"></CardOfObject>
 				<IsEnd v-if="isLastItem"></IsEnd>
 			</scroll-view>
-			<SecurityControls v-else-if="privacyAuth==1">
+			<SecurityControls v-else-if="privacyAuth ==1">
 				由于该用户隐私设置，藏品不可见
 			</SecurityControls>
 			<IsNoObject v-else>
@@ -120,6 +120,7 @@
 	padding: 40rpx;
 	.container{
 		height: calc(100% - 260rpx);
+		position: relative;
 		.title{
 			text-align: center;
 			font-size: 36rpx;

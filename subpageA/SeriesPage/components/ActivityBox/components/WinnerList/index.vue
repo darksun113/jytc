@@ -95,6 +95,7 @@
 		width: 100%;
 		background: #333;
 		color: #FFFFFF;
+		position: relative;
 		.title-rules{
 			font-size: 32rpx;
 			font-family: PingFangSC-Medium, PingFang SC;

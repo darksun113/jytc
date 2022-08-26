@@ -63,7 +63,7 @@
 		}
 		.goods-count{
 			padding: 6rpx 4rpx;
-			background: rgba(10, 12, 71, .5);
+			background: rgba(0, 0, 0, .5);
 			border-radius: 2px;
 			font-size: 20rpx;
 			font-family: PingFangSC-Regular, PingFang SC;

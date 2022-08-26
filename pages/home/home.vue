@@ -129,5 +129,9 @@
 		width: 100%;
 		overflow: auto;
 		color: #FFFFFF;
+		.container{
+			position: relative;
+			height: calc(100% - 280rpx - 150rpx);
+		}
 	}
 </style>

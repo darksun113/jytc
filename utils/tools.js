@@ -481,18 +481,3 @@ export async function formatImg(file, type,cb) {
         throw new Error("系统错误")
     }
 }
-
-export async function checkAI(type){
-	const res1 = uni.getStorageSync('isAI')
-	
-	if(res1==true){
-		try{
-			const res2 = await uni.$http('/log/addLog',{
-				"type": type
-			})
-		}catch(e){
-			//TODO handle the exception
-		}
-	}
-	
-}

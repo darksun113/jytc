@@ -34,9 +34,7 @@
 			uni.$on("toOpenSharePoster",()=>{
 				const name=uni.getStorageSync("userInfo").name
 				const avatar=uni.getStorageSync("userInfo").avatar
-				// const avatar=uni.getStorageSync("userInfo").avatar.split("?")[0]
 				const posterImg = this.goodsData.image
-				// const posterImg = this.goodsData.image.split("?")[0]
 				const instanceId = this.goodsData.goodsInstanceId?this.goodsData.goodsInstanceId:""
 				const baseCodeUrl = process.env.NODE_ENV=="development" ? "http://192.168.2.27:8080":"https://h5.jialex.cn/"
 				this.posterData={
@@ -46,7 +44,6 @@
 					avatar,
 					shopName:this.goodsData.shopName,
 					shopIcon:this.goodsData.shopIcon,
-					// shopIcon:this.goodsData.shopIcon.split("?")[0],
 					goodsName:this.goodsData.goodsName,
 					goodsCode:this.goodsData.goodsCode,
 					totalNum:this.goodsData.totalNumber,

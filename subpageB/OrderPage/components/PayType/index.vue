@@ -5,7 +5,6 @@
 			<image src="../../static/images/ccb.svg" mode=""></image>
 			<view class="cardinfo-box">
 				<view class="txt1">银行卡支付</view>
-				
 				<view class="change-box">
 					<view class="txt2" v-if="this.cardList.length!==0">
 						{{ selected_card_name }} 储蓄卡 ({{ selected_card_num }})
@@ -16,8 +15,6 @@
 						</view>
 					</view>
 				</view>
-				
-				
 			</view>
 			<image v-show="payType=='bankPay'" class="check-icon" style="width: 28rpx;height: 24rpx;" src="../../static/images/check.svg"></image>
 		</view>
@@ -151,7 +148,7 @@
 
 <style lang="scss" socped>
 	.pay-type{
-		margin-top: 40rpx;
+		margin: 40rpx 0;
 		width: 750rpx;
 		padding: 0 40rpx;
 		background: #FFFFFF;

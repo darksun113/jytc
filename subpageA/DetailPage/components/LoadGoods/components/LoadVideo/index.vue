@@ -4,7 +4,7 @@
 			<VideoPlayer ref="VideoPlayer" :videoData="goodsData"></VideoPlayer>
 		</view>
 		<Control v-if="goodsData.loadType==1" @preview="toOpenModelPreVideo" @share="toShare" :buyerName="goodsData.buyerName"></Control>
-		<view class="lock_text" v-else>购买后可在我的藏品进行高清观赏</view>
+		<view class="lock_text" v-else>购买后体验内容</view>
 		<Preview :isShow="isOpenPre" @close="isOpenPre=false">
 			<PreviewModel :videoData="goodsData" @close="closePreviewModel"></PreviewModel>
 		</Preview>

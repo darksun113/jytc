@@ -2,7 +2,7 @@
 	<view class="load-image">
 		<image class="goods-pic" :src="goodsData.image" mode="aspectFit"></image>
 		<Control  v-if="goodsData.loadType==1" @preview="toOpenModelPreImg" @share="toShare" :buyerName="goodsData.buyerName"></Control>
-		<view class="lock_text" v-else>购买后可在我的藏品进行高清观赏</view>
+		<view class="lock_text" v-else>购买后体验内容</view>
 		<Preview :isShow="isOpenPre" @close="isOpenPre=false">
 			<PreviewModel :goodsData="imgData" @close="closePreviewModel"></PreviewModel>
 		</Preview>
@@ -62,31 +62,12 @@
 			top: 50%;
 			transform: translate(-50%,-50%);
 		}
-		.lock-tip{
-			display: flex;
-			align-items: center;
-			position: absolute;
-			left: 50%;
-			bottom: 20rpx;
-			transform: translateX(-50%);
-			.lock-icon{
-				width: 20rpx;
-				height: 20rpx;
-				margin-right: 10rpx;
-			}
-			.lock-text{
-				font-size: 20rpx;
-				font-family: PingFangSC-Regular, PingFang SC;
-				color: #CCCCCC;
-				line-height: 28rpx;
-			}
-		}
 		.lock_text{
 			height: 28rpx;
 			font-size: 20rpx;
 			font-family: PingFangSC-Regular, PingFang SC;
 			font-weight: 400;
-			color: #FFFFFF;
+			color: #ccc;
 			line-height: 28rpx;
 			position: absolute;
 			left: 50%;

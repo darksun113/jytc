@@ -33,7 +33,6 @@
 				<view class="txt">选择银行卡</view>
 				<image @click="closePop" src="../../static/images/x.svg"></image>
 			</view>
-			
 			<scroll-view class="list" scroll-y="true" @scrolltolower="updateList">
 				<view class="cards" v-for="(item,index) in cardList" :key="index" >
 					<view class="card-info">

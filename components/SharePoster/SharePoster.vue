@@ -4,9 +4,9 @@
 		<view class="poster-page">
 			<image class="download_pic_icon" src="@/static/images/download_pic_icon.svg" @click="saveFile"></image>
 			<image v-if="posterUrl" :src="posterUrl" mode="" style="height: 740rpx;width: 100%;"></image>
-			<view class="poster-box" id="pagePoster" >
+			<view class="poster-box" id="pagePoster" v-else>
 				<view class="poster-pic">
-					<img crossorigin="anonymous" :src="posterData.posterImg" >
+					<img crossorigin="anonymous" :src="posterData.posterImg + '?' + new Date().getTime()" >
 				</view>
 				<view class="poster-content" v-if="posterData.loadType==0">
 					<view class="poster-title nowrap">
@@ -41,14 +41,14 @@
 							<view class="item">
 								<text class="title">持有者：</text>
 								<view class="info">
-									<img crossorigin="anonymous" :src="posterData.avatar" >
+									<img crossorigin="anonymous" :src="posterData.avatar+ '?' + new Date().getTime()" >
 									<view class="name nowrap">{{posterData.name}}</view>
 								</view>
 							</view>
 							<view class="item">
 								<text class="title">发行方：</text>
 								<view class="info">
-									<img crossorigin="anonymous" :src="posterData.shopIcon" >
+									<img crossorigin="anonymous" :src="posterData.shopIcon+ '?' + new Date().getTime()" >
 									<view class="name nowrap">{{posterData.shopName}}</view>
 								</view>
 							</view>

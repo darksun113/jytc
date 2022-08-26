@@ -68,13 +68,11 @@
 				
 				<view class="bottom-body">
 					<view class="items" v-for="(item,index) in bankList" :key="index">
-						<view class="item">
-							<view class="item-icon">
-								<image class="the-icon" :src="item.icon"></image>
-							</view>
-							<view class="item-name">
-								{{ item.name }}
-							</view>
+						<view class="item-icon">
+							<image class="the-icon" :src="item.icon"></image>
+						</view>
+						<view class="item-name">
+							{{ item.name }}
 						</view>
 					</view>
 				</view>
@@ -368,31 +366,37 @@
 				padding-top: 180rpx;
 			}
 			.bottom-body{
-				width: 700rpx;
+				width: 100%;
 				padding-top: 40rpx;
 				display: flex;
 				flex-wrap: wrap;
 				.items{
+					width: 25%;
 					display: flex;
-					flex-direction: column;
-					padding-right: 42rpx;
-					.item{
-						display: flex;
-						.item-icon{
-							width: 34rpx;
-							height: 34rpx;
-							background-color: white;
-							border-radius: 50%;
-							.the-icon{
-								padding:4rpx;
-								width: 26rpx;
-								height: 26rpx;
-							}
+					margin-top:10rpx ;
+					// padding-right: 42rpx;
+					// &:nth-child(4){
+					// 	padding-right: 0;
+					// }
+					// &:nth-child(8){
+					// 	padding-right: 0;
+					// }
+					// &:nth-child(12){
+					// 	padding-right: 0;
+					// }
+					.item-icon{
+						width: 34rpx;
+						height: 34rpx;
+						background-color: white;
+						border-radius: 50%;
+						.the-icon{
+							padding:4rpx;
+							width: 26rpx;
+							height: 26rpx;
 						}
-						.item-name{
-							width: 102rpx;
-							padding-left: 10rpx;
-						}
+					}
+					.item-name{
+						padding-left: 10rpx;
 					}
 				}
 			}

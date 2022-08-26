@@ -45,7 +45,6 @@
 
 <script>
 	import mixin from "../../mixins/PuzzleCodeMixin.js"
-	import { checkAI } from "@/utils/tools.js"
 	export default {
 		data() {
 			return {
@@ -83,7 +82,7 @@
 			this.prePurchaseId = opt.prePurchaseId ? opt.prePurchaseId : ""
 			this.instanceId = opt.instanceId ? opt.instanceId : ""
 			this.from = opt.from ? opt.from : ""
-			checkAI(3)
+			this.$checkAI(3)
 		},
 		mixins: [mixin],
 		methods: {

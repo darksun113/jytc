@@ -21,7 +21,6 @@
 	import StickyNav from "./components/StickyNav/index.vue"
 	import Search from "./components/Search"
 	import { getFilePath } from "@/utils/tools.js"
-	import { checkAI } from "@/utils/tools.js"
 	export default {
 		components: {
 			Banner,
@@ -44,7 +43,7 @@
 			this.getUrl()
 		},
 		onLoad() {
-			checkAI(1)
+			this.$checkAI(1)
 		},
 		onHide() {
 			if (this.isLastItem) {

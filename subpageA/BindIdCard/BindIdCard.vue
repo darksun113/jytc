@@ -45,7 +45,6 @@
 </template>
 
 <script>
-	import { checkAI } from "@/utils/tools.js"
 	export default {
 		name: "BindIdCard",
 		data() {
@@ -67,7 +66,7 @@
 			};
 		},
 		onLoad(){
-			checkAI(2)
+			this.$checkAI(2)
 		},
 		methods: {
 			warningTip() {

@@ -39,7 +39,7 @@
 			<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>
 		</view>
 		<!-- 流转历史 -->
-		<view class="options_box" v-if="goodsData.loadType==1" @click="toOpenBlockPopup(5)">
+		<!-- <view class="options_box" v-if="goodsData.loadType==1" @click="toOpenBlockPopup(5)">
 			<view class="options_right">
 				<image class="options-icon" src="./static/images/transfer_icon.svg" mode=""></image>
 				<view class="options_info">
@@ -49,9 +49,9 @@
 				</view>
 			</view>
 			<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>
-		</view>
+		</view> -->
 		<!-- 最近购买 -->
-		<view class="options_box" v-if="goodsData.loadType==0" @click="toOpenBlockPopup(3)">
+		<!-- <view class="options_box" v-if="goodsData.loadType==0" @click="toOpenBlockPopup(3)">
 			<view class="options_right">
 				<view class="options_info"
 					style="margin-left: 0;font-size: 32rpx;font-family: PingFangSC-Regular, PingFang SC;color: #FFFFFF;">
@@ -64,7 +64,7 @@
 				</view>
 				<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg"></image>
 			</view>
-		</view>
+		</view> -->
 		<PopupBottom :isShow="isPopupShow" :popupData="goodsData" :loadType="PopupShowType" @close="isPopupShow=false" @openTokenPop="isShow=true">
 		</PopupBottom>
 	</view>

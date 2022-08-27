@@ -70,7 +70,7 @@
 </template>
 
 <script>
-	import uQRCode from 'u-qrcode';
+	import uQRCode from 'uqrcodejs';
 	import FileSaver from 'file-saver'
 	import {imgPathToBase64,blobToBase64} from "@/utils/tools.js"
 	export default {

@@ -69,6 +69,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/login/LoginByMobile/landingPage/landingPage",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#666", //字体颜色

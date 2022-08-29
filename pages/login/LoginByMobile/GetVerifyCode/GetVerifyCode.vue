@@ -82,7 +82,7 @@
 			this.prePurchaseId = opt.prePurchaseId ? opt.prePurchaseId : ""
 			this.instanceId = opt.instanceId ? opt.instanceId : ""
 			this.from = opt.from ? opt.from : ""
-			this.$checkAI(3)
+			this.$checkAI(3,opt.code)
 		},
 		mixins: [mixin],
 		methods: {

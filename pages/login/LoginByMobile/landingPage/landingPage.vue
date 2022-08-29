@@ -12,7 +12,7 @@
 			}
 		},
 		onLoad(){
-			this.$checkAI(1)
+			// this.$checkAI(1)
 		},
 		methods: {
 			toReg(){

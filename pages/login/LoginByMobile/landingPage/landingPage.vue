@@ -11,8 +11,8 @@
 				
 			}
 		},
-		onLoad(){
-			// this.$checkAI(1)
+		onLoad(opt){
+			this.$checkAI(1,opt)
 		},
 		methods: {
 			toReg(){

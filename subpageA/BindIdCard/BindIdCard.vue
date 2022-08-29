@@ -65,8 +65,8 @@
 				],
 			};
 		},
-		onLoad(){
-			this.$checkAI(2)
+		onLoad(opt){
+			this.$checkAI(2,opt.code)
 		},
 		methods: {
 			warningTip() {

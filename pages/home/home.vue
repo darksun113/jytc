@@ -44,8 +44,8 @@
 			this.init()
 			this.getUrl()
 		},
-		onLoad() {
-			this.$checkAI(1)
+		onLoad(opt) {
+			//this.$checkAI(1,opt.code)
 		},
 		onHide() {
 			if (this.isLastItem) {

@@ -24,7 +24,7 @@
 		},
 		onLoad(opt) {
 			this.orderNo=opt.orderNo?opt.orderNo : uni.getStorageSync("orderNo")
-			this.$checkAI(4)
+			this.$checkAI(4,opt.code)
 		},
 		onShow() {
 			this.getOrderInfo()

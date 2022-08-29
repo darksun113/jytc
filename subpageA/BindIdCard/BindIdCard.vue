@@ -310,15 +310,15 @@
 		background-color: rgba(189, 65, 76, 1);
 		border-radius: 8px 8px 8px 0px;
 		font-weight: 400;
-		padding: 6rpx 10rpx;
-		line-height: 32rpx;
+		padding: 8rpx 20rpx;
+		line-height: 30rpx;
 		font-size: 20rpx;
 		font-family: SourceHanSansCN-Regular, SourceHanSansCN;
 		color: #ffffff;
 		text-align: center;
 		position: absolute;
-		left: 126rpx;
-		top: -36rpx;
+		left: 120rpx;
+		top: -40rpx;
 	}
 
 	.uni-button {

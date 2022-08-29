@@ -5,11 +5,9 @@
     "file-saver": "^2.0.5",
     "fingerprintjs2": "^2.1.4",
     "html2canvas": "^1.4.1",
-    "i": "^0.3.7",
     "jweixin-module": "^1.6.0",
     "mui-player": "^1.6.1",
-    "npm": "^8.18.0",
-    "three": "^0.140.2",
+    "three": "^0.140.1",
     "three-obj-mtl-loader": "^1.0.3",
     "uqrcodejs": "^3.5.1"
   }

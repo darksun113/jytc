@@ -13,7 +13,7 @@
 				</view>
 			</view>
 		</scroll-view>
-		<!-- <Notice :isShow="isNoticeShow"></Notice> -->
+		<!-- <Notice :isShow="isNoticeShow" @close="isNoticeShow=false"></Notice> -->
 	</PageTemp>
 </template>
 

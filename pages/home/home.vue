@@ -13,6 +13,7 @@
 				</view>
 			</view>
 		</scroll-view>
+		<!-- <Notice :isShow="isNoticeShow" @close="isNoticeShow=false"></Notice> -->
 	</PageTemp>
 </template>
 
@@ -35,7 +36,8 @@
 				isLastItem: false,
 				updatePage: 1,
 				seriesList: [],
-				shouldRequest: true
+				shouldRequest: true,
+				isNoticeShow:true
 			}
 		},
 		onShow() {

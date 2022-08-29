@@ -7,7 +7,7 @@
     "html2canvas": "^1.4.1",
     "jweixin-module": "^1.6.0",
     "mui-player": "^1.6.1",
-    "three": "^0.140.1",
+    "three": "^0.140.2",
     "three-obj-mtl-loader": "^1.0.3",
     "uqrcodejs": "^3.5.1"
   }

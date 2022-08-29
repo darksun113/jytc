@@ -5,7 +5,6 @@
 			<image src="../../static/images/ccb.svg" mode=""></image>
 			<view class="cardinfo-box">
 				<view class="txt1">银行卡支付</view>
-				
 				<view class="change-box">
 					<view class="txt2" v-if="this.cardList.length!==0">
 						{{ selected_card_name }} 储蓄卡 ({{ selected_card_num }})
@@ -16,8 +15,6 @@
 						</view>
 					</view>
 				</view>
-				
-				
 			</view>
 			<image v-show="payType=='bankPay'" class="check-icon" style="width: 28rpx;height: 24rpx;" src="../../static/images/check.svg"></image>
 		</view>
@@ -33,8 +30,8 @@
 		</view>
 		<u-popup class="pop" :show="Shows" mode="bottom">
 			<view class="head">
-				<image @click="closePop" src="../../static/images/return.svg"></image>
-				<view class="txt">请选择银行卡</view>
+				<view class="txt">选择银行卡</view>
+				<image @click="closePop" src="../../static/images/x.svg"></image>
 			</view>
 			<scroll-view class="list" scroll-y="true" @scrolltolower="updateList">
 				<view class="cards" v-for="(item,index) in cardList" :key="index" >
@@ -50,7 +47,7 @@
 					</u-radio-group>
 				</view>
 				<button class="add-cards-btn" @click="addCard">
-					<image class="add-icon" src="../../static/images/plus.svg"></image>
+					<image class="add-icon" src="../../static/images/plus2.svg"></image>
 					<view vlass="add-txt">添加银行卡</view>
 					<image class="arrow" src="../../static/images/right_arrow.svg"></image>
 				</button>
@@ -151,7 +148,7 @@
 
 <style lang="scss" socped>
 	.pay-type{
-		margin-top: 40rpx;
+		margin: 40rpx 0;
 		width: 750rpx;
 		padding: 0 40rpx;
 		background: #FFFFFF;
@@ -218,7 +215,6 @@
 			display: flex;
 			align-items: center;
 			font-size: 28rpx;
-			font-family: PingFangSC-Regular, PingFang SC;
 			color: #000000;
 			line-height: 30px;
 			border-top: 2rpx solid #EEE;
@@ -241,16 +237,16 @@
 			flex-direction: column;
 			.head{
 				display: flex;
+				border-bottom: 2rpx solid #EEEEEE;
+				padding: 40rpx 40rpx 40rpx 296rpx;
+				font-size: 32rpx;
+				font-weight: 500;
+				color: #000000;
+				line-height: 44rpx;
 				image{
-					width: 38rpx;
-					height: 64rpx;
-					padding: 20rpx 0rpx 20rpx 20rpx;
-				}
-				.txt{
-					color: #000000;
-					padding-top: 26rpx;
-					padding-left: 220rpx;
-					font-size: 36rpx;
+					width: 36rpx;
+					height: 36rpx;
+					padding: 0rpx 0rpx 0rpx 222rpx;
 				}
 			}
 			.list{

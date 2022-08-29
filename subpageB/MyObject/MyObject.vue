@@ -83,7 +83,6 @@
 .my-object{
 	box-sizing: border-box;
 	padding: 40rpx;
-	height: 100%;
 	overflow: auto;
 }
 </style>

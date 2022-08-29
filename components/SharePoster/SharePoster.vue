@@ -6,7 +6,7 @@
 			<image v-if="posterUrl" :src="posterUrl" mode="" style="height: 740rpx;width: 100%;"></image>
 			<view class="poster-box" id="pagePoster" v-else>
 				<view class="poster-pic">
-					<img :src="posterData.posterImg" crossorigin="anonymous">
+					<img crossorigin="anonymous" :src="posterData.posterImg + '?' + new Date().getTime()" >
 				</view>
 				<view class="poster-content" v-if="posterData.loadType==0">
 					<view class="poster-title nowrap">
@@ -30,7 +30,7 @@
 				<view class="poster-goods-content" v-else>
 					<view class="poster-goods-title">
 						<view class="left nowrap">
-							{{posterData.name}}
+							{{posterData.goodsName}}
 						</view>
 						<view class="right">
 							#{{posterData.goodsCode}}/{{posterData.totalNum}}
@@ -41,14 +41,14 @@
 							<view class="item">
 								<text class="title">持有者：</text>
 								<view class="info">
-									<img :src="posterData.avatar+'?'+Date.now()" crossorigin="anonymous">
+									<img crossorigin="anonymous" :src="posterData.avatar+ '?' + new Date().getTime()" >
 									<view class="name nowrap">{{posterData.name}}</view>
 								</view>
 							</view>
 							<view class="item">
 								<text class="title">发行方：</text>
 								<view class="info">
-									<img :src="posterData.shopIcon+'?'+Date.now()" crossorigin="anonymous">
+									<img crossorigin="anonymous" :src="posterData.shopIcon+ '?' + new Date().getTime()" >
 									<view class="name nowrap">{{posterData.shopName}}</view>
 								</view>
 							</view>
@@ -70,7 +70,7 @@
 </template>
 
 <script>
-	import uQRCode from 'u-qrcode';
+	import uQRCode from 'uqrcodejs';
 	import FileSaver from 'file-saver'
 	import {imgPathToBase64,blobToBase64} from "@/utils/tools.js"
 	export default {
@@ -306,8 +306,8 @@
 							display: flex;
 							align-items: center;
 							.title{
-								max-width: 96rpx;
-								min-width: 96rpx;
+								max-width: 120rpx;
+								min-width: 120rpx;
 								font-size: 24rpx;
 								font-family: PingFangSC-Regular, PingFang SC;
 								font-weight: 400;

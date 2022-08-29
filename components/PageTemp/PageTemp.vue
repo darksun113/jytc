@@ -29,5 +29,6 @@
 		background: #222;
 		color: #FFFFFF;
 		overflow: auto;
+		position: relative;
 	}
 </style>

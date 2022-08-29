@@ -21,8 +21,11 @@
 <style lang="scss" scoped>
 .no-data{
 	width: 100%;
-	margin-top: 300rpx;
 	text-align: center;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50% , -50%);
 	image{
 		width: 200rpx;
 		height: 160rpx;

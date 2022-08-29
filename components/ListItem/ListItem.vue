@@ -12,7 +12,7 @@
 				</view>
 			</view>
 			<view class="block-hash">
-				<text style="min-width: 140rpx;font-size: 24rpx;">区块链地址：</text>
+				<text style="min-width: 150rpx;font-size: 24rpx;">区块链地址：</text>
 				<text class="nowrap_s" style="font-size: 24rpx;">{{item.addr}}</text>
 			</view>
 		</view>

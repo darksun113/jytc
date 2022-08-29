@@ -149,6 +149,7 @@
 		overflow: auto;
 		padding: 0 40rpx;
 		border-top: 2rpx solid rgba(255, 255, 255, 0.1);
+		position: relative;
 		.box{
 			height: 100%;
 			overflow: auto;
@@ -199,11 +200,14 @@
 		}
 		.no_trans_box {
 			text-align: center;
-		
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50% , -50%);
 			.no_trans {
-				width: 280rpx;
-				height: 280rpx;
-				margin: 300rpx auto 0 auto;
+				width: 200rpx;
+				height: 160rpx;
+				// margin: 300rpx auto 0 auto;
 			}
 		
 			view {

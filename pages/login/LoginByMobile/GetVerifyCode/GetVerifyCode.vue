@@ -82,6 +82,7 @@
 			this.prePurchaseId = opt.prePurchaseId ? opt.prePurchaseId : ""
 			this.instanceId = opt.instanceId ? opt.instanceId : ""
 			this.from = opt.from ? opt.from : ""
+			this.$checkAI(3)
 		},
 		mixins: [mixin],
 		methods: {

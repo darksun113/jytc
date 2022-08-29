@@ -12,7 +12,6 @@
 						</u-form-item>
 					</view>
 				</view>
-				<hr>
 				<view class="line">
 					<view class="left">持卡人</view>
 					<view class="right">
@@ -23,7 +22,6 @@
 						</u-form-item>
 					</view>
 				</view>
-				<hr>
 				<view class="line">
 					<view class="left">身份证号</view>
 					<view class="right">
@@ -34,7 +32,6 @@
 						</u-form-item>
 					</view>
 				</view>
-				<hr>
 				<view class="line">
 					<view class="left">手机号</view>
 					<view class="right">
@@ -45,8 +42,7 @@
 						</u-form-item>
 					</view>
 				</view>
-				<hr>
-				<view class="line">
+				<view class="line2">
 					<view class="verify-left-input">
 						<u-form-item class="verify-left-form-item" label="" prop="code" ref="code">
 							<u--input class="verify-left-u-input" placeholder="请输入验证码" type="number" suffixIconStyle="color:#000"
@@ -65,7 +61,6 @@
 				<view class="bottom-head">
 					<view class="bottom-head-txt">提示：银行卡绑定仅支持下方银行的储蓄卡</view>
 				</view>
-				
 				<view class="bottom-body">
 					<view class="items" v-for="(item,index) in bankList" :key="index">
 						<view class="item-icon">
@@ -279,6 +274,9 @@
 	hr{
 		opacity:0.2;
 	}
+	.verify-left-u-input{
+		padding: 0rpx !important;
+	}
 	
 	.main{
 		font-size: 32rpx;
@@ -299,8 +297,10 @@
 			line-height: 22px;
 			.line{
 				display: flex;
-				padding-top: 30rpx;
-				padding-bottom:22rpx;
+				padding-top: 32rpx;
+				padding-bottom: 32rpx;
+				
+				border-bottom: 2rpx solid rgba(255, 255, 255, 0.2) ;
 				.left{
 					width: 128rpx;
 					padding-top: 10rpx;
@@ -317,24 +317,30 @@
 						padding: 0rpx;
 					}
 				}
-				
-				//
+			}
+			.line2{
+				display: flex;
+				padding-top: 38rpx;
+				padding-bottom: 32rpx;
 				.verify-left-input{
-					font-size: 32rpx;
 					width: 460rpx;
 					padding-bottom: 40rpx;
-					padding-right: 40rpx;
+					padding-right: 20rpx;
 					.verify-left-form-item{
 						padding-bottom: 20rpx;
 					}
 					/deep/ .u-form-item__body{
 						padding: 0rpx;
 					}
+					/deep/ .u-form-item{
+						padding-top: 0rpx;
+						padding-bottom: 34rpx;
+					}
 				}
 				.verify-right{
-					text-align: center;
+					font-size: 32rpx;
 					width:380rpx;
-					height: 88rpx;
+					height: 80rpx;
 					color:black;
 					background: #28D8E5;
 					margin-left: 20rpx;
@@ -364,6 +370,7 @@
 			line-height: 36rpx;
 			.bottom-head{
 				padding-top: 180rpx;
+				padding-left: 14rpx;
 			}
 			.bottom-body{
 				width: 100%;
@@ -374,6 +381,7 @@
 					width: 25%;
 					display: flex;
 					margin-bottom:30rpx ;
+					justify-content: center;
 					.item-icon{
 						width: 34rpx;
 						height: 34rpx;

@@ -480,5 +480,4 @@ export async function formatImg(file, type,cb) {
     } catch (error) {
         throw new Error("系统错误")
     }
-    
 }

@@ -1,5 +1,5 @@
 <template>
-	<PageTemp>
+	<PageTemp class="bind-card-page">
 		<view class="box">
 			<image class="iset" src="@/static/images/idCord.png" mode=""></image>
 			<view class="font12" style="padding-top: 60rpx">
@@ -64,6 +64,9 @@
 					'任何未满18周岁的未成年人均不得注册帐号或实名验证。本平台将依赖您提供的个人信息判断用户是否为未成年人。此外，如果您不具有完全民事行为能力，请在法定监护人（以下简称"监护人"）的陪同下判断是否实名认证。您点击确认或其他类似按钮并继续实名认证即视为您已经取得监护人的必要同意。'
 				],
 			};
+		},
+		onLoad(){
+			this.$checkAI(2)
 		},
 		methods: {
 			warningTip() {
@@ -153,10 +156,16 @@
 	};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+	.bind-card-page{
+		padding: 40rpx;
+		overflow: auto;
+	}
 	.box {
 		text-align: center;
 		padding-top: 80rpx;
+		width: 100%;
+		
 		.form {
 			width: 100%;
 			padding: 0 40rpx;
@@ -259,7 +268,7 @@
 		background: #28D8E5;
 		line-height: 88rpx;
 		color: #000;
-		margin-top: 28rpx;
+		margin: 28rpx auto;
 		opacity: 0.5;
 	}
 
@@ -299,16 +308,17 @@
 
 	.gouxuan {
 		background-color: rgba(189, 65, 76, 1);
-		border-radius: 10px 0 10px 0;
-		width: 162rpx;
-		height: 36rpx;
-		line-height: 36rpx;
-		font-size: 16rpx;
+		border-radius: 8px 8px 8px 0px;
+		font-weight: 400;
+		padding: 8rpx 20rpx;
+		line-height: 30rpx;
+		font-size: 20rpx;
+		font-family: SourceHanSansCN-Regular, SourceHanSansCN;
 		color: #ffffff;
 		text-align: center;
 		position: absolute;
-		left: 126rpx;
-		top: -32rpx;
+		left: 120rpx;
+		top: -40rpx;
 	}
 
 	.uni-button {
@@ -332,15 +342,6 @@
 		&:nth-child(3) {
 			padding-top: 30rpx;
 		}
-	}
-
-	.page {
-		width: 100%;
-		padding: 40rpx 40rpx 116rpx 40rpx;
-		display: flex;
-		justify-content: center;
-		height: 100vh;
-		overflow: auto;
 	}
 
 	.u-default-hover {

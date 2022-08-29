@@ -107,5 +107,6 @@
 		box-sizing: border-box;
 		height: 100%;
 		overflow: auto;
+		position: relative;
 	}
 </style>

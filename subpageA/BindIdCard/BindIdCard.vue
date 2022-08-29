@@ -1,5 +1,5 @@
 <template>
-	<PageTemp>
+	<PageTemp class="bind-card-page">
 		<view class="box">
 			<image class="iset" src="@/static/images/idCord.png" mode=""></image>
 			<view class="font12" style="padding-top: 60rpx">
@@ -156,10 +156,16 @@
 	};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+	.bind-card-page{
+		padding: 40rpx;
+		overflow: auto;
+	}
 	.box {
 		text-align: center;
 		padding-top: 80rpx;
+		width: 100%;
+		
 		.form {
 			width: 100%;
 			padding: 0 40rpx;
@@ -262,7 +268,7 @@
 		background: #28D8E5;
 		line-height: 88rpx;
 		color: #000;
-		margin-top: 28rpx;
+		margin: 28rpx auto;
 		opacity: 0.5;
 	}
 
@@ -302,16 +308,17 @@
 
 	.gouxuan {
 		background-color: rgba(189, 65, 76, 1);
-		border-radius: 10px 0 10px 0;
-		width: 162rpx;
-		height: 36rpx;
-		line-height: 36rpx;
-		font-size: 16rpx;
+		border-radius: 8px 8px 8px 0px;
+		font-weight: 400;
+		padding: 6rpx 10rpx;
+		line-height: 32rpx;
+		font-size: 20rpx;
+		font-family: SourceHanSansCN-Regular, SourceHanSansCN;
 		color: #ffffff;
 		text-align: center;
 		position: absolute;
 		left: 126rpx;
-		top: -32rpx;
+		top: -36rpx;
 	}
 
 	.uni-button {
@@ -335,15 +342,6 @@
 		&:nth-child(3) {
 			padding-top: 30rpx;
 		}
-	}
-
-	.page {
-		width: 100%;
-		padding: 40rpx 40rpx 116rpx 40rpx;
-		display: flex;
-		justify-content: center;
-		height: 100vh;
-		overflow: auto;
 	}
 
 	.u-default-hover {

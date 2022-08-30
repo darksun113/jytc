@@ -1,7 +1,10 @@
 <template>
 	<view class="page">
-		<img style="width:100%" src="../../../../static/images/BG.jpg"/>
-		<u-button @click="toReg">点击跳转</u-button>
+		<img style="width:100%" src="../../../../static/images/BG.jpg" />
+		<view class="dianji" style="position: absolute;">
+			点击下方按钮立即注册
+		</view>
+		<view class="toclass" @click="toReg">注册即送</view>
 	</view>
 </template>
 
@@ -9,16 +12,22 @@
 	export default {
 		data() {
 			return {
-				code:'',
+				code: 'ai',
 			}
 		},
-		onLoad(){
-			// this.code=window.location.href.split("?")[1]; 
+		onShow() {
+			uni.setStorage({
+				key: 'isAI',
+				data: true
+			})
+		},
+		onLoad() {
+			this.$checkAI(1)
 		},
 		methods: {
-			toReg(){
+			toReg() {
 				uni.navigateTo({
-					url:`../GetVerifyCode/GetVerifyCode.vue?code="ai"`
+					url: `/pages/login/LoginByMobile/GetVerifyCode/GetVerifyCode?code=ai`
 				})
 			},
 		}
@@ -26,8 +35,37 @@
 </script>
 
 <style scoped>
-.page{
-	width: 100%;
-	height: 100vh;
-}
+	.dianji {
+		font-size: 24rpx;
+		font-family: SourceHanSansCN-Regular, SourceHanSansCN;
+		font-weight: 400;
+		color: #FFFFFF;
+		line-height: 36rpx;
+		bottom: 320rpx;
+		text-align: center;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	.page {
+		width: 100%;
+		position: relative;
+	}
+
+	.toclass {
+		position: absolute;
+		bottom: 220rpx;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 548rpx;
+		height: 80rpx;
+		background: linear-gradient(90deg, #FFFFFF 0%, #28D8E5 50%, #C058F6 100%);
+		border-radius: 10rpx;
+		text-align: center;
+		line-height: 80rpx;
+		font-size: 32rpx;
+		font-family: SourceHanSansCN-Medium, SourceHanSansCN;
+		font-weight: 500;
+		color: #000000;
+	}
 </style>

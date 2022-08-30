@@ -4,13 +4,6 @@
 	},
 	"pages": [
 		{
-			"path": "pages/login/LoginByMobile/landingPage/landingPage",
-			"style": {
-				"navigationBarTitleText": "数版通",
-				"enablePullDownRefresh": false
-			}
-		
-		},{
 		"path": "pages/home/home",
 		"style": {
 			"navigationBarTitleText": "数版通",
@@ -85,7 +78,15 @@
                 "enablePullDownRefresh": false
             }
             
-        }
+        },
+		{
+			"path": "pages/login/LoginByMobile/landingPage/landingPage",
+			"style": {
+				"navigationBarTitleText": "数版通",
+				"enablePullDownRefresh": false
+			}
+		
+		}
     ],
 	"tabBar": {
 		"color": "#666", //字体颜色

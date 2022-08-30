@@ -65,7 +65,7 @@
 				],
 			};
 		},
-		onLoad(){
+		onLoad(opt){
 			this.$checkAI(2)
 		},
 		methods: {

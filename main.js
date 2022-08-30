@@ -45,14 +45,25 @@ const app = new Vue({
 })
 app.$mount()
 
-Vue.prototype.$checkAI= async function(type,code){
-	if(code&& code=='ai'){
-		try{
-			const res2 = await uni.$http('/log/addLog',{
-				"type": type
-			})
-		}catch(e){
-			//TODO handle the exception
-		}
+Vue.prototype.$checkAI= async function(type){
+	const res1 = uni.getStorageSync('isAI')
+	console.log(res1,'res1')
+	// if(code && code=='ai'){
+	// 	try{
+	// 		const res2 = await uni.$http('/log/addLog',{
+	// 			"type": type
+	// 		})
+	// 	}catch(e){
+	// 		//TODO handle the exception
+	// 	}
+	// }
+	if(res1==true){
+			try{
+				const res2 = await uni.$http('/log/addLog',{
+					"type": type
+				})
+			}catch(e){
+				//TODO handle the exception
+			}
 	}
 }

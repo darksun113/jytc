@@ -1,5 +1,6 @@
 <template>
 	<view class="page">
+		<img style="width:100%" src="../../../../static/images/BG.jpg"/>
 		<u-button @click="toReg">点击跳转</u-button>
 	</view>
 </template>
@@ -8,11 +9,11 @@
 	export default {
 		data() {
 			return {
-				
+				code:'',
 			}
 		},
 		onLoad(){
-			// this.$checkAI(1)
+			// this.code=window.location.href.split("?")[1]; 
 		},
 		methods: {
 			toReg(){
@@ -28,7 +29,5 @@
 .page{
 	width: 100%;
 	height: 100vh;
-	background: url(../../ResetPwd/static/images/success.png) no-repeat center;
-	background-size: 100% 100%;
 }
 </style>

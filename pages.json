@@ -2,7 +2,15 @@
 	"easycom": {
 		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
 	},
-	"pages": [{
+	"pages": [
+		{
+			"path": "pages/login/LoginByMobile/landingPage/landingPage",
+			"style": {
+				"navigationBarTitleText": "数版通",
+				"enablePullDownRefresh": false
+			}
+		
+		},{
 		"path": "pages/home/home",
 		"style": {
 			"navigationBarTitleText": "数版通",

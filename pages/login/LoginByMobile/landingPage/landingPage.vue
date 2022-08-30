@@ -1,6 +1,6 @@
 <template>
 	<view class="page">
-		<img style="width:100%" src="../../../../static/images/BG.jpg" />
+		<img style="width:100%" src="https://shubantong.oss-cn-guangzhou.aliyuncs.com/%E5%88%9B%E4%B8%96%E5%BE%BD%E7%AB%A0%E6%B4%BB%E5%8A%A8.jpg" />
 		<view class="dianji" style="position: absolute;">
 			点击下方按钮立即注册
 		</view>

@@ -78,8 +78,12 @@
 									})
 								}else{
 									const routes = getCurrentPages()
+									console.log(routes,'routes')
 									if(routes.length>2){
-										this.$routerTo(2,"back")
+										// this.$routerTo(2,"back")
+										uni.reLaunch({
+											url:"/pages/user/user"
+										})
 									}else{
 										uni.reLaunch({
 											url:"/pages/home/home"

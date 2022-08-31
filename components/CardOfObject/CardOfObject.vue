@@ -1,22 +1,26 @@
 <template>
 	<view class="card-of-object" @click="toGoodsDetail">
 		<view class="goods-pic-box">
-			<image class="goods-pic" :src="item.image" mode="aspectFill"></image>
+			<image class="goods-pic" :src="item.image || item.seriesImg" mode="aspectFill"></image>
 			<view class="icon">
 				<image v-if="item.materialType==0" class="goods-type" src="@/static/images/type_3D.svg" mode=""></image>
 				<image v-else-if="item.materialType==1" class="goods-type" src="@/static/images/type_pic.svg" mode=""></image>
 				<image v-else-if="item.materialType==2" class="goods-type" src="@/static/images/type_video.svg" mode=""></image>
 				<image v-else-if="item.materialType==3" class="goods-type" src="@/static/images/type_audio.svg" mode=""></image>
+				<image v-else class="goods-type" src="@/static/images/type_audio.svg" mode=""></image>
 			</view>
 		</view>
 		<view class="goods-info">
 			<view class="goods-name nowrap_2">
-				{{item.goodsName}}
+				{{item.goodsName || "故宫里的中国节-中秋"}}
 			</view>
 			<view>
 				<view class="goods-code-box">
-					<view class="code">
+					<view class="code" v-if="loadType==0">
 						#{{item.goodsCode}}/{{item.totalNumber}}
+					</view>
+					<view class="limit" v-else>
+						限量 10000
 					</view>
 				</view>
 				<view class="author-box">
@@ -37,6 +41,10 @@
 			item:{
 				type:Object,
 				default:()=>{}
+			},
+			loadType:{
+				type:Number,
+				default:0
 			}
 		},
 		data() {
@@ -112,6 +120,12 @@
 				font-weight: 700;
 				color: #28D8E5;
 				line-height: 34rpx;
+			}
+			.limit{
+				font-size: 24rpx;
+				font-family: PingFangSC-Regular, PingFang SC;
+				font-weight: 400;
+				color: #999999;
 			}
 		}
 		.author-box{

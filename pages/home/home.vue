@@ -161,7 +161,7 @@
 		color: #FFFFFF;
 		.container{
 			position: relative;
-			height: calc(100% - 280rpx - 150rpx);
+			min-height: calc(100% - 280rpx - 150rpx - 134rpx);
 			.sell-time{
 				padding: 40rpx 0;
 				font-size: 32rpx;

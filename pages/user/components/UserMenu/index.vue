@@ -1,52 +1,17 @@
 <template>
 	<view class="user-menu">
 		<view class="title">常用功能</view>
-		<view class="item-box" @click="toSubmenu(0)">
-			<view class="item-right">
-				<image src="@/static/images/my_ objects_icon.svg" mode=""></image>
-				我的藏品
-			</view>
-			<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>
-		</view>
-		<view class="item-box" @click="toSubmenu(1)">
-			<view class="item-right">
-				<image src="@/static/images/preorder_icon.svg" mode=""></image>
-				预购信息
-			</view>
-			<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>
-		</view>
-		<view class="item-box" @click="toSubmenu(5)">
-			<view class="item-right">
-				<image src="@/static/images/my_cards.svg" mode=""></image>
-				我的银行卡
-			</view>
-			<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>
-		</view>
-		<view class="item-box" @click="toSubmenu(2)">
-			<view class="item-right" >
-				<image src="@/static/images/account_security_icon.svg" mode=""></image>
-				帐号与安全
-			</view>
-			<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>
-		</view>
-		<view class="item-box" @click="toSubmenu(3)">
-			<view class="item-right">
-				<image src="@/static/images/privacy_icon.svg" mode=""></image>
-				隐私设置
-			</view>
-			<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>
-		</view>
-		<view class="item-box" @click="toSubmenu(4)">
-			<view class="item-right">
-				<image src="@/static/images/about_icon.svg" mode=""></image>
-				关于平台
-			</view>
-			<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>
-		</view>
+		<MenuItem @click.native="toSubmenu(0)" src="/static/images/my_objects_icon.svg">我的藏品</MenuItem>
+		<MenuItem @click.native="toSubmenu(1)" src="/static/images/preorder_icon.svg">预购信息</MenuItem>
+		<MenuItem @click.native="toSubmenu(5)" src="/static/images/my_cards.svg">我的银行卡</MenuItem>
+		<MenuItem @click.native="toSubmenu(2)" src="/static/images/account_security_icon.svg">帐号与安全</MenuItem>
+		<MenuItem @click.native="toSubmenu(3)" src="/static/images/privacy_icon.svg">隐私设置</MenuItem>
+		<MenuItem @click.native="toSubmenu(4)" src="/static/images/about_icon.svg">关于平台</MenuItem>
 	</view>
 </template>
 
 <script>
+	import MenuItem from "./components/MenuItem.vue"
 	export default {
 		props:{
 			isLogin:[Boolean]
@@ -55,6 +20,9 @@
 			return {
 				checkLogin:this.isLogin
 			}
+		},
+		components:{
+			MenuItem
 		},
 		methods:{
 			toSubmenu(idx){
@@ -80,7 +48,6 @@
 					break;
 				}
 			}
-			
 		},
 		watch:{
 			isLogin(boo){
@@ -103,24 +70,6 @@
 			line-height: 50rpx;
 			margin-bottom: 20rpx;
 			padding-left: 40rpx;
-		}
-		.item-box{
-			padding: 40rpx;
-			background: #333;
-			display: flex;
-			justify-content: space-between;
-			margin-bottom: 20rpx;
-			border-radius: 8rpx;
-			.item-right{
-				display: flex;
-				align-items: center;
-				font-size: 32rpx;
-				image{
-					width: 32rpx;
-					height: 32rpx;
-					margin-right: 44rpx;
-				}
-			}
 		}
 	}
 </style>

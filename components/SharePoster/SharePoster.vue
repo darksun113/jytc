@@ -275,6 +275,8 @@
 			.poster-goods-content{
 				padding: 20rpx;
 				padding-top: 10rpx;
+				background: url("../../static/images/card_bg.png") no-repeat right center;
+				background-size: auto 160%; 
 				.poster-goods-title{
 					display: flex;
 					justify-content: space-between;

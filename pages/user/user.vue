@@ -8,6 +8,7 @@
 		<LoginTipPop name="user" :isShow="isShow" @close="isShow=false"></LoginTipPop>
 		<ShareAndInvitePop :popUpshow="popUpshow" @closePop="closePop">
 		</ShareAndInvitePop>
+		<QrcodePop :popQrshow="popQrshow" @closePopQr="closePopQr" ></QrcodePop>
 	</PageTemp>
 </template>
 

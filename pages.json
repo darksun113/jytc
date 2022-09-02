@@ -87,6 +87,33 @@
 			}
 		
 		}
+        ,{
+            "path" : "pages/user/components/UserMenu/components/ShareAndInvite/ShareAndInvite",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/user/components/UserMenu/components/ShareAndInvite/Qrcode/Qrcode",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/user/components/UserMenu/components/ShareAndInvite/components/QrcodePop/QrcodePop",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"tabBar": {
 		"color": "#666", //字体颜色

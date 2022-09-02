@@ -8,12 +8,12 @@
 		<MenuItem @click.native="toSubmenu(3)" src="/static/images/privacy_icon.svg">隐私设置</MenuItem>
 		<MenuItem @click.native="toSubmenu(4)" src="/static/images/about_icon.svg">关于平台</MenuItem>
 		<MenuItem @click.native="toSubmenu(6)" src="/static/images/about_icon.svg">分享与邀请</MenuItem>
-		<!-- <QrcodePop :popQrshow="popQrshow" @closePopQr="closePopQr" ></QrcodePop> -->
+		<QrcodePop :popQrshow="popQrshow" @closePopQr="closePopQr" ></QrcodePop>
 	</view>
 </template>
 
 <script>
-	// import QrcodePop from './UserMenu/components/ShareAndInvite/components/QrcodePop/QrcodePop.vue'
+	import QrcodePop from './components/ShareAndInvite/components/QrcodePop/QrcodePop.vue'
 	import MenuItem from "./components/MenuItem.vue"
 	export default {
 		props:{
@@ -21,11 +21,20 @@
 		},
 		data() {
 			return {
-				checkLogin:this.isLogin
+				checkLogin:this.isLogin,
+				popQrshow:false,
 			}
 		},
 		components:{
 			MenuItem,
+		},
+		onShow(){
+			uni.$on("showQrUp",()=>{
+				this.popQrshow=true
+			})
+		},
+		onHide(){
+			uni.$off("showQrUp")
 		},
 		methods:{
 			toSubmenu(idx){

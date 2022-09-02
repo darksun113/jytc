@@ -97,7 +97,7 @@
             
         }
         ,{
-            "path" : "pages/user/components/UserMenu/components/ShareAndInvite/Qrcode/Qrcode",
+            "path" : "pages/user/components/UserMenu/components/ShareAndInvite/components/QrcodePop/QrcodePop",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

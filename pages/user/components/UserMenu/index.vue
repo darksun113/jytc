@@ -7,6 +7,7 @@
 		<MenuItem @click.native="toSubmenu(2)" src="/static/images/account_security_icon.svg">帐号与安全</MenuItem>
 		<MenuItem @click.native="toSubmenu(3)" src="/static/images/privacy_icon.svg">隐私设置</MenuItem>
 		<MenuItem @click.native="toSubmenu(4)" src="/static/images/about_icon.svg">关于平台</MenuItem>
+		<MenuItem @click.native="toSubmenu(6)" src="/static/images/about_icon.svg">分享与邀请</MenuItem>
 	</view>
 </template>
 
@@ -22,7 +23,7 @@
 			}
 		},
 		components:{
-			MenuItem
+			MenuItem,
 		},
 		methods:{
 			toSubmenu(idx){
@@ -46,6 +47,7 @@
 					break;
 					case 5 : fn_to("MyCards")
 					break;
+					case 6 : uni.$emit("showPopUp")
 				}
 			}
 		},

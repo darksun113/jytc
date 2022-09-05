@@ -2,11 +2,13 @@
 	<u-popup :show="show" mode="center" @open="open" overlayOpacity="0.8" :closeOnClickOverlay="false"
 		bgColor="transparent">
 		<view class="poster-page">
-			<image class="download_pic_icon" src="@/static/images/download_pic_icon.svg" @click="saveFile"></image>
+			<image v-if="posterData.loadType==3" class="download_pic_icon" src="@/static/新增icon/保存.svg" @click="saveFile"></image>
+			<image v-else class="download_pic_icon" src="@/static/images/download_pic_icon.svg" @click="saveFile"></image>
 			<image v-if="posterUrl" :src="posterUrl" mode="" style="height: 740rpx;width: 100%;"></image>
 			<view class="poster-box" id="pagePoster" v-else>
 				<view class="poster-pic">
-					<img crossorigin="anonymous" :src="posterData.posterImg + '?' + new Date().getTime()" >
+					<img  v-if="posterData.loadType!=3" crossorigin="anonymous" :src="posterData.posterImg + '?' + new Date().getTime()" >
+					<img v-else  crossorigin="anonymous" src="@/static/新增icon/占位图.png" >
 				</view>
 				<view class="poster-content" v-if="posterData.loadType==0">
 					<view class="poster-title nowrap">
@@ -27,7 +29,25 @@
 						</view>
 					</view>
 				</view>
-				<view class="poster-goods-content" v-else>
+				<view style="background: none;background-size: none;" class="poster-content" v-if="posterData.loadType==3">
+					<view style="width: 530rpx;" class="poster-title nowrap">
+						 {{userName}} 邀请您加入蓬莱数藏
+					</view>
+					<view class="poster-detail">
+						<view class="left">
+							<view class="tip"> 
+								赶紧注册加入我们吧
+							</view>
+							<view class="tip-3">
+								扫码打开蓬莱数藏，一起玩转数字藏品 
+							</view>
+						</view>
+						<view class="right" id="qrBox">
+							<canvas id="qrcode" canvas-id="qrcode" :style="{ width: `${size}px`, height: `${size}px` }"></canvas>
+						</view>
+					</view>
+				</view>
+				<view class="poster-goods-content" v-if="posterData.loadType!=0 && posterData.loadType!=3">
 					<view class="poster-goods-title">
 						<view class="left nowrap">
 							{{posterData.goodsName}}
@@ -63,6 +83,7 @@
 				取消
 			</view>
 		</view>
+		
 		<view class="mask" v-if="!posterUrl">
 			<u-loading-icon mode="semicircle" size="36"></u-loading-icon>
 		</view>
@@ -173,6 +194,13 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+	.tip-3{
+		font-size: 20rpx;
+		font-family: PingFangSC-Regular, PingFang SC;
+		font-weight: 400;
+		color: #EFCE91;
+		line-height: 28rpx;
 	}
 	.poster-page {
 		position: relative;

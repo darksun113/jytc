@@ -57,7 +57,7 @@
 					codeUrl :`${baseCodeUrl}/subpageA/SharePage/SharePage?prePurchaseId=${prePurchaseId}&userId=${userId}`,
 					// posterImg:this.prePurchaseInfo.seriesImg,
 					posterImg:this.prePurchaseInfo.seriesImg.split("?")[0],
-					loadType:0 // 0 邀请分享  1 分享把玩
+					loadType:0 // 0 邀请分享  1 分享把玩 3分享邀请
 				}
 				this.isOpenPoster=true
 			})

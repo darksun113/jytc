@@ -92,15 +92,22 @@
 				this.popUpshowAccept = newVal
 			}
 		},
-		onShow(){
-			uni.$on("showQrUp", () => {
-				uni.$emit("toOpenSharePoster")
+		mounted() {
+			uni.$on("toOpenSharePoster",()=>{
+				const name=uni.getStorageSync("userInfo").name
+				const userId=uni.getStorageSync("userInfo").buyerId
+				const baseCodeUrl = process.env.NODE_ENV=="development" ? "http://192.168.2.11:8080":"https://h5.jialex.cn"
+				this.posterData={
+					codeUrl : `${baseCodeUrl}/subpageA/DetailPage/DetailPage?share=platform&userId=userId`,
+					name,
+					loadType:3 // 0 邀请分享  1 分享把玩
+				}
+				this.isOpenPoster=true
 			})
 		},
-		onHide(){
-			uni.$off("showQrUp")
+		beforeDestroy() {
+			uni.$off("toOpenSharePoster")
 		},
-		
 		methods: {
 			updateList(){
 				if(this.shouldRequest){
@@ -118,14 +125,14 @@
 				this.$emit('closePop')
 			},
 			open() {
-				// this.getShareList((list)=>{
-				// 	if(list==0){
-				// 		this.hasData=false
-				// 	}else{
-				// 	    this.hasData=true
-				// 		this.winnerList=list
-				// 	}
-				// })
+				this.getShareList((list)=>{
+					if(list==0){
+						this.hasData=false
+					}else{
+					    this.hasData=true
+						this.winnerList=list
+					}
+				})
 			},
 			async getShareList(callback){
 				try{
@@ -148,7 +155,7 @@
 				}
 			},
 			toQrcode() {
-				uni.$emit("showQrUp")
+				uni.$emit("toOpenSharePoster")
 			},
 		},
 	}

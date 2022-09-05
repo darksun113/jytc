@@ -3,26 +3,26 @@
 		<scroll-view class="home" scroll-y="true" @scrolltolower="updateList">
 			<Search />
 			<Banner />
-			<StickyNav ref="nav" @changeShowType="changeShowType" @switchoverNav="switchoverNav" @resetPage="reset"></StickyNav>
+			<StickyNav ref="nav" @changeShowType="changeShowType" @switchOverNav="switchOverNav" @resetPage="reset"></StickyNav>
 			<view class="container">
 				<template v-if="navType==0">
 					<IsNoData v-if="!hasData">暂无数据</IsNoData>
 					<view v-else>
-						<ModelOfListFlow :seriesList="seriesList" v-if="showType==0" :loadType="0"></ModelOfListFlow>
-						<ModelOfWaterFall :seriesList="seriesList" v-else></ModelOfWaterFall>
+						<ModelOfListFlow :renderList="renderList" v-if="showType==0" :loadType="0"></ModelOfListFlow>
+						<ModelOfWaterFall :renderList="renderList" v-else></ModelOfWaterFall>
 						<IsEnd v-if="isLastItem"></IsEnd>
 					</view>
 				</template>
 				<template v-else-if="navType==1">
 					<IsNoBlind v-if="!hasData">暂无盲盒，敬请期待！</IsNoBlind>
 					<view v-else>
-						<ModelOfListFlow :seriesList="seriesList" :loadType="0"></ModelOfListFlow>
+						<ModelOfListFlow :renderList="renderList" :loadType="0"></ModelOfListFlow>
 						<IsEnd v-if="isLastItem"></IsEnd>
 					</view>
 				</template>
 				<template v-else>
 					<IsNoData v-if="!hasData">暂无数据</IsNoData>
-					<view v-for="(item,index) in seriesList" :key="index">
+					<view v-for="(item,index) in renderList" :key="index">
 						<view class="sell-time">
 							<!-- {{item.sellTime}} -->
 							{{parseInt(Date.now()/1000) | format}}
@@ -55,7 +55,7 @@
 				navType:0,
 				isLastItem: false,
 				updatePage: 1,
-				seriesList: [],
+				renderList: [],
 				shouldRequest: true,
 				isNoticeShow:true
 			}
@@ -78,8 +78,9 @@
 				this.showType = type
 			},
 			// 切换nav
-			switchoverNav(e){
+			switchOverNav(e){
 				const {index} = e
+				this.updatePage=1
 				this.navType=index
 				switch(index){
 					case 0 : this.init()
@@ -92,7 +93,25 @@
 			},
 			// 盲盒
 			getBlindBox(){
-				
+				this.getBlindList("",list=>{
+					if (list == 0) {
+						this.hasData = false
+					} else {
+						if(list.length<10)this.isLastItem = true;
+						this.renderList = list
+					}
+				})
+			},
+			async getBlindList(keyWord,cb){
+				const res = await uni.$http("blindbox/list",{
+					keyWord,
+					size:10,
+					page:this.updatePage
+				})
+				if(res.code == 0){
+					res.data.list = await getFilePath(res.data.list,["image","shopIcon"])
+					cb(res.data.list)
+				}
 			},
 			// 发售日历
 			toSellCalendar(){
@@ -108,7 +127,7 @@
 							this.isLastItem = true
 							this.shouldRequest = false
 						} else {
-							this.seriesList = [...this.seriesList, ...list]
+							this.renderList = [...this.renderList, ...list]
 						}
 					})
 				}
@@ -122,9 +141,8 @@
 						this.hasData = false
 					} else {
 						if(list.length<10)this.isLastItem = true;
-						this.seriesList = list
+						this.renderList = list
 					}
-					uni.stopPullDownRefresh()
 				})
 			},
 			async getSeriesList(callback) {

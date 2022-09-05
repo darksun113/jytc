@@ -47,7 +47,7 @@
 			clickNav(e){
 				// e.index : 0 数字藏品  1 盲盒商城  2 发售日历
 				this.navIdx = e.index
-				this.$emit("switchoverNav",e)
+				this.$emit("switchOverNav",e)
 			},
 			changeNav(type) {
 				this.pattern = type

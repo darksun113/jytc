@@ -93,7 +93,7 @@
 			},
 			// 盲盒
 			getBlindBox(){
-				this.getBlindList(list=>{
+				this.getBlindList("",list=>{
 					if (list == 0) {
 						this.hasData = false
 					} else {
@@ -102,8 +102,9 @@
 					}
 				})
 			},
-			async getBlindList(cb){
+			async getBlindList(keyWord,cb){
 				const res = await uni.$http("blindbox/list",{
+					keyWord,
 					size:10,
 					page:this.updatePage
 				})

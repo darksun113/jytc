@@ -1,6 +1,7 @@
 <template>
-	<u-popup :zIndex="10074" :show="popUpshowAccept" mode="bottom" close-icon-color="#999999" :closeable="true" @close="close"
+	<u-popup  :show="popUpshowAccept" mode="bottom" close-icon-color="#999999" :closeable="true" @close="close"
 		@open="open">
+		<SharePoster :isOpenPoster="isOpenPoster" @close="isOpenPoster=false" :posterData="posterData"></SharePoster>
 		<view class="content">
 			<view class="header">
 				分享名单
@@ -17,22 +18,26 @@
 						注册时间
 					</view>
 				</view>
-				<scroll-view scroll-y="true">
+				<scroll-view v-if="hasData"  scroll-y="true" @scrolltolower="updateList">
 					<view class="scrollSt">
-						<view v-for="index in 30" :key="index" class="oneText">
+						<view v-for="(item,index) in shareList" :key="index" class="oneText">
 							<view style="width:270rpx;" class="">
-								张三
+								{{item.name}}
 							</view>
 							<view style="height:30rpx; text-align: center;width:100rpx;">
-								<img style="width:26rpx;height:30rpx;display: inline-block;"
+								<img v-if="item.certification==1" style="width:26rpx;height:30rpx;display: inline-block;"
 									src="../../../../../../static/新增icon/认证.svg" alt="">
 							</view>
 							<view style="width:270rpx;text-align: right;" class="">
-								2022/12/12
+								{{item.createTime | format}}
 							</view>
 						</view>
+						<IsEnd v-if="isLastItem"></IsEnd>
 					</view>
 				</scroll-view>
+				<IsNoData v-else>
+					暂无数据
+				</IsNoData>
 				<view class="bottom">
 					<view @click="toQrcode" class="buttons">
 						生成专属邀请海报
@@ -45,6 +50,22 @@
 
 <script>
 	export default {
+		filters:{
+			format(stamp){
+				if(!stamp){
+					return ""
+				}else{
+					const date = new Date(stamp*1000)
+					const Y = date.getFullYear() + '-'
+					const M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
+					const D = date.getDate() < 10 ? '0' + date.getDate() + ' ' : date.getDate() + ' '
+					const H = date.getHours() + ':'
+					const M2 = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':'
+					const S = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
+					return Y + M + D + H + M2 + S
+				}
+			}
+		},
 		props: {
 			popUpshow: {
 				type: Boolean,
@@ -56,7 +77,14 @@
 		data() {
 			return {
 				show: false,
-				popUpshowAccept: this.popUpshow
+				popUpshowAccept: this.popUpshow,
+				isOpenPoster:false,
+				posterData:{},
+				shareList:[],
+				hasData:true,
+				shouldRequest:true,
+				isLastItem:false,
+				updatePage:1,
 			}
 		},
 		watch: {
@@ -64,15 +92,72 @@
 				this.popUpshowAccept = newVal
 			}
 		},
+		mounted() {
+			uni.$on("toOpenSharePoster",()=>{
+				const name=uni.getStorageSync("userInfo").name
+				const userId=uni.getStorageSync("userInfo").buyerId
+				const baseCodeUrl = process.env.NODE_ENV=="development" ? "http://192.168.2.11:8080":"https://h5.jialex.cn"
+				this.posterData={
+					codeUrl : `${baseCodeUrl}/subpageA/DetailPage/DetailPage?share=platform&userId=userId`,
+					name,
+					loadType:3 // 0 邀请分享  1 分享把玩
+				}
+				this.isOpenPoster=true
+			})
+		},
+		beforeDestroy() {
+			uni.$off("toOpenSharePoster")
+		},
 		methods: {
+			updateList(){
+				if(this.shouldRequest){
+					this.getShareList(list=>{
+						if(list==0){
+							this.isLastItem=true
+							this.shouldRequest=false
+						}else{
+							this.shareList=[...this.shareList,...list]
+						}
+					})
+				}
+			},
 			close() {
 				this.$emit('closePop')
 			},
-			open() {},
-			toQrcode() {
-				uni.$emit("showQrUp")
+			open() {
+				this.getShareList((list)=>{
+					if(list==0){
+						this.hasData=false
+					}else{
+					    this.hasData=true
+						this.winnerList=list
+					}
+				})
 			},
-		}
+			async getShareList(callback){
+				try{
+					const res=await uni.$http("/share/inviteList",{
+						state:3,
+						page:this.updatePage,
+						size:10
+					})
+					if(res.code==0){
+						if(res.data.list.length==0){
+							callback(0)
+						}else{
+							this.updatePage++
+							res.data.list=await getFilePath(res.data.list,['icon'])
+							callback(res.data.list)
+						}
+					}
+				}catch(e){
+					//TODO handle the exception
+				}
+			},
+			toQrcode() {
+				uni.$emit("toOpenSharePoster")
+			},
+		},
 	}
 </script>
 

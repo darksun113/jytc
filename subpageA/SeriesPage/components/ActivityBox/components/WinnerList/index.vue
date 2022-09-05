@@ -4,7 +4,6 @@
 			<view class="title-rules">
 				获奖名单
 			</view>
-			
 			<scroll-view v-if="hasData" scroll-y="true" @scrolltolower="updateList" class="activity-pop-container">
 				<ListItem v-for="(item,index) in winnerList" :key="index" :item="item"></ListItem>
 				<IsEnd v-if="isLastItem"></IsEnd>

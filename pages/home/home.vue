@@ -102,17 +102,6 @@
 					}
 				})
 			},
-			async getBlindList(keyWord,cb){
-				const res = await uni.$http("blindbox/list",{
-					keyWord,
-					size:10,
-					page:this.updatePage
-				})
-				if(res.code == 0){
-					res.data.list = await getFilePath(res.data.list,["image","shopIcon"])
-					cb(res.data.list)
-				}
-			},
 			// 发售日历
 			toSellCalendar(){
 				
@@ -122,15 +111,29 @@
 			},
 			updateList() {
 				if (this.shouldRequest) {
-					this.getSeriesList(list => {
-						if (list == 0) {
-							this.isLastItem = true
-							this.shouldRequest = false
-						} else {
-							this.renderList = [...this.renderList, ...list]
-						}
-					})
+					switch(this.navType){
+						case 0 : this.uodateSeriesList()
+						break;
+						case 1 : this.updateBlindList()
+						break;
+						case 2 : this.toSellCalendar()
+						break
+					}
+					
 				}
+			},
+			uodateSeriesList(){
+				this.getSeriesList(list => {
+					if (list == 0) {
+						this.isLastItem = true
+						this.shouldRequest = false
+					} else {
+						this.renderList = [...this.renderList, ...list]
+					}
+				})
+			},
+			updateBlindList(){
+				
 			},
 			init() {
 				this.updatePage = 1
@@ -166,7 +169,18 @@
 				} catch (e) {
 					//TODO handle the exception
 				}
-			}
+			},
+			async getBlindList(keyWord,cb){
+				const res = await uni.$http("blindbox/list",{
+					keyWord,
+					size:10,
+					page:this.updatePage
+				})
+				if(res.code == 0){
+					res.data.list = await getFilePath(res.data.list,["image","shopIcon"])
+					cb(res.data.list)
+				}
+			},
 		}
 	}
 </script>

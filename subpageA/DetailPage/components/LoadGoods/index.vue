@@ -1,10 +1,11 @@
 <template>
-	<view class="show-box" :style="{height:goodsData.loadType==0 ? '668rpx':'780rpx'}">
-		<ShowCode :goodsData="loadData" v-if="goodsData.loadType==1"></ShowCode>
-		<LoadModel  :goodsData="loadData" v-if="loadData.materialType==0"></LoadModel>
-		<LoadImage  :goodsData="loadData" v-else-if="loadData.materialType==1"></LoadImage>
-		<LoadVideo  :goodsData="loadData" v-else-if="loadData.materialType==2"></LoadVideo>
-		<LoadAudio  :goodsData="loadData" v-else></LoadAudio>
+	<view class="show-box" :style="{height:(goodsData.loadType==0 || goodsData.loadType==2) ? '668rpx':'780rpx'}">
+		<show-code :goodsData="loadData" v-if="goodsData.loadType==1" />
+		<load-model  :goodsData="loadData" v-if="loadData.materialType==0" />
+		<load-image  :goodsData="loadData" v-else-if="loadData.materialType==1" />
+		<load-video  :goodsData="loadData" v-else-if="loadData.materialType==2" />
+		<load-audio :goodsData="loadData" v-else></load-audio>load-image
+		<load-blind :goodsData="loadData" />
 		<SharePoster :isOpenPoster="isOpenPoster" @close="isOpenPoster=false" :posterData="posterData"></SharePoster>
 	</view>
 </template>
@@ -14,6 +15,7 @@
 	import LoadImage from "./components/LoadImage/index.vue"
 	import LoadVideo from "./components/LoadVideo/index.vue"
 	import LoadAudio from "./components/LoadAudio/index.vue"
+	import LoadBlind from "./components/LoadBlind/index.vue"
 	import ShowCode from "./components/ShowCode/index.vue"
 	export default{
 		props:{

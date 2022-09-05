@@ -16,7 +16,7 @@
 				<template v-else-if="navType==1">
 					<IsNoBlind v-if="!hasData">暂无盲盒，敬请期待！</IsNoBlind>
 					<view v-else>
-						<ModelOfListFlow :renderList="renderList" :loadType="0"></ModelOfListFlow>
+						<ModelOfListFlow :renderList="renderList" :loadType="0" :isBlind="true"></ModelOfListFlow>
 						<IsEnd v-if="isLastItem"></IsEnd>
 					</view>
 				</template>
@@ -27,7 +27,7 @@
 							<!-- {{item.sellTime}} -->
 							{{parseInt(Date.now()/1000) | format}}
 						</view>
-						<CardOfObject :item="item" :loadType="1"></CardOfObject>
+						<CardOfObject :item="item" :loadType="2"></CardOfObject>
 					</view>
 				</template>
 			</view>
@@ -69,7 +69,6 @@
 			format:formatMouthToMinutes
 		},
 		onLoad(opt) {
-			//this.$checkAI(1,opt.code)
 			this.init()
 		},
 		onHide() {},
@@ -171,7 +170,7 @@
 				}
 			},
 			async getBlindList(keyWord,cb){
-				const res = await uni.$http("blindbox/list",{
+				const res = await uni.$http("/blindbox/list",{
 					keyWord,
 					size:10,
 					page:this.updatePage

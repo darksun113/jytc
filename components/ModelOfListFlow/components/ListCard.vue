@@ -45,6 +45,10 @@
 				type:Object,
 				default:()=>{}
 			},
+			isBlind:{
+				type:Boolean,
+				default:false
+			},
 			loadType:[Number,String]
 		},
 		data(){
@@ -55,7 +59,8 @@
 		},
 		methods:{
 			toSeriesDetailPage(){
-				this.$emit("toSeriesDetailPage",this.item.seriesId)
+				const id = this.isBlind ? this.item.blindboxId : this.item.seriesId
+				this.$emit("toSeriesDetailPage",id)
 			},
 			onChange(e){
 				this.timeData = e

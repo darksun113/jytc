@@ -81,6 +81,7 @@ async function getFilesPath_(data) {
 						result[key] = res.data.url
 						idx++
 					}else{
+						idx++
 						console.error(res.errorMsg)
 					}
 				} else {

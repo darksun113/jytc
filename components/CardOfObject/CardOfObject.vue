@@ -1,5 +1,5 @@
 <template>
-	<view class="card-of-object" @click="toGoodsDetail">
+	<view class="card-of-object" @click="active">
 		<view class="goods-pic-box">
 			<image class="goods-pic" :src="item.image || item.seriesImg" mode="aspectFill"></image>
 			<view class="icon">
@@ -10,13 +10,13 @@
 				<image v-else class="goods-type" src="@/static/images/type_audio.svg" mode=""></image>
 			</view>
 		</view>
-		<view class="goods-info">
+		<view class="goods-info" :style="{justifyContent:loadType_==1?'space-around' : 'space-between'}">
 			<view class="goods-name nowrap_2">
 				{{item.goodsName || "故宫里的中国节-中秋"}}
 			</view>
 			<view>
-				<view class="goods-code-box">
-					<view class="code" v-if="loadType==0">
+				<view class="goods-code-box" v-if="loadType_ == 0 || loadType_ == 2">
+					<view class="code" v-if="loadType_ == 0">
 						#{{item.goodsCode}}/{{item.totalNumber}}
 					</view>
 					<view class="limit" v-else>
@@ -42,20 +42,34 @@
 				type:Object,
 				default:()=>{}
 			},
+			//0 普通藏品  1 盲盒 2 日历模式
 			loadType:{
-				type:Number,
+				type:[Number,String],
 				default:0
 			}
 		},
 		data() {
 			return {
-				
+				loadType_:this.loadType
 			};
 		},
 		methods:{
+			active(){
+				if(this.loadType_ == 2)return;
+				if(this.loadType_ == 0){
+					this.toGoodsDetail()
+				}else{
+					this.$emit("toOpenBlindBox",this.item.instanceId)
+				}
+			},
 			toGoodsDetail(){
 				const url=`/subpageA/DetailPage/DetailPage?loadType=1&instanceId=${this.item.instanceId}&materialType=${this.item.materialType}`
 				this.$routerTo(url)
+			}
+		},
+		watch:{
+			loadType(type){
+				this.loadType_=type
 			}
 		}
 	}
@@ -102,7 +116,6 @@
 		padding: 20rpx;
 		display: flex;
 		flex-direction: column;
-		justify-content: space-between;
 		.goods-name{
 			font-size: 32rpx;
 			font-family: PingFangSC-Medium, PingFang SC;

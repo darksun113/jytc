@@ -40,9 +40,6 @@
 			uni.$on("showPopUp", () => {
 				this.popUpshow = true
 			})
-			// uni.$on("showQrUp", () => {
-			// 	uni.$emit("toOpenSharePoster")
-			// })
 		},
 		onLoad() {
 
@@ -50,7 +47,6 @@
 		onHide() {
 			uni.$off("showLogin")
 			uni.$off("showPopUp")
-			// uni.$off("showQrUp")
 		},
 		methods: {
 			init() {

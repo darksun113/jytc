@@ -8,20 +8,21 @@
 		<IsNoObject v-else>
 			暂无藏品
 		</IsNoObject>
+		<BlindToGoods :isShow="isOpenBlind" @openBlindSuccess="openBlindSuccess" :blindData="blindDataRes" />
 	</PageTemp>
 </template>
 
 <script>
 	import NavBar from "./components/NavBar.vue"
-	import {
-		getFilePath
-	} from "@/utils/tools.js"
+	import { getFilePath } from "@/utils/tools.js"
 	export default {
 		data() {
 			return {
 				hasData: true,
 				isEnd: false,
 				isCanReq: true,
+				isOpenBlind:false,
+				blindDataRes: {},
 				goodsList: [],
 				loadType:0,//0 普通藏品  1 盲盒 2 日历模式
 			};
@@ -31,14 +32,21 @@
 		},
 		onShow() {
 			this.init(1)
-
 		},
 		onHide() {
 			this.goodsList = []
 		},
 		methods: {
-			toOpenBlindBox(id){
-				
+			async toOpenBlindBox(instanceId){
+				const res = await uni.$http("/blindbox/open",{instanceId})
+				if(res.code == 0){
+					this.blindDataRes = await getFilePath(res.data,["image"])
+					this.isOpenBlind=true
+				}
+			},
+			openBlindSuccess(){
+				this.isOpenBlind = false
+				this.changeNav(0)
 			},
 			changeNav(idx) {
 				this.isCanReq = true

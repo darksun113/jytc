@@ -60,7 +60,7 @@
 				const startTime = this.goodsList[this.goodsList.length - 1].startTime
 				const type = this.loadType == 0 ? 1 : 2
 				this.getGoodsList(startTime, type, list => {
-					if (item == 0) {
+					if (list == 0) {
 						this.isCanReq = false
 						this.isEnd = true
 					} else {
@@ -108,9 +108,10 @@
 <style lang="scss">
 	.my-object {
 		box-sizing: border-box;
-		height: calc(100% - 112rpx);
+		// height: calc(100% - 112rpx);
+		height: 100%;
 		padding: 40rpx;
-		padding-top: 0;
+		// padding-top: 0;
 		overflow: auto;
 	}
 </style>

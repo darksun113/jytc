@@ -36,7 +36,7 @@
 				if(!this.isCanReq)return;
 				const startTime=this.goodsList[this.goodsList.length-1].startTime
 				this.getGoodsList(startTime,list=>{
-					if(item==0){
+					if(list==0){
 						this.isCanReq=false
 						this.isEnd=true
 					}else{
@@ -82,6 +82,7 @@
 <style lang="scss">
 .my-object{
 	box-sizing: border-box;
+	height: 100%;
 	padding: 40rpx;
 	overflow: auto;
 }

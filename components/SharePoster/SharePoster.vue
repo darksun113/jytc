@@ -11,7 +11,7 @@
 					<img v-else  crossorigin="anonymous" src="@/static/新增icon/占位图.png" >
 				</view>
 				<view class="poster-content" v-if="posterData.loadType==0">
-					<view class="poster-title nowrap">
+					<view style="width: 530rpx;" class="poster-title nowrap_s">
 						收藏家 {{userName}} 邀请你助力抽中白名单机会
 					</view>
 					<view class="poster-detail">
@@ -30,7 +30,7 @@
 					</view>
 				</view>
 				<view style="background: none;background-size: none;" class="poster-content" v-if="posterData.loadType==3">
-					<view style="width: 530rpx;" class="poster-title nowrap">
+					<view style="width: 530rpx;" class="poster-title nowrap_s">
 						 {{userName}} 邀请您加入蓬莱数藏
 					</view>
 					<view class="poster-detail">

@@ -37,9 +37,25 @@
 		onLoad(opt) {
 			this.phone=opt.phone
 			this.slidingFigureId=opt.slidingFigureId
-			this.inviter=opt.inviter?opt.inviter:""
+			if(window.localStorage.getItem('shareType')){
+				this.share=window.localStorage.getItem('shareType')
+			}else{
+				this.share=opt.share?opt.share:""
+			}
+			if(window.localStorage.getItem('userId')){
+				this.inviter=window.localStorage.getItem('userId')
+			}else if(opt.inviter){
+				this.inviter=opt.inviter
+			}else{
+				if(opt.userId){
+					this.inviter=opt.userId
+				}else{
+					this.inviter=''
+				}
+			}
 			this.prePurchaseId=opt.prePurchaseId?opt.prePurchaseId:""
 			this.instanceId=opt.instanceId?opt.instanceId:""
+			
 		},
 		mixins:[mixin],
 		methods: {
@@ -57,12 +73,15 @@
 						verifyCode:this.verifyCode,
 						slidingFigureId:this.slidingFigureId,
 						inviter:this.inviter,
-						prePurchaseId:this.prePurchaseId
+						prePurchaseId:this.prePurchaseId,
+						share:this.share
 					})
 					if(res.code==0){
 						uni.setStorageSync("token",res.data.token)
 						this.$store.commit("getToken",res.data.token)
 						this.$toast('登录成功')
+						window.localStorage.setItem('shareType','')
+						window.localStorage.setItem('userId','')
 						this.$updateUserInfo()
 						let timer = setTimeout(()=>{
 							clearTimeout(timer)

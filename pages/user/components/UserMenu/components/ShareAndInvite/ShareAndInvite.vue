@@ -21,14 +21,14 @@
 				<scroll-view v-if="hasData"  scroll-y="true" @scrolltolower="updateList">
 					<view class="scrollSt">
 						<view v-for="(item,index) in shareList" :key="index" class="oneText">
-							<view style="width:270rpx;" class="">
+							<view style="width:284rpx;" class="font78 nowrap_s">
 								{{item.name}}
 							</view>
 							<view style="height:30rpx; text-align: center;width:100rpx;">
-								<img v-if="item.certification==1" style="width:26rpx;height:30rpx;display: inline-block;"
+								<img v-if="item.certification==0" style="width:26rpx;height:30rpx;display: inline-block;"
 									src="../../../../../../static/新增icon/认证.svg" alt="">
 							</view>
-							<view style="width:270rpx;text-align: right;" class="">
+							<view style="width:274rpx;text-align: right;" class="font78 nowrap_s">
 								{{item.createTime | format}}
 							</view>
 						</view>
@@ -95,13 +95,15 @@
 		mounted() {
 			uni.$on("toOpenSharePoster",()=>{
 				const name=uni.getStorageSync("userInfo").name
-				const userId=uni.getStorageSync("userInfo").buyerId
-				const baseCodeUrl = process.env.NODE_ENV=="development" ? "http://192.168.2.11:8080":"https://h5.jialex.cn"
+				const userId=uni.getStorageSync("userInfo").buyerId 
+				// http://120.197.126.61:18940 http://192.168.2.11:8080
+				const baseCodeUrl = process.env.NODE_ENV=="development" ? "http://192.168.2.15:8082":"https://h5.jialex.cn"
 				this.posterData={
-					codeUrl : `${baseCodeUrl}/subpageA/DetailPage/DetailPage?share=platform&userId=userId`,
+					codeUrl : `${baseCodeUrl}/pages/home/home?share=platform&userId=${userId}`,
 					name,
 					loadType:3 // 0 邀请分享  1 分享把玩
 				}
+				console.log(this.posterData.codeUrl,'codeUrl')
 				this.isOpenPoster=true
 			})
 		},
@@ -123,6 +125,7 @@
 			},
 			close() {
 				this.$emit('closePop')
+				this.updatePage=1
 			},
 			open() {
 				this.getShareList((list)=>{
@@ -130,9 +133,10 @@
 						this.hasData=false
 					}else{
 					    this.hasData=true
-						this.winnerList=list
+						this.shareList=list
 					}
 				})
+				console.log(this.shareList,'this.shareList')
 			},
 			async getShareList(callback){
 				try{
@@ -146,7 +150,6 @@
 							callback(0)
 						}else{
 							this.updatePage++
-							res.data.list=await getFilePath(res.data.list,['icon'])
 							callback(res.data.list)
 						}
 					}
@@ -162,6 +165,13 @@
 </script>
 
 <style lang="less">
+	.font78{
+		font-size: 28rpx;
+		font-family: SourceHanSansCN-Regular, SourceHanSansCN;
+		font-weight: 400;
+		color: #CCCCCC;
+		line-height: 40rpx;
+	}
 	::v-deep .u-popup__content {
 		z-index: 9998 !important;
 	}

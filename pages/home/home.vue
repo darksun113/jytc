@@ -69,6 +69,13 @@
 			format:formatMouthToMinutes
 		},
 		onLoad(opt) {
+			console.log(opt,'opt')
+			if(opt.share){
+			  window.localStorage.setItem('shareType',opt.share)
+			}
+			if(opt.userId){
+			  window.localStorage.setItem('userId',opt.userId)
+			}
 			this.init()
 		},
 		onHide() {},

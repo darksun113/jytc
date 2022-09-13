@@ -4,7 +4,7 @@
 		<load-model  :goodsData="loadData" v-if="loadData.materialType==0" />
 		<load-image  :goodsData="loadData" v-else-if="loadData.materialType==1" />
 		<load-video  :goodsData="loadData" v-else-if="loadData.materialType==2" />
-		<load-audio :goodsData="loadData" v-else></load-audio>load-image
+		<load-audio :goodsData="loadData" v-else></load-audio>
 		<load-blind :goodsData="loadData" />
 		<SharePoster :isOpenPoster="isOpenPoster" @close="isOpenPoster=false" :posterData="posterData"></SharePoster>
 	</view>

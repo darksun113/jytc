@@ -1,19 +1,38 @@
 <template>
 	<PageTemp style="padding: 0 40rpx;">
 		<scroll-view class="home" scroll-y="true" @scrolltolower="updateList">
-			<!-- <Search /> -->
+			<Search />
 			<Banner />
-			<StickyNav @changeShowType="changeShowType"></StickyNav>
+			<StickyNav ref="nav" @changeShowType="changeShowType" @switchOverNav="switchOverNav" @resetPage="reset"></StickyNav>
 			<view class="container">
-				<IsNoData v-if="!hasData">暂无数据</IsNoData>
-				<view v-else>
-					<ModelOfListFlow :seriesList="seriesList" v-if="showType==0" :loadType="0"></ModelOfListFlow>
-					<ModelOfWaterFall :seriesList="seriesList" v-else></ModelOfWaterFall>
-					<IsEnd v-if="isLastItem"></IsEnd>
-				</view>
+				<template v-if="navType==0">
+					<IsNoData v-if="!hasData">暂无数据</IsNoData>
+					<view v-else>
+						<ModelOfListFlow :renderList="renderList" v-if="showType==0" :loadType="0"></ModelOfListFlow>
+						<ModelOfWaterFall :renderList="renderList" v-else></ModelOfWaterFall>
+						<IsEnd v-if="isLastItem"></IsEnd>
+					</view>
+				</template>
+				<template v-else-if="navType==1">
+					<IsNoBlind v-if="!hasData">暂无盲盒，敬请期待！</IsNoBlind>
+					<view v-else>
+						<ModelOfListFlow :renderList="renderList" :loadType="0" :isBlind="true"></ModelOfListFlow>
+						<IsEnd v-if="isLastItem"></IsEnd>
+					</view>
+				</template>
+				<template v-else>
+					<IsNoData v-if="!hasData">暂无数据</IsNoData>
+					<view v-for="(item,index) in renderList" :key="index">
+						<view class="sell-time">
+							<!-- {{item.sellTime}} -->
+							{{parseInt(Date.now()/1000) | format}}
+						</view>
+						<CardOfObject :item="item" :loadType="2"></CardOfObject>
+					</view>
+				</template>
 			</view>
 		</scroll-view>
-		<!-- <Notice :isShow="isNoticeShow"></Notice> -->
+		<!-- <Notice :isShow="isNoticeShow" @close="isNoticeShow=false"></Notice> -->
 	</PageTemp>
 </template>
 
@@ -22,6 +41,7 @@
 	import StickyNav from "./components/StickyNav/index.vue"
 	import Search from "./components/Search"
 	import { getFilePath } from "@/utils/tools.js"
+	import { formatMouthToMinutes } from "@/utils/formatDate.js"
 	export default {
 		components: {
 			Banner,
@@ -31,59 +51,103 @@
 		data() {
 			return {
 				showType: 0,
-				loadType: 0,
 				hasData: true,
+				navType:0,
 				isLastItem: false,
 				updatePage: 1,
-				seriesList: [],
+				renderList: [],
 				shouldRequest: true,
 				isNoticeShow:true
 			}
 		},
 		onShow() {
-			this.init()
-			this.getUrl()
+			this.$nextTick(()=>{
+				this.$refs.nav.resetPage()
+			})
 		},
-		onLoad() {
-			this.$checkAI(1)
+		filters:{
+			format:formatMouthToMinutes
 		},
-		onHide() {
-			if (this.isLastItem) {
-				this.seriesList = []
+		onLoad(opt) {
+			console.log(opt,'opt')
+			if(opt.share){
+			  window.localStorage.setItem('shareType',opt.share)
 			}
+			if(opt.userId){
+			  window.localStorage.setItem('userId',opt.userId)
+			}
+			this.init()
 		},
+		onHide() {},
 		methods: {
-			getUrl() {
-				var pages = getCurrentPages() //获取加载的页面
-				var currentPage = pages[pages.length - 1] //获取当前页面的对象
-				var url = currentPage.route //当前页面url
-				var options = currentPage.options //如果要获取url中所带的参数可以查看options
-				//参数多时通过&拼接url的参数
-				var urlWithArgs = url + '?'
-				for (var key in options) {
-					var value = options[key]
-					if(key=="code"&&value=="ai"){
-						uni.setStorage({
-						   key: 'isAI',
-						   data: true
-						})
-					}
-				}
-			},
 			changeShowType(type) {
 				this.showType = type
 			},
+			// 切换nav
+			switchOverNav(e){
+				const {index} = e
+				this.updatePage=1
+				this.navType=index
+				switch(index){
+					case 0 : this.init()
+					break;
+					case 1 : this.getBlindBox()
+					break;
+					case 2 : this.toSellCalendar()
+					break
+				}
+			},
+			// 盲盒
+			getBlindBox(){
+				this.getBlindList("",0,list=>{
+					if (list == 0) {
+						this.hasData = false
+					} else {
+						if(list.length<10)this.isLastItem = true;
+						this.renderList = list
+					}
+				})
+			},
+			// 发售日历
+			toSellCalendar(){
+				
+			},
+			reset(){
+				this.init()
+			},
 			updateList() {
 				if (this.shouldRequest) {
-					this.getSeriesList(list => {
-						if (list == 0) {
-							this.isLastItem = true
-							this.shouldRequest = false
-						} else {
-							this.seriesList = [...this.seriesList, ...list]
-						}
-					})
+					switch(this.navType){
+						case 0 : this.uodateSeriesList()
+						break;
+						case 1 : this.updateBlindList()
+						break;
+						case 2 : this.toSellCalendar()
+						break
+					}
+					
 				}
+			},
+			uodateSeriesList(){
+				this.getSeriesList(list => {
+					if (list == 0) {
+						this.isLastItem = true
+						this.shouldRequest = false
+					} else {
+						this.renderList = [...this.renderList, ...list]
+					}
+				})
+			},
+			updateBlindList(){
+				const state = this.renderList[this.renderList.length-1].state
+				this.getBlindList("",state,list=>{
+					if (list == 0) {
+						this.isLastItem = true
+						this.shouldRequest = false
+					} else {
+						this.renderList = [...this.renderList, ...list]
+					}
+				})
 			},
 			init() {
 				this.updatePage = 1
@@ -93,9 +157,9 @@
 					if (list == 0) {
 						this.hasData = false
 					} else {
-						this.seriesList = list
+						if(list.length<10)this.isLastItem = true;
+						this.renderList = list
 					}
-					uni.stopPullDownRefresh()
 				})
 			},
 			async getSeriesList(callback) {
@@ -119,7 +183,19 @@
 				} catch (e) {
 					//TODO handle the exception
 				}
-			}
+			},
+			async getBlindList(keyWord,state,cb){
+				const res = await uni.$http("/blindbox/list",{
+					keyWord,
+					state,
+					size:10,
+					page:this.updatePage
+				})
+				if(res.code == 0){
+					res.data.list = await getFilePath(res.data.list,["image","shopIcon"])
+					cb(res.data.list)
+				}
+			},
 		}
 	}
 </script>
@@ -132,7 +208,14 @@
 		color: #FFFFFF;
 		.container{
 			position: relative;
-			height: calc(100% - 280rpx - 150rpx);
+			min-height: calc(100% - 280rpx - 150rpx - 134rpx);
+			.sell-time{
+				padding: 40rpx 0;
+				font-size: 32rpx;
+				font-family: SourceHanSansCN-Medium, SourceHanSansCN;
+				font-weight: 500;
+				color: #FFFFFF;
+			}
 		}
 	}
 </style>

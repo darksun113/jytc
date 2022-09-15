@@ -22,10 +22,10 @@
 				</u-count-down>
 			</view>
 		</view>
-		<image class="series-pic" :src="item.seriesImg" mode="aspectFill"></image>
+		<image class="series-pic" :src="item.seriesImg || item.image" mode="aspectFill"></image>
 		<view class="series-info">
 			<view class="series-title nowrap">
-				{{item.seriesName}}
+				{{item.seriesName || item.blindboxName}}
 			</view>
 			<view class="author-box">
 				<image class="author-icon" :src="item.shopIcon" mode=""></image>
@@ -45,6 +45,10 @@
 				type:Object,
 				default:()=>{}
 			},
+			isBlind:{
+				type:Boolean,
+				default:false
+			},
 			loadType:[Number,String]
 		},
 		data(){
@@ -55,7 +59,8 @@
 		},
 		methods:{
 			toSeriesDetailPage(){
-				this.$emit("toSeriesDetailPage",this.item.seriesId)
+				const id = this.isBlind ? this.item.blindboxId : this.item.seriesId
+				this.$emit("toSeriesDetailPage",id)
 			},
 			onChange(e){
 				this.timeData = e

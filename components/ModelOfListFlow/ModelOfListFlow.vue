@@ -1,6 +1,6 @@
 <template>
 	<view class="list_layout">
-		<ListCard :item="item" v-for="(item,index) in seriesList" :key="index" @toSeriesDetailPage="toSeriesDetailPage" :loadType="loadType"></ListCard>
+		<ListCard :item="item" v-for="(item,index) in renderList" :key="index" :isBlind="isBlind" @toSeriesDetailPage="active" :loadType="loadType"></ListCard>
 	</view>
 </template>
 
@@ -12,13 +12,28 @@
 			ListCard
 		},
 		props:{
-			seriesList:{
+			renderList:{
 				type:Array,
 				default:()=>[]
+			},
+			isBlind:{
+				type:Boolean,
+				default:false
 			},
 			loadType:[Number,String]
 		},
 		methods:{
+			active(id){
+				if(this.isBlind){
+					this.toBlindBoxDetail(id)
+				}else{
+					this.toSeriesDetailPage(id)
+				}
+			},
+			toBlindBoxDetail(blindboxId){
+				const url = `/subpageA/DetailPage/DetailPage?loadType=2&blindboxId=${blindboxId}`
+				this.$routerTo(url)
+			},
 			toSeriesDetailPage(seriesId){
 				const url=`../../subpageA/SeriesPage/SeriesPage?seriesId=${seriesId}`
 				this.$routerTo(url)

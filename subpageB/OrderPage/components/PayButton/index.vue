@@ -250,6 +250,7 @@
 			},
 			// 支付宝支付
 			openPayWeb(body) {
+				console.log(body,'body--------')
 				uni.removeStorageSync("isWxPay")
 				const formElement = document.createElement("div");
 				formElement.style.display = "display:none;";

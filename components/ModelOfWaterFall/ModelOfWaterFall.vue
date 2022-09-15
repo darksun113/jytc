@@ -1,10 +1,10 @@
 <template>
 	<view class="water_layout">
 		<view>
-			<WaterFallCard :item="item" v-for="(item,index) in seriesList" :key="index" v-if="index % 2 ==0" @toSeriesDetailPage="toSeriesDetailPage"></WaterFallCard>
+			<WaterFallCard :item="item" v-for="(item,index) in renderList" :key="index" v-if="index % 2 ==0" @toSeriesDetailPage="toSeriesDetailPage"></WaterFallCard>
 		</view>
 		<view>
-			<WaterFallCard :item="item" v-for="(item,index) in seriesList" :key="index" v-if="index % 2 !==0" @toSeriesDetailPage="toSeriesDetailPage"></WaterFallCard>
+			<WaterFallCard :item="item" v-for="(item,index) in renderList" :key="index" v-if="index % 2 !==0" @toSeriesDetailPage="toSeriesDetailPage"></WaterFallCard>
 		</view>
 	</view>
 </template>
@@ -14,7 +14,7 @@
 	export default {
 		name:"ModelOfWaterFall",
 		props:{
-			seriesList:{
+			renderList:{
 				type:Array,
 				default:()=>[]
 			}

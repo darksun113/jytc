@@ -76,7 +76,13 @@
 		methods:{
 			async getBuyers(createTime, callback) {
 				try{
-					const res=await uni.$http("/goods/getBuyers", {goodsId: this.popupData.goodsId,size: 10,createTime,optType:0})
+					const reqData = {}
+					if(this.popupData.loadType == 2){
+						reqData.blindboxId = this.popupData.blindboxId
+					}else{
+						reqData.goodsId = this.popupData.goodsId
+					}
+					const res=await uni.$http("/goods/getBuyers", {...reqData,size: 10,createTime,optType:0})
 					if (res.code == 0) {
 						if(res.data.list.length==0){
 							callback(0)

@@ -15,7 +15,7 @@ export default {
 		    }
 		},
         initLight() {
-            switch (this.modelType) {
+            switch (Number(this.modelType)) {
                 case 1:
                     this.lightTypeOfPainting()
                     break;

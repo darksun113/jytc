@@ -2,8 +2,7 @@
 	<PageTemp>
 		<view class="detail-page" :style="{paddingBottom:(loadType==0 || loadType==2)?'156rpx':'0'}">
 			<LoadGoods v-if="JSON.stringify(goodsData)!=='{}'" :goodsData="goodsData"></LoadGoods>
-			<GoodsInfo v-if="JSON.stringify(goodsData)!=='{}'" :goodsData="goodsData" :buyerList="buyerList">
-			</GoodsInfo>
+			<GoodsInfo v-if="JSON.stringify(goodsData)!=='{}'" :goodsData="goodsData" :buyerList="buyerList"></GoodsInfo>
 			<ButtonBox v-if="JSON.stringify(goodsData)!=='{}' && (loadType==0 || loadType==2)" :goodsData="goodsData"></ButtonBox>
 		</view>
 	</PageTemp>

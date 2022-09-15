@@ -39,7 +39,6 @@ export default{
 	        objLoader: null,
 	        mtlLoader: null,
 	        animationId:null,
-	        isAutoPlay:true
 	    };
 	},
 	mounted() {
@@ -57,13 +56,12 @@ export default{
 		    this.control = new OrbitControls(this.camera, this.renderer.domElement)
 			
 		    // 开启自动旋转
-		    this.control.autoRotate = this.isAutoPlay
+		    this.control.autoRotate = true
 			
 		    // 设置缩放最大、最小距离
 		    this.control.minDistance = 50
 		    this.control.maxDistance = 400
 			this.control.enableZoom = true
-		    
 		    if(this.loadType == 0){
 		        this.control.enableRotate = false;
 		        this.control.enableZoom = false;
@@ -76,38 +74,6 @@ export default{
 		    this.control.enableDamping = true
 		    this.control.dampingFactor = 0.1
 		},
-		// initModel(){
-		// 	const _this=this
-		// 	let loader = new GLTFLoader();
-		// 	// const texture = new THREE.Texture();
-		// 	loader.load("static/demo/11.glb", geometry => {
-		// 		this.mesh = geometry.scene;
-		// 		geometry.scene.traverse(function (child) {
-		// 			if (child instanceof THREE.Mesh) {
-		// 				console.log(child)
-		// 				// child.material.map = texture;
-		// 				// 设置镜面反光效果（陶瓷类模型使用）
-		// 				if (_this.modelType == 2) {
-		// 					child.castShadow = false;
-		// 					child.receiveShadow = false;
-		// 					child.material.shininess = 5000;
-		// 					child.material.color.r = 0.9;
-		// 					child.material.color.g = 0.9;
-		// 					child.material.color.b = 0.85;
-		// 					child.material.roughness= 0;
-		// 				}
-		// 			}
-		// 			child.castShadow = true;
-		// 			child.receiveShadow = true;
-		// 		});
-		// 		this.mesh.scale.set(1.5, 1.5, 1.5); //设置大小比例
-		// 		// this.mesh.position.set(0, 0, 0); //设置位置
-		// 		const y= this.setPosition()
-		// 		this.showIf=false
-		// 		this.mesh.position.y = -30;
-		// 		this.scene.add(this.mesh); // 将模型引入three
-		// 	})
-		// },
 		initModel() {
 		    const manager = new THREE.LoadingManager();
 		    let _this=this
@@ -193,6 +159,7 @@ export default{
 		},
 		// 重置模型位置
 		resetModel(){
+			this.initScene();
 		    this.initCamera()
 		    this.initControls()
 		},
@@ -202,6 +169,15 @@ export default{
 		},
 		stopRotate(){
 			this.control.autoRotate=false
+		},
+		openEnablePan(){
+			this.resetModel()
+			this.control.enablePan=true
+			this.control.autoRotate=false
+			this.control.enableRotate = false
+		},
+		closeEnablePan(){
+			this.resetModel()
 		},
 		execute() {
 		    // 初始化场景

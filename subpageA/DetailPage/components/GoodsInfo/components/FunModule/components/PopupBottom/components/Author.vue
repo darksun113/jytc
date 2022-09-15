@@ -6,7 +6,7 @@
 		<view class="author_content">
 			<view class="pic_box">
 				<img :src="authorInfo.icon" alt="">
-				<view class="author_name nowrap">
+				<view class="author_name">
 					{{authorInfo.shopName}}
 				</view>
 			</view>

@@ -1,6 +1,6 @@
 <template>
 	<view class="load-image">
-		<image class="goods-pic" :src="goodsData.image" mode="aspectFit"></image>
+		<image class="goods-pic" :src="goodsData.image" mode="aspectFill"></image>
 		<view class="lock_text">购买后体验内容</view>
 	</view>
 </template>
@@ -31,8 +31,8 @@
 		height: 100%;
 		position: relative;
 		.goods-pic{
-			width: 450rpx;
-			height: 450rpx;
+			width: 100%;
+			height: 100%;
 			position: absolute;
 			left: 50%;
 			top: 50%;

@@ -92,7 +92,7 @@
 			},
 			// 盲盒
 			getBlindBox(){
-				this.getBlindList("",list=>{
+				this.getBlindList("",0,list=>{
 					if (list == 0) {
 						this.hasData = false
 					} else {
@@ -132,7 +132,15 @@
 				})
 			},
 			updateBlindList(){
-				
+				const state = this.renderList[this.renderList.length-1].state
+				this.getBlindList("",state,list=>{
+					if (list == 0) {
+						this.isLastItem = true
+						this.shouldRequest = false
+					} else {
+						this.renderList = [...this.renderList, ...list]
+					}
+				})
 			},
 			init() {
 				this.updatePage = 1
@@ -169,9 +177,10 @@
 					//TODO handle the exception
 				}
 			},
-			async getBlindList(keyWord,cb){
+			async getBlindList(keyWord,state,cb){
 				const res = await uni.$http("/blindbox/list",{
 					keyWord,
+					state,
 					size:10,
 					page:this.updatePage
 				})

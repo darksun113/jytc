@@ -22,10 +22,10 @@
 				</u-count-down>
 			</view>
 		</view>
-		<image class="series-pic" :src="item.seriesImg" mode="aspectFill"></image>
+		<image class="series-pic" :src="item.seriesImg || item.image" mode="aspectFill"></image>
 		<view class="series-info">
 			<view class="series-title nowrap">
-				{{item.seriesName}}
+				{{item.seriesName || item.blindboxName}}
 			</view>
 			<view class="author-box">
 				<image class="author-icon" :src="item.shopIcon" mode=""></image>

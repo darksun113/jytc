@@ -13,6 +13,7 @@
 </template>
 
 <script>
+	import BlindToGoods from "./components/BlindToGoods"
 	import NavBar from "./components/NavBar.vue"
 	import { getFilePath } from "@/utils/tools.js"
 	export default {
@@ -28,7 +29,8 @@
 			};
 		},
 		components: {
-			NavBar
+			NavBar,
+			BlindToGoods
 		},
 		onShow() {
 			this.init(1)

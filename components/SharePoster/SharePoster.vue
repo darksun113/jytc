@@ -30,7 +30,7 @@
 					</view>
 				</view>
 				<view style="background: none;background-size: none;" class="poster-content" v-if="posterData.loadType==3">
-					<view style="width: 530rpx;" class="poster-title nowrap_s">
+					<view style="width: 100%;display:block" class="poster-title nowrap_s">
 						 {{userName}} 邀请您加入蓬莱数藏
 					</view>
 					<view class="poster-detail">
@@ -79,6 +79,7 @@
 					</view>
 				</view>
 			</view>
+			<view class="note">长按图片保存至手机相册</view>
 			<view class="close-btn" @click="close">
 				取消
 			</view>
@@ -180,8 +181,22 @@
 </script>
 
 <style lang="scss" scoped>
+	.note{
+		text-align: center;
+        margin-top: 20rpx;
+		font-size: 14rpx;
+		font-family: SourceHanSansCN-Regular, SourceHanSansCN;
+		font-weight: 400;
+		color: #FFFFFF;
+		line-height: 21rpx;
+	}
+	.nowrap_s {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 	view {
-		box-sizing: border-box;
+		box-sizing: -box;
 	}
 	.mask{
 		width: 100%;

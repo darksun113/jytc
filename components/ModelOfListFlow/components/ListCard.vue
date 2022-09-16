@@ -1,9 +1,17 @@
 <template>
 	<view class="series-box" @click="toSeriesDetailPage">
-		<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-if="item.goodsTotal==0 && loadType==0">
-			已售罄
-		</view>
-		<view v-else-if="loadType==1">
+		<template v-if="loadType==0 || loadType==2">
+			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-if="item.goodsTotal==0 || item.remainingNumber == 0">
+				已售罄
+			</view>
+			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-else-if="item.startTime>curTime">
+				开售时间 {{item.startTime | formatYearToMinutes_EN}}
+			</view>
+			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-else-if="item.sellTime>curTime">
+				开售时间 {{item.sellTime | formatYearToMinutes_EN}}
+			</view>
+		</template>
+		<template v-else-if="loadType==1">
 			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-if="item.writeListStatus==2">
 				已使用
 			</view>
@@ -21,8 +29,8 @@
 					</view>
 				</u-count-down>
 			</view>
-		</view>
-		<image class="series-pic" :src="item.seriesImg || item.image" mode="aspectFill"></image>
+		</template>
+		<image class="series-pic" :src="item.seriesImg || item.image" :mode="isBlind?'aspectFit':'aspectFill'"></image>
 		<view class="series-info">
 			<view class="series-title nowrap">
 				{{item.seriesName || item.blindboxName}}
@@ -38,6 +46,7 @@
 </template>
 
 <script>
+	import {formatYearToMinutes_EN} from "@/utils/formatDate.js"
 	export default {
 		name:"ListCard",
 		props:{
@@ -49,6 +58,7 @@
 				type:Boolean,
 				default:false
 			},
+			// 0 普通模式 1 预购模式 2 盲盒模式
 			loadType:[Number,String]
 		},
 		data(){
@@ -56,6 +66,9 @@
 				timeData: {},
 				curTime:parseInt(Date.now()/1000)
 			}
+		},
+		filters:{
+			formatYearToMinutes_EN
 		},
 		methods:{
 			toSeriesDetailPage(){

@@ -2,7 +2,7 @@
 	<view class="card-of-object" @click="active">
 		<view class="goods-pic-box">
 			<image class="goods-pic" :src="item.image || item.seriesImg" mode="aspectFill"></image>
-			<view class="icon">
+			<view class="icon" v-if="loadType!=1">
 				<image v-if="item.materialType==0" class="goods-type" src="@/static/images/type_3D.svg" mode=""></image>
 				<image v-else-if="item.materialType==1" class="goods-type" src="@/static/images/type_pic.svg" mode=""></image>
 				<image v-else-if="item.materialType==2" class="goods-type" src="@/static/images/type_video.svg" mode=""></image>

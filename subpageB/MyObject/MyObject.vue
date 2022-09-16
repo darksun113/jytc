@@ -25,24 +25,24 @@
 				isOpenBlind:false,
 				blindDataRes: {},
 				goodsList: [],
-				loadType:0,//0 普通藏品  1 盲盒 2 日历模式
+				loadType:0,//0 普通藏品  1 盲盒 
 			};
 		},
 		components: {
 			NavBar,
 			BlindToGoods
 		},
-		onShow() {
+		onLoad() {
 			this.init(1)
 		},
 		onHide() {
-			this.goodsList = []
+			// this.goodsList = []
 		},
 		methods: {
 			async toOpenBlindBox(instanceId){
-				const res = await uni.$http("/blindbox/open",{instanceId})
+				const res = await uni.$http("/blindbox/openBlindbox",{instanceId})
 				if(res.code == 0){
-					this.blindDataRes = await getFilePath(res.data,["image"])
+					this.blindDataRes = await getFilePath(res.data.goods,["image"])
 					this.isOpenBlind=true
 				}
 			},

@@ -41,6 +41,7 @@ export async function getFilePath(data,keysList){
 				if(data[key]){
 					temp[key]=data[key]
 				}else{
+					debugger
 					console.error(key+"无内容，请检查")
 					return
 				}

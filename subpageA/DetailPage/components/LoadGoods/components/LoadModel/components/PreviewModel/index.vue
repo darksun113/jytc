@@ -19,6 +19,10 @@
 				<img src="../../static/images/stop_rotate_icon.svg" alt="">
 			</view>
 		</view>
+		<view class="control" v-show="showType!=0">
+			<image class="finger" src="../../static/images/db_finger_move.svg"></image>
+			<text>双指移动</text>
+		</view>
 	</view>
 </template>
 
@@ -148,6 +152,27 @@
 					width: 40rpx;
 					height: 40rpx;
 				}
+			}
+			.finger{
+				width: 80rpx;
+				height: 80rpx;
+				position: absolute;
+				left: 50%;
+				bottom: 100rpx;
+				transform: translateX(-50%);
+			}
+			text{
+				width: 120rpx;
+				height: 36rpx;
+				font-size: 24rpx;
+				font-family: PingFangSC-Regular, PingFang SC;
+				font-weight: 400;
+				color: #FFFFFF;
+				line-height: 36rpx;
+				position: absolute;
+				left: 50%;
+				bottom: 60rpx;
+				transform: translateX(-50%);
 			}
 		}
 	}

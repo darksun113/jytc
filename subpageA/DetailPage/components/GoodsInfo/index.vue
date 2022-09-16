@@ -5,7 +5,7 @@
 				<view class="name">
 					{{goodsData.goodsName}}
 				</view>
-				<view class="limit" v-if="goodsData.loadType==0">
+				<view class="limit" v-if="goodsData.loadType==0 || goodsData.loadType==2">
 					<text>{{goodsData.remainingNumber}}/{{goodsData.totalNumber}}份</text>
 				</view>
 			</view>

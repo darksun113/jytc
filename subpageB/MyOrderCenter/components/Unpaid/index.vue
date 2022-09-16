@@ -29,7 +29,7 @@
 				cancelIdx:null,
 				isLastData:false,
 				updatePage:1,
-				orderList:[] 
+				orderList:[]
 			} 
 		},
 		mounted() {
@@ -44,6 +44,7 @@
 						this.isNoData=true
 					}else{
 						this.orderList=list
+						// this.orderList=JSON.parse(JSON.stringify(list))
 					}
 				})
 			},

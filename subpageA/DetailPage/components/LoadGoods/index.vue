@@ -1,7 +1,7 @@
 <template>
 	<view class="show-box" :style="{height:(goodsData.loadType==0 || goodsData.loadType==2) ? '668rpx':'780rpx'}">
 		<show-code :goodsData="loadData" v-if="goodsData.loadType==1" />
-		<load-blind :goodsData="loadData" v-if="loadData.goodsType==1"/>
+		<load-blind :goodsData="loadData" v-if="loadData.goodsType==2"/>
 		<load-model  :goodsData="loadData" v-else-if="loadData.materialType==0" />
 		<load-image  :goodsData="loadData" v-else-if="loadData.materialType==1" />
 		<load-video  :goodsData="loadData" v-else-if="loadData.materialType==2" />

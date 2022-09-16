@@ -3,7 +3,8 @@
 		<scroll-view class="home" scroll-y="true" @scrolltolower="updateList">
 			<Search />
 			<Banner />
-			<StickyNav ref="nav" @changeShowType="changeShowType" @switchOverNav="switchOverNav" @resetPage="reset"></StickyNav>
+			<StickyNav ref="nav" @changeShowType="changeShowType" @switchOverNav="switchOverNav" @resetPage="reset">
+			</StickyNav>
 			<view class="container">
 				<template v-if="navType==0">
 					<IsNoData v-if="!hasData">暂无数据</IsNoData>
@@ -16,7 +17,7 @@
 				<template v-else-if="navType==1">
 					<IsNoBlind v-if="!hasData">暂无盲盒，敬请期待！</IsNoBlind>
 					<view v-else>
-						<ModelOfListFlow :renderList="renderList" :loadType="0" :isBlind="true"></ModelOfListFlow>
+						<ModelOfListFlow :renderList="renderList" :loadType="2" :isBlind="true"></ModelOfListFlow>
 						<IsEnd v-if="isLastItem"></IsEnd>
 					</view>
 				</template>
@@ -40,8 +41,12 @@
 	import Banner from "./components/Banner/index.vue"
 	import StickyNav from "./components/StickyNav/index.vue"
 	import Search from "./components/Search"
-	import { getFilePath } from "@/utils/tools.js"
-	import { formatMouthToMinutes } from "@/utils/formatDate.js"
+	import {
+		getFilePath
+	} from "@/utils/tools.js"
+	import {
+		formatMouthToMinutes
+	} from "@/utils/formatDate.js"
 	export default {
 		components: {
 			Banner,
@@ -52,29 +57,28 @@
 			return {
 				showType: 0,
 				hasData: true,
-				navType:0,
+				navType: 0,
 				isLastItem: false,
 				updatePage: 1,
 				renderList: [],
 				shouldRequest: true,
-				isNoticeShow:true
+				isNoticeShow: true,
 			}
 		},
 		onShow() {
-			this.$nextTick(()=>{
+			this.$nextTick(() => {
 				this.$refs.nav.resetPage()
 			})
 		},
-		filters:{
-			format:formatMouthToMinutes
+		filters: {
+			format: formatMouthToMinutes
 		},
 		onLoad(opt) {
-			console.log(opt,'opt')
-			if(opt.share){
-			  window.localStorage.setItem('shareType',opt.share)
+			if (opt.share) {
+				window.localStorage.setItem('shareType', opt.share)
 			}
-			if(opt.userId){
-			  window.localStorage.setItem('userId',opt.userId)
+			if (opt.userId) {
+				window.localStorage.setItem('userId', opt.userId)
 			}
 			this.init()
 		},
@@ -84,51 +88,60 @@
 				this.showType = type
 			},
 			// 切换nav
-			switchOverNav(e){
-				const {index} = e
-				this.updatePage=1
-				this.navType=index
-				switch(index){
-					case 0 : this.init()
-					break;
-					case 1 : this.getBlindBox()
-					break;
-					case 2 : this.toSellCalendar()
-					break
+			switchOverNav(e) {
+				this.renderList = []
+				const { index } = e
+				this.hasData = true
+				this.isLastItem = false
+				this.updatePage = 1
+				this.navType = index
+				switch (index) {
+					case 0:
+						this.init()
+						break;
+					case 1:
+						this.getBlindBox()
+						break;
+					case 2:
+						this.toSellCalendar()
+						break
 				}
 			},
 			// 盲盒
-			getBlindBox(){
-				this.getBlindList("",0,list=>{
+			getBlindBox() {
+				this.getBlindList("", 0, null, list => {
 					if (list == 0) {
 						this.hasData = false
 					} else {
-						if(list.length<10)this.isLastItem = true;
+						if (list.length < 10) this.isLastItem = true;
 						this.renderList = list
 					}
 				})
 			},
 			// 发售日历
-			toSellCalendar(){
+			toSellCalendar() {
 				
 			},
-			reset(){
+			reset() {
 				this.init()
 			},
 			updateList() {
 				if (this.shouldRequest) {
-					switch(this.navType){
-						case 0 : this.uodateSeriesList()
-						break;
-						case 1 : this.updateBlindList()
-						break;
-						case 2 : this.toSellCalendar()
-						break
+					switch (this.navType) {
+						case 0:
+							this.uodateSeriesList()
+							break;
+						case 1:
+							this.updateBlindList()
+							break;
+						case 2:
+							this.toSellCalendar()
+							break
 					}
-					
+
 				}
 			},
-			uodateSeriesList(){
+			uodateSeriesList() {
 				this.getSeriesList(list => {
 					if (list == 0) {
 						this.isLastItem = true
@@ -138,9 +151,10 @@
 					}
 				})
 			},
-			updateBlindList(){
-				const state = this.renderList[this.renderList.length-1].state
-				this.getBlindList("",state,list=>{
+			updateBlindList() {
+				const state = this.renderList[this.renderList.length - 1].remainingNumber == 0 ? 1 : 0
+				const startTime = this.renderList[this.renderList.length - 1].startTime
+				this.getBlindList("", state, startTime, list => {
 					if (list == 0) {
 						this.isLastItem = true
 						this.shouldRequest = false
@@ -157,7 +171,7 @@
 					if (list == 0) {
 						this.hasData = false
 					} else {
-						if(list.length<10)this.isLastItem = true;
+						if (list.length < 10) this.isLastItem = true;
 						this.renderList = list
 					}
 				})
@@ -184,16 +198,18 @@
 					//TODO handle the exception
 				}
 			},
-			async getBlindList(keyWord,state,cb){
-				const res = await uni.$http("/blindbox/list",{
+			async getBlindList(keyWord, state, startTime, cb) {
+				const res = await uni.$http("/blindbox/list", {
 					keyWord,
 					state,
-					size:10,
-					page:this.updatePage
+					size: 10,
+					startTime
 				})
-				if(res.code == 0){
-					res.data.list = await getFilePath(res.data.list,["image","shopIcon"])
+				if (res.code == 0) {
+					res.data.list = await getFilePath(res.data.list, ["image", "shopIcon"])
 					cb(res.data.list)
+				}else{
+					this.$toast(res.errorMsg)
 				}
 			},
 		}
@@ -206,10 +222,12 @@
 		width: 100%;
 		overflow: auto;
 		color: #FFFFFF;
-		.container{
+
+		.container {
 			position: relative;
 			min-height: calc(100% - 280rpx - 150rpx - 134rpx);
-			.sell-time{
+
+			.sell-time {
 				padding: 40rpx 0;
 				font-size: 32rpx;
 				font-family: SourceHanSansCN-Medium, SourceHanSansCN;

@@ -1,5 +1,5 @@
 <template>
-	<u-popup v-model="show" mode="center" @close="close" :mask="false">
+	<u-popup :show="show" mode="center" @close="close" :mask="false">
 		<view class="blind_box_res" @click.self="close">
 			<view class="open_res_box" >
 				<transition enter-active-class="animated bounceIn">

@@ -159,7 +159,6 @@ export default{
 		},
 		// 重置模型位置
 		resetModel(){
-			this.initScene();
 		    this.initCamera()
 		    this.initControls()
 		},

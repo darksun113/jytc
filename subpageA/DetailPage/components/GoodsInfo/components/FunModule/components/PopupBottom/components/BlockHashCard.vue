@@ -95,7 +95,9 @@
 						display: flex;
 						line-height: 38rpx;
 						margin-bottom: 30rpx;
-						
+						&:last-child{
+							margin-bottom: 0;
+						}
 						view {
 							color: #000000;
 							font-size: 28rpx;

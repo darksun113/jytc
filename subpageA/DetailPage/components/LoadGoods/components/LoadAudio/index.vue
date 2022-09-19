@@ -1,7 +1,7 @@
 <template>
 	<view class="load-image">
 		<image class="goods-pic" :src="goodsData.image" mode="aspectFit"></image>
-		<Control  v-if="goodsData.loadType==1" @preview="toOpenModelPreImg" @share="toShare" :buyerName="goodsData.buyerName"></Control>
+		<Control  v-if="goodsData.loadType==1" @preview="toOpenModelPreImg" @share="toShare" :buyerId="goodsData.ownerName"></Control>
 		<view class="lock_text" v-else>购买后体验内容</view>
 		<Preview :isShow="isOpenPre" @close="closePreviewModel">
 			<PreviewModel :audioData="goodsData" ref="preAudio"></PreviewModel>

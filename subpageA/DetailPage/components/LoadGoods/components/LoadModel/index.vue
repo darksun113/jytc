@@ -6,7 +6,7 @@
 		<Preview :isShow="isOpenModelPre">
 			<PreviewModel :goodsData="modelData" @close="closePreviewModel"></PreviewModel>
 		</Preview>
-		<Control v-if="goodsData.loadType==1" @preview="toOpenModelPre3D" @share="toShare" :buyerName="goodsData.buyerName"></Control>
+		<Control v-if="goodsData.loadType==1" @preview="toOpenModelPre3D" @share="toShare" :buyerId="goodsData.ownerName"></Control>
 		<view class="lock_text" v-else>
 			购买后体验内容
 		</view>

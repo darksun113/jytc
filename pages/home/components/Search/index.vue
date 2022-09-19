@@ -1,12 +1,7 @@
 <template>
 	<view class="search-module">
 		<view class="scarch-box">
-			<u-search shape="square" placeholder="数学通识"
-				placeholderColor="#666" 
-				:searchIcon="searchIcon" 
-				@change="searchKeyWords"
-				:clearabled="true"
-				@clear="clear"
+			<u-search shape="square" placeholder="数学通识" placeholderColor="#666" :searchIcon="searchIcon" @change="searchKeyWords" :clearabled="true" @clear="clear"
 				color="#fff"
 				v-model="keyWords"
 				bgColor="#333333" :showAction="false"></u-search>
@@ -16,8 +11,7 @@
 			</view>
 		</view>
 		<view class="res-list" v-show="searchResList.length>0">
-			<view class="res-item" 
-				:style="{background:idx==curSelect?'#565656' : '#333'}" 
+			<view class="res-item" :style="{background:idx==curSelect?'#565656' : '#333'}" 
 				v-for="(item,idx) in searchResList" :key="idx" @click="searchGoods(item,idx)">
 				{{item.title}}
 			</view>

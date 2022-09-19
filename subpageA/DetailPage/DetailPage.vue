@@ -2,8 +2,10 @@
 	<PageTemp>
 		<view class="detail-page" :style="{paddingBottom:(loadType==0 || loadType==2)?'156rpx':'0'}">
 			<LoadGoods v-if="JSON.stringify(goodsData)!=='{}'" :goodsData="goodsData"></LoadGoods>
-			<GoodsInfo v-if="JSON.stringify(goodsData)!=='{}'" :goodsData="goodsData" :buyerList="buyerList"></GoodsInfo>
-			<ButtonBox v-if="JSON.stringify(goodsData)!=='{}' && (loadType==0 || loadType==2)" :goodsData="goodsData"></ButtonBox>
+			<GoodsInfo v-if="JSON.stringify(goodsData)!=='{}'" :goodsData="goodsData" :buyerList="buyerList">
+			</GoodsInfo>
+			<ButtonBox v-if="JSON.stringify(goodsData)!=='{}' && (loadType==0 || loadType==2)" :goodsData="goodsData">
+			</ButtonBox>
 		</view>
 	</PageTemp>
 </template>
@@ -23,7 +25,7 @@
 		},
 		data() {
 			return {
-				// 加载方式 0 未购买  1 已购买
+				// 加载方式 0 未购买  1 已购买 2 盲盒
 				loadType: 0,
 				goodsId: "",
 				goodsData: {},
@@ -168,6 +170,5 @@
 		overflow: auto;
 		position: relative;
 		background: #04030A;
-		;
 	}
 </style>

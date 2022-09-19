@@ -3,7 +3,7 @@
 		<view class="control"  @click="toOpenModelPre" >
 			<img src="@/static/images/control_icon.svg" alt="">
 		</view>
-		<view class="control"  @click="toShare" style="margin-left: 80rpx;" v-if="buyerName == userName">
+		<view class="control"  @click="toShare" style="margin-left: 80rpx;" v-if="buyerId == buyerId">
 			<img src="@/static/images/share_icon.svg" alt="">
 		</view>
 	</view>
@@ -12,11 +12,11 @@
 <script>
 	export default{
 		props:{
-			buyerName:[String]
+			buyerId:[String]
 		},
 		data(){
 			return{
-				userName:uni.getStorageSync("userInfo").name
+				userId:uni.getStorageSync("userInfo").name
 			}
 		},
 		methods:{

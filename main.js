@@ -5,6 +5,8 @@ import request from './utils/http.js'
 import store from './store'
 import uView from "uview-ui"
 
+import {isMap_PingAn} from "./utils/PingAn-app.js"
+
 // 自定义方法
 import {
 	routerTo
@@ -25,7 +27,6 @@ Vue.use(uView);
 
 App.mpType = 'app'
 
-
 Object.assign(Vue.prototype, {
 	'$routerTo': routerTo,
 })
@@ -41,6 +42,7 @@ Vue.prototype.$toast = function(text, icon = "none") {
 		duration: 1500
 	})
 }
+Vue.prototype.$isMap_PingAn=isMap_PingAn()
 Vue.prototype.$updateUserInfo = function() {
 	this.$store.dispatch("getUserInfo")
 }

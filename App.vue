@@ -8,6 +8,7 @@
 		},
 		onShow: function() {
 			this.watchRouter()
+			console.log(this.$isMap_PingAn)
 		},
 		methods: {
 			resetFilePath() {

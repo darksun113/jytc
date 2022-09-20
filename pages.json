@@ -80,6 +80,13 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/login/pingan-login/pingan-login",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
 		}
 	],
 	"tabBar": {

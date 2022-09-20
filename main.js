@@ -8,9 +8,7 @@ import uView from "uview-ui"
 import {isMap_PingAn} from "./utils/PingAn-app.js"
 
 // 自定义方法
-import {
-	routerTo
-} from '@/utils/routerTo.js' //公共方法
+import { routerTo } from '@/utils/routerTo.js' //公共方法
 import {
 	myshare,
 	isWechat

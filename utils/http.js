@@ -1,7 +1,10 @@
+
+import {isMap_PingAn} from "./PingAn-app.js"
+
 const devBaseUrl = "http://120.197.126.61:18940";
 // const devBaseUrl = "http://192.168.2.108:18940";
 const proBaseUrl = "https://api.jialex.cn"
-const baseUrl =process.env.NODE_ENV=="development" ? devBaseUrl : proBaseUrl;	
+const baseUrl =process.env.NODE_ENV=="development" ? devBaseUrl : devBaseUrl;	
 
 const request = (url = '', date = {}, type = 'POST', header = {}) => {
 	uni.showLoading()
@@ -26,17 +29,8 @@ const request = (url = '', date = {}, type = 'POST', header = {}) => {
 						title:"用户token过期，请重新登录",
 						icon:"error"
 					})
-					const timer_=setTimeout(()=>{
-						clearTimeout(timer_)
-						uni.reLaunch({
-							url:"/pages/home/home"
-						})
-					},1000)
+					routerTo()
 				}
-				uni.removeStorageSync("token")
-				uni.removeStorageSync("userInfo")
-				uni.removeStorageSync("viewBuyerId")
-				uni.hideLoading()
 				return
 			}
 			const timer=setTimeout(()=>{
@@ -53,5 +47,22 @@ const request = (url = '', date = {}, type = 'POST', header = {}) => {
 function getToken() {
 	return uni.getStorageSync('token') || ''
 }
-
+function routerTo(){
+	uni.removeStorageSync("token")
+	uni.removeStorageSync("userInfo")
+	uni.removeStorageSync("viewBuyerId")
+	uni.hideLoading()
+	const timer_=setTimeout(()=>{
+		clearTimeout(timer_)
+		if(isMap_PingAn()){
+			uni.reLaunch({
+				url:"/pages/login/pingan-login/pingan-login"
+			})
+		}else{
+			uni.reLaunch({
+				url:"/pages/home/home"
+			})
+		}
+	},1000)
+}
 export default request

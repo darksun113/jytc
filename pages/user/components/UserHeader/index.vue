@@ -43,6 +43,7 @@
 </template>
 
 <script>
+	import {PingAn_login} from "@/utils/PingAn-app.js"
 	export default{
 		props:{
 			isLogin:[Boolean]
@@ -54,8 +55,12 @@
 		},
 		methods:{
 			toLogin(){
-				const url="/pages/login/LoginByMobile/GetVerifyCode/GetVerifyCode?name=user"
-				this.$routerTo(url)
+				if(this.$isMap_PingAn){
+					PingAn_login(2)
+				}else{
+					const url = "/pages/login/LoginByMobile/GetVerifyCode/GetVerifyCode?name=user"
+					this.$routerTo(url)
+				}
 			},
 			toFansPage(type){
 				const url=`/subpageC/UserFansAndFocus/UserFansAndFocus?type=${type}&viewBuyerId=${this.$store.state.userInfo.buyerId}`

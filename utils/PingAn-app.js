@@ -27,7 +27,7 @@ export const isMap_PingAn = () => {
 }
 
 // 登录
-export function PingAn_login() {
+export function PingAn_login(loadType) {
 	// 获取随机base64
 	const base64 = window.btoa(unescape(encodeURIComponent(getRandomString(30))))
 	pabank.login({
@@ -36,12 +36,15 @@ export function PingAn_login() {
 		},
 		success: async (data) => {
 			let { authCode, state } = data
-			alert(authCode, state)
+			alert("(1) "+state)
+			alert("(2) "+authCode)
 			const res = await uni.$http("user/pinganXcxAuthLogin", {
 				authCode,
 				state
 			})
+			alert("(3) "+res)
 			if (res.code == 0) {
+				alert("(4) "+res.data)
 				if (res.data.token) {
 					uni.setStorageSync("token", res.data.token)
 					store.dispatch("getUserInfo")
@@ -51,9 +54,13 @@ export function PingAn_login() {
 						duration: 2000
 					})
 					setTimeout(() => {
-						uni.reLaunch({
-							url: "/pages/home/home"
-						})
+						if(loadType == 1){
+							uni.navigateBack({delta:1})
+						}else if(loadType != 2){
+							uni.reLaunch({
+								url: "/pages/home/home"
+							})
+						}
 					}, 2000)
 				} else {
 					uni.redirectTo({
@@ -61,6 +68,7 @@ export function PingAn_login() {
 					})
 				}
 			} else {
+				alert("(5) "+res)
 				uni.showToast({
 					title: res.errorMsg,
 					icon: "error"
@@ -99,18 +107,22 @@ function getRandomString(len) {
 }
 
 export async function PingAn_pay(orderNo){
+	alert("(001): "+orderNo)
 	const res = await uni.$http("/payment/prepay", {
 		orderNo,
 		appType: 'PAXCX',
 		payType: "BANK",
 	})
+	alert("(002): "+res)
 	if(res.code == 0){
+		alert("(003): "+res.data)
 		const {appId,payOrderNo,source,outerSource}=res.data.paxcxBank
 		const testURL=`https://test-b-fat.pingan.com.cn/is/mpcoms/pay/index.html#/?appId=${appId}&payOrderNo=${payOrderNo}&source=${source}&outerSource=${outerSource}`
 		const proURL=`https://b.pingan.com.cn/is/mpcoms/pay/index.html#/?appId=${appId}&payOrderNo=${payOrderNo}&source=${source}&outerSource=${outerSource}`
 		const url=testURL
 		pabank.navigateTo({url})
 	}else{
+		alert("(004): "+res.errorMsg)
 		uni.showToast({
 			title:res.errorMsg,
 			icon:"none"

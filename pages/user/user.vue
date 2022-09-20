@@ -5,10 +5,8 @@
 			<UserOrder :isLogin="isLogin"></UserOrder>
 			<UserMenu :isLogin="isLogin"></UserMenu>
 		</view>
-		<LoginTipPop name="user" :isShow="isShow" @close="isShow=false"></LoginTipPop>
-		<ShareAndInvitePop :popUpshow="popUpshow" @closePop="closePop">
-		</ShareAndInvitePop>
-
+		<LoginTipPop name="user" :isShow="isShow" @close="isShow=false" />
+		<ShareAndInvitePop :popUpshow="popUpshow" @closePop="closePop" />
 	</PageTemp>
 </template>
 

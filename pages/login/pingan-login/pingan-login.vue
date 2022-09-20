@@ -7,11 +7,14 @@
 	export default {
 		data() {
 			return {
-				
+				loadType:0
 			};
 		},
-		mounted() {
-			PingAn_login()
+		onLoad(opt) {
+			this.loadType=opt.type||0
+		},
+		onShow() {
+			PingAn_login(this.loadType)
 		}
 	}
 </script>

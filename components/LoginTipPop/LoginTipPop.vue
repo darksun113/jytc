@@ -10,6 +10,7 @@
 </template>
 
 <script>
+	import {PingAn_login} from "../../utils/PingAn-app.js"
 	export default{
 		name:"LoginTipPop",
 		props:{
@@ -51,8 +52,12 @@
 			toLogin() {
 				uni.removeStorageSync("token")
 				this.$emit("close")
-				const url = `/pages/login/LoginByMobile/GetVerifyCode/GetVerifyCode?name=${this.name}`
-				this.$routerTo(url)
+				if(this.$isMap_PingAn){
+					PingAn_login(2)
+				}else{
+					const url =  "/pages/login/LoginByMobile/GetVerifyCode/GetVerifyCode?name=user"
+					this.$routerTo(url)
+				}
 			},
 		}
 	}

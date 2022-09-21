@@ -42,17 +42,17 @@ export function PingAn_authorize(){
 // 登录
 export function PingAn_login(cb) {
 	// 获取随机base64
-	const base64 = window.btoa(unescape(encodeURIComponent(getRandomString(30))))
+	const base64 = window.btoa(unescape(encodeURIComponent(getRandomString(30)))) || "anl0Yy1waW5nYXBwLXVzZXJzdGF0ZQ=="
 	pabank.login({
 		bizContent: {
-			state: base64 ? base64 : "anl0Yy1waW5nYXBwLXVzZXJzdGF0ZQ=="
+			state: base64
 		},
 		success: function(data){
 			let { authCode, state } = data
 			const fn = async (state,authCode)=>{
 				const res = await uni.$http("/user/pinganXcxAuthLogin", {
 					authCode,
-					state
+					state:state||base64
 				})
 				if (res.code == 0) {
 					if (res.data.token) {

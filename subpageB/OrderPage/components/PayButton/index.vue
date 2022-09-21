@@ -150,7 +150,6 @@
 					this.check_shows=true
 				}
 			},
-
 			// 微信
 			async wxPay() {
 				try {

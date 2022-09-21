@@ -43,7 +43,7 @@
 </template>
 
 <script>
-	import {PingAn_login,PingAn_authorize} from "@/utils/PingAn-app.js"
+	import {PingAn_login} from "@/libs/jsm/PingAn-app.js"
 	export default{
 		props:{
 			isLogin:[Boolean]
@@ -56,8 +56,9 @@
 		methods:{
 			toLogin(){
 				if(this.$isMap_PingAn){
-					// PingAn_login(2)
-					PingAn_authorize()
+					PingAn_login(()=>{
+						this.$emit("loginSuccess")
+					})
 				}else{
 					const url = "/pages/login/LoginByMobile/GetVerifyCode/GetVerifyCode?name=user"
 					this.$routerTo(url)

@@ -4,7 +4,7 @@
 			<Banner :seriesInfo="seriesInfo"></Banner>
 			<view class="container">
 				<ActivityDesBox :seriesInfo="seriesInfo"></ActivityDesBox>
-				<ActivityBox :seriesInfo="seriesInfo" v-if="seriesInfo.prePurchaseId"></ActivityBox>
+				<ActivityBox :seriesInfo="seriesInfo" v-if="seriesInfo.prePurchaseId" @loginSuccess="loginSuccess"></ActivityBox>
 				<GoodsList ref="GoodsList" :seriesId="seriesId"></GoodsList>
 			</view>
 		</scroll-view>
@@ -38,6 +38,14 @@
 			this.getSeriesDetail()
 		},
 		methods:{
+			loginSuccess(){
+				this.getSeriesDetail()
+				uni.showToast({
+					title:"登录成功",
+					icon:"success",
+					duration:2000
+				})
+			},
 			async getSeriesDetail(){
 				try{
 					const res=await uni.$http("/series/getSeriesDetail",{

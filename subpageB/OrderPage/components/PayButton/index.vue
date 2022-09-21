@@ -43,7 +43,7 @@
 <script>
 	let jweixin = require('jweixin-module')
 	import {getWeChatAuthorization,checkWeChatCode} from "@/libs/jsm/wx-authorization.js"
-	import {PingAn_pay} from "@/utils/PingAn-app.js"
+	import {PingAn_pay} from "@/libs/jsm/PingAn-app.js"
 	export function isWechatBrowser() {
 		let status = navigator.userAgent.toLowerCase();
 		if (status.match(/MicroMessenger/i) == "micromessenger") {
@@ -81,27 +81,18 @@
 			})
 		},
 		methods: {
-			test(){
-				console.log(this.cardId)
-			},
 			toPay() {
 				// 判断是否是平安银行环境
-				if(!this.$isMap_PingAn){
-					switch (this.payType) {
-						case 'bankPay':
-							this.bankPay()
-							break;
-						case 'wxPay':
-							this.wxPay()
-							break;
-						case 'aliPay':
-							this.aliPay()
-							break;
-						case 'uniPay':
-							this.uniPay()
-					}
-				}else{
+				if(this.$isMap_PingAn){
 					PingAn_pay(this.orderNo)
+				}else{
+					const option={
+						wxPay:this.wxPay,
+						aliPay:this.aliPay,
+						uniPay:this.uniPay,
+						bankPay:this.bankPay,
+					}
+					option[this.payType]()
 				}
 			},
 			closePop(){

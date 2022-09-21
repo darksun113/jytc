@@ -1,5 +1,5 @@
-import pabank from "../libs/jsm/ping-an-test-sdk.js"
-import store from '../store/index.js'
+import pabank from "./pingAn_test_sdk.js"
+import store from '../../store/index.js'
 // 检验环境是否是平安小程序
 export const isMap_PingAn = () => {
 	var ua = navigator.userAgent;
@@ -25,7 +25,7 @@ export const isMap_PingAn = () => {
 		return false
 	}
 }
-
+// 授权
 export function PingAn_authorize(){
 	pabank.authorize({
 	    scopeId: 'phoneNumber',
@@ -40,29 +40,21 @@ export function PingAn_authorize(){
 }
 
 // 登录
-/**
- * @params loadType 0 初次授权登录  1 
- **/ 
-export function PingAn_login(loadType) {
+export function PingAn_login(cb) {
 	// 获取随机base64
 	const base64 = window.btoa(unescape(encodeURIComponent(getRandomString(30))))
-	alert("(0)++base64 "+base64)
 	pabank.login({
 		bizContent: {
-			state: base64
+			state: base64 ? base64 : "anl0Yy1waW5nYXBwLXVzZXJzdGF0ZQ=="
 		},
 		success: function(data){
 			let { authCode, state } = data
 			const fn = async (state,authCode)=>{
-				alert("(1)++state "+state)
-				alert("(2)++authCode "+authCode)
 				const res = await uni.$http("/user/pinganXcxAuthLogin", {
 					authCode,
 					state
 				})
-				alert("(3) "+JSON.stringify(res))
 				if (res.code == 0) {
-					alert("(4) "+res.data)
 					if (res.data.token) {
 						uni.setStorageSync("token", res.data.token)
 						store.dispatch("getUserInfo")
@@ -71,16 +63,7 @@ export function PingAn_login(loadType) {
 							icon: "success",
 							duration: 2000
 						})
-						const timer = setTimeout(() => {
-							clearTimeout(timer)
-							if(loadType == 1){
-								uni.navigateBack({delta:1})
-							}else if(loadType != 2){
-								uni.reLaunch({
-									url: "/pages/home/home"
-								})
-							}
-						}, 2000)
+						cb()
 					} else {
 						uni.redirectTo({
 							url: `/pages/login/BindingPhone/BindingPhone?code=${authCode}&type=3`
@@ -128,19 +111,19 @@ function getRandomString(len) {
 }
 
 export async function PingAn_pay(orderNo){
-	alert("(001): "+orderNo)
 	const res = await uni.$http("/payment/prepay", {
 		orderNo,
 		appType: 'PAXCX',
 		payType: "BANK",
 	})
-	alert("(002): "+res)
+	alert("(001): "+JSON.stringify(res))
 	if(res.code == 0){
-		alert("(003): "+res.data)
+		alert("(002): "+res.data)
 		const {appId,payOrderNo,source,outerSource}=res.data.paxcxBank
 		const testURL=`https://test-b-fat.pingan.com.cn/is/mpcoms/pay/index.html#/?appId=${appId}&payOrderNo=${payOrderNo}&source=${source}&outerSource=${outerSource}`
 		const proURL=`https://b.pingan.com.cn/is/mpcoms/pay/index.html#/?appId=${appId}&payOrderNo=${payOrderNo}&source=${source}&outerSource=${outerSource}`
 		const url=testURL
+		alert("(003): "+url)
 		pabank.navigateTo({url})
 	}else{
 		alert("(004): "+res.errorMsg)

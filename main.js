@@ -5,19 +5,18 @@ import request from './utils/http.js'
 import store from './store'
 import uView from "uview-ui"
 
-import {isMap_PingAn} from "./utils/PingAn-app.js"
+import {isMap_PingAn} from "./libs/jsm/PingAn-app.js"
 
 // 自定义方法
 import { routerTo } from '@/utils/routerTo.js' //公共方法
-import {
-	myshare,
-	isWechat
-} from '@/libs/jsm/w-share.js'
+import { myshare, isWechat} from '@/libs/jsm/w-share.js'
+
 if (isWechat()) {
 	Vue.prototype.$wShare = myshare;
 } else {
 	Vue.prototype.$wShare = () => {}
 }
+
 Vue.prototype.$store = store
 Vue.config.productionTip = false
 uni.$http = request;

@@ -39,7 +39,7 @@
 								赶紧注册加入我们吧
 							</view>
 							<view class="tip-3">
-								扫码打开蓬莱数藏，一起玩转数字藏品 
+								扫码打开数版通，一起玩转数字藏品 
 							</view>
 						</view>
 						<view class="right" id="qrBox">

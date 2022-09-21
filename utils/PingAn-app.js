@@ -28,11 +28,14 @@ export const isMap_PingAn = () => {
 
 export function PingAn_authorize(){
 	pabank.authorize({
-	    scopeId: 'userInfo',
+	    scopeId: 'phoneNumber',
 	    success: function (res) {
 	        console.log(res, 'authorize succcess')
-			alert(JSON.stringify(res))
-	    }
+			alert("success+++ "+JSON.stringify(res))
+	    },
+		complete(res){
+			alert("complete+++ "+JSON.stringify(res))
+		}
 	})
 }
 

@@ -163,7 +163,7 @@
 					}
 				})
 			},
-			init() {
+			async init() {
 				this.updatePage = 1
 				this.shouldRequest = true
 				this.isLastItem = false

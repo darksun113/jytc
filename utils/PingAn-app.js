@@ -27,53 +27,60 @@ export const isMap_PingAn = () => {
 }
 
 // 登录
+/**
+ * @params loadType 0 初次授权登录  1 
+ **/ 
 export function PingAn_login(loadType) {
 	// 获取随机base64
-	const base64 = window.btoa(unescape(encodeURIComponent(getRandomString(30))))
+	const base64 = window.btoa(unescape(encodeURIComponent(getRandomString(30)))) || window.webkit.messageHandlers.btoa(unescape(encodeURIComponent(getRandomString(30)))) 
 	pabank.login({
 		bizContent: {
 			state: base64
 		},
-		success: async (data) => {
+		success: function(data){
 			let { authCode, state } = data
-			alert("(1) "+state)
-			alert("(2) "+authCode)
-			const res = await uni.$http("user/pinganXcxAuthLogin", {
-				authCode,
-				state
-			})
-			alert("(3) "+res)
-			if (res.code == 0) {
-				alert("(4) "+res.data)
-				if (res.data.token) {
-					uni.setStorageSync("token", res.data.token)
-					store.dispatch("getUserInfo")
-					uni.showToast({
-						title: "登录成功",
-						icon: "success",
-						duration: 2000
-					})
-					setTimeout(() => {
-						if(loadType == 1){
-							uni.navigateBack({delta:1})
-						}else if(loadType != 2){
-							uni.reLaunch({
-								url: "/pages/home/home"
-							})
-						}
-					}, 2000)
+			const fn = async (state,authCode)=>{
+				alert("(1)++state "+state)
+				alert("(2)++authCode "+authCode)
+				const res = await uni.$http("/user/pinganXcxAuthLogin", {
+					authCode,
+					state
+				})
+				alert("(3) "+JSON.stringify(res))
+				if (res.code == 0) {
+					alert("(4) "+res.data)
+					if (res.data.token) {
+						uni.setStorageSync("token", res.data.token)
+						store.dispatch("getUserInfo")
+						uni.showToast({
+							title: "登录成功",
+							icon: "success",
+							duration: 2000
+						})
+						const timer = setTimeout(() => {
+							clearTimeout(timer)
+							if(loadType == 1){
+								uni.navigateBack({delta:1})
+							}else if(loadType != 2){
+								uni.reLaunch({
+									url: "/pages/home/home"
+								})
+							}
+						}, 2000)
+					} else {
+						uni.redirectTo({
+							url: `/pages/login/BindingPhone/BindingPhone?code=${authCode}&type=3`
+						})
+					}
 				} else {
-					uni.redirectTo({
-						url: `/pages/login/BindingPhone/BindingPhone?code=${authCode}&type=3`
+					alert("(5) "+res)
+					uni.showToast({
+						title: res.errorMsg,
+						icon: "error"
 					})
 				}
-			} else {
-				alert("(5) "+res)
-				uni.showToast({
-					title: res.errorMsg,
-					icon: "error"
-				})
 			}
+			fn(state,authCode)
 		},
 		
 	})

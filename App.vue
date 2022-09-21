@@ -5,10 +5,6 @@
 			this.getBrowserCode()
 			this.resetFilePath()
 			this.$wShare();
-			if(this.$isMap_PingAn && !this.$checkLogin()){
-				const url = `/pages/login/pingan-login/pingan-login?loadType=0`
-				this.$routerTo(url)
-			}
 		},
 		onShow: function() {
 			this.watchRouter()

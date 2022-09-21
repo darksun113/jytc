@@ -1,8 +1,4 @@
-
-import {isMap_PingAn} from "./PingAn-app.js"
-
 const devBaseUrl = "http://120.197.126.61:18940";
-// const devBaseUrl = "http://192.168.2.108:18940";
 const proBaseUrl = "https://api.jialex.cn"
 const baseUrl =process.env.NODE_ENV=="development" ? devBaseUrl : devBaseUrl;	
 
@@ -54,15 +50,9 @@ function routerTo(){
 	uni.hideLoading()
 	const timer_=setTimeout(()=>{
 		clearTimeout(timer_)
-		if(isMap_PingAn()){
-			uni.reLaunch({
-				url:"/pages/login/pingan-login/pingan-login"
-			})
-		}else{
-			uni.reLaunch({
-				url:"/pages/home/home"
-			})
-		}
+		uni.reLaunch({
+			url:"/pages/home/home"
+		})
 	},1000)
 }
 export default request

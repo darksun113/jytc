@@ -14,6 +14,7 @@
 						<IsEnd v-if="isLastItem"></IsEnd>
 					</view>
 				</template>
+				<!-- 盲盒 -->
 				<template v-else-if="navType==1">
 					<IsNoBlind v-if="!hasData">暂无盲盒，敬请期待！</IsNoBlind>
 					<view v-else>
@@ -21,15 +22,21 @@
 						<IsEnd v-if="isLastItem"></IsEnd>
 					</view>
 				</template>
+				<!-- 发售日历 -->
 				<template v-else>
 					<IsNoData v-if="!hasData">暂无数据</IsNoData>
-					<view v-for="(item,index) in renderList" :key="index">
-						<view class="sell-time">
-							<!-- {{item.sellTime}} -->
-							{{parseInt(Date.now()/1000) | format}}
+					<view v-for="(item,index) in renderList" :key="item.goodsId">
+						<view v-if="Date.now() < item.startTime" >
+							<view class="sell-time">
+								{{ parseInt(item.startTime/1000) || parseInt(Date.now()/1000) | format}}
+								<!-- {{parseInt(Date.now()/1000) | format}} -->
+							</view>
+							<view v-for="(it,id) in item.doneList" :key="item.goodsId">
+								<CalendarGoods :item="it" :loadType="2"></CalendarGoods>
+							</view>
 						</view>
-						<CardOfObject :item="item" :loadType="2"></CardOfObject>
 					</view>
+					<IsEnd v-if="isLastItem"></IsEnd>
 				</template>
 			</view>
 		</scroll-view>
@@ -66,9 +73,9 @@
 			}
 		},
 		onShow() {
-			this.$nextTick(() => {
+/* 			this.$nextTick(() => {
 				this.$refs.nav.resetPage()
-			})
+			}) */
 		},
 		filters: {
 			format: formatMouthToMinutes
@@ -90,7 +97,10 @@
 			// 切换nav
 			switchOverNav(e) {
 				this.renderList = []
-				const { index } = e
+				this.shouldRequest = true
+				const {
+					index
+				} = e
 				this.hasData = true
 				this.isLastItem = false
 				this.updatePage = 1
@@ -103,7 +113,7 @@
 						this.getBlindBox()
 						break;
 					case 2:
-						this.toSellCalendar()
+						this.getCalendarBox()
 						break
 				}
 			},
@@ -119,8 +129,15 @@
 				})
 			},
 			// 发售日历
-			toSellCalendar() {
-				
+			getCalendarBox() {
+				this.getCalendarList(list => {
+					if (list.length == 0) {
+						this.hasData = false
+					} else {
+						if (list.length < 10) this.isLastItem = true;
+						this.renderList = this.changeList(list)
+					}
+				})
 			},
 			reset() {
 				this.init()
@@ -135,10 +152,9 @@
 							this.updateBlindList()
 							break;
 						case 2:
-							this.toSellCalendar()
+							this.updateCalendar()
 							break
 					}
-
 				}
 			},
 			uodateSeriesList() {
@@ -160,6 +176,17 @@
 						this.shouldRequest = false
 					} else {
 						this.renderList = [...this.renderList, ...list]
+					}
+				})
+			},
+			// 下拉触底获取更多日历列表
+			updateCalendar() {
+				this.getCalendarList(list => {
+					if (list.length == 0) {
+						this.isLastItem = true
+						this.shouldRequest = false
+					} else {
+						this.renderList = [...this.renderList, ...this.changeList(list)]
 					}
 				})
 			},
@@ -208,10 +235,52 @@
 				if (res.code == 0) {
 					res.data.list = await getFilePath(res.data.list, ["image", "shopIcon"])
 					cb(res.data.list)
-				}else{
+				} else {
 					this.$toast(res.errorMsg)
 				}
 			},
+			// 获取发售日历列表
+			async getCalendarList(cb) {
+				const res = await uni.$http("/launchCalendar/getPrepaidGoodsList", {
+					page: this.updatePage,
+					size: 10
+				})
+				if (res.code == 0) {
+					res.data.list = await getFilePath(res.data.list, ["image"])
+					this.updatePage++
+					cb(res.data.list)
+				} else {
+					this.$toast(res.errorMsg)
+				}
+			},
+			// 转换发售日历列表
+			changeList(arr) {
+				let newArr = []
+				arr.forEach((item, i) => {
+					let index = 1
+					let isExist = newArr.some((it, j) => {
+						// 时间相同时，即已存在
+						if (item.startTime == it.startTime) {
+							index = j
+							return true
+						}
+					})
+					if (!isExist) {
+						// 不存在
+						newArr.push({
+							startTime: item.startTime,
+							doneList: [item]
+						})
+					} else {
+						// 存在
+						newArr[index].doneList.push(item)
+					}
+				})
+				newArr.sort(function(a, b) {
+					return a.startTime - b.startTime
+				})
+				return newArr
+			}
 		}
 	}
 </script>
@@ -228,11 +297,16 @@
 			min-height: calc(100% - 280rpx - 150rpx - 134rpx);
 
 			.sell-time {
-				padding: 40rpx 0;
+				// padding: 40rpx 0;
+				padding-bottom: 40rpx;
 				font-size: 32rpx;
 				font-family: SourceHanSansCN-Medium, SourceHanSansCN;
 				font-weight: 500;
 				color: #FFFFFF;
+
+				:nth-of-type(1) {
+					padding-top: 0;
+				}
 			}
 		}
 	}

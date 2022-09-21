@@ -25,7 +25,7 @@
 								{{item.name}}
 							</view>
 							<view style="height:30rpx; text-align: center;width:100rpx;">
-								<img v-if="item.certification==0" style="width:26rpx;height:30rpx;display: inline-block;"
+								<img v-if="item.certification==1" style="width:26rpx;height:30rpx;display: inline-block;"
 									src="../../../../../../static/新增icon/认证.svg" alt="">
 							</view>
 							<view style="width:274rpx;text-align: right;" class="font78 nowrap_s">

@@ -11,8 +11,8 @@
 					<img v-else  crossorigin="anonymous" src="@/static/新增icon/占位图.png" >
 				</view>
 				<view class="poster-content" v-if="posterData.loadType==0">
-					<view style="width: 530rpx;" class="poster-title nowrap_s">
-						收藏家 {{userName}} 邀请你助力抽中白名单机会
+					<view style="width: 500rpx;" class="poster-title nowrap_s">
+						 {{userName}} 
 					</view>
 					<view class="poster-detail">
 						<view class="left">
@@ -30,9 +30,9 @@
 					</view>
 				</view>
 				<view style="background: none;background-size: none;" class="poster-content" v-if="posterData.loadType==3">
-					<view style="width: 100%;display:block" class="poster-title nowrap_s">
-						 {{userName}} 邀请您加入蓬莱数藏
-					</view>
+					<p style="max-width: 600rpx;" class="poster-title nowrap_s">
+						 {{userName}} 
+					</p>
 					<view class="poster-detail">
 						<view class="left">
 							<view class="tip"> 
@@ -79,7 +79,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="note">长按图片保存至手机相册</view>
+			<view class="note">长按分享或保存至手机相册</view>
 			<view class="close-btn" @click="close">
 				取消
 			</view>
@@ -184,16 +184,20 @@
 	.note{
 		text-align: center;
         margin-top: 20rpx;
-		font-size: 14rpx;
+		font-size: 28rpx;
 		font-family: SourceHanSansCN-Regular, SourceHanSansCN;
 		font-weight: 400;
 		color: #FFFFFF;
 		line-height: 21rpx;
 	}
 	.nowrap_s {
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
+		overflow: hidden;       /* 隐藏溢出 */
+		word-break: break-all;  /* break-all(允许在单词内换行。) */
+		text-overflow: ellipsis;  /* 超出部分省略号 */
+		display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+		-webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+		-webkit-line-clamp: 1; /** 显示的行数 **/
+		font-size: 32rpx;
 	}
 	view {
 		box-sizing: -box;
@@ -351,8 +355,8 @@
 							display: flex;
 							align-items: center;
 							.title{
-								max-width: 120rpx;
-								min-width: 120rpx;
+								max-width: 100rpx;
+								min-width: 100rpx;
 								font-size: 24rpx;
 								font-family: PingFangSC-Regular, PingFang SC;
 								font-weight: 400;
@@ -362,6 +366,7 @@
 							.info{
 								display: flex;
 								align-items: center;
+								text-align: left;
 								img{
 									width: 32rpx;
 									min-width: 32rpx;
@@ -375,6 +380,7 @@
 									font-weight: 400;
 									color: #CCCCCC;
 									line-height: 34rpx;
+									text-align: left;
 								}
 								.name{
 									max-width: 260rpx;

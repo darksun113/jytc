@@ -26,13 +26,24 @@ export const isMap_PingAn = () => {
 	}
 }
 
+export function PingAn_authorize(){
+	pabank.authorize({
+	    scopeId: 'userInfo',
+	    success: function (res) {
+	        console.log(res, 'authorize succcess')
+			alert(JSON.stringify(res))
+	    }
+	})
+}
+
 // 登录
 /**
  * @params loadType 0 初次授权登录  1 
  **/ 
 export function PingAn_login(loadType) {
 	// 获取随机base64
-	const base64 = window.btoa(unescape(encodeURIComponent(getRandomString(30)))) || window.webkit.messageHandlers.btoa(unescape(encodeURIComponent(getRandomString(30)))) 
+	const base64 = window.btoa(unescape(encodeURIComponent(getRandomString(30))))
+	alert("(0)++base64 "+base64)
 	pabank.login({
 		bizContent: {
 			state: base64

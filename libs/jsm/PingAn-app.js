@@ -116,17 +116,12 @@ export async function PingAn_pay(orderNo){
 		appType: 'PAXCX',
 		payType: "BANK",
 	})
-	alert("(001): "+JSON.stringify(res))
 	if(res.code == 0){
-		alert("(002): "+res.data)
 		const {appId,payOrderNo,source,outerSource}=res.data.paxcxBank
 		const testURL=`https://test-b-fat.pingan.com.cn/is/mpcoms/pay/index.html#/?appId=${appId}&payOrderNo=${payOrderNo}&source=${source}&outerSource=${outerSource}`
 		const proURL=`https://b.pingan.com.cn/is/mpcoms/pay/index.html#/?appId=${appId}&payOrderNo=${payOrderNo}&source=${source}&outerSource=${outerSource}`
-		const url=testURL
-		alert("(003): "+url)
-		pabank.navigateTo({url})
+		const url=proURL
 	}else{
-		alert("(004): "+res.errorMsg)
 		uni.showToast({
 			title:res.errorMsg,
 			icon:"none"

@@ -1,5 +1,5 @@
 <template>
-	<view class="nav-box">
+	<view class="nav-box" >
 		<view class="nav-show">
 			<view class="bar" :style="{left:pattern==0?'0':'64rpx'}"></view>
 			<image :src="pattern==0?require('./images/list_s_icon.svg'):require('./images/list_icon.svg')"
@@ -25,9 +25,9 @@
 				}, {
 					name: '盲盒商城'
 				}
-				// , {
-				// 	name: '发售日历'
-				// },
+				, {
+					name: '发售日历'
+				},
 				],
 				itemStyle: {
 					fontSize: "32rpx",
@@ -53,12 +53,12 @@
 				this.$emit("changeShowType", type)
 			},
 			// 页面show时，检查是否在"发售日历"，如果在，就重置nav为数字藏品
-			resetPage() {
+			/* resetPage() {
 				if (this.navIdx == 2) {
 					this.navIdx = 0
 					this.$emit("resetPage")
 				}
-			}
+			} */
 		}
 	}
 </script>

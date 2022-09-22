@@ -1,7 +1,7 @@
 <template>
 	<view class="load-video">
 		<view class="video-box">
-			<VideoPlayer ref="VideoPlayer" :videoData="goodsData"></VideoPlayer>
+			<VideoPlayer ref="video" :videoData="goodsData"></VideoPlayer>
 		</view>
 		<Control v-if="goodsData.loadType==1" @preview="toOpenModelPreVideo" @share="toShare" :buyerId="goodsData.ownerName"></Control>
 		<view class="lock_text" v-else>购买后体验内容</view>
@@ -34,17 +34,13 @@
 				isOpenPre:false
 			}
 		},
-		mounted() {
-			
-		},
-		destroyed() {
-			
-		},
 		methods: {
 			closePreviewModel() {
+				this.$refs.video.play()
 				this.isOpenPre = false
 			},
 			toOpenModelPreVideo() {
+				this.$refs.video.pause()
 				this.isOpenPre = true
 			},
 			toShare() {

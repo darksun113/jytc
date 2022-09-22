@@ -1,5 +1,6 @@
 <template>
 	<video 
+		@click="control"
 		class="video"
 		id="player"
 		webkit-playsinline="true"
@@ -15,6 +16,9 @@
 		loop
 		:poster="videoData.image"
 		:src="videoData.url">
+		<view class="play-box" v-show="isPause" @click.self="control">
+			<image src="../../../../static/images/play_icon.svg" mode=""></image>
+		</view>
 	</video>
 </template>
 
@@ -28,36 +32,40 @@
 		},
 		data() {
 			return {
-				video:null
+				videoNode:null,
+				isPause:false
 			}
 		},
 		mounted() {
-			this.isWeiXin()
 			this.setVideo()
 		},
-		destroyed() {
-		},
 		methods: {
-			//判断是否微信环境
-			isWeiXin() {
-			    var ua = window.navigator.userAgent.toLowerCase();
-			    if (ua.match(/MicroMessenger/i) == 'micromessenger') {
-					document.addEventListener('WeixinJSBridgeReady', function(){
-					    this.video = document.getElementById("player");
-					    this.video.play();
-					}, false);
-			    } else {
-			        return false; // 普通浏览器中打开
-			    }
-			},
 			setVideo(){
+				this.videoNode = document.getElementById("player").childNodes[0].childNodes[0]
 				if(this.videoData.loadType==1)return
-				const videoNode = document.getElementById("player").childNodes[0].childNodes[0]
-				videoNode.addEventListener('timeupdate',()=>{
-					if(videoNode.currentTime>5){
-						videoNode.currentTime=0
+				this.videoNode.addEventListener('timeupdate',()=>{
+					if(this.videoNode.currentTime>5){
+						this.videoNode.currentTime=0
 					}
 				})
+			},
+			control(){
+				if(this.videoNode.paused){
+					this.play()
+					this.isPause=false
+				}else{
+					this.pause()
+					this.isPause=true
+					
+				}
+			},
+			pause(){
+				this.videoNode.pause()
+				this.isPause=true
+			},
+			play(){
+				this.videoNode.play()
+				this.isPause=false
 			}
 		}
 	}
@@ -67,6 +75,25 @@
 	.video {
 		width: 100% ;
 		height: 100% ;
+		position: relative;
+		.play-box{
+			width: 80rpx;
+			height: 80rpx;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%,-50%);
+			border-radius: 50%;
+			overflow: hidden;
+			background: #28D8E5;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			image{
+				width: 40rpx;
+				height: 40rpx;
+			}
+		}
 	}
 	::v-deep .uni-video-cover{
 		// display: none;

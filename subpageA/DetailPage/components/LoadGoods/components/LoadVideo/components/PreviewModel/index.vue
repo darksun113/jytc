@@ -1,6 +1,9 @@
 <template>
-	<view class="pre">
-		<view id="mui-pre-player"></view>
+	<view class="pre-box">
+		<img class="close_icon" src="@/static/images/close_preview_icon.svg" alt="" @click="$emit('close')">
+		<view class="pre">
+			<view id="mui-pre-player"></view>
+		</view>
 	</view>
 </template>
 
@@ -46,9 +49,28 @@
 		width: 100% !important;
 		height: 100% !important;
 	}
-	.pre{
-		width: 630rpx;
-		height: 356rpx;
-		// padding: ;
+	.pre-box{
+		width: 100vw;
+		height: 100vh;
+		background: rgba(0, 0, 0, .8);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+		.close_icon {
+			width: 64rpx;
+			height: 64rpx;
+			position: absolute;
+			right: 60rpx;
+			top: 120rpx;
+			z-index: 999999;
+		}
+		.pre{
+			width: 630rpx;
+			height: 356rpx;
+			position: relative;
+			
+		}
 	}
+	
 </style>

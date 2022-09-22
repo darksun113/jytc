@@ -1,11 +1,11 @@
 <template>
 	<!-- 音频播放器组件 -->
 	<view v-if='url && canPlay' class='flex justify-between align-center audio'>
-		<view class='ml-3' @click='start(audioId)'>
+		<view class='ml-3' @click='start()'>
 			<view class="icon-box" v-show='!status'>
 				<image :src='startPic' class='icon'></image>
 			</view>
-			<view class="icon-box" v-show='status'>
+			<view class="icon-box rotate" v-show='status'>
 				<image :src='endPic' class='icon'></image>
 			</view>
 		</view>
@@ -26,7 +26,8 @@
 				currentTime: 0,
 				duration: 0,
 				status: false,
-				canPlay:false
+				canPlay:false,
+				ifSetThis:true
 			}
 		},
 		props: {
@@ -45,9 +46,8 @@
 			},
 			startPic: String, //开始播放的图片
 			endPic: String, //暂停播放的图片
-			audioId: [String, Number] //必填，且id不可为数字0，建议格式 ‘audio’+数字
 		},
-		created() {
+		mounted() {
 			this.context = uni.createInnerAudioContext(); //初始化音频
 			this.context.src = this.url;
 			this.onTimeUpdate();
@@ -60,22 +60,35 @@
 				this.currentTime=0
 				this.status = false;
 			},
-			start(id) { //点击播放
-				let audioId = id;
+			start() { //点击播放
 				if (this.status) {
 					this.context.pause();
 					this.status = !this.status;
 				} else {
-					// uni.$emit('stop', id)
 					this.context.play()
 					this.status = !this.status;
 				}
 			},
-			onCanplay() { //进入可播放状态
-				this.context.onCanplay(() => {
-					this.duration = this.context.duration;
-					this.canPlay=true
-				})
+			onCanplay(cb) { //进入可播放状态
+				let platform = uni.getSystemInfoSync().platform;
+				if(platform == 'android'){
+					this.context.onCanplay(() => {
+						this.duration = this.context.duration;
+						this.canPlay=true
+					})
+				}else{
+					this.start()
+					this.context.onCanplay(() => {
+						this.duration = this.context.duration;
+						this.canPlay=true
+						if(this.ifSetThis){
+							this.currentTime=0
+							this.context.stop()
+							this.status = false;
+						}
+						this.ifSetThis = false
+					})
+				}
 			},
 			onTimeUpdate() { //音频播放进度
 				this.context.onTimeUpdate(() => {
@@ -98,6 +111,7 @@
 				let paused = this.context.paused;
 				this.context.pause();
 				this.context.seek(e.detail.value)
+				console.log(this.context)
 				if (!paused) {
 					this.context.play();
 				}
@@ -128,7 +142,17 @@
 	::v-deep .uni-slider-thumb {
 		background: #28D8E5 !important;
 	}
-
+	.rotate{
+		animation: rotate 5s 0s linear infinite;
+		transform: rotate(0deg);
+	}
+	@keyframes rotate {
+		from{
+			transform: rotate(0deg);
+		}to{
+			transform: rotate(360deg);
+		}
+	}
 	.icon-box {
 		width: 40rpx;
 		height: 40rpx;

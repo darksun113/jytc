@@ -33,11 +33,33 @@
 				</template>
 			</view>
 		</scroll-view>
-		<!-- <Notice :isShow="isNoticeShow" @close="isNoticeShow=false"></Notice> -->
+		<u-popup mode="center" :show="showAnnoun" :closeOnClickOverlay="false">
+			<view class="announ">
+				<view class="head">
+					<image style="width: 60rpx; height: 60rpx" @click="closeAnnoun" src="../../static/announcement/close.svg"></image>
+				</view>
+				<view class="body">
+					<view class="title">{{this.announce[this.current].title}}</view>
+					<view class="content">{{this.announce[this.current].description}}</view>
+				</view>
+				<view class="foot">
+					<view>
+						<image v-if="this.current!=0" style="width: 60rpx; height: 60rpx" @click="previous" src="../../static/announcement/previous.svg"></image>
+					</view>
+					<image v-if="this.isLast!=true" style="width: 60rpx; height: 60rpx" @click="next" src="../../static/announcement/next.svg"></image>
+				</view>
+			</view>
+		</u-popup>
 	</PageTemp>
 </template>
 
 <script>
+	const tmp = [
+		{
+			title:"",
+			description:""			
+		}
+	]
 	import Banner from "./components/Banner/index.vue"
 	import StickyNav from "./components/StickyNav/index.vue"
 	import Search from "./components/Search"
@@ -55,6 +77,7 @@
 		},
 		data() {
 			return {
+				tmp,
 				showType: 0,
 				hasData: true,
 				navType: 0,
@@ -62,13 +85,25 @@
 				updatePage: 1,
 				renderList: [],
 				shouldRequest: true,
-				isNoticeShow: true,
+				showAnnoun: false,
+				current:0, //当前公告的index
+				announce:[], //公告数组
+				isLast:false, //判断是否最后一篇公告
+				isShow: false, //公告是否弹出了，只弹出一次
 			}
 		},
 		onShow() {
 			this.$nextTick(() => {
 				this.$refs.nav.resetPage()
 			})
+			
+			this.announce = this.tmp
+			if(this.$checkLogin()&&uni.getStorageSync("announceIsShow")!=true){
+				console.log()
+				this.showAnnoun= true
+				uni.setStorageSync("announceIsShow",true)
+				this.getAnnounce()
+			}
 		},
 		filters: {
 			format: formatMouthToMinutes
@@ -83,6 +118,8 @@
 			this.init()
 		},
 		onHide() {},
+		mounted(){
+		},
 		methods: {
 			changeShowType(type) {
 				this.showType = type
@@ -138,7 +175,6 @@
 							this.toSellCalendar()
 							break
 					}
-
 				}
 			},
 			uodateSeriesList() {
@@ -212,6 +248,29 @@
 					this.$toast(res.errorMsg)
 				}
 			},
+			async getAnnounce(){
+				const res = await uni.$http("/homepage/getNoticeList", {
+					
+				})
+				if (res.code == 0) {
+					this.announce = res.data.list
+				}else{
+					this.$toast(res.errorMsg)
+				}
+			},
+			closeAnnoun(){
+				this.showAnnoun=false;
+			},
+			previous(){
+				this.current--;
+				this.isLast = false;
+			},
+			next(){
+				this.current++;
+				if(this.current==this.announce.length-1){
+					this.isLast = true;
+				}
+			}
 		}
 	}
 </script>
@@ -234,6 +293,48 @@
 				font-weight: 500;
 				color: #FFFFFF;
 			}
+		}
+	}
+	::v-deep .u-popup__content{
+		background-color: transparent !important;
+	}
+	.announ{
+		width: 530rpx;
+		height: 800rpx;
+		border-radius: 10px;
+		.head{
+			height: 100rpx;
+			display: flex;
+			justify-content: right;
+		}
+		.body{
+			height: 600rpx;
+			background:url("../../static/announcement/bj.png");
+			background-size:100% 100%;
+			display: flex;
+			flex-direction: column;
+			.title{
+				height: 30%;
+				font-size: 36rpx;
+				font-family: SourceHanSansCN-Medium, SourceHanSansCN;
+				font-weight: 500;
+				color: #000000;
+				padding: 84rpx 40rpx 0rpx;
+			}
+			.content{
+				height: 190rpx;
+				font-size: 28rpx;
+				font-family: SourceHanSansCN-Regular, SourceHanSansCN;
+				font-weight: 400;
+				color: #5A5A5A;
+				padding: 28rpx 40rpx 20rpx;
+			}
+		}
+		.foot{
+			height: 100rpx;
+			display: flex;
+			justify-content: space-between;
+			padding:40rpx 156rpx 0rpx;
 		}
 	}
 </style>

@@ -5,6 +5,8 @@
 			<view class="container">
 				<ActivityDesBox :seriesInfo="seriesInfo"></ActivityDesBox>
 				<ActivityBox :seriesInfo="seriesInfo" v-if="seriesInfo.prePurchaseId"></ActivityBox>
+				<!-- 预购活动系列详情新增 -->
+				<PreorderList></PreorderList>
 				<GoodsList ref="GoodsList" :seriesId="seriesId"></GoodsList>
 			</view>
 		</scroll-view>
@@ -15,6 +17,7 @@
 	import Banner from "./components/Banner"
 	import ActivityDesBox from "./components/ActivityDesBox"
 	import ActivityBox from "./components/ActivityBox"
+	import PreorderList from "./components/PreorderList/index.vue"
 	import GoodsList from "./components/GoodsList"
 	import { getFilePath } from "@/utils/tools.js"
 	export default {
@@ -22,7 +25,8 @@
 			Banner,
 			GoodsList,
 			ActivityDesBox,
-			ActivityBox
+			ActivityBox,
+			PreorderList
 		},
 		data() {
 			return {

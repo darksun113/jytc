@@ -18,6 +18,10 @@
 				<view class="btn" @click="toOrder" v-else>
 					购买
 				</view>
+				<!-- 已结束新增 -->
+				<view class="btn" style="opacity: 0.6;"  v-else>
+					已结束
+				</view>
 			</view>
 		</view>
 		<LoginTipPop name="goodsDetail" :isShow="isShow" @close="isShow=false"></LoginTipPop>

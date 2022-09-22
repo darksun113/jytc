@@ -31,14 +31,24 @@
 			</view>
 		</template>
 		<image class="series-pic" :src="item.seriesImg || item.image" :mode="isBlind?'aspectFit':'aspectFill'"></image>
-		<view class="series-info">
-			<view class="series-title nowrap">
-				{{item.seriesName || item.blindboxName}}
+		<view class="series-info-box">
+			<view class="series-info">
+				<view class="series-title nowrap">
+					{{item.seriesName || item.blindboxName}}
+				</view>
+				<view class="author-box">
+					<image class="author-icon" :src="item.shopIcon" mode=""></image>
+					<view class="author-name nowrap">
+						{{item.shopName}}
+					</view>
+				</view>
 			</view>
-			<view class="author-box">
-				<image class="author-icon" :src="item.shopIcon" mode=""></image>
-				<view class="author-name nowrap">
-					{{item.shopName}}
+			<view class="price-box" v-if="loadType==2">
+				<view class="total">
+					限量{{item.totalNumber}}
+				</view>
+				<view class="price">
+					¥ {{(item.blindboxPrice/100).toFixed(2)}}
 				</view>
 			</view>
 		</view>
@@ -127,39 +137,65 @@
 		height: 670rpx;
 		border-radius: 30rpx;
 	}
-	.series-info{
+	.series-info-box{
 		padding: 30rpx 40rpx;
 		background: url("../../../static/images/card_bg.png") no-repeat right bottom;
 		background-size: auto 140%;
-		.series-title{
-			height: 44rpx;
-			font-size: 32rpx;
-			font-family: PingFangSC-Medium, PingFang SC;
-			font-weight: 500;
-			line-height: 44rpx;
+		display: flex;
+		justify-content: space-between;
+		.series-info{
+			.series-title{
+				height: 44rpx;
+				font-size: 32rpx;
+				font-family: PingFangSC-Medium, PingFang SC;
+				font-weight: 500;
+				line-height: 44rpx;
+			}
+			.author-box{
+				display: flex;
+				align-items: center;
+				margin-top: 20rpx;
+				.author-icon{
+					width: 36rpx;
+					height: 36rpx;
+					min-width: 36rpx;
+					min-height: 36rpx;
+					border-radius: 50%;
+					margin-right: 10rpx;
+				}
+				.author-name{
+					height: 40rpx;
+					font-size: 28rpx;
+					font-family: PingFangSC-Regular, PingFang SC;
+					font-weight: 400;
+					line-height: 40rpx;
+					color: #999;
+				}
+			}
 		}
-		.author-box{
+		.price-box{
 			display: flex;
-			align-items: center;
-			margin-top: 20rpx;
-			.author-icon{
-				width: 36rpx;
-				height: 36rpx;
-				min-width: 36rpx;
-				min-height: 36rpx;
-				border-radius: 50%;
-				margin-right: 10rpx;
-			}
-			.author-name{
-				height: 40rpx;
-				font-size: 28rpx;
-				font-family: PingFangSC-Regular, PingFang SC;
+			flex-direction: column;
+			justify-content: space-between;
+			.total{
+				font-size: 12rpx;
+				font-family: SourceHanSansCN-Regular, SourceHanSansCN;
 				font-weight: 400;
-				line-height: 40rpx;
-				color: #999;
+				color: #999999;
+				line-height: 36rpx;
+				text-align: right;
+			}
+			.price{
+				font-size: 48rpx;
+				font-family: SourceHanSansCN-Bold, SourceHanSansCN;
+				font-weight: bold;
+				color: #FFFFFF;
+				line-height: 48rpx;
 			}
 		}
+		
 	}
+	
 	
 	
 }

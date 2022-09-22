@@ -1,11 +1,14 @@
 <template>
-	<view class="pre">
-		<image :src="audioData.image" mode="aspectFill"></image>
-		<view class="play-box" v-show="isPlay" @click="pause">
-			<image src="../../../../static/images/pause_icon.svg" mode=""></image>
-		</view>
-		<view class="play-box" v-show="!isPlay" @click="play">
-			<image src="../../../../static/images/play_icon.svg" mode=""></image>
+	<view class="pre-box">
+		<img class="close_icon" src="@/static/images/close_preview_icon.svg" alt="" @click="$emit('close')">
+		<view class="pre">
+			<image :src="audioData.image" mode="aspectFill"></image>
+			<view class="play-box" v-show="isPlay" @click="pause">
+				<image src="../../../../static/images/pause_icon.svg" mode=""></image>
+			</view>
+			<view class="play-box" v-show="!isPlay" @click="play">
+				<image src="../../../../static/images/play_icon.svg" mode=""></image>
+			</view>
 		</view>
 	</view>
 </template>
@@ -53,39 +56,55 @@
 </script>
 
 <style lang="scss" scoped>
-	.pre{
-		width: 630rpx;
-		height: 356rpx;
-		background-color: pink;
+	.pre-box{
+		width: 100vw;
+		height: 100vh;
+		background: rgba(0, 0, 0, .8);
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		position: relative;
-		// overflow:hidden;
-		image{
-			width: 100%;
-			height: 100%;
-		}
-		.audio{
+		.close_icon {
+			width: 64rpx;
+			height: 64rpx;
 			position: absolute;
-			left: 0;
-			bottom: 0;
-			width: 100%;
-			height: 40rpx;
+			right: 60rpx;
+			top: 120rpx;
+			z-index: 999999;
 		}
-		.play-box{
-			width: 80rpx;
-			height: 80rpx;
-			position: absolute;
-			left: 50%;
-			top: 50%;
-			transform: translate(-50%,-50%);
-			border-radius: 50%;
-			overflow: hidden;
-			background: #28D8E5;
-			display: flex;
-			justify-content: center;
-			align-items: center;
+		.pre{
+			width: 630rpx;
+			height: 356rpx;
+			background-color: pink;
+			position: relative;
 			image{
-				width: 40rpx;
+				width: 100%;
+				height: 100%;
+			}
+			.audio{
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				width: 100%;
 				height: 40rpx;
+			}
+			.play-box{
+				width: 80rpx;
+				height: 80rpx;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%,-50%);
+				border-radius: 50%;
+				overflow: hidden;
+				background: #28D8E5;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				image{
+					width: 40rpx;
+					height: 40rpx;
+				}
 			}
 		}
 	}

@@ -96,7 +96,6 @@
 			this.$nextTick(() => {
 				this.$refs.nav.resetPage()
 			})
-			
 			this.announce = this.tmp
 			if(this.$checkLogin()&&uni.getStorageSync("announceIsShow")!=true){
 				console.log()
@@ -254,6 +253,9 @@
 				})
 				if (res.code == 0) {
 					this.announce = res.data.list
+					if(this.announce.length<2){
+						this.isLast=true;
+					}
 				}else{
 					this.$toast(res.errorMsg)
 				}

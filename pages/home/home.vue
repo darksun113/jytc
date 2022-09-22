@@ -33,7 +33,8 @@
 				</template>
 			</view>
 		</scroll-view>
-		<u-popup mode="center" :show="showAnnoun" :closeOnClickOverlay="false">
+		<Notice :isShow="isNoticeShow" @close="isNoticeShow=false"></Notice>
+	<!-- 	<u-popup mode="center" :show="showAnnoun" :closeOnClickOverlay="false">
 			<view class="announ">
 				<view class="head">
 					<image style="width: 60rpx; height: 60rpx" @click="closeAnnoun" src="../../static/announcement/close.svg"></image>
@@ -49,7 +50,7 @@
 					<image v-if="this.isLast!=true" style="width: 60rpx; height: 60rpx" @click="next" src="../../static/announcement/next.svg"></image>
 				</view>
 			</view>
-		</u-popup>
+		</u-popup> -->
 	</PageTemp>
 </template>
 
@@ -77,7 +78,7 @@
 		},
 		data() {
 			return {
-				tmp,
+				isNoticeShow:false,
 				showType: 0,
 				hasData: true,
 				navType: 0,
@@ -86,22 +87,15 @@
 				renderList: [],
 				shouldRequest: true,
 				showAnnoun: false,
-				current:0, //当前公告的index
-				announce:[], //公告数组
-				isLast:false, //判断是否最后一篇公告
-				isShow: false, //公告是否弹出了，只弹出一次
 			}
 		},
 		onShow() {
 			this.$nextTick(() => {
 				this.$refs.nav.resetPage()
 			})
-			this.announce = this.tmp
 			if(this.$checkLogin()&&uni.getStorageSync("announceIsShow")!=true){
-				console.log()
-				this.showAnnoun= true
+				this.isNoticeShow=true
 				uni.setStorageSync("announceIsShow",true)
-				this.getAnnounce()
 			}
 		},
 		filters: {
@@ -247,32 +241,6 @@
 					this.$toast(res.errorMsg)
 				}
 			},
-			async getAnnounce(){
-				const res = await uni.$http("/homepage/getNoticeList", {
-					
-				})
-				if (res.code == 0) {
-					this.announce = res.data.list
-					if(this.announce.length<2){
-						this.isLast=true;
-					}
-				}else{
-					this.$toast(res.errorMsg)
-				}
-			},
-			closeAnnoun(){
-				this.showAnnoun=false;
-			},
-			previous(){
-				this.current--;
-				this.isLast = false;
-			},
-			next(){
-				this.current++;
-				if(this.current==this.announce.length-1){
-					this.isLast = true;
-				}
-			}
 		}
 	}
 </script>

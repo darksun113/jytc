@@ -121,6 +121,7 @@ export async function PingAn_pay(orderNo){
 		const testURL=`https://test-b-fat.pingan.com.cn/is/mpcoms/pay/index.html#/?appId=${appId}&payOrderNo=${payOrderNo}&source=${source}&outerSource=${outerSource}`
 		const proURL=`https://b.pingan.com.cn/is/mpcoms/pay/index.html#/?appId=${appId}&payOrderNo=${payOrderNo}&source=${source}&outerSource=${outerSource}`
 		const url=proURL
+		pabank.navigateTo({url})
 	}else{
 		uni.showToast({
 			title:res.errorMsg,

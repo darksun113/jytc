@@ -1,19 +1,15 @@
 <template>
 	<view class="pre-box">
-		<img class="close_icon" src="@/static/images/close_preview_icon.svg" alt="" @click="$emit('close')">
+		<img class="close_icon" src="@/static/images/close_preview_icon.svg" alt="" @click="close">
 		<view class="pre">
 			<image :src="audioData.image" mode="aspectFill"></image>
-			<view class="play-box" v-show="isPlay" @click="pause">
-				<image src="../../../../static/images/pause_icon.svg" mode=""></image>
-			</view>
-			<view class="play-box" v-show="!isPlay" @click="play">
-				<image src="../../../../static/images/play_icon.svg" mode=""></image>
-			</view>
+			<audioDom ref="audioNode" :url="audioData.url" :endPic="endPic" :startPic="stattPic"></audioDom>
 		</view>
 	</view>
 </template>
 
 <script>
+	import audioDom from "./components/audioDom"
 	export default {
 		props: {
 			audioData: {
@@ -23,33 +19,16 @@
 		},
 		data() {
 			return {
-				audioDom: null,
-				isPlay:false
+				isPlay:false,
+				endPic:require("../../../../static/images/pause_icon.svg"),
+				stattPic:require('../../../../static/images/play_icon.svg')
 			}
 		},
-		mounted() {
-			this.init()
-			
-		},
+		components:{audioDom},
 		methods: {
-			init(){
-				this.audioDom = uni.createInnerAudioContext();
-				this.audioDom.src=this.audioData.url
-				this.audioDom.onEnded(() => {
-				  this.isPlay=false
-				});
-			},
-			play(){
-				this.audioDom.play()
-				this.isPlay=!this.isPlay
-			},
-			pause(){
-				this.audioDom.pause()
-				this.isPlay=!this.isPlay
-			},
-			destroy(){
-				this.audioDom.pause()
-				this.audioDom.destroy()
+			close(){
+				this.$refs.audioNode.destory()
+				this.$emit('close')
 			}
 		}
 	}
@@ -75,7 +54,7 @@
 		.pre{
 			width: 630rpx;
 			height: 356rpx;
-			background-color: pink;
+			background-color: rgba(0, 0, 0, .8);
 			position: relative;
 			image{
 				width: 100%;

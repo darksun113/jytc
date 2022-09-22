@@ -97,7 +97,6 @@
 									})
 								}else{
 									const routes = getCurrentPages()
-									console.log(routes,'routes')
 									if(routes.length>2){
 										uni.reLaunch({
 											url:"/pages/home/home"

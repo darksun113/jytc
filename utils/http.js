@@ -1,6 +1,6 @@
 const devBaseUrl = "http://120.197.126.61:18940";
 const proBaseUrl = "https://api.jialex.cn"
-const baseUrl =process.env.NODE_ENV=="development" ? devBaseUrl : devBaseUrl;	
+const baseUrl =process.env.NODE_ENV=="development" ? devBaseUrl : proBaseUrl;	
 
 const request = (url = '', date = {}, type = 'POST', header = {}) => {
 	uni.showLoading()

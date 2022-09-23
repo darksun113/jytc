@@ -13,7 +13,7 @@
 				<CalendarModule v-else :renderList="renderList" :hasData="hasData" :isLastItem="isLastItem" />
 			</view>
 		</scroll-view>
-		<Notice :isShow="isNoticeShow" :noticeList="noticeList" @close="isNoticeShow=false"></Notice>
+		<Notice :isShow="isNoticeShow" :noticeList="noticeList" @close="closeNotice"></Notice>
 	</PageTemp>
 </template>
 
@@ -37,7 +37,7 @@
 		},
 		data() {
 			return {
-				isNoticeShow:true,
+				isNoticeShow:false,
 				showType: 0,
 				hasData: true,
 				navType: 0,
@@ -50,13 +50,10 @@
 			}
 		},
 		onShow() {
-			this.getNoticeList();
+			
 			if(this.$checkLogin()&&uni.getStorageSync("announceIsShow")!=true){
-				//公告数量不等于0时，展示公告
-				if(this.noticeList.length!=0){
-					this.isNoticeShow=true
-				}
-				uni.setStorageSync("announceIsShow",true)
+				//已登录，且没有展示过公告
+				this.getNoticeList()
 			}
 		},
 		onLoad(opt) {
@@ -263,9 +260,9 @@
 					})
 					if (res.code == 0) {
 						this.noticeList = res.data.list
-						console.log(this.noticeList)
-						if(this.noticeList.length==0){
-							this.$emit("close")
+						//公告数量不等于0时，展示公告
+						if(this.noticeList.length!=0){
+							this.isNoticeShow=true
 						}
 					}else{
 						this.$toast(res.errorMsg)
@@ -274,6 +271,10 @@
 				}catch(e){
 					//TODO handle the exception
 				}
+			},
+			closeNotice(){
+				this.isNoticeShow=false
+				uni.setStorageSync("announceIsShow",true)
 			}
 		}
 	}

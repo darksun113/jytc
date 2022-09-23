@@ -4,9 +4,7 @@
 			<Banner :seriesInfo="seriesInfo"></Banner>
 			<view class="container">
 				<ActivityDesBox :seriesInfo="seriesInfo"></ActivityDesBox>
-				<ActivityBox :seriesInfo="seriesInfo" v-if="seriesInfo.prePurchaseId"></ActivityBox>
-				<!-- 预购活动系列详情新增 -->
-				<PreorderList></PreorderList>
+				<ActivityBox :seriesInfo="seriesInfo" v-if="seriesInfo.prePurchaseId" @loginSuccess="loginSuccess"></ActivityBox>
 				<GoodsList ref="GoodsList" :seriesId="seriesId"></GoodsList>
 			</view>
 		</scroll-view>
@@ -17,7 +15,6 @@
 	import Banner from "./components/Banner"
 	import ActivityDesBox from "./components/ActivityDesBox"
 	import ActivityBox from "./components/ActivityBox"
-	import PreorderList from "./components/PreorderList/index.vue"
 	import GoodsList from "./components/GoodsList"
 	import { getFilePath } from "@/utils/tools.js"
 	export default {
@@ -25,8 +22,7 @@
 			Banner,
 			GoodsList,
 			ActivityDesBox,
-			ActivityBox,
-			PreorderList
+			ActivityBox
 		},
 		data() {
 			return {
@@ -42,6 +38,14 @@
 			this.getSeriesDetail()
 		},
 		methods:{
+			loginSuccess(){
+				this.getSeriesDetail()
+				uni.showToast({
+					title:"登录成功",
+					icon:"success",
+					duration:2000
+				})
+			},
 			async getSeriesDetail(){
 				try{
 					const res=await uni.$http("/series/getSeriesDetail",{

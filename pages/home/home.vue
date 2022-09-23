@@ -3,44 +3,17 @@
 		<scroll-view class="home" scroll-y="true" @scrolltolower="updateList">
 			<!-- <Search /> -->
 			<Banner />
-			<StickyNav ref="nav" @changeShowType="changeShowType" @switchOverNav="switchOverNav" @resetPage="reset">
-			</StickyNav>
+			<StickyNav ref="nav" @changeShowType="changeShowType" @switchOverNav="switchOverNav" @resetPage="reset" />
 			<view class="container">
-				<template v-if="navType==0">
-					<IsNoData v-if="!hasData">暂无数据</IsNoData>
-					<view v-else>
-						<ModelOfListFlow :renderList="renderList" v-if="showType==0" :loadType="0"></ModelOfListFlow>
-						<ModelOfWaterFall :renderList="renderList" v-else></ModelOfWaterFall>
-						<IsEnd v-if="isLastItem"></IsEnd>
-					</view>
-				</template>
+				<!-- 数字藏品 -->
+				<DigitalCollection v-if="navType==0" :renderList="renderList" :hasData="hasData" :isLastItem="isLastItem" :showType="showType"/>
 				<!-- 盲盒 -->
-				<template v-else-if="navType==1">
-					<IsNoBlind v-if="!hasData">暂无盲盒，敬请期待！</IsNoBlind>
-					<view v-else>
-						<ModelOfListFlow :renderList="renderList" :loadType="2" :isBlind="true"></ModelOfListFlow>
-						<IsEnd v-if="isLastItem"></IsEnd>
-					</view>
-				</template>
+				<BlindBoxModule v-else-if="navType==1" :renderList="renderList" :hasData="hasData" :isLastItem="isLastItem" />
 				<!-- 发售日历 -->
-				<template v-else>
-					<IsNoData v-if="!hasData">暂无数据</IsNoData>
-					<view v-for="(item,index) in renderList" :key="item.goodsId">
-						<view v-if="Date.now() < item.startTime" >
-							<view class="sell-time">
-								{{ parseInt(item.startTime/1000) || parseInt(Date.now()/1000) | format}}
-								<!-- {{parseInt(Date.now()/1000) | format}} -->
-							</view>
-							<view v-for="(it,id) in item.doneList" :key="item.goodsId">
-								<CalendarGoods :item="it" :loadType="2"></CalendarGoods>
-							</view>
-						</view>
-					</view>
-					<IsEnd v-if="isLastItem"></IsEnd>
-				</template>
+				<CalendarModule v-else :renderList="renderList" :hasData="hasData" :isLastItem="isLastItem" />
 			</view>
 		</scroll-view>
-		<!-- <Notice :isShow="isNoticeShow" @close="isNoticeShow=false"></Notice> -->
+		<Notice :isShow="isNoticeShow" :noticeList="noticeList" @close="isNoticeShow=false"></Notice>
 	</PageTemp>
 </template>
 
@@ -48,20 +21,23 @@
 	import Banner from "./components/Banner/index.vue"
 	import StickyNav from "./components/StickyNav/index.vue"
 	import Search from "./components/Search"
-	import {
-		getFilePath
-	} from "@/utils/tools.js"
-	import {
-		formatMouthToMinutes
-	} from "@/utils/formatDate.js"
+	import DigitalCollection from "./components/DigitalCollection"
+	import BlindBoxModule from "./components/BlindBoxModule"
+	import CalendarModule from "./components/CalendarModule"
+	import { getFilePath } from "@/utils/tools.js"
+
 	export default {
 		components: {
 			Banner,
 			StickyNav,
-			Search
+			Search,
+			DigitalCollection,
+			BlindBoxModule,
+			CalendarModule,
 		},
 		data() {
 			return {
+				isNoticeShow:true,
 				showType: 0,
 				hasData: true,
 				navType: 0,
@@ -69,16 +45,19 @@
 				updatePage: 1,
 				renderList: [],
 				shouldRequest: true,
-				isNoticeShow: true,
+				showAnnoun: false,
+				noticeList:[],
 			}
 		},
 		onShow() {
-/* 			this.$nextTick(() => {
-				this.$refs.nav.resetPage()
-			}) */
-		},
-		filters: {
-			format: formatMouthToMinutes
+			this.getNoticeList();
+			if(this.$checkLogin()&&uni.getStorageSync("announceIsShow")!=true){
+				//公告数量不等于0时，展示公告
+				if(this.noticeList.length!=0){
+					this.isNoticeShow=true
+				}
+				uni.setStorageSync("announceIsShow",true)
+			}
 		},
 		onLoad(opt) {
 			if (opt.share) {
@@ -89,7 +68,6 @@
 			}
 			this.init()
 		},
-		onHide() {},
 		methods: {
 			changeShowType(type) {
 				this.showType = type
@@ -98,9 +76,7 @@
 			switchOverNav(e) {
 				this.renderList = []
 				this.shouldRequest = true
-				const {
-					index
-				} = e
+				const { index } = e
 				this.hasData = true
 				this.isLastItem = false
 				this.updatePage = 1
@@ -280,6 +256,24 @@
 					return a.startTime - b.startTime
 				})
 				return newArr
+			},
+			async getNoticeList(){
+				try{
+					const res = await uni.$http("/homepage/getNoticeList", {
+					})
+					if (res.code == 0) {
+						this.noticeList = res.data.list
+						console.log(this.noticeList)
+						if(this.noticeList.length==0){
+							this.$emit("close")
+						}
+					}else{
+						this.$toast(res.errorMsg)
+					}
+					
+				}catch(e){
+					//TODO handle the exception
+				}
 			}
 		}
 	}
@@ -295,19 +289,6 @@
 		.container {
 			position: relative;
 			min-height: calc(100% - 280rpx - 150rpx - 134rpx);
-
-			.sell-time {
-				// padding: 40rpx 0;
-				padding-bottom: 40rpx;
-				font-size: 32rpx;
-				font-family: SourceHanSansCN-Medium, SourceHanSansCN;
-				font-weight: 500;
-				color: #FFFFFF;
-
-				:nth-of-type(1) {
-					padding-top: 0;
-				}
-			}
 		}
 	}
 </style>

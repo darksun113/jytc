@@ -30,17 +30,9 @@
 			Control,
 			PreviewModel
 		},
-		mounted() {
-			uni.$on("destroyAudio",()=>{
-				if(this.$refs.preAudio){
-					this.$refs.preAudio.destroy()
-				}
-			})
-		},
 		methods:{
 			closePreviewModel(){
 				this.isOpenPre=false
-				this.$refs.preAudio.destroy()
 			},
 			toOpenModelPreImg(){
 				this.isOpenPre=true

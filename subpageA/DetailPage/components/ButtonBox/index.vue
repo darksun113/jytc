@@ -18,13 +18,9 @@
 				<view class="btn" @click="toOrder" v-else>
 					购买
 				</view>
-				<!-- 已结束新增 -->
-				<view class="btn" style="opacity: 0.6;"  v-else>
-					已结束
-				</view>
 			</view>
 		</view>
-		<LoginTipPop name="goodsDetail" :isShow="isShow" @close="isShow=false"></LoginTipPop>
+		<LoginTipPop name="goodsDetail" @loginSuccess="loginSuccess" :isShow="isShow" @close="isShow=false"></LoginTipPop>
 		<IdentityAuthPopup :show="identityShow" @close="identityShow=false"></IdentityAuthPopup>
 	</view>
 </template>
@@ -47,6 +43,13 @@
 		mounted() {
 		},
 		methods:{
+			loginSuccess(){
+				uni.showToast({
+					title:"登录成功",
+					icon:"success",
+					duration:2000
+				})
+			},
 			toOrder(){
 				const boo=this.$checkLogin()
 				if(boo){

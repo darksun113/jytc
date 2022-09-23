@@ -1,10 +1,10 @@
 <template>
 	<view>
 		<!-- 活动未开启 -->
-		<view class="active-tip" v-if="seriesInfo.prePurchaseOpenTime - curTime>0">
+		<view class="active-tip" v-if="seriesInfo_.prePurchaseOpenTime - curTime>0">
 			<view class="active-tip-info">
 				<view class="active-tip-info-title">
-					{{seriesInfo.prePurchaseOpenTime | format}}
+					{{seriesInfo_.prePurchaseOpenTime | format}}
 				</view>
 				<view class="active-tip-info-count">
 					开启预购活动
@@ -17,18 +17,18 @@
 			</view>
 		</view>
 		<!-- 活动进行中 -->
-		<view class="active-tip" v-else-if="seriesInfo.end == 0">
+		<view class="active-tip" v-else-if="seriesInfo_.end == 0">
 			<view class="active-tip-info">
 				<view class="active-tip-info-title">
 					预购活动已开启
 				</view>
 				<!-- <view class="active-tip-info-count">
-					{{seriesInfo.joinNumber}}人参与
+					{{seriesInfo_.joinNumber}}人参与
 				</view> -->
 			</view>
 			<view class="active-btn-box">
 				<view class="custom-style" @click="toJoin">
-					{{seriesInfo.join == 0?'参与':'已参与'}}
+					{{seriesInfo_.join == 0?'参与':'已参与'}}
 				</view>
 			</view>
 		</view>
@@ -39,7 +39,7 @@
 					查看获得预购资格名单
 				</view>
 				<!-- <view class="active-tip-info-count">
-					{{seriesInfo.joinNumber}}人参与
+					{{seriesInfo_.joinNumber}}人参与
 				</view> -->
 			</view>
 			<view class="active-btn-box">
@@ -48,9 +48,9 @@
 				</view>
 			</view>
 		</view>
-		<ActivityPop @close="isJoinShow=false" :isShow="isJoinShow" :joinStatus="joinStatus" :prePurchaseId="seriesInfo.prePurchaseId" @changeAcitveBoxStatus="changeAcitveBoxStatus"></ActivityPop>
-		<WinnerList @close="isWinnerOpen=false" :isShow="isWinnerOpen" :prePurchaseId="seriesInfo.prePurchaseId"></WinnerList>
-		<LoginTipPop name="SeriesPage" :isShow="isLoginTip" @close="isLoginTip=false"></LoginTipPop>
+		<ActivityPop @close="isJoinShow=false" :isShow="isJoinShow" :joinStatus="joinStatus" :prePurchaseId="seriesInfo_.prePurchaseId" @changeAcitveBoxStatus="changeAcitveBoxStatus"></ActivityPop>
+		<WinnerList @close="isWinnerOpen=false" :isShow="isWinnerOpen" :prePurchaseId="seriesInfo_.prePurchaseId"></WinnerList>
+		<LoginTipPop name="SeriesPage" @loginSuccess="$emit('loginSuccess')" :isShow="isLoginTip" @close="isLoginTip=false"></LoginTipPop>
 	</view>
 </template>
 
@@ -68,6 +68,7 @@
 			return {
 				joinStatus:0,
 				isJoinShow:false,
+				seriesInfo_:this.seriesInfo,
 				isWinnerOpen:false,
 				isLoginTip:false,
 				curTime:parseInt(Date.now()/1000)
@@ -96,7 +97,7 @@
 			toJoin(){
 				const login=this.$checkLogin()
 				if(login){
-					this.joinStatus=this.seriesInfo.join
+					this.joinStatus=this.seriesInfo_.join
 					this.isJoinShow=true
 				}else{
 					this.isLoginTip=true
@@ -106,10 +107,14 @@
 				this.isWinnerOpen=true
 			},
 			changeAcitveBoxStatus(){
-				this.seriesInfo.join=1
+				this.seriesInfo_.join=1
 			}
 		},
-		
+		watch:{
+			seriesInfo(val){
+				this.seriesInfo_=val
+			}
+		}
 	}
 </script>
 

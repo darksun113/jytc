@@ -77,6 +77,10 @@
 						share:this.share
 					})
 					if(res.code==0){
+						uni.setStorage({
+							key: 'announceIsShow',
+							data: false,
+						})
 						uni.setStorageSync("token",res.data.token)
 						this.$store.commit("getToken",res.data.token)
 						this.$toast('登录成功')
@@ -97,7 +101,6 @@
 									})
 								}else{
 									const routes = getCurrentPages()
-									console.log(routes,'routes')
 									if(routes.length>2){
 										uni.reLaunch({
 											url:"/pages/home/home"

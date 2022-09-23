@@ -13,7 +13,7 @@
 				<CalendarModule v-else :renderList="renderList" :hasData="hasData" :isLastItem="isLastItem" />
 			</view>
 		</scroll-view>
-		<Notice :isShow="isNoticeShow" @close="isNoticeShow=false"></Notice>
+		<Notice :isShow="isNoticeShow" :noticeList="noticeList" @close="isNoticeShow=false"></Notice>
 	</PageTemp>
 </template>
 
@@ -33,11 +33,11 @@
 			Search,
 			DigitalCollection,
 			BlindBoxModule,
-			CalendarModule
+			CalendarModule,
 		},
 		data() {
 			return {
-				isNoticeShow:false,
+				isNoticeShow:true,
 				showType: 0,
 				hasData: true,
 				navType: 0,
@@ -46,11 +46,16 @@
 				renderList: [],
 				shouldRequest: true,
 				showAnnoun: false,
+				noticeList:[],
 			}
 		},
 		onShow() {
+			this.getNoticeList();
 			if(this.$checkLogin()&&uni.getStorageSync("announceIsShow")!=true){
-				this.isNoticeShow=true
+				//公告数量不等于0时，展示公告
+				if(this.noticeList.length!=0){
+					this.isNoticeShow=true
+				}
 				uni.setStorageSync("announceIsShow",true)
 			}
 		},
@@ -251,6 +256,24 @@
 					return a.startTime - b.startTime
 				})
 				return newArr
+			},
+			async getNoticeList(){
+				try{
+					const res = await uni.$http("/homepage/getNoticeList", {
+					})
+					if (res.code == 0) {
+						this.noticeList = res.data.list
+						console.log(this.noticeList)
+						if(this.noticeList.length==0){
+							this.$emit("close")
+						}
+					}else{
+						this.$toast(res.errorMsg)
+					}
+					
+				}catch(e){
+					//TODO handle the exception
+				}
 			}
 		}
 	}

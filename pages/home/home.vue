@@ -19,21 +19,13 @@
 </template>
 
 <script>
-	const tmp = [
-		{
-			title:"",
-			description:""			
-		}
-	]
 	import Banner from "./components/Banner/index.vue"
 	import StickyNav from "./components/StickyNav/index.vue"
 	import Search from "./components/Search"
 	import DigitalCollection from "./components/DigitalCollection"
 	import BlindBoxModule from "./components/BlindBoxModule"
 	import CalendarModule from "./components/CalendarModule"
-	import {
-		getFilePath
-	} from "@/utils/tools.js"
+	import { getFilePath } from "@/utils/tools.js"
 
 	export default {
 		components: {
@@ -58,16 +50,10 @@
 			}
 		},
 		onShow() {
-			this.$nextTick(() => {
-				this.$refs.nav.resetPage()
-			})
 			if(this.$checkLogin()&&uni.getStorageSync("announceIsShow")!=true){
 				this.isNoticeShow=true
 				uni.setStorageSync("announceIsShow",true)
 			}
-		},
-		filters: {
-			format: formatMouthToMinutes
 		},
 		onLoad(opt) {
 			if (opt.share) {
@@ -77,9 +63,6 @@
 				window.localStorage.setItem('userId', opt.userId)
 			}
 			this.init()
-		},
-		onHide() {},
-		mounted(){
 		},
 		methods: {
 			changeShowType(type) {
@@ -284,65 +267,6 @@
 		.container {
 			position: relative;
 			min-height: calc(100% - 280rpx - 150rpx - 134rpx);
-
-			.sell-time {
-				// padding: 40rpx 0;
-				padding-bottom: 40rpx;
-				font-size: 32rpx;
-				font-family: SourceHanSansCN-Medium, SourceHanSansCN;
-				font-weight: 500;
-				color: #FFFFFF;
-
-				:nth-of-type(1) {
-					padding-top: 0;
-				}
-			}
-		}
-	}
-<<<<<<< HEAD
-</style>
-=======
-	::v-deep .u-popup__content{
-		background-color: transparent !important;
-	}
-	.announ{
-		width: 530rpx;
-		height: 800rpx;
-		border-radius: 10px;
-		.head{
-			height: 100rpx;
-			display: flex;
-			justify-content: right;
-		}
-		.body{
-			height: 600rpx;
-			background:url("../../static/announcement/bj.png");
-			background-size:100% 100%;
-			display: flex;
-			flex-direction: column;
-			.title{
-				height: 30%;
-				font-size: 36rpx;
-				font-family: SourceHanSansCN-Medium, SourceHanSansCN;
-				font-weight: 500;
-				color: #000000;
-				padding: 84rpx 40rpx 0rpx;
-			}
-			.content{
-				height: 190rpx;
-				font-size: 28rpx;
-				font-family: SourceHanSansCN-Regular, SourceHanSansCN;
-				font-weight: 400;
-				color: #5A5A5A;
-				padding: 28rpx 40rpx 20rpx;
-			}
-		}
-		.foot{
-			height: 100rpx;
-			display: flex;
-			justify-content: space-between;
-			padding:40rpx 156rpx 0rpx;
 		}
 	}
 </style>
->>>>>>> v2.0_announ

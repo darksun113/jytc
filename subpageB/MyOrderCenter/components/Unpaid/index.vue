@@ -44,7 +44,6 @@
 						this.isNoData=true
 					}else{
 						this.orderList=list
-						// this.orderList=JSON.parse(JSON.stringify(list))
 					}
 				})
 			},

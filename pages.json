@@ -284,7 +284,10 @@
 		"navigationBarBackgroundColor": "#04030A",
 		"backgroundColor": "#04030A",
 		"app-plus": {
-			"scrollIndicator": "none" //全局 在APP页面都不显示滚动条
+			//全局 在APP页面都不显示滚动条
+			"scrollIndicator": "none", 
+			"animationType": "zoom-fade-out",
+			"animationDuration": 200
 		}
 	}
 }

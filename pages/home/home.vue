@@ -34,23 +34,6 @@
 			</view>
 		</scroll-view>
 		<Notice :isShow="isNoticeShow" @close="isNoticeShow=false"></Notice>
-	<!-- 	<u-popup mode="center" :show="showAnnoun" :closeOnClickOverlay="false">
-			<view class="announ">
-				<view class="head">
-					<image style="width: 60rpx; height: 60rpx" @click="closeAnnoun" src="../../static/announcement/close.svg"></image>
-				</view>
-				<view class="body">
-					<view class="title">{{this.announce[this.current].title}}</view>
-					<view class="content">{{this.announce[this.current].description}}</view>
-				</view>
-				<view class="foot">
-					<view>
-						<image v-if="this.current!=0" style="width: 60rpx; height: 60rpx" @click="previous" src="../../static/announcement/previous.svg"></image>
-					</view>
-					<image v-if="this.isLast!=true" style="width: 60rpx; height: 60rpx" @click="next" src="../../static/announcement/next.svg"></image>
-				</view>
-			</view>
-		</u-popup> -->
 	</PageTemp>
 </template>
 

@@ -38,7 +38,6 @@
 						this.isNoData=true
 					}else{
 						this.orderList=list
-						console.log(this.orderList,list)
 					}
 				})
 			},

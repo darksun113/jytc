@@ -272,8 +272,8 @@
 					//TODO handle the exception
 				}
 			},
-			close(){
-				isNoticeShow=false
+			closeNotice(){
+				this.isNoticeShow=false
 				uni.setStorageSync("announceIsShow",true)
 			}
 		}

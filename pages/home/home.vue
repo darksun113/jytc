@@ -6,38 +6,12 @@
 			<StickyNav ref="nav" @changeShowType="changeShowType" @switchOverNav="switchOverNav" @resetPage="reset">
 			</StickyNav>
 			<view class="container">
-				<template v-if="navType==0">
-					<IsNoData v-if="!hasData">暂无数据</IsNoData>
-					<view v-else>
-						<ModelOfListFlow :renderList="renderList" v-if="showType==0" :loadType="0"></ModelOfListFlow>
-						<ModelOfWaterFall :renderList="renderList" v-else></ModelOfWaterFall>
-						<IsEnd v-if="isLastItem"></IsEnd>
-					</view>
-				</template>
+				<!-- 数字藏品 -->
+				<DigitalCollection v-if="navType==0" :renderList="renderList" :hasData="hasData" :isLastItem="isLastItem" :showType="showType"/>
 				<!-- 盲盒 -->
-				<template v-else-if="navType==1">
-					<IsNoBlind v-if="!hasData">暂无盲盒，敬请期待！</IsNoBlind>
-					<view v-else>
-						<ModelOfListFlow :renderList="renderList" :loadType="2" :isBlind="true"></ModelOfListFlow>
-						<IsEnd v-if="isLastItem"></IsEnd>
-					</view>
-				</template>
+				<BlindBoxModule v-else-if="navType==1" :renderList="renderList" :hasData="hasData" :isLastItem="isLastItem" />
 				<!-- 发售日历 -->
-				<template v-else>
-					<IsNoData v-if="!hasData">暂无数据</IsNoData>
-					<view v-for="(item,index) in renderList" :key="item.goodsId">
-						<view v-if="Date.now() < item.startTime" >
-							<view class="sell-time">
-								{{ parseInt(item.startTime/1000) || parseInt(Date.now()/1000) | format}}
-								<!-- {{parseInt(Date.now()/1000) | format}} -->
-							</view>
-							<view v-for="(it,id) in item.doneList" :key="item.goodsId">
-								<CalendarGoods :item="it" :loadType="2"></CalendarGoods>
-							</view>
-						</view>
-					</view>
-					<IsEnd v-if="isLastItem"></IsEnd>
-				</template>
+				<CalendarModule v-else :renderList="renderList" :hasData="hasData" :isLastItem="isLastItem" />
 			</view>
 		</scroll-view>
 		<!-- <Notice :isShow="isNoticeShow" @close="isNoticeShow=false"></Notice> -->
@@ -48,17 +22,21 @@
 	import Banner from "./components/Banner/index.vue"
 	import StickyNav from "./components/StickyNav/index.vue"
 	import Search from "./components/Search"
+	import DigitalCollection from "./components/DigitalCollection"
+	import BlindBoxModule from "./components/BlindBoxModule"
+	import CalendarModule from "./components/CalendarModule"
 	import {
 		getFilePath
 	} from "@/utils/tools.js"
-	import {
-		formatMouthToMinutes
-	} from "@/utils/formatDate.js"
+
 	export default {
 		components: {
 			Banner,
 			StickyNav,
-			Search
+			Search,
+			DigitalCollection,
+			BlindBoxModule,
+			CalendarModule
 		},
 		data() {
 			return {
@@ -71,14 +49,6 @@
 				shouldRequest: true,
 				isNoticeShow: true,
 			}
-		},
-		onShow() {
-/* 			this.$nextTick(() => {
-				this.$refs.nav.resetPage()
-			}) */
-		},
-		filters: {
-			format: formatMouthToMinutes
 		},
 		onLoad(opt) {
 			if (opt.share) {
@@ -98,9 +68,7 @@
 			switchOverNav(e) {
 				this.renderList = []
 				this.shouldRequest = true
-				const {
-					index
-				} = e
+				const { index } = e
 				this.hasData = true
 				this.isLastItem = false
 				this.updatePage = 1

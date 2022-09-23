@@ -2,11 +2,15 @@
 	<view class="goods-box" @click="toDetailPage">
 		<view class="goods-pic-box">
 			<image class="goods-pic" :src="item.image" mode="aspectFill"></image>
-			<image v-if="item.materialType==0" class="goods-type" src="@/static/images/type_3D.svg" mode=""></image>
-			<image v-else-if="item.materialType==1" class="goods-type" src="@/static/images/type_pic.svg" mode=""></image>
-			<image v-else-if="item.materialType==2" class="goods-type" src="@/static/images/type_video.svg" mode=""></image>
-			<image v-else-if="item.materialType==3" class="goods-type" src="@/static/images/type_audio.svg" mode=""></image>
-			
+			<view class="time-info-box">
+				开售时间：08月18日 13:00
+			</view>
+			<view>
+				<image v-if="item.materialType==0" class="goods-type" src="@/static/images/type_3D.svg" mode=""></image>
+				<image v-else-if="item.materialType==1" class="goods-type" src="@/static/images/type_pic.svg" mode=""></image>
+				<image v-else-if="item.materialType==2" class="goods-type" src="@/static/images/type_video.svg" mode=""></image>
+				<image v-else-if="item.materialType==3" class="goods-type" src="@/static/images/type_audio.svg" mode=""></image>
+			</view>
 		</view>
 		<view class="goods-info">
 			<view class="goods-title nowrap_2">
@@ -68,9 +72,22 @@
 			position: absolute;
 			right: 20rpx;
 			bottom: 20rpx;
-			background: rgba(0, 0, 0, .6);
+			background: #8E8A8A;
 			padding: 4rpx 4rpx;
 			border-radius: 8rpx;
+		}
+		.time-info-box{
+			padding: 6rpx 6rpx;
+			background: rgba(10, 12, 71, 0.5);
+			border-radius: 4rpx;
+			font-size: 20rpx;
+			font-family: SourceHanSansCN-Regular, SourceHanSansCN;
+			font-weight: 400;
+			color: #FFFFFF;
+			line-height: 30rpx;
+			position: absolute;
+			left: 10rpx;
+			top: 10rpx;
 		}
 	}
 	

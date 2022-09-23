@@ -14,11 +14,17 @@
 				<CalendarModule v-else :renderList="renderList" :hasData="hasData" :isLastItem="isLastItem" />
 			</view>
 		</scroll-view>
-		<!-- <Notice :isShow="isNoticeShow" @close="isNoticeShow=false"></Notice> -->
+		<Notice :isShow="isNoticeShow" @close="isNoticeShow=false"></Notice>
 	</PageTemp>
 </template>
 
 <script>
+	const tmp = [
+		{
+			title:"",
+			description:""			
+		}
+	]
 	import Banner from "./components/Banner/index.vue"
 	import StickyNav from "./components/StickyNav/index.vue"
 	import Search from "./components/Search"
@@ -40,6 +46,7 @@
 		},
 		data() {
 			return {
+				isNoticeShow:false,
 				showType: 0,
 				hasData: true,
 				navType: 0,
@@ -47,8 +54,20 @@
 				updatePage: 1,
 				renderList: [],
 				shouldRequest: true,
-				isNoticeShow: true,
+				showAnnoun: false,
 			}
+		},
+		onShow() {
+			this.$nextTick(() => {
+				this.$refs.nav.resetPage()
+			})
+			if(this.$checkLogin()&&uni.getStorageSync("announceIsShow")!=true){
+				this.isNoticeShow=true
+				uni.setStorageSync("announceIsShow",true)
+			}
+		},
+		filters: {
+			format: formatMouthToMinutes
 		},
 		onLoad(opt) {
 			if (opt.share) {
@@ -60,6 +79,8 @@
 			this.init()
 		},
 		onHide() {},
+		mounted(){
+		},
 		methods: {
 			changeShowType(type) {
 				this.showType = type
@@ -278,4 +299,50 @@
 			}
 		}
 	}
+<<<<<<< HEAD
 </style>
+=======
+	::v-deep .u-popup__content{
+		background-color: transparent !important;
+	}
+	.announ{
+		width: 530rpx;
+		height: 800rpx;
+		border-radius: 10px;
+		.head{
+			height: 100rpx;
+			display: flex;
+			justify-content: right;
+		}
+		.body{
+			height: 600rpx;
+			background:url("../../static/announcement/bj.png");
+			background-size:100% 100%;
+			display: flex;
+			flex-direction: column;
+			.title{
+				height: 30%;
+				font-size: 36rpx;
+				font-family: SourceHanSansCN-Medium, SourceHanSansCN;
+				font-weight: 500;
+				color: #000000;
+				padding: 84rpx 40rpx 0rpx;
+			}
+			.content{
+				height: 190rpx;
+				font-size: 28rpx;
+				font-family: SourceHanSansCN-Regular, SourceHanSansCN;
+				font-weight: 400;
+				color: #5A5A5A;
+				padding: 28rpx 40rpx 20rpx;
+			}
+		}
+		.foot{
+			height: 100rpx;
+			display: flex;
+			justify-content: space-between;
+			padding:40rpx 156rpx 0rpx;
+		}
+	}
+</style>
+>>>>>>> v2.0_announ

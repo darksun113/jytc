@@ -3,8 +3,7 @@
 		<scroll-view class="home" scroll-y="true" @scrolltolower="updateList">
 			<!-- <Search /> -->
 			<Banner />
-			<StickyNav ref="nav" @changeShowType="changeShowType" @switchOverNav="switchOverNav" @resetPage="reset">
-			</StickyNav>
+			<StickyNav ref="nav" @changeShowType="changeShowType" @switchOverNav="switchOverNav" @resetPage="reset" />
 			<view class="container">
 				<!-- 数字藏品 -->
 				<DigitalCollection v-if="navType==0" :renderList="renderList" :hasData="hasData" :isLastItem="isLastItem" :showType="showType"/>

@@ -14,7 +14,7 @@
 						<view class="swiper-item">
 							<scroll-view scroll-y="true" class="content">
 								<view class="title"> {{item.title}}</view>
-								<view v-html="translateHtml(item.description)"></view>
+								<view class="info" v-html="translateHtml(item.description)"></view>
 							</scroll-view>
 						</view>
 					</swiper-item>
@@ -28,17 +28,18 @@
 	export default {
 		name:"Preview",
 		props:{
-			isShow:[Boolean]
+			isShow:[Boolean],
+			noticeList:{
+				type: Array,
+				require: true,
+			},
 		},
 		data() {
 			return {
 				show:this.isShow,
+				noticeListAccept:this.noticeList,
 				currentDot:0,
-				noticeList:[]
 			};
-		},
-		mounted() {
-			this.getNoticeList()
 		},
 		computed:{
 			
@@ -63,26 +64,14 @@
 					this.currentDot--
 				}
 			},
-			async getNoticeList(){
-				try{
-					const res = await uni.$http("/homepage/getNoticeList", {
-					})
-					if (res.code == 0) {
-						this.noticeList = res.data.list
-					}else{
-						this.$toast(res.errorMsg)
-					}
-					if(this.noticeList.length==0){
-						this.show=false
-					}
-				}catch(e){
-					//TODO handle the exception
-				}
-			}
+			
 		},
 		watch:{
 			isShow(boo){
 				this.show=boo
+			},
+			noticeList(newVal){
+				this.noticeListAccept = newVal
 			}
 		}
 	}
@@ -145,6 +134,7 @@
 				color: #5A5A5A;
 				line-height: 42rpx;
 				text-align: justify;
+				width: 100%;
 				.title{
 					text-align: center;
 					padding: 100rpx 0 28rpx;
@@ -153,6 +143,25 @@
 					font-weight: 500;
 					color: #000000;
 					line-height: 54rpx;
+				}
+				.info{
+					word-break: break-word; /* 文本行的任意字内断开，就算是一个单词也会分开 */
+					
+					word-wrap: break-word; /* IE */
+					
+					white-space: -moz-pre-wrap; /* Mozilla */
+					
+					white-space: -hp-pre-wrap; /* HP printers */
+					
+					white-space: -o-pre-wrap; /* Opera 7 */
+					
+					white-space: -pre-wrap; /* Opera 4-6 */
+					
+					white-space: pre; /* CSS2 */
+					
+					white-space: pre-wrap; /* CSS 2.1 */
+					
+					white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
 				}
 			}
 		}

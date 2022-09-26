@@ -1,11 +1,23 @@
 <template>
 	<view class="goods-info">
 		<view class="goods-name-box" >
-			<view>
+			<view v-if="false">
 				<view class="name">
 					{{goodsData.goodsName}}
 				</view>
 				<view class="limit" v-if="goodsData.loadType==0 || goodsData.loadType==2">
+					<text>{{goodsData.remainingNumber}}/{{goodsData.totalNumber}}份</text>
+				</view>
+			</view>
+			<view v-else>
+				<view class="name">
+					¥{{(goodsData.goodsPrice / 100).toFixed(2)}}
+				</view>
+				<view class="price-detail-box" v-if="goodsData.loadType==0 || goodsData.loadType==2">
+					<text style="margin-right: 60rpx;">预售价：¥28.88</text>
+					<text>定金：¥10.00</text>
+				</view>
+				<view class="limit" style="margin-top: 40rpx;" v-if="goodsData.loadType==0 || goodsData.loadType==2">
 					<text>{{goodsData.remainingNumber}}/{{goodsData.totalNumber}}份</text>
 				</view>
 			</view>
@@ -77,6 +89,15 @@
 					color: #999;
 					line-height: 34rpx;
 				}
+			}
+			.price-detail-box{
+				display: flex;
+				align-items: center;
+				font-size: 16px;
+				font-family: SourceHanSansCN-Regular, SourceHanSansCN;
+				font-weight: 400;
+				color: #FFFFFF;
+				line-height: 48rpx;
 			}
 			.level-tags{
 				image{

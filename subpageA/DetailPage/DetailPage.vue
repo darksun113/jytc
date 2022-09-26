@@ -58,6 +58,11 @@
 						this.goodsData = objData
 						this.goodsData.loadType = this.loadType
 						this.goodsData.modelType = 4
+						if(true){
+							uni.setNavigationBarTitle({
+								title:this.goodsData.goodsName
+							})
+						}
 					} else {
 						uni.showToast({
 							title: res.errorMsg,
@@ -83,6 +88,11 @@
 						this.goodsData = objData
 						this.goodsData.loadType = this.loadType
 						this.goodsData.modelType = 4
+						if(true){
+							uni.setNavigationBarTitle({
+								title:this.goodsData.goodsName
+							})
+						}
 					} else if (res.code == 1000) {
 						this.toLogin()
 					} else {
@@ -119,7 +129,7 @@
 				if (res.code == 0) {
 					const keyList = ["image", "description", "shopIcon"]
 					this.goodsData = await getFilePath(res.data.goods, keyList)
-					this.goodsData.loadType = this.loadType
+					this.goodsData.loadType = this.loadType	
 				} else {
 					this.$toast(res.errorMsg)
 				}
@@ -131,7 +141,7 @@
 						this.buyerList = list
 					})
 				} else {
-					if (this.loadType == 0 || this.loadType == 3) {
+					if ([0,3].includes(Number(this.loadType))) {
 						this.getGoodsDetail()
 						this.getBuyers(list => {
 							this.buyerList = list

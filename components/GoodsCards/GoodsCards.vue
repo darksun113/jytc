@@ -3,7 +3,10 @@
 		<view class="goods-pic-box">
 			<image class="goods-pic" :src="item.image" mode="aspectFill"></image>
 			<view class="time-info-box">
-				开售时间：08月18日 13:00
+				<text v-if="false">开售时间：08月18日 13:00</text>
+				<text v-else-if="false">在售</text>
+				<text v-else-if="false">已售罄</text>
+				<text v-else>已结束</text>
 			</view>
 			<view>
 				<image v-if="item.materialType==0" class="goods-type" src="@/static/images/type_3D.svg" mode=""></image>

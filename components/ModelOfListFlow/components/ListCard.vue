@@ -38,7 +38,7 @@
 				</view>
 				<view class="author-box">
 					<image class="author-icon" :src="item.shopIcon" mode=""></image>
-					<view class="author-name nowrap">
+					<view class="author-name nowrap_s">
 						{{item.shopName}}
 					</view>
 				</view>
@@ -166,6 +166,7 @@
 				.author-name{
 					height: 40rpx;
 					font-size: 28rpx;
+					max-width: 400rpx;
 					font-family: PingFangSC-Regular, PingFang SC;
 					font-weight: 400;
 					line-height: 40rpx;
@@ -193,10 +194,6 @@
 				line-height: 48rpx;
 			}
 		}
-		
 	}
-	
-	
-	
 }
 </style>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="我的-我的订单-预付-已付定金取消订单" transform="translate(-20.000000, -346.000000)" fill="#999999" fill-rule="nonzero">
+            <g id="编组" transform="translate(20.000000, 346.000000)">
+                <path d="M13,0 C20.1797017,0 26,5.82029825 26,13 C26,20.1797017 20.1797017,26 13,26 C5.82029825,26 0,20.1797017 0,13 C0,5.82029825 5.82029825,0 13,0 Z M13,1 C6.372583,1 1,6.372583 1,13 C1,19.627417 6.372583,25 13,25 C19.627417,25 25,19.627417 25,13 C25,6.372583 19.627417,1 13,1 Z" id="椭圆形"></path>
+                <g id="1" transform="translate(10.291786, 8.004000)">
+                    <path d="M2.604,0 C2.268,0.378 1.876,0.714 1.4,1.022 C0.924,1.302 0.448,1.498 0,1.624 L0,2.772 C0.938,2.492 1.722,2.044 2.352,1.4 L2.352,9.996 L3.5,9.996 L3.5,0 L2.604,0 Z" id="路径"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -15,6 +15,27 @@
 			</view>
 		</view>
 		<view class="order-detail-box">
+			<!-- <view class="pre-oder" v-if="orderInfo.status!=0"> -->
+			<view class="pre-oder" v-if="this.status==0">
+				<view style="display:flex;padding-top:40rpx">
+					<image style="width: 52rpx; height: 52rpx;padding-right:28rpx" class="step" src="../../static/images/1r.svg"></image>
+					<view v-if="this.status==0" style="color:#C75943">阶段一：定金（待付款）</view>
+					<view v-if="this.status==1" style="color:#000000">阶段一：定金（已付）</view>
+					<view v-if="this.status==1" style="color:#999999;display:flex;">阶段一：定金<view style="color:#C75943">（待付款）</view></view>
+					<view v-if="this.status==1" style="color:#999999;display:flex;">阶段一：定金<view style="color:#C75943">（待退款）</view></view>
+					<view v-if="this.status==1" style="color:#999999;display:flex;">阶段一：定金<view style="color:#C75943">（退款成功）</view></view>
+					<view v-if="this.status==1" style="color:#999999;display:flex;">阶段一：定金<view style="color:#C75943">（退款失败）</view></view>
+				</view>
+				<view style="margin-bottom: -6rpx">
+					<image style="height:60rpx;width:50rpx;padding-top:2rpx" src="../../static/images/dot_line.svg"></image>
+				</view>
+				<view style="padding-bottom:20rpx; display:flex;">
+					<image style="width: 52rpx; height: 52rpx;padding-right:28rpx" class="step" src="../../static/images/2g.svg"></image>
+					<view v-if="this.status==0" style="color:#999999">阶段二：尾款（未开始）</view>
+					<view v-if="this.status==1" style="color:#999999;display:flex;">阶段二：尾款（退款失败）</view>
+					<view class="pay-time" v-if="this.status==1">{{orderInfo.goods.startTime}} 至 {{orderInfo.goods.endTime}}</view>
+				</view>
+			</view>
 			<view class="order-detail">
 				<view class="title">订单金额：</view>
 				<view class="detail price">¥ {{(orderInfo.goods.goodsPrice/100).toFixed(2)}}</view>
@@ -40,7 +61,9 @@
 			}
 		},
 		data(){
-			return {}
+			return {
+				status:0,
+			}
 		},
 		filters:{
 			format(stamp){
@@ -64,9 +87,8 @@
 <style lang="scss" scoped>
 	.order-info{
 		width: 100%;
-		height: 504rpx;
 		background: #fff;
-		padding: 0 40rpx;
+		padding: 0 40rpx 20rpx;
 		.goods{
 			height: 280rpx;
 			padding: 40rpx 0;
@@ -118,10 +140,20 @@
 			}
 		}
 		.order-detail-box{
-			height: 224rpx;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
+			.pre-oder{
+				display:flex;
+				flex-direction:column;
+				font-family: PingFangSC-Regular, PingFang SC;
+				.pay-time{
+					font-size: 24rpx;
+					font-family: SourceHanSansCN-Regular, SourceHanSansCN;
+					font-weight: 400;
+					color: #C75943;
+				}
+			}
 			.order-detail{
 				display: flex;
 				justify-content: space-between;

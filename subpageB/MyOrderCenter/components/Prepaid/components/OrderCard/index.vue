@@ -29,10 +29,21 @@
 					<image v-else-if="item.goods.materialType==2" class="goods-type" src="@/static/images/type_video.svg"></image>
 					<image v-else-if="item.goods.materialType==3" class="goods-type" src="@/static/images/type_audio.svg"></image>
 					<view class="price">
-						¥ {{(item.goods.goodsPrice/100).toFixed(2)}}
+						<view>
+							¥ {{(item.goods.goodsPrice/100).toFixed(2)}}
+						</view>
+						
+						<view style="font-size:28rpx;padding-top:12rpx;">
+							<view v-if="0==0">退款成功</view>
+							<view v-if="0==1" style="color:#FFD690">等待退款</view>
+							<view v-if="0==1" style="color:#FF5454">退款失败</view>
+						</view>
 					</view>
+					
 				</view>
+				
 			</view>
+			
 		</view>
 	</view>
 </template>

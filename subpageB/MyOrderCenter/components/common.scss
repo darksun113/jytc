@@ -93,6 +93,8 @@
 					font-size: 44rpx;
 					font-weight: 500;
 					color: #FFFFFF;
+					display:flex;
+					justify-content:space-between;
 				}
 			}
 		}
@@ -119,6 +121,11 @@
 			.btn-pay {
 				background: #28D8E5;
 				color: #000;
+			}
+			.btn-tail{
+				color: #000000;
+				background: #28D8E5;
+				opacity: 0.6;
 			}
 		}
 	}

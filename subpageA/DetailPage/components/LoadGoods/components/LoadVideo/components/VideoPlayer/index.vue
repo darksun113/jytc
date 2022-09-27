@@ -73,9 +73,16 @@
 
 <style lang="scss" scoped>
 	.video {
-		width: 100% ;
-		height: 100% ;
 		position: relative;
+		object-fit: fill;
+		position: absolute;
+		top: 0px;
+		right: 0px;
+		bottom: 0px;
+		left: 0px;
+		max-height: 100%;
+		max-width: 100%;
+		margin: auto;
 		.play-box{
 			width: 80rpx;
 			height: 80rpx;

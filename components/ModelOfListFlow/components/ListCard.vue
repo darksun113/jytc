@@ -179,7 +179,7 @@
 			flex-direction: column;
 			justify-content: space-between;
 			.total{
-				font-size: 12rpx;
+				font-size: 24rpx;
 				font-family: SourceHanSansCN-Regular, SourceHanSansCN;
 				font-weight: 400;
 				color: #999999;

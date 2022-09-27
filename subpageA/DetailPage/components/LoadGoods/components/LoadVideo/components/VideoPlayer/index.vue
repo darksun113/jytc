@@ -50,6 +50,9 @@
 				})
 			},
 			control(){
+				if(this.videoData.loadType==0){
+					return;
+				}
 				if(this.videoNode.paused){
 					this.play()
 					this.isPause=false
@@ -104,5 +107,8 @@
 	}
 	::v-deep .uni-video-cover{
 		// display: none;
+	}
+	::v-deep .uni-video-container{
+		background: transparent;
 	}
 </style>

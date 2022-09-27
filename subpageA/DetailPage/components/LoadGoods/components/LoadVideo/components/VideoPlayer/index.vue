@@ -83,8 +83,8 @@
 		right: 0px;
 		bottom: 0px;
 		left: 0px;
-		max-height: 100%;
-		max-width: 100%;
+		width: 100%;
+		height:100% ;
 		margin: auto;
 		.play-box{
 			width: 80rpx;

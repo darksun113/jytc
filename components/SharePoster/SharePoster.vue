@@ -62,14 +62,14 @@
 								<text class="title">持有者：</text>
 								<view class="info">
 									<img crossorigin="anonymous" :src="posterData.avatar+ '?' + new Date().getTime()" >
-									<view class="name nowrap">{{posterData.name && posterData.name.length>10? posterData.name.substr(0,10)+'...':posterData.name}}</view>
+									<view class="name nowrap">{{posterData.name && posterData.name.length>10? posterData.name.substr(0,8)+'...':posterData.name}}</view>
 								</view>
 							</view>
 							<view class="item">
 								<text class="title">发行方：</text>
 								<view class="info">
 									<img crossorigin="anonymous" :src="posterData.shopIcon+ '?' + new Date().getTime()" >
-									<view class="name nowrap">{{posterData.shopName && posterData.shopName.length>10? posterData.shopName.substr(0,10)+'...': posterData.shopName}}</view>
+									<view class="name nowrap">{{posterData.shopName && posterData.shopName.length>10? posterData.shopName.substr(0,8)+'...': posterData.shopName}}</view>
 								</view>
 							</view>
 						</view>
@@ -385,6 +385,7 @@
 								}
 								.name{
 									max-width: 260rpx;
+									font-size: 24rpx;
 								}
 							}
 						}

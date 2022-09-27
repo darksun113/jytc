@@ -6,6 +6,7 @@
 			<PayType v-if="orderInfo.status==0 && !isPingAn" @setPayType="setPayType" @setCard="setCard"></PayType>
 		</view>
 		<PayButton v-if="orderInfo.status==0" :payType_="payType" :orderNo="orderNo" @updateOrderInfo="getOrderInfo" :price="orderInfo.goods.goodsPrice" :cardId_="cardId"></PayButton>
+		<Contact :orderNo="orderNo"></Contact>
 	</PageTemp>
 </template>
 
@@ -14,6 +15,7 @@
 	import OrderInfo from "./components/OrderInfo/index.vue"
 	import PayType from "./components/PayType/index.vue"
 	import PayButton from "./components/PayButton/index.vue"
+	import Contact from "./components/Contact/index.vue"
 	import {getFilePath} from "@/utils/tools.js"
 	export default {
 		components:{
@@ -21,6 +23,7 @@
 			OrderInfo,
 			PayType,
 			PayButton,
+			Contact,
 		},
 		onLoad(opt) {
 			this.orderNo=opt.orderNo?opt.orderNo : uni.getStorageSync("orderNo")

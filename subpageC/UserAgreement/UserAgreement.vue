@@ -152,7 +152,7 @@
             <view class="info">附件一《违规用户处罚规则》</view>
             <view class="info">为维护本平台的正常运营，保障各方的合法权益，严格防范和打击任何形式的转售、炒作数字作品的违法违规行为，依据《数版通平台用户协议》制定本规则。</view>
             <view class="info">1.如果本平台收到投诉或举报，或通过其他途径，经过合理判断认定您从事了以下违法、违规或违约行为的，本平台有权根据您的具体行为和情节实施下述处罚措施，并向您发送处罚通知∶</view>
-			<img src="./static/tabble.png" style="width: 100%;margin: 10rpx 0;border: 2rpx solid #eee;"/>
+			<img v-lazy src="./static/tabble.png" style="width: 100%;margin: 10rpx 0;border: 2rpx solid #eee;"/>
             <view class="info">2.如您同时涉及前述多项违反情形的，或者您重复违规或恶意违规的，本平台有权分别采取多项对应的处罚措施，或有权按照从重处罚原则对您的相关行为予以处罚。</view>
             <view class="info">3.针对他人对您的投诉和举报，或本平台对您的处罚措施，您可以提交相关证明材料进行申诉，本平台将依据事实进行处理。</view>
             <view class="info">4.您理解并确认，本平台有权依据国家法律法规、监管政策、或风险防范的需要对上述处罚规则进行修改、调整、补充和公示。</view>

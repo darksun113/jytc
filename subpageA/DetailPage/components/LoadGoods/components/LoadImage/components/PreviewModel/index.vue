@@ -1,10 +1,10 @@
 <template>
 	<view class="pre-image">
-		<img class="close_icon" src="@/static/images/close_preview_icon.svg" alt="" @click="$emit('close')">
+		<img v-lazy class="close_icon" src="@/static/images/close_preview_icon.svg" alt="" @click="$emit('close')">
 		<view class="scaleImg">
 			<movable-area>
 				<movable-view direction="all" scale-value="1" scale-min="0.1" scale="true" scale-max="2" :damping="100" out-of-bounds="false">
-					<img :src="goodsData.image" alt="">
+					<img v-lazy :src="goodsData.image" alt="">
 				</movable-view>
 			</movable-area>
 		</view>

@@ -7,8 +7,8 @@
 			<image v-if="posterUrl" :src="posterUrl" mode="" style="height: 740rpx;width: 100%;"></image>
 			<view class="poster-box" id="pagePoster" v-else>
 				<view class="poster-pic">
-					<img  v-if="posterData.loadType!=3" crossorigin="anonymous" :src="posterData.posterImg + '?' + new Date().getTime()" >
-					<img v-else  crossorigin="anonymous" src="@/static/新增icon/占位图.png" >
+					<img v-lazy  v-if="posterData.loadType!=3" crossorigin="anonymous" :src="posterData.posterImg + '?' + new Date().getTime()" >
+					<img v-lazy v-else  crossorigin="anonymous" src="@/static/新增icon/占位图.png" >
 				</view>
 				<view class="poster-content" v-if="posterData.loadType==0">
 					<view style="max-width: 500rpx;" class="poster-title nowrap_s">
@@ -61,14 +61,14 @@
 							<view class="item">
 								<text class="title">持有者：</text>
 								<view class="info">
-									<img crossorigin="anonymous" :src="posterData.avatar+ '?' + new Date().getTime()" >
+									<img v-lazy crossorigin="anonymous" :src="posterData.avatar+ '?' + new Date().getTime()" >
 									<view class="name nowrap">{{posterData.name && posterData.name.length>10? posterData.name.substr(0,8)+'...':posterData.name}}</view>
 								</view>
 							</view>
 							<view class="item">
 								<text class="title">发行方：</text>
 								<view class="info">
-									<img crossorigin="anonymous" :src="posterData.shopIcon+ '?' + new Date().getTime()" >
+									<img v-lazy crossorigin="anonymous" :src="posterData.shopIcon+ '?' + new Date().getTime()" >
 									<view class="name nowrap">{{posterData.shopName && posterData.shopName.length>10? posterData.shopName.substr(0,8)+'...': posterData.shopName}}</view>
 								</view>
 							</view>

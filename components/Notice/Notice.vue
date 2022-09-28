@@ -2,7 +2,7 @@
 	<u-popup :show="show" mode="center" :mask="false" bgColor="transparent">
 		<view class="center-pop">
 			<view class="notice-box">
-				<img class="close_icon" src="@/static/notice/close_notice_icon.svg" alt="" @click="$emit('close')">
+				<img v-lazy class="close_icon" src="@/static/notice/close_notice_icon.svg" alt="" @click="$emit('close')">
 				<view class="control-box">
 					<image src="@/static/notice/pre_icon.svg" @click="pre" v-show="currentDot!==0"></image>
 					<view v-show="currentDot==0"></view>

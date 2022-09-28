@@ -9,7 +9,7 @@
 					<view class="transfer_item" v-for="(item,index) in popupData.transferList" :key="index">
 						<view class="item_info">
 							<view class="sender">
-								<img class="sender_logo" :src="item.transferIcon" style="border-radius: 50%;"/>
+								<img v-lazy class="sender_logo" :src="item.transferIcon" style="border-radius: 50%;"/>
 								<view class="sender_name nowrap">
 									{{item.transferName}}
 								</view>
@@ -21,7 +21,7 @@
 								转赠
 							</view>
 							<view class="recipient">
-								<img class="recipient_logo" style="border-radius: 50%;" :src="item.recipientIcon" />
+								<img v-lazy class="recipient_logo" style="border-radius: 50%;" :src="item.recipientIcon" />
 								<view class="recipient_name nowrap">
 									{{item.recipientName}}
 								</view>

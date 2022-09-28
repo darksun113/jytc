@@ -3,7 +3,7 @@
 		<view class="blind_box_res" @click.self="close">
 			<view class="open_res_box" >
 				<transition enter-active-class="animated bounceIn">
-					<img class="goods_pic" v-show="isOpenResult" 
+					<img v-lazy class="goods_pic" v-show="isOpenResult" 
 						style="width:100%;height:100%;object-fit: contain;" 
 						crossorigin="anonymous" :src="blindData.image" alt="">
 				</transition>

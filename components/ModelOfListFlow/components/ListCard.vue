@@ -30,7 +30,7 @@
 				</u-count-down>
 			</view>
 		</template>
-		<image class="series-pic" :src="item.seriesImg || item.image" :mode="isBlind?'aspectFit':'aspectFill'"></image>
+		<img v-lazy class="series-pic" :src="item.seriesImg || item.image" :style="{objectFit:isBlind ? 'contain':'cover'}" />
 		<view class="series-info-box">
 			<view class="series-info">
 				<view class="series-title nowrap">

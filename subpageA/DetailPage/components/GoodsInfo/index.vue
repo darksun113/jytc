@@ -35,7 +35,7 @@
 		</view>
 		<FunModule :goodsData="goodsData" :buyerList="buyerList"></FunModule>
 		<view class="goods-introduce">
-			<img :src="goodsData.description" alt="">
+			<img v-lazy :src="goodsData.description" alt="">
 		</view>
 		<view class="digital-collection-tip">
 			<view class="title">

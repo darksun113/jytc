@@ -1,9 +1,12 @@
 <template>
 	<view>
-		<!-- 常规支付按钮模块 -->
-		<routineModule v-if="false" :goodsData="goodsData" @showLoginTip="isShow=true" @showIdentityShow="identityShow=true"></routineModule>
+		<!-- private int goodsStatus; // 状态 0 上架 1下架 2 未发布 新增: 3 已售罄 4 已结束'  5 售卖中 6 预售中 -->
 		<!-- 预付支付按钮模块 -->
-		<prepayModule v-else :goodsData="goodsData" @showLoginTip="isShow=true" @showIdentityShow="identityShow=true"></prepayModule>
+		<prepayModule v-if="(goodsData.prePayStaus==1 && goodsData.balanceEndTime > curTime) || (goodsData.goodsType == 3 && goodsData.goodsStatus != 5 && goodsData.goodsStatus != 4 && goodsData.goodsStatus != 3) " 
+			:goodsData="goodsData" @showLoginTip="isShow=true" @showIdentityShow="identityShow=true"></prepayModule>
+		<!-- 常规支付按钮模块 -->
+		<routineModule v-else :goodsData="goodsData" @showLoginTip="isShow=true" @showIdentityShow="identityShow=true"></routineModule>
+		
 		<!-- 登录pop -->
 		<LoginTipPop name="goodsDetail" @loginSuccess="loginSuccess" :isShow="isShow" @close="isShow=false"></LoginTipPop>
 		<!-- 身份实名认证pop -->
@@ -24,7 +27,8 @@
 		data() {
 			return {
 				isShow:false,
-				identityShow:false
+				identityShow:false,
+				curTime:parseInt(Date.now()/1000)
 			}
 		},
 		components:{

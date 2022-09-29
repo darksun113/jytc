@@ -34,12 +34,16 @@
 				blindboxId: ""
 			}
 		},
+		onShow() {
+			this.init()
+		},
 		onHide() {
 			uni.$emit("destroyAudio")
 			uni.$off("destroyAudio")
 		},
 		onUnload() {
 			uni.$off("toOpenSharePoster")
+			uni.$off("reLoadPage")
 		},
 		methods: {
 			async getGoodsDetail() {
@@ -163,13 +167,13 @@
 		},
 		onLoad(opt) {
 			// loadType: 0 未购买  1 已购买  2 盲盒   3 后台预览
-			this.loadType = opt.loadType
-			this.goodsId = opt.goodsId ? opt.goodsId : ""
-			this.instanceId = opt.instanceId ? opt.instanceId : ""
-			this.blindboxId = opt.blindboxId ? opt.blindboxId : ""
-		},
-		onShow() {
-			this.init()
+			this.loadType = opt.loadType;
+			this.goodsId = opt.goodsId ? opt.goodsId : "";
+			this.instanceId = opt.instanceId ? opt.instanceId : "";
+			this.blindboxId = opt.blindboxId ? opt.blindboxId : "";
+			uni.$on("reLoadPage",()=>{
+				this.init()
+			})
 		}
 	}
 </script>

@@ -12,7 +12,7 @@
 		:controls="false"
 		preload="auto"
 		:muted="videoData.loadType==1?false:true" 
-		autoplay
+		autoplay="autoplay"
 		loop
 		:poster="videoData.image"
 		:src="videoData.url">
@@ -77,7 +77,7 @@
 <style lang="scss" scoped>
 	.video {
 		position: relative;
-		object-fit: fill;
+		object-fit: contain;
 		position: absolute;
 		top: 0px;
 		right: 0px;

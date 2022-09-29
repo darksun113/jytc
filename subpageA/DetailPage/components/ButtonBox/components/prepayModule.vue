@@ -1,10 +1,11 @@
 <template>
 	<view class="btn-box">
 		<view class="time-box">
-			<view v-if="true">预付活动：09月18日 13:00</view>
-			<view style="display: flex;align-items: center;" v-else-if="false">
+			<!-- private int goodsStatus; // 状态 0 上架 1下架 2 未发布 新增: 3 已售罄 4 已结束'  5 售卖中 6 预售中 -->
+			<view v-if="goodsData.goodsStatus == 0">预售活动：{{goodsData.preSaleTime | format}}</view>
+			<view style="display: flex;align-items: center;" v-else-if="goodsData.goodsStatus == 6">
 				<text>预付时间：</text>
-				<u-count-down :time="30 * 60 * 60 * 1000" format="HH:mm:ss" @change="onChange" @finish="onFinish">
+				<u-count-down :time="(goodsData.startTime - curTime)* 1000" format="HH:mm:ss" @change="onChange" @finish="onFinish">
 					<view class="time">
 						<view class="time__custom">
 							<text class="time__custom__item">{{ timeData.hours>10?timeData.hours:'0'+timeData.hours}}</text>
@@ -22,22 +23,23 @@
 				</u-count-down>
 			</view>
 		</view>
-		<view class="">
-			<view class="btn" style="opacity: 0.65;" v-if="goodsData.remainingNumber <= 0">
+		<view>
+			<view class="btn" style="opacity: 0.65;" v-if="goodsData.goodsStatus == 3">
 				已售罄
 			</view>
-			<view class="btn" style="opacity: 0.65;" v-else-if="false">
-				{{false?'立即购买':'支付尾款'}}
+			<view class="btn" style="opacity: 0.65;" v-else-if="goodsData.goodsStatus == 2 ">
+				{{goodsData.prePayStatus == 1 ?'支付尾款':'立即购买'}}
 			</view>
 			<view class="btn" @click="toOrder" v-else>
-				{{false?'立即购买':'支付尾款'}}
+				{{goodsData.prePayStatus == 1 ?'支付尾款':'立即购买'}}
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
-	export default {
+	import { formatMouthToMinutes} from "@/utils/formatDate.js"
+ 	export default {
 		props: {
 			goodsData: {
 				type: Object,
@@ -50,10 +52,12 @@
 				timeData: {}
 			}
 		},
-		mounted() {},
+		filters:{
+			format:formatMouthToMinutes
+		},
 		methods: {
 			onFinish(){
-				
+				uni.$emit("reLoadPage")
 			},
 			onChange(e) {
 				this.timeData = e

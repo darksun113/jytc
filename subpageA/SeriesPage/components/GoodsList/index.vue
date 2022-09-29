@@ -9,7 +9,7 @@
 		</view>
 		<view class="list-contnet">
 			<template v-for="(item,index) in goodsList">
-				<GoodsCards :item="item" :key='index'></GoodsCards>
+				<GoodsCards :item="item" :key='index' @countFinish="init"></GoodsCards>
 			</template>
 			<IsEnd v-if="isLastItem"></IsEnd>
 		</view>
@@ -18,9 +18,7 @@
 	</view>
 </template>
 <script>
-	import {
-		getFilePath
-	} from "@/utils/tools.js"
+	import { getFilePath } from "@/utils/tools.js"
 	export default {
 		props: ["seriesId"],
 		data() {

@@ -168,6 +168,7 @@
 	.detail-page {
 		height: 100%;
 		overflow: auto;
+		overflow-x: hidden;
 		position: relative;
 		background: #04030A;
 	}

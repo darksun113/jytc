@@ -65,7 +65,7 @@ export function PingAn_login(cb) {
 						})
 						cb()
 					} else {
-						uni.redirectTo({
+						uni.navigateTo({
 							url: `/pages/login/BindingPhone/BindingPhone?code=${authCode}&type=3`
 						})
 					}

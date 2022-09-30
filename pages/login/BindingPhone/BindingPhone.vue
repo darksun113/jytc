@@ -6,16 +6,15 @@
 		<view class="form">
 			<u--form :model="form" ref="uForms">
 				<u-form-item label="" prop="phone" style="position: relative;">
-					<u--input placeholder="请输入手机号码" v-model="form.phone" type="number" suffixIconStyle="color:#000"
+					<u--input placeholder="请输入手机号码" maxlength="11" :value="form.phone" type="number" suffixIconStyle="color:#000"
 						color="#FFFFFF" border="bottom" :customStyle="{marginTop:'90rpx'}" :focus="true" clearable>
 					</u--input>
 				</u-form-item>
 				<u-form-item label="" class="pwd" prop="verifyCode" style="position: relative;">
-					<u--input placeholder="请输入验证码" v-model="form.verifyCode" type="number" suffixIconStyle="color:#000"
+					<u--input placeholder="请输入验证码"  maxlength="6" :value="form.verifyCode" type="number" suffixIconStyle="color:#000"
 						color="#FFFFFF" border="bottom">
 					</u--input>
-					<view :style="{opacity:!$store.state.isCount ?'1':'0.5'}" class="get-verification-code-btn"
-						@click="getCode">
+					<view :style="{opacity:!$store.state.isCount ?'1':'0.5'}" class="get-verification-code-btn" @click="getCode">
 						{{$store.state.isCount?$store.state.second+'秒后重新获取':'获取验证码'}}
 					</view>
 				</u-form-item>

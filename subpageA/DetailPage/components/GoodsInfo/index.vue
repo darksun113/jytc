@@ -1,24 +1,32 @@
 <template>
 	<view class="goods-info">
+		<!-- private int goodsStatus; // 状态 0 上架 1下架 2 未发布 新增: 3 已售罄 4 已结束'  5 售卖中 6 预售中 -->
 		<view class="goods-name-box" >
-			<view v-if="false">
-				<view class="name">
-					{{goodsData.goodsName}}
+			<template v-if="goodsData.goodsStatus !== 4">
+				<view v-if="goodsData.goodsType == 3 && [0,6].includes(goodsData.goodsStatus) || goodsData.prepayStatus == 1">
+					<view class="name">
+						¥{{(goodsData.goodsPrice / 100).toFixed(2)}}
+					</view>
+					<view class="price-detail-box" v-if="goodsData.loadType==0 || goodsData.loadType==2">
+						<text style="margin-right: 60rpx;">预售价：¥{{(goodsData.prepayAmount/100).toFixed(2)}}</text>
+						<text>定金：¥{{(goodsData.deposit/100).toFixed(2)}}</text>
+					</view>
+					<view class="limit" style="margin-top: 40rpx;" v-if="goodsData.loadType==0 || goodsData.loadType==2">
+						<text>{{goodsData.remainingNumber}}/{{goodsData.totalNumber}}份</text>
+					</view>
 				</view>
-				<view class="limit" v-if="goodsData.loadType==0 || goodsData.loadType==2">
-					<text>{{goodsData.remainingNumber}}/{{goodsData.totalNumber}}份</text>
+				<view v-else>
+					<view class="name">
+						{{goodsData.goodsName}}
+					</view>
+					<view class="limit" v-if="goodsData.loadType==0 || goodsData.loadType==2">
+						<text>{{goodsData.remainingNumber}}/{{goodsData.totalNumber}}份</text>
+					</view>
 				</view>
-			</view>
+			</template>
 			<view v-else>
 				<view class="name">
-					¥{{(goodsData.goodsPrice / 100).toFixed(2)}}
-				</view>
-				<view class="price-detail-box" v-if="goodsData.loadType==0 || goodsData.loadType==2">
-					<text style="margin-right: 60rpx;">预售价：¥28.88</text>
-					<text>定金：¥10.00</text>
-				</view>
-				<view class="limit" style="margin-top: 40rpx;" v-if="goodsData.loadType==0 || goodsData.loadType==2">
-					<text>{{goodsData.remainingNumber}}/{{goodsData.totalNumber}}份</text>
+					{{goodsData.goodsName}}
 				</view>
 			</view>
 			<view class="level-tags" v-if="goodsData.labelType">

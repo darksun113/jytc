@@ -4,14 +4,17 @@
 			¥ {{(goodsData.goodsPrice/100).toFixed(2)}}
 		</view>
 		<view class="">
-			<view class="btn" style="opacity: 0.65;" v-if="goodsData.remainingNumber <= 0">
+			<view class="btn" style="opacity: 0.65;" v-if="goodsData.goodsStatus == 3">
 				已售罄
 			</view>
+			<view class="btn" style="opacity: 0.65;" v-else-if="goodsData.goodsStatus == 4">
+				已结束
+			</view>
 			<!-- 预购白名单 -->
-			<view class="btn" @click="toOrder" v-else-if="goodsData.selling==1">
+			<view class="btn" @click="toOrder" v-else-if="goodsData.selling==1 && goodsData.goodsStatus == 0">
 				购买
 			</view>
-			<view class="btn" style="opacity: 0.65;" v-else-if="curTime - goodsData.startTime < 0">
+			<view class="btn" style="opacity: 0.65;" v-else-if="goodsData.goodsStatus == 0">
 				即将开售
 			</view>
 			<view class="btn" @click="toOrder" v-else>

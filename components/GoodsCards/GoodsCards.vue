@@ -14,7 +14,7 @@
 						<view class="time">
 							<text>预售中：</text>
 							<view class="time__custom">
-								<text class="time__custom__item">{{ timeData.hours>10?timeData.hours:'0'+timeData.hours}}</text>
+								<text class="time__custom__item">{{ timeData.days*24 + timeData.hours>10?timeData.days*24 + timeData.hours:'0'+timeData.days*24 + timeData.hours}}</text>
 							</view>
 							<text class="time__doc">小时</text>
 							<view class="time__custom">

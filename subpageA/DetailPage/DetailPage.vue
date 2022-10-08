@@ -46,7 +46,7 @@
 			uni.$off("reLoadPage")
 		},
 		mounted(){
-			setTimeout(function() {
+			setTimeout(()=> {
 				this.count();
 			}, 3000);
 		},
@@ -170,8 +170,7 @@
 				this.$routerTo(url, 'redirect')
 			},
 			async count(){
-				const time = new Date()
-				console.log("time: ",Date.now());
+				const time = Date.now()
 				const res = await uni.$http("/tracking/report",{
 					eventCode: 'view_gooods',
 					eventTimestamp: parseInt(time/1000),

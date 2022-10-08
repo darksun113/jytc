@@ -97,15 +97,20 @@
 			},
 			async getOrderNo() {
 				try {
-					const goodsId = this.goodsData.goodsId
-					const res = await uni.$http("/order/place", {
-						goodsId
-					})
-					if (res.code == 0) {
-						const url = `/subpageB/OrderPage/OrderPage?orderNo=${res.data.orderNo}`
+					if(this.goodsData.prepayStatus == 1){
+						const url = `/subpageB/OrderPage/OrderPage?orderNo=${this.goodsData.balanceOrderNo}`
 						this.$routerTo(url, 'redirect')
-					} else {
-						this.$toast(res.errorMsg)
+					}else{
+						const goodsId = this.goodsData.goodsId
+						const res = await uni.$http("/order/place", {
+							goodsId
+						})
+						if (res.code == 0) {
+							const url = `/subpageB/OrderPage/OrderPage?orderNo=${res.data.orderNo}`
+							this.$routerTo(url, 'redirect')
+						} else {
+							this.$toast(res.errorMsg)
+						}
 					}
 				} catch (e) {
 					//TODO handle the exception

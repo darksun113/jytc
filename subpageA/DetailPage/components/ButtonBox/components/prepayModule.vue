@@ -51,7 +51,7 @@
 			<view class="btn" style="opacity: 0.65;" v-if="goodsData.goodsStatus == 3">
 				已售罄
 			</view>
-			<view class="btn" style="opacity: 0.65;" v-else-if="goodsData.goodsStatus == 0 || ([5,6].includes(goodsData.goodsStatus) && goodsData.prepayStatus == 1)">
+			<view class="btn" style="opacity: 0.65;" v-else-if="goodsData.goodsStatus == 0 || ([6].includes(goodsData.goodsStatus) && goodsData.prepayStatus == 1)">
 				{{goodsData.prepayStatus == 1 ?'支付尾款':'立即购买'}}
 			</view>
 			<view class="btn" @click="toOrder" v-else>

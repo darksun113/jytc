@@ -25,7 +25,7 @@
 							</view>
 						</view>
 						<view class="right" id="qrBox">
-							<canvas id="qrcode" canvas-id="qrcode" :style="{ width: `${size}px`, height: `${size}px` }"></canvas>
+							<canvas id="qrcode" canvas-id="qrcode" :style="{ width: `${size}px`, height: `${size}px`}"/>
 						</view>
 					</view>
 				</view>
@@ -43,7 +43,7 @@
 							</view>
 						</view>
 						<view class="right" id="qrBox">
-							<canvas id="qrcode" canvas-id="qrcode" :style="{ width: `${size}px`, height: `${size}px` }"></canvas>
+							<canvas id="qrcode" canvas-id="qrcode" :style="{ width: `${size}px`, height: `${size}px`}"/>
 						</view>
 					</view>
 				</view>
@@ -74,7 +74,7 @@
 							</view>
 						</view>
 						<view class="right" id="qrBox">
-							<canvas id="qrcode" canvas-id="qrcode" :style="{ width: `${size}px`, height: `${size}px` }"></canvas>
+							<canvas id="qrcode" canvas-id="qrcode" :style="{ width: `${size}px`, height: `${size}px` }"/>
 						</view>
 					</view>
 				</view>
@@ -92,7 +92,7 @@
 </template>
 
 <script>
-	import uQRCode from 'uqrcodejs';
+	import uQRCode from "../../libs/jsm/uqrcode.js";
 	import FileSaver from 'file-saver'
 	import {imgPathToBase64,blobToBase64} from "@/utils/tools.js"
 	export default {
@@ -117,19 +117,23 @@
 				if(this.posterUrl)return
 				this.size=document.getElementById("qrBox").clientWidth
 				const ctx = uni.createCanvasContext('qrcode');
-				const uqrcode = new uQRCode(
-				  {
-				    text: this.posterData.codeUrl,
-				    size: this.size
-				  },
-				  ctx
-				);
-				uqrcode.make();
-				uqrcode.draw();
-				this.$nextTick(()=>{
-					this.canvasImage.generateImage((val)=>{
-						this.posterUrl = val.replace(/[\r\n]/g, ''); // 去除base64位中的空格
-					})
+				uQRCode.make({
+					canvasId: 'qrcode',
+					componentInstance: this,
+					text: this.posterData.codeUrl,
+					size: this.size,
+					margin: 0,
+					backgroundColor: '#ffffff',
+					foregroundColor: '#000000',
+					fileType: 'jpg',
+					errorCorrectLevel: uQRCode.errorCorrectLevel.H,
+					success: () => {
+						this.$nextTick(()=>{
+							this.canvasImage.generateImage((val)=>{
+								this.posterUrl = val.replace(/[\r\n]/g, ''); // 去除base64位中的空格
+							})
+						})
+					}
 				})
 			},
 			// 保存图片至本地
@@ -314,7 +318,6 @@
 						image {
 							width: 100%;
 							height: 100%;
-
 						}
 					}
 				}

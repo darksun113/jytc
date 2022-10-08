@@ -10,15 +10,14 @@ import {isMap_PingAn} from "./libs/jsm/PingAn-app.js"
 import { routerTo } from '@/utils/routerTo.js' //公共方法
 import { myshare, isWechat} from '@/libs/jsm/w-share.js'
 import { count } from '@/utils/countApi.js'
+import LazyLoad from "./directives/lazy.js"
 
-
-
+Vue.directive("lazy",LazyLoad)
 if (isWechat()) {
 	Vue.prototype.$wShare = myshare;
 } else {
 	Vue.prototype.$wShare = () => {}
 }
-
 Vue.prototype.$store = store
 Vue.config.productionTip = false
 uni.$http = request;

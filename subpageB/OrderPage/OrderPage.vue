@@ -3,9 +3,9 @@
 		<view class="main">
 			<OrderStatus :orderInfo="orderInfo"  v-if="orderInfo.goods"></OrderStatus>
 			<OrderInfo :orderInfo="orderInfo" v-if="orderInfo.goods"></OrderInfo>
-			<PayType v-if="orderInfo.status==0 && !isPingAn" @setPayType="setPayType" @setCard="setCard"></PayType>
+			<PayType v-if="orderInfo.status==0 || orderInfo.status==3 ||orderInfo.status==4 && !isPingAn" @setPayType="setPayType" @setCard="setCard"></PayType>
 		</view>
-		<PayButton v-if="orderInfo.status==0" :payType_="payType" :orderNo="orderNo" @updateOrderInfo="getOrderInfo" :price="orderInfo.goods.goodsPrice" :cardId_="cardId"></PayButton>
+		<PayButton v-if="orderInfo.status==0 || orderInfo.status==3 ||orderInfo.status==4" :payType_="payType" :orderNo="orderNo" @updateOrderInfo="getOrderInfo" :price="orderInfo.totalFee" :cardId_="cardId"></PayButton>
 		<Contact :orderNo="orderNo"></Contact>
 	</PageTemp>
 </template>

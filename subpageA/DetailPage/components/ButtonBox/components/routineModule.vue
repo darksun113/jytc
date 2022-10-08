@@ -40,7 +40,6 @@
 		mounted() {
 		},
 		methods:{
-			
 			toOrder(){
 				const boo=this.$checkLogin()
 				if(boo){

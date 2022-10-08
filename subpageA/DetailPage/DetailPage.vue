@@ -41,6 +41,11 @@
 		onUnload() {
 			uni.$off("toOpenSharePoster")
 		},
+		mounted(){
+			setTimeout(function() {
+				this.count();
+			}, 3000);
+		},
 		methods: {
 			async getGoodsDetail() {
 				try {
@@ -150,6 +155,15 @@
 				const url = `/pages/login/LoginByMobile/GetVerifyCode/GetVerifyCode?instanceId=${instanceId}`
 				this.$routerTo(url, 'redirect')
 			},
+			async count(){
+				const time = new Date()
+				console.log("time: ",Date.now());
+				const res = await uni.$http("/tracking/report",{
+					eventCode: 'view_gooods',
+					eventTimestamp: parseInt(time/1000),
+					data: this.goodsId,
+				})
+			}
 		},
 		onLoad(opt) {
 			// loadType: 0 未购买  1 已购买  2 盲盒   3 后台预览
@@ -160,7 +174,7 @@
 		},
 		onShow() {
 			this.init()
-		}
+		},
 	}
 </script>
 

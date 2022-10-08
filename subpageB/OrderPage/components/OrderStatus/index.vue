@@ -28,6 +28,12 @@
 			订单已取消
 		</view>
 	</view>
+	<view v-else-if="orderInfo.status == 4&&onSale==false" class="topBox1">
+		<view class="tabRight">
+			<view class="" style="font-size: 38rpx"> 尾款支付-未开始 </view>
+			<view class="pay-time" style="color:#eca800;">{{orderInfo.goods.startTime | formatDate}} 至 {{orderInfo.goods.endTime | formatDate}}</view>
+		</view>
+	</view>
 </template>
 
 <script>
@@ -40,15 +46,53 @@
 		},
 		data(){
 			return{
-				curTime:parseInt(Date.now())
+				curTime:parseInt(Date.now()),
+				onSale:false,
 			}
+		},
+		mounted(){
+			this.checkTime()
 		},
 		methods:{
 			countEnd(){
 				this.orderInfo.status=1
-			}
+			},
+			checkTime(){
+				const date = Date.now();
+				if(this.orderInfo.goods.startTime<date/1000){
+					this.onSale=true;
+				}else{
+					this.onSale=false;
+				}
+				console.log(this.onSale)
+			},
 		},
-		watch:{}
+		watch:{
+			
+		},
+		filters:{
+			formatDate(value) {
+				if(value == undefined){
+					return;
+				}
+				// let date = new Date(value * 1000);
+				let date = new Date(value);
+				//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+				let y = date.getFullYear();
+				let MM = date.getMonth() + 1;
+				MM = MM < 10 ? ('0' + MM) : MM; //月补0
+				let d = date.getDate();
+				d = d < 10 ? ('0' + d) : d; //天补0
+				let h = date.getHours();
+				h = h < 10 ? ('0' + h) : h; //小时补0
+				let m = date.getMinutes();
+				m = m < 10 ? ('0' + m) : m; //分钟补0
+				let s = date.getSeconds();
+				s = s < 10 ? ('0' + s) : s; //秒补0
+				// return y + '-' + MM + '-' + d; //年月日
+				return y + '-' + MM + '-' + d + ' ' + h + ':' + m+ ':' + s; //年月日时分秒
+			}
+		}
 	}
 </script>
 
@@ -56,6 +100,21 @@
 	::v-deep .u-count-down__text{
 		color: #ECA800;
 		font-size: 28rpx;
+	}
+	.topBox1{
+		width: 100%;
+		height: 192rpx;
+		background-color: #fffcf2;
+		display: flex;
+		align-items: center;
+		color: #eca800;	
+		.tabRight {
+			padding-left: 40rpx;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+
+		}
 	}
 	.topBox {
 		width: 100%;
@@ -76,5 +135,11 @@
 			justify-content: space-between;
 			color: #eca800;
 		}
+	}
+	.pay-time{
+		font-size: 14px;
+		font-family: SourceHanSansCN-Regular, SourceHanSansCN;
+		font-weight: 400;
+		padding-top: 30rpx;
 	}
 </style>

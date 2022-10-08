@@ -15,25 +15,35 @@
 			</view>
 		</view>
 		<view class="order-detail-box">
-			<!-- <view class="pre-oder" v-if="orderInfo.status!=0"> -->
-			<view class="pre-oder" v-if="this.status==0">
+			<!-- <view class="pre-oder"  v-if="orderInfo.status>2"> -->
+			<view class="pre-oder">
 				<view style="display:flex;padding-top:40rpx">
-					<image style="width: 52rpx; height: 52rpx;padding-right:28rpx" class="step" src="../../static/images/1r.svg"></image>
-					<view v-if="this.status==0" style="color:#C75943">阶段一：定金（待付款）</view>
-					<view v-if="this.status==1" style="color:#000000">阶段一：定金（已付）</view>
-					<view v-if="this.status==1" style="color:#999999;display:flex;">阶段一：定金<view style="color:#C75943">（待付款）</view></view>
-					<view v-if="this.status==1" style="color:#999999;display:flex;">阶段一：定金<view style="color:#C75943">（待退款）</view></view>
-					<view v-if="this.status==1" style="color:#999999;display:flex;">阶段一：定金<view style="color:#C75943">（退款成功）</view></view>
-					<view v-if="this.status==1" style="color:#999999;display:flex;">阶段一：定金<view style="color:#C75943">（退款失败）</view></view>
+					<image style="width: 52rpx; height: 52rpx;padding-right:28rpx" src="../../static/images/1r.svg"></image>
+					<view  class="step">
+						<view style="color:#C75943">阶段一：测试（待付款）</view>
+						<view v-if="this.status==3" style="color:#C75943">阶段一：定金（待付款）</view>
+						<view v-if="this.status==4" style="color:#000000">阶段一：定金（已付）</view>
+						<view v-if="this.status==5" style="color:#999999;display:flex;">阶段一：定金<view style="color:#C75943">（待退款）</view></view>
+						<view v-if="this.status==6" style="color:#999999;display:flex;">阶段一：定金<view style="color:#C75943">（退款失败）</view></view>
+						<view v-if="this.status==7" style="color:#999999;display:flex;">阶段一：定金<view style="color:#C75943">（退款成功）</view></view>
+						<view>{{}}</view>
+					</view>
 				</view>
 				<view style="margin-bottom: -6rpx">
 					<image style="height:60rpx;width:50rpx;padding-top:2rpx" src="../../static/images/dot_line.svg"></image>
 				</view>
 				<view style="padding-bottom:20rpx; display:flex;">
-					<image style="width: 52rpx; height: 52rpx;padding-right:28rpx" class="step" src="../../static/images/2g.svg"></image>
-					<view v-if="this.status==0" style="color:#999999">阶段二：尾款（未开始）</view>
-					<view v-if="this.status==1" style="color:#999999;display:flex;">阶段二：尾款（退款失败）</view>
-					<view class="pay-time" v-if="this.status==1">{{orderInfo.goods.startTime}} 至 {{orderInfo.goods.endTime}}</view>
+					<image style="width: 52rpx; height: 52rpx;padding-right:28rpx" src="../../static/images/2g.svg"></image>
+					<view class="step">
+						<view v-if="this.status!=4" style="color:#999999">阶段二：尾款（未开始）</view>
+						<view v-if="this.status==4" style="color:#999999;display:flex;">阶段二：尾款（代付款）</view>
+						<view>{{}}</view>
+					</view>
+
+				</view>
+				<view v-if="this.status==4">
+					<view class="pay-time" v-if="onSale" style="padding-left:78rpx; color:#C75943;">{{orderInfo.goods.startTime | formatDate}} 至 {{orderInfo.goods.endTime | formatDate}}</view>
+					<view class="pay-time" v-if="!onSale" style="padding-left:78rpx; color:#999999;">{{orderInfo.goods.startTime | formatDate}} 至 {{orderInfo.goods.endTime | formatDate}}</view>
 				</view>
 			</view>
 			<view class="order-detail">
@@ -60,10 +70,24 @@
 				default:()=>{}
 			}
 		},
+		mounted(){
+			this.checkTime()
+		},
 		data(){
 			return {
 				status:0,
+				onSale:false,
 			}
+		},
+		methods:{
+			checkTime(){
+				const date = Date.now();
+				if(this.orderInfo.goods.startTime<date/1000){
+					this.onSale=true;
+				}else{
+					this.onSale=false;
+				}
+			},
 		},
 		filters:{
 			format(stamp){
@@ -79,6 +103,27 @@
 					const S = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
 					return Y + M + D + H + M2 + S
 				}
+			},
+			formatDate(value) {
+				if(value == undefined){
+					return;
+				}
+				// let date = new Date(value * 1000);
+				let date = new Date(value);
+				//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+				let y = date.getFullYear();
+				let MM = date.getMonth() + 1;
+				MM = MM < 10 ? ('0' + MM) : MM; //月补0
+				let d = date.getDate();
+				d = d < 10 ? ('0' + d) : d; //天补0
+				let h = date.getHours();
+				h = h < 10 ? ('0' + h) : h; //小时补0
+				let m = date.getMinutes();
+				m = m < 10 ? ('0' + m) : m; //分钟补0
+				let s = date.getSeconds();
+				s = s < 10 ? ('0' + s) : s; //秒补0
+				// return y + '-' + MM + '-' + d; //年月日
+				return y + '-' + MM + '-' + d + ' ' + h + ':' + m+ ':' + s; //年月日时分秒
 			}
 		}
 	}
@@ -147,6 +192,11 @@
 				display:flex;
 				flex-direction:column;
 				font-family: PingFangSC-Regular, PingFang SC;
+				.step{
+					width:100%;
+					display:flex;
+					justify-content:space-between;
+				}
 				.pay-time{
 					font-size: 24rpx;
 					font-family: SourceHanSansCN-Regular, SourceHanSansCN;

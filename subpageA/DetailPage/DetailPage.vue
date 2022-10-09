@@ -37,7 +37,7 @@
 		},
 		destroyed(){
 			clearTimeout(this.timer)
-		}
+		},
 		onShow() {
 			this.init()
 		},

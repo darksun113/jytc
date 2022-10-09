@@ -1,6 +1,6 @@
 <template>
 	<!-- status:0未支付 1已取消 2已支付 -->
-	<view v-if="orderInfo.status > 4" class="topBox">
+	<view v-if="orderInfo.status == 0||orderInfo.status == 3" class="topBox">
 		<image class="status-icon" src="../../static/images/payIng.svg" mode=""></image>
 		<view class="tabRight">
 			<view class="" style="font-size: 38rpx"> 待支付 </view>
@@ -37,21 +37,21 @@
 	<view v-else-if="orderInfo.status == 5" class="topBox-s5">
 		<image class="status-icon" src="../../static/images/x_red.svg" mode=""></image>
 		<view class="tabRight">
-			<view class="" style="font-size: 38rpx"> 交易失败 </view>
+			<view class="red-txt"> 交易失败 </view>
 			<view style="color:#333333;">已取消订单，等待商家退款</view>
 		</view>
 	</view>
 	<view v-else-if="orderInfo.status == 6" class="topBox-s6">
 		<image class="status-icon" src="../../static/images/x_grey.svg" mode=""></image>
 		<view class="tabRight">
-			<view class="" style="font-size: 38rpx:color:#999999"> 交易失败 </view>
+			<view class="grey-txt" style="font-size: 38rpx:color:#999999"> 交易失败 </view>
 			<view style="color:#333333;">已取消订单，等待商家退款</view>
 		</view>
 	</view>
 	<view v-else-if="orderInfo.status == 7" class="topBox-s5">
 		<image class="status-icon" src="../../static/images/x_red.svg" mode=""></image>
 		<view class="tabRight">
-			<view class="" style="font-size: 38rpx"> 交易失败 </view>
+			<view class="red-txt"> 交易失败 </view>
 			<view style="color:#333333;">商家退款失败，请联系客服重新退款</view>
 		</view>
 	</view>
@@ -200,5 +200,17 @@
 			flex-direction: column;
 			justify-content: space-between;
 		}
+	}
+	.red-txt{
+		font-size: 38rpx;
+		font-family: SourceHanSansCN-Medium, SourceHanSansCN;
+		font-weight: 500;
+		color: #F5222D;
+	}
+	.grey-txt{
+		font-size: 38rpx;
+		font-family: SourceHanSansCN-Medium, SourceHanSansCN;
+		font-weight: 500;
+		color: #999999;
 	}
 </style>

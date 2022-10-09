@@ -1,4 +1,5 @@
 <template>
+	<!-- private int goodsStatus; // 状态 0 上架 1下架 2 未发布 新增: 3 已售罄 4 已结束'  5 售卖中 6 预售中 -->
 	<view class="goods-box" @click="toDetailPage">
 		<view class="goods-pic-box">
 			<image class="goods-pic" :src="item.image" mode="aspectFill"></image>
@@ -42,7 +43,7 @@
 			</view>
 			<view class="price-box">
 				<view class="price">
-					<view class="pre-pay-info-box" v-if="item.goodsType==3 && item.goodsStatus !== 3">
+					<view class="pre-pay-info-box" v-if="item.goodsType==3  && [0,6].includes(item.goodsStatus)">
 						<view class="pre-item">
 							<text class="pre-title">预售价：</text>
 							<text class="pre-price">¥ {{(item.prepayAmount/100).toFixed(2)}}</text>
@@ -86,7 +87,7 @@
 				this.timeData = e
 			},
 			onFinish(){
-				this.$$emit("countFinish")
+				this.$emit("countFinish")
 			},
 			toDetailPage(){
 				const loadType = 0

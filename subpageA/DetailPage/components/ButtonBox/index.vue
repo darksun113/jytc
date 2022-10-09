@@ -6,7 +6,6 @@
 			:goodsData="goodsData" @showLoginTip="isShow=true" @showIdentityShow="identityShow=true"></prepayModule>
 		<!-- 常规支付按钮模块 -->
 		<routineModule v-else :goodsData="goodsData" @showLoginTip="isShow=true" @showIdentityShow="identityShow=true"></routineModule>
-		
 		<!-- 登录pop -->
 		<LoginTipPop name="goodsDetail" @loginSuccess="loginSuccess" :isShow="isShow" @close="isShow=false"></LoginTipPop>
 		<!-- 身份实名认证pop -->

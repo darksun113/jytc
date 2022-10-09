@@ -16,7 +16,6 @@
 		</view>
 		<view class="order-detail-box">
 			<view class="pre-oder"  v-if="orderInfo.status>2">
-			<!-- <view class="pre-oder"> -->
 				<view style="display:flex;padding-top:40rpx">
 					<image style="width: 52rpx; height: 52rpx;padding-right:28rpx" src="../../static/images/1r.svg"></image>
 					<view  class="step">
@@ -58,23 +57,23 @@
 				<view style="padding-bottom:20rpx; display:flex;">
 					<image style="width: 52rpx; height: 52rpx;padding-right:28rpx" src="../../static/images/2g.svg"></image>
 					<view class="step">
-						<view class="in-step" v-if="orderInfo.status!=4" style="color:#999999">
+						<view class="in-step" v-if="orderInfo.status == 4 && orderInfo.goods.startTime < curTime" style="color:#C75943">
 							<view class="left">
-								阶段二：尾款（未开始）
+								阶段二：尾款（待付款）
 							</view>
 							{{(orderInfo.goods.prepayAmount/100).toFixed(2)}}
 						</view>	
-						<view v-if="orderInfo.status==4" style="color:#999999;display:flex;">
+						<view v-else style="color:#999999;width: 100%; display:flex;justify-content: space-between;">
 							<view class="left">
-							阶段二：尾款（代付款）
+								阶段二：尾款（未开始）
 							</view>
-							{{(orderInfo.goods.prepayAmount/100).toFixed(2)}}
+							<text>{{(orderInfo.goods.prepayAmount/100).toFixed(2)}}</text>
 						</view>
 					</view>
 				</view>
 				<view v-if="orderInfo.status==4">
-					<view class="pay-time" v-if="onSale" style="padding-left:78rpx; color:#C75943;">{{orderInfo.goods.startTime | formatDate}} 至 {{orderInfo.goods.balanceEndTime | formatDate}}</view>
-					<view class="pay-time" v-if="!onSale" style="padding-left:78rpx; color:#999999;">{{orderInfo.goods.startTime | formatDate}} 至 {{orderInfo.goods.balanceEndTime | formatDate}}</view>
+					<view class="pay-time" v-if="orderInfo.goods.startTime < curTime" style="padding-left:78rpx; color:#C75943;">{{orderInfo.goods.startTime | formatDate}} 至 {{orderInfo.goods.balanceEndTime | formatDate}}</view>
+					<view class="pay-time" v-else style="padding-left:78rpx; color:#999999;">{{orderInfo.goods.startTime | formatDate}} 至 {{orderInfo.goods.balanceEndTime | formatDate}}</view>
 				</view>
 			</view>
 			<view v-if="orderInfo.status!=0" class="order-detail">
@@ -102,24 +101,14 @@
 			}
 		},
 		mounted(){
-			this.checkTime()
 		},
 		data(){
 			return {
 				status:0,
-				onSale:false,
+				curTime:parseInt(Date.now()/1000)
 			}
 		},
 		methods:{
-			checkTime(){
-
-				const date = Date.now();
-				if(this.orderInfo.goods.startTime<date/1000){
-					this.onSale=true;
-				}else{
-					this.onSale=false;
-				}
-			},
 		},
 		filters:{
 			format(stamp){
@@ -140,8 +129,7 @@
 				if(value == undefined){
 					return;
 				}
-				// let date = new Date(value * 1000);
-				let date = new Date(value);
+				let date = new Date(value * 1000);
 				//时间戳为10位需*1000，时间戳为13位的话不需乘1000
 				let y = date.getFullYear();
 				let MM = date.getMonth() + 1;

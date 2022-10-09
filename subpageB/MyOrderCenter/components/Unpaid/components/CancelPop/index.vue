@@ -11,7 +11,7 @@
 				<view class="left" @click="$emit('close')">
 					取消
 				</view>
-				<view class="right" @click="cancelOrder">
+				<view class="right" @click="confirmCancel">
 					确认
 				</view>
 			</view>
@@ -26,15 +26,31 @@
 				type:Boolean,
 				default:()=>false
 			},
-			orderNo:[Number,String]
+			orderNo:[Number,String],
+			orderStatus:[Number,String]
 		},
 		data(){
 			return {
 				show:this.isShow,
-				renameValue:""
+				status:this.orderStatus
 			}
 		},
 		methods:{
+			confirmCancel(){
+				this.status == 4 ? this.refundOrder() : this.cancelOrder()
+			},
+			// 定金订单退款取消
+			async refundOrder(){
+				const res = await uni.$http("/order/refund",{
+					orderNo:this.orderNo
+				})
+				if(res.code==0){
+					this.$emit("cancelSuccess")
+				}else{
+					this.$toast(res.errorMsg)
+				}
+			},
+			// 普通订单取消
 			async cancelOrder(){
 				try{
 					const res=await uni.$http("/order/cancel",{orderNo:this.orderNo})
@@ -52,6 +68,9 @@
 			isShow(boo){
 				this.show=boo
 			},
+			orderStatus(val){
+				this.status=val
+			}
 		}
 	}
 </script>

@@ -4,7 +4,15 @@
 			<view class="price-box">
 				待支付：<text class="price"> ¥ {{(price/100).toFixed(2)}}</text>
 			</view>
-			<view class="btn" @click="toPay">
+			<template v-if="orderInfo.status == 4">
+				<view class="btn" style="background: #999;color: #fff;" v-if="orderInfo.goods.startTime > curTime">
+					付尾款
+				</view>
+				<view class="btn" @click="toPay" v-else>
+					付尾款
+				</view>
+			</template>
+			<view class="btn" @click="toPay" v-else>
 				去支付
 			</view>
 		</view>
@@ -60,6 +68,10 @@
 			orderNo:[String],
 			price:[String,Number],
 			cardId_:[String,Number],
+			orderInfo:{
+				type:Object,
+				default:()=>{}
+			}
 		},
 		data() {
 			return {
@@ -72,6 +84,7 @@
 				cardId: this.cardId_,
 				isWx:false,
 				check_shows: false,
+				curTime:parseInt(Date.now()/1000)
 			}
 		},
 		async mounted(){
@@ -300,6 +313,7 @@
 		width: 100%;
 		height: 188rpx;
 		background: #FFFFFF;
+		border-top: 2rpx solid #EEEEEE;
 		position: fixed;
 		padding: 32rpx 40rpx;
 		left: 0;

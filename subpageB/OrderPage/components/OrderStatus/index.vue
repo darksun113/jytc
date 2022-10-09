@@ -96,8 +96,7 @@
 				if(value == undefined){
 					return;
 				}
-				// let date = new Date(value * 1000);
-				let date = new Date(value);
+				let date = new Date(value*1000);
 				//时间戳为10位需*1000，时间戳为13位的话不需乘1000
 				let y = date.getFullYear();
 				let MM = date.getMonth() + 1;

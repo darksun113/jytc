@@ -39,10 +39,10 @@
 			<view class="btn btn-cancel" @click.stop="$emit('cancelOrder',{orderNo:item.orderNo,index:index_})">
 				取消订单
 			</view>
-			<view v-if="this.item.status==0" class="btn btn-pay" @click.stop="toPay">
+			<view v-if="this.item.status==0||this.item.status==3" class="btn btn-pay" @click.stop="toPay">
 				立即支付
 			</view>
-			<view v-if="this.item.status==1" class="btn btn-tail" @click.stop="toPay">
+			<view v-if="this.item.status==4" class="btn btn-tail" @click.stop="toPay">
 				支付尾款
 			</view>
 		</view>

@@ -20,12 +20,36 @@
 				<view style="display:flex;padding-top:40rpx">
 					<image style="width: 52rpx; height: 52rpx;padding-right:28rpx" src="../../static/images/1r.svg"></image>
 					<view  class="step">
-						<view v-if="orderInfo.status==3" style="color:#C75943">阶段一：定金（待付款）</view>
-						<view v-if="orderInfo.status==4" style="color:#000000">阶段一：定金（已付）</view>
-						<view v-if="orderInfo.status==5" style="color:#999999;display:flex;">阶段一：定金<view style="color:#C75943">（待退款）</view></view>
-						<view v-if="orderInfo.status==6" style="color:#999999;display:flex;">阶段一：定金<view style="color:#C75943">（退款失败）</view></view>
-						<view v-if="orderInfo.status==7" style="color:#999999;display:flex;">阶段一：定金<view style="color:#C75943">（退款成功）</view></view>
-						<view>{{}}</view>
+						<view class="in-step" v-if="orderInfo.status==3" style="color:#C75943">
+							<view class="left">
+								阶段一：定金（待付款）
+							</view>
+							{{(orderInfo.goods.deposit/100).toFixed(2)}}
+						</view>
+						<view class="in-step" v-if="orderInfo.status==4" style="color:#000000">
+							<view class="left">
+								阶段一：定金（已付）
+							</view>
+							{{(orderInfo.goods.deposit/100).toFixed(2)}}
+						</view>
+						<view class="in-step" v-if="orderInfo.status==5" style="color:#999999;display:flex;">
+							<view class="left">
+								阶段一：定金<view style="color:#C75943">（待退款）</view>
+							</view>
+							{{(orderInfo.goods.deposit/100).toFixed(2)}}
+						</view>
+						<view class="in-step" v-if="orderInfo.status==6" style="color:#999999;display:flex;">
+							<view class="left">
+								阶段一：定金<view style="color:#C75943">（退款失败）</view> 
+							</view>
+							{{(orderInfo.goods.deposit/100).toFixed(2)}}
+						</view>
+						<view class="in-step" v-if="orderInfo.status==7" style="color:#999999;display:flex;">
+							<view class="left">
+								阶段一：定金<view style="color:#C75943">（退款成功）</view>
+							</view>
+							{{(orderInfo.goods.deposit/100).toFixed(2)}}
+						</view>
 					</view>
 				</view>
 				<view style="margin-bottom: -6rpx">
@@ -34,18 +58,26 @@
 				<view style="padding-bottom:20rpx; display:flex;">
 					<image style="width: 52rpx; height: 52rpx;padding-right:28rpx" src="../../static/images/2g.svg"></image>
 					<view class="step">
-						<view v-if="orderInfo.status!=4" style="color:#999999">阶段二：尾款（未开始）</view>
-						<view v-if="orderInfo.status==4" style="color:#999999;display:flex;">阶段二：尾款（代付款）</view>
-						<view>{{}}</view>
+						<view class="in-step" v-if="orderInfo.status!=4" style="color:#999999">
+							<view class="left">
+								阶段二：尾款（未开始）
+							</view>
+							{{(orderInfo.goods.prepayAmount/100).toFixed(2)}}
+						</view>	
+						<view v-if="orderInfo.status==4" style="color:#999999;display:flex;">
+							<view class="left">
+							阶段二：尾款（代付款）
+							</view>
+							{{(orderInfo.goods.prepayAmount/100).toFixed(2)}}
+						</view>
 					</view>
-
 				</view>
 				<view v-if="orderInfo.status==4">
-					<view class="pay-time" v-if="onSale" style="padding-left:78rpx; color:#C75943;">{{orderInfo.goods.startTime | formatDate}} 至 {{orderInfo.goods.endTime | formatDate}}</view>
-					<view class="pay-time" v-if="!onSale" style="padding-left:78rpx; color:#999999;">{{orderInfo.goods.startTime | formatDate}} 至 {{orderInfo.goods.endTime | formatDate}}</view>
+					<view class="pay-time" v-if="onSale" style="padding-left:78rpx; color:#C75943;">{{orderInfo.goods.startTime | formatDate}} 至 {{orderInfo.goods.balanceEndTime | formatDate}}</view>
+					<view class="pay-time" v-if="!onSale" style="padding-left:78rpx; color:#999999;">{{orderInfo.goods.startTime | formatDate}} 至 {{orderInfo.goods.balanceEndTime | formatDate}}</view>
 				</view>
 			</view>
-			<view class="order-detail">
+			<view v-if="orderInfo.status!=0" class="order-detail">
 				<view class="title">订单金额：</view>
 				<view class="detail price">¥ {{(orderInfo.totalFee/100).toFixed(2)}}</view>
 			</view>
@@ -80,6 +112,7 @@
 		},
 		methods:{
 			checkTime(){
+
 				const date = Date.now();
 				if(this.orderInfo.goods.startTime<date/1000){
 					this.onSale=true;
@@ -195,6 +228,11 @@
 					width:100%;
 					display:flex;
 					justify-content:space-between;
+					.in-step{
+						width:100%;
+						display:flex;
+						justify-content:space-between;
+					}
 				}
 				.pay-time{
 					font-size: 24rpx;

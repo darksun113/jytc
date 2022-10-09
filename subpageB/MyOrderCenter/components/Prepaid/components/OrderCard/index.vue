@@ -4,7 +4,7 @@
 			<view class="title-box">
 				<view class="author-box">
 					<image class="avatar" :src="item.goods.shopIcon" mode=""></image>
-					<view class="author nowrap">
+					<view class="author" style="overflow:hidden;white-space: nowrap;">
 						{{item.goods.shopName}}
 					</view>
 				</view>
@@ -32,11 +32,11 @@
 						<view>
 							¥ {{(item.goods.goodsPrice/100).toFixed(2)}}
 						</view>
-						
 						<view style="font-size:28rpx;padding-top:12rpx;">
-							<view v-if="0==0">退款成功</view>
-							<view v-if="0==1" style="color:#FFD690">等待退款</view>
-							<view v-if="0==1" style="color:#FF5454">退款失败</view>
+							<view v-if="item.status==5">退款成功</view>
+							<view v-if="item.status==6" style="color:#FFD690">等待退款</view>
+							<view v-if="item.status==7" style="color:#FF5454">退款失败</view>
+							<view v-else></view>
 						</view>
 					</view>
 					
@@ -60,6 +60,8 @@
 			return {
 				
 			}
+		},
+		mouted(){
 		},
 		filters:{
 			format(stamp){

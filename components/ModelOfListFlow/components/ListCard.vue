@@ -4,10 +4,10 @@
 			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-if="item.goodsTotal==0 || item.remainingNumber == 0">
 				已售罄
 			</view>
-			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-else-if="item.startTime>curTime">
+			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-else-if="!!item.startTime && item.startTime > curTime">
 				开售时间 {{item.startTime | formatYearToMinutes_EN}}
 			</view>
-			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-else-if="item.sellTime>curTime">
+			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-else-if="!!item.sellTime && item.sellTime > curTime">
 				开售时间 {{item.sellTime | formatYearToMinutes_EN}}
 			</view>
 		</template>

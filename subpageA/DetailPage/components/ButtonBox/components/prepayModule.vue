@@ -9,7 +9,7 @@
 					<u-count-down :time="(goodsData.balanceEndTime - curTime)* 1000" format="HH:mm:ss" @change="onChange" @finish="onFinish">
 						<view class="time">
 							<view class="time__custom">
-								<text class="time__custom__item">{{ timeData.days*24 + timeData.hours>10?timeData.days*24 + timeData.hours:'0'+timeData.days*24 + timeData.hours}}</text>
+								<text class="time__custom__item">{{ (timeData.days*24 + timeData.hours)>10 ? (timeData.days*24 + timeData.hours):'0'+(timeData.days*24 + timeData.hours)}}</text>
 							</view>
 							<text class="time__doc">小时</text>
 							<view class="time__custom">
@@ -31,7 +31,7 @@
 					<u-count-down :time="(goodsData.startTime - curTime)* 1000" format="HH:mm:ss" @change="onChange" @finish="onFinish">
 						<view class="time">
 							<view class="time__custom">
-								<text class="time__custom__item">{{ timeData.days*24 + timeData.hours>10?timeData.days*24 + timeData.hours:'0'+timeData.days*24 + timeData.hours}}</text>
+								<text class="time__custom__item">{{ (timeData.days*24 + timeData.hours)>10?(timeData.days*24 + timeData.hours):'0'+(timeData.days*24 + timeData.hours)}}</text>
 							</view>
 							<text class="time__doc">小时</text>
 							<view class="time__custom">

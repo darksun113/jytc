@@ -30,7 +30,7 @@
 					<image v-else-if="item.goods.materialType==2" class="goods-type" src="@/static/images/type_video.svg"></image>
 					<image v-else-if="item.goods.materialType==3" class="goods-type" src="@/static/images/type_audio.svg"></image>
 					<view class="price">
-						¥ {{(item.goods.goodsPrice/100).toFixed(2)}}
+						¥ {{(item.totalFee/100).toFixed(2)}}
 					</view>
 				</view>
 			</view>

@@ -4,7 +4,7 @@
 			<view class="title-box">
 				<view class="author-box">
 					<image class="avatar" :src="item.goods.shopIcon" mode=""></image>
-					<view class="author" style="overflow:hidden;white-space: nowrap;">
+					<view class="author" style="overflow:hidden;white-space: nowrap;text-overflow:ellipsis;width:300rpx;">
 						{{item.goods.shopName}}
 					</view>
 				</view>

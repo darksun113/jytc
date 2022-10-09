@@ -85,7 +85,7 @@
 				}else{
 					this.onSale=false;
 				}
-				console.log(this.onSale)
+				// console.log(this.onSale)
 			},
 		},
 		watch:{

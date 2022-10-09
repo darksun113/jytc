@@ -1,6 +1,6 @@
 <template>
 	<!-- status:0未支付 1已取消 2已支付 -->
-	<view v-if="orderInfo.status == 0" class="topBox">
+	<view v-if="orderInfo.status > 4" class="topBox">
 		<image class="status-icon" src="../../static/images/payIng.svg" mode=""></image>
 		<view class="tabRight">
 			<view class="" style="font-size: 38rpx"> 待支付 </view>
@@ -28,10 +28,31 @@
 			订单已取消
 		</view>
 	</view>
-	<view v-else-if="orderInfo.status == 4&&onSale==false" class="topBox1">
+	<view v-else-if="orderInfo.status == 4&& onSale==false" class="topBox1">
 		<view class="tabRight">
 			<view class="" style="font-size: 38rpx"> 尾款支付-未开始 </view>
 			<view class="pay-time" style="color:#eca800;">{{orderInfo.goods.startTime | formatDate}} 至 {{orderInfo.goods.endTime | formatDate}}</view>
+		</view>
+	</view>
+	<view v-else-if="orderInfo.status == 5" class="topBox-s5">
+		<image class="status-icon" src="../../static/images/x_red.svg" mode=""></image>
+		<view class="tabRight">
+			<view class="" style="font-size: 38rpx"> 交易失败 </view>
+			<view style="color:#333333;">已取消订单，等待商家退款</view>
+		</view>
+	</view>
+	<view v-else-if="orderInfo.status == 6" class="topBox-s6">
+		<image class="status-icon" src="../../static/images/x_grey.svg" mode=""></image>
+		<view class="tabRight">
+			<view class="" style="font-size: 38rpx:color:#999999"> 交易失败 </view>
+			<view style="color:#333333;">已取消订单，等待商家退款</view>
+		</view>
+	</view>
+	<view v-else-if="orderInfo.status == 7" class="topBox-s5">
+		<image class="status-icon" src="../../static/images/x_red.svg" mode=""></image>
+		<view class="tabRight">
+			<view class="" style="font-size: 38rpx"> 交易失败 </view>
+			<view style="color:#333333;">商家退款失败，请联系客服重新退款</view>
 		</view>
 	</view>
 </template>
@@ -141,5 +162,43 @@
 		font-family: SourceHanSansCN-Regular, SourceHanSansCN;
 		font-weight: 400;
 		padding-top: 30rpx;
+	}
+	.topBox-s5{
+		width: 100%;
+		height: 192rpx;
+		background-color: #FFF1F0;
+		display: flex;
+		padding: 0 40rpx;
+		align-items: center;
+		.status-icon {
+			width: 80rpx;
+			height: 80rpx;
+		}
+		.tabRight {
+			padding-left: 40rpx;
+			height: 100rpx;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
+	}
+	.topBox-s6{
+		width: 100%;
+		height: 192rpx;
+		background-color: #F2F2F2;
+		display: flex;
+		padding: 0 40rpx;
+		align-items: center;
+		.status-icon {
+			width: 80rpx;
+			height: 80rpx;
+		}
+		.tabRight {
+			padding-left: 40rpx;
+			height: 100rpx;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+		}
 	}
 </style>

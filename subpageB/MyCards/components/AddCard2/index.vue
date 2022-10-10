@@ -16,7 +16,7 @@
 					<view class="left">持卡人</view>
 					<view class="right">
 						<u-form-item  label="" prop="name" ref="name">
-							<u--input class="u-input" @change="nameInput(form.name)" placeholder="持卡人姓名" v-model:value="form.name" type="text" suffixIconStyle="color:#000"
+							<u--input class="u-input" @change="nameInput(form.name)" placeholder="持卡人姓名" v-model="form.name" type="text" suffixIconStyle="color:#000"
 								color="#FFFFFF" border="" clearable>
 							</u--input>
 						</u-form-item>
@@ -26,7 +26,7 @@
 					<view class="left">身份证号</view>
 					<view class="right">
 						<u-form-item  label="" prop="id" ref="id">
-							<u--input class="u-input" @change="idInput(form.id)" maxlength="18" placeholder="持卡人身份证号码" v-model:value="form.id" type="text" suffixIconStyle="color:#000"
+							<u--input class="u-input" @change="idInput(form.id)" maxlength="18" placeholder="持卡人身份证号码" v-model="form.id" type="text" suffixIconStyle="color:#000"
 								color="#FFFFFF" border="" clearable>
 							</u--input>
 						</u-form-item>
@@ -46,7 +46,7 @@
 					<view class="verify-left-input">
 						<u-form-item class="verify-left-form-item" label="" prop="code" ref="code">
 							<u--input class="verify-left-u-input" placeholder="请输入验证码" type="number" suffixIconStyle="color:#000"
-								color="#FFFFFF" border="" v-model:value="verifyCode" @input="input" clearable>
+								color="#FFFFFF" border="" v-model="verifyCode" @input="input" clearable>
 							</u--input>
 						</u-form-item>
 						<hr>

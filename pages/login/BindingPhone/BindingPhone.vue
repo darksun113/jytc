@@ -6,12 +6,12 @@
 		<view class="form">
 			<u--form :model="form" ref="uForms">
 				<u-form-item label="" prop="phone" style="position: relative;">
-					<u--input placeholder="请输入手机号码" maxlength="11" :value="form.phone" type="number" suffixIconStyle="color:#000"
+					<u--input placeholder="请输入手机号码" maxlength="11" v-model="form.phone" type="number" suffixIconStyle="color:#000"
 						color="#FFFFFF" border="bottom" :customStyle="{marginTop:'90rpx'}" :focus="true" clearable>
 					</u--input>
 				</u-form-item>
 				<u-form-item label="" class="pwd" prop="verifyCode" style="position: relative;">
-					<u--input placeholder="请输入验证码"  maxlength="6" :value="form.verifyCode" type="number" suffixIconStyle="color:#000"
+					<u--input placeholder="请输入验证码"  maxlength="6" v-model="form.verifyCode" type="number" suffixIconStyle="color:#000"
 						color="#FFFFFF" border="bottom">
 					</u--input>
 					<view :style="{opacity:!$store.state.isCount ?'1':'0.5'}" class="get-verification-code-btn" @click="getCode">
@@ -19,8 +19,17 @@
 					</view>
 				</u-form-item>
 			</u--form>
+			<view class="agreement-check">
+				<u-checkbox-group v-model="checkGrop">
+					<u-checkbox activeColor="#28D8E5" inactiveColor="#999999" name="agree" iconColor="#000" size="14">
+					</u-checkbox>
+				</u-checkbox-group>
+				<view class="agreement-text">
+					同意并遵守<text @click="toUserAgreement">《用户协议》</text>与<text @click="toPrivacyPolicy">《隐私政策》</text>
+				</view>
+			</view>
 			<u-button text="确认" :custom-style="{color:'#000',marginTop:'150rpx',fontFamily: 'PingFangSC-Regular, PingFang SC',height:'100rpx',
-				opacity:form.verifyCode.length==6?'1':'0.5',borderRadius: '16rpx'}" @click="toBindPhone"
+				opacity:(form.verifyCode.length==6 && checkGrop[0] == 'agree')?'1':'0.5',borderRadius: '16rpx'}" @click="toBindPhone"
 				color="#28D8E5"></u-button>
 		</view>
 	</PageTemp>
@@ -33,6 +42,7 @@
 			return {
 				openId: "",
 				accessToken: "",
+				checkGrop:[],
 				form: {
 					phone: null,
 					verifyCode: "",
@@ -113,6 +123,10 @@
 			},
 			toBindPhone() {
 				this.$refs.uForms.validate().then(res => {
+					if (this.checkGrop[0] !== 'agree') {
+						this.$toast('请先阅读并勾选用户协议与隐私政策')
+						return
+					}
 					if(this.form.verifyCode.length==6){
 						this.bindUserPhone()
 					}else{
@@ -127,6 +141,14 @@
 				setTimeout(()=>{
 					this.$routerTo("../../home/home", "reLaunch")
 				},2000)
+			},
+			toUserAgreement() {
+				const url = "/subpageC/UserAgreement/UserAgreement"
+				this.$routerTo(url)
+			},
+			toPrivacyPolicy() {
+				const url = "/subpageC/PrivacyPolicy/PrivacyPolicy"
+				this.$routerTo(url)
 			}
 		}
 	}
@@ -163,6 +185,22 @@
 				color: #000000;
 				line-height: 88rpx;
 				text-align: center;
+			}
+			.agreement-check {
+				margin-top: 60rpx;
+				display: flex;
+				align-items: center;
+			
+				.agreement-text {
+					font-size: 24rpx;
+					font-family: PingFangSC-Regular, PingFang SC;
+					color: #999999;
+					line-height: 44rpx;
+			
+					text {
+						color: #FFFFFF;
+					}
+				}
 			}
 		}
 	}

@@ -7,11 +7,11 @@
 			<image v-if="posterUrl" :src="posterUrl" mode="" style="height: 740rpx;width: 100%;"></image>
 			<view class="poster-box" id="pagePoster" v-else>
 				<view class="poster-pic">
-					<img  v-if="posterData.loadType!=3" crossorigin="anonymous" :src="posterData.posterImg + '?' + new Date().getTime()" >
+					<img v-if="posterData.loadType!=3" crossorigin="anonymous" :src="posterData.posterImg + '?' + new Date().getTime()" >
 					<img v-else  crossorigin="anonymous" src="@/static/新增icon/占位图.png" >
 				</view>
 				<view class="poster-content" v-if="posterData.loadType==0">
-					<view style="width: 500rpx;" class="poster-title nowrap_s">
+					<view style="max-width: 500rpx;" class="poster-title nowrap_s">
 						 {{userName}} 
 					</view>
 					<view class="poster-detail">
@@ -25,7 +25,7 @@
 							</view>
 						</view>
 						<view class="right" id="qrBox">
-							<canvas id="qrcode" canvas-id="qrcode" :style="{ width: `${size}px`, height: `${size}px` }"></canvas>
+							<canvas id="qrcode" canvas-id="qrcode" :style="{ width: `${size}px`, height: `${size}px`}"/>
 						</view>
 					</view>
 				</view>
@@ -43,14 +43,14 @@
 							</view>
 						</view>
 						<view class="right" id="qrBox">
-							<canvas id="qrcode" canvas-id="qrcode" :style="{ width: `${size}px`, height: `${size}px` }"></canvas>
+							<canvas id="qrcode" canvas-id="qrcode" :style="{ width: `${size}px`, height: `${size}px`}"/>
 						</view>
 					</view>
 				</view>
 				<view class="poster-goods-content" v-if="posterData.loadType!=0 && posterData.loadType!=3">
 					<view class="poster-goods-title">
 						<view class="left nowrap">
-							{{posterData.goodsName}}
+							{{posterData.goodsName&&posterData.goodsName.length>22? posterData.goodsName.substr(0,12)+'...' : posterData.goodsName}}
 						</view>
 						<view class="right">
 							#{{posterData.goodsCode}}/{{posterData.totalNum}}
@@ -62,19 +62,19 @@
 								<text class="title">持有者：</text>
 								<view class="info">
 									<img crossorigin="anonymous" :src="posterData.avatar+ '?' + new Date().getTime()" >
-									<view class="name nowrap">{{posterData.name}}</view>
+									<view class="name nowrap">{{posterData.name && posterData.name.length>10? posterData.name.substr(0,8)+'...':posterData.name}}</view>
 								</view>
 							</view>
 							<view class="item">
 								<text class="title">发行方：</text>
 								<view class="info">
 									<img crossorigin="anonymous" :src="posterData.shopIcon+ '?' + new Date().getTime()" >
-									<view class="name nowrap">{{posterData.shopName}}</view>
+									<view class="name nowrap">{{posterData.shopName && posterData.shopName.length>10? posterData.shopName.substr(0,8)+'...': posterData.shopName}}</view>
 								</view>
 							</view>
 						</view>
 						<view class="right" id="qrBox">
-							<canvas id="qrcode" canvas-id="qrcode" :style="{ width: `${size}px`, height: `${size}px` }"></canvas>
+							<canvas id="qrcode" canvas-id="qrcode" :style="{ width: `${size}px`, height: `${size}px` }"/>
 						</view>
 					</view>
 				</view>
@@ -92,7 +92,7 @@
 </template>
 
 <script>
-	import uQRCode from 'uqrcodejs';
+	import uQRCode from "../../libs/jsm/uqrcode.js";
 	import FileSaver from 'file-saver'
 	import {imgPathToBase64,blobToBase64} from "@/utils/tools.js"
 	export default {
@@ -117,19 +117,23 @@
 				if(this.posterUrl)return
 				this.size=document.getElementById("qrBox").clientWidth
 				const ctx = uni.createCanvasContext('qrcode');
-				const uqrcode = new uQRCode(
-				  {
-				    text: this.posterData.codeUrl,
-				    size: this.size
-				  },
-				  ctx
-				);
-				uqrcode.make();
-				uqrcode.draw();
-				this.$nextTick(()=>{
-					this.canvasImage.generateImage((val)=>{
-						this.posterUrl = val.replace(/[\r\n]/g, ''); // 去除base64位中的空格
-					})
+				uQRCode.make({
+					canvasId: 'qrcode',
+					componentInstance: this,
+					text: this.posterData.codeUrl,
+					size: this.size,
+					margin: 0,
+					backgroundColor: '#ffffff',
+					foregroundColor: '#000000',
+					fileType: 'jpg',
+					errorCorrectLevel: uQRCode.errorCorrectLevel.H,
+					success: () => {
+						this.$nextTick(()=>{
+							this.canvasImage.generateImage((val)=>{
+								this.posterUrl = val.replace(/[\r\n]/g, ''); // 去除base64位中的空格
+							})
+						})
+					}
 				})
 			},
 			// 保存图片至本地
@@ -165,6 +169,7 @@
 						scrollY: 0, // html2canvas默认绘制视图内的页面，需要把scrollY，scrollX设置为0
 						scrollX: 0,
 						useCORS: true, //支持跨域
+						dpi:300,//处理模糊问题
 						crossOrigin:"anonymous",
 						scale: 10, // 设置生成图片的像素比例，默认是1，如果生成的图片模糊的话可以开启该配置项
 					}).then((canvas) => {
@@ -223,6 +228,7 @@
 	}
 	.poster-page {
 		position: relative;
+		width: 588rpx;
 		.download_pic_icon {
 			width: 72rpx;
 			height: 72rpx;
@@ -235,11 +241,10 @@
 
 		.poster-box {
 			width: 588rpx;
-			margin: 0 auto;
 			height: 740rpx;
 			background: #333;
 			border-radius: 20rpx;
-			position: relative;
+			overflow: auto;
 			.poster-pic {
 				width: 100%;
 				height: 516rpx;
@@ -253,7 +258,7 @@
 					width:100% ;
 					height: 100%;
 					object-fit: cover;
-					
+					overflow: auto;
 				}
 			}
 
@@ -313,7 +318,6 @@
 						image {
 							width: 100%;
 							height: 100%;
-
 						}
 					}
 				}
@@ -355,8 +359,8 @@
 							display: flex;
 							align-items: center;
 							.title{
-								max-width: 100rpx;
-								min-width: 100rpx;
+								width: 100rpx;
+								min-width: 50px;
 								font-size: 24rpx;
 								font-family: PingFangSC-Regular, PingFang SC;
 								font-weight: 400;
@@ -384,6 +388,7 @@
 								}
 								.name{
 									max-width: 260rpx;
+									font-size: 24rpx;
 								}
 							}
 						}

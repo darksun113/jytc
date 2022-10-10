@@ -10,7 +10,7 @@
 				</view>
 				<view class="count-box" style="justify-content: flex-end;">
 					<text v-if="item.status==2">交易完成</text>
-					<text v-else-if="item.status==1" style="color:#888888;">交易失败</text>
+					<text v-else style="color:#888888;">交易失败</text>
 				</view>
 			</view>
 			<view class="order-time">
@@ -30,18 +30,16 @@
 					{{item.goods.goodsName}}
 				</view>
 				<view class="price">
-					<view>
+					<view style="font-size: 48rpx;">
 						¥ {{(item.goods.goodsPrice/100).toFixed(2)}}
 					</view>
 					<view style="font-size:28rpx;padding-top:12rpx;display: flex;justify-content: space-between;">
 						<view>
-							<text v-if="item.status == 2">实付款：¥{{(item.goods.goodsPrice/100).toFixed(2)}}</text>
-							<text v-else>实付款：¥{{(item.goods.goodsPrice/100).toFixed(2)}}</text>
+							<text>{{item.status == 1 ?'应付款：':'实付款：' }}¥{{(item.totalFee/100).toFixed(2)}}</text>
 						</view>
-						<view v-if="item.status==7">退款成功</view>
-						<view v-else-if="item.status==5" style="color:#FFD690">等待退款</view>
+						<view v-if="item.status==5" style="color:#FFD690">等待退款</view>
 						<view v-else-if="item.status==6" style="color:#FF5454">退款失败</view>
-						<view v-else style="color:#FFD690">等待退款</view>
+						<view v-else-if="item.status==7">退款成功</view>
 					</view>
 				</view>
 			</view>

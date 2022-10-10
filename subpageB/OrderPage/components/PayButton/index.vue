@@ -22,7 +22,7 @@
 				<view class="txt">请输入验证码</view>
 			</view>
 			<view class="body">
-				<u-code-input class="input" v-model="verifyCode" :hairline="true" mode="line" color="#28D8E5" @finish="finish"></u-code-input>
+				<u-code-input class="input" v-model="verifyCode" :hairline="true" mode="line" color="#28D8E5" @finish="handleCheckVerifyCode"></u-code-input>
 			</view>
 			<u-button class="resend" @click="resend">重新发送</u-button>
 		</u-popup>
@@ -40,7 +40,7 @@
 				<view>第3步：关注公众号即可在公众号开启网页</view>
 			</view>
 			<view class="copy" >
-				<button class="copy-btn" @click="copy">
+				<button class="copy-btn" @click="copyName">
 					点击复制名称
 				</button>
 			</view>
@@ -271,7 +271,7 @@
 				}
 			},
 			//银行支付，验证手机验证码
-			async finish(){
+			async handleCheckVerifyCode(){
 				try{
 					const res = await uni.$http("/payment/confirmPay", {
 						"appType": "H5",
@@ -295,6 +295,18 @@
 			},
 			resend(){
 				toPay()
+			},
+			copyName(){
+				uni.setClipboardData({
+					data:"数版通服务",
+					success:()=> {
+						uni.showToast({
+							title: "复制成功",
+							icon: "none"
+						})
+						this.check_shows=false
+					}
+				})
 			}
 		},
 		watch: {

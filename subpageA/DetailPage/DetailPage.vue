@@ -180,7 +180,7 @@
 					eventCode: 'view_gooods',
 					eventTimestamp: parseInt(time/1000),
 					data: this.goodsId,
-				})
+				},false)
 			}
 		},
 		onLoad(opt) {

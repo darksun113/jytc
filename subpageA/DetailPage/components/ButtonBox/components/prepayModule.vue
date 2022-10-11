@@ -98,7 +98,7 @@
 			async getOrderNo() {
 				try {
 					if(this.goodsData.prepayStatus == 1){
-						const url = `/subpageB/OrderPage/OrderPage?orderNo=${this.goodsData.balanceOrderNo}`
+						const url = `/subpageB/OrderPage/OrderPage?orderNo=${this.goodsData.preSaleOrderNo}`
 						this.$routerTo(url, 'redirect')
 					}else{
 						const goodsId = this.goodsData.goodsId

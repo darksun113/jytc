@@ -9,7 +9,7 @@
 						深圳百纳维科技有限公司维科技有限公司
 					</view>
 				</view>
-				<view class="count-box" v-if="item.goods.startTime > curTime">
+				<view class="count-box" v-if="item.goods.startTime > curTime && item.status == 4">
 					预付成功，等待开售
 				</view>
 				<view class="count-box" v-else>
@@ -53,10 +53,7 @@
 			<view v-if="this.item.status==0||this.item.status==3" class="btn btn-pay" @click.stop="toPay">
 				立即支付
 			</view>
-			<view v-else-if="this.item.status==4 && item.goods.startTime > curTime" class="btn btn-tail">
-				支付尾款
-			</view>
-			<view v-else-if="this.item.status==4 && item.goods.startTime < curTime" class="btn btn-pay" @click.stop="toPay">
+			<view v-else-if="this.item.status==4" class="btn" :class="item.goods.startTime < curTime ? 'btn-pay':'btn-tail'" @click.stop="toPay">
 				支付尾款
 			</view>
 		</view>

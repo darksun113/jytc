@@ -9,6 +9,11 @@
 		onShow: function() {
 			this.watchRouter()
 		},
+		data() {
+			return {
+				imageDB: null
+			}
+		},
 		methods: {
 			resetFilePath() {
 				let time = setInterval(() => {

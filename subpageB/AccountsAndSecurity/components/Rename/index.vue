@@ -8,7 +8,9 @@
 					<text class="nowrap">{{$store.state.userInfo.name}}</text>
 				</view>
 				<view class="input-box">
-					<u--input placeholder="请输入内容" border="none" color="#FFF" maxlength="16" :customStyle="{background:'#666',padding:'12rpx 26rpx' }" v-model="renameValue"></u--input>
+					<u--input placeholder="请输入内容" border="none" color="#FFF" maxlength="16" 
+						placeholderStyle="color:#999"
+						:customStyle="{background:'#666',padding:'12rpx 26rpx' }" v-model="renameValue"></u--input>
 				</view>
 			</view>
 			<view class="operate-box">

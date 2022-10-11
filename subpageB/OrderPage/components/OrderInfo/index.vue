@@ -2,14 +2,16 @@
 	<view class="order-info">
 		<view class="goods">
 			<view class="left">
-				<image class="goods-pic" :src="orderInfo.goods.image" mode="aspectFill"></image>
+				<image class="goods-pic" :src="orderInfo.goods.image" 
+				:style="{background:orderInfo.goods.goodsType == 2 ?'#000':''}" 
+				:mode="orderInfo.goods.goodsType == 2 ? 'aspectFit' : 'aspectFill'"></image>
 			</view>
 			<view class="right">
 				<view class="goods-name nowrap">
 					{{orderInfo.goods.goodsName}}
 				</view>
 				<view class="author">
-					<image class="author-pic" :src="orderInfo.goods.shopIcon" mode=""></image>
+					<image class="author-pic" :src="orderInfo.goods.shopIcon" ></image>
 					<view class="author-name nowrap">{{orderInfo.goods.shopName}}</view>
 				</view>
 			</view>

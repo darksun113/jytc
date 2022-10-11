@@ -24,7 +24,7 @@
 		</view>
 		<view class="item-center">
 			<view class="goods-pic-box">
-				<image class="goods-pic" :src="item.goods.image" mode="aspectFill"></image>
+				<image class="goods-pic" :src="item.goods.image" :mode="item.goods.goodsType == 2 ? 'aspectFit' : 'aspectFill'"></image>
 				<image v-if="item.goods.materialType==0" class="goods-type" src="@/static/images/type_3D.svg"></image>
 				<image v-else-if="item.goods.materialType==1" class="goods-type" src="@/static/images/type_pic.svg"></image>
 				<image v-else-if="item.goods.materialType==2" class="goods-type" src="@/static/images/type_video.svg"></image>

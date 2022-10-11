@@ -3,7 +3,7 @@ const proBaseUrl = "https://api.jialex.cn";
 const baseUrl =process.env.NODE_ENV=="development" ? devBaseUrl : devBaseUrl;	
 import {isMap_PingAn} from "@/libs/jsm/PingAn-app.js";
 
-const request = (url = '', date = {}, loading = true,type = 'POST', header = {}) => {
+const request = (url = '', date = {},loading=true, type = 'POST', header = {}) => {
 	loading && uni.showLoading()
 	const token = getToken()
 	return new Promise((resolve, reject) => {

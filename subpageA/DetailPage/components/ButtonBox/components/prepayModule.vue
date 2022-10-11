@@ -51,7 +51,7 @@
 			<view class="btn" style="opacity: 0.65;" v-if="goodsData.goodsStatus == 3">
 				已售罄
 			</view>
-			<view class="btn" style="opacity: 0.65;" v-else-if="goodsData.goodsStatus == 0 || ([6].includes(goodsData.goodsStatus) && goodsData.prepayStatus == 1)">
+			<view class="btn" style="opacity: 0.65;" v-else-if="[6,0].includes(goodsData.goodsStatus) || (goodsData.goodsStatus==5 && goodsData.prepayStatus !== 1)">
 				{{goodsData.prepayStatus == 1 ?'支付尾款':'立即购买'}}
 			</view>
 			<view class="btn" @click="toOrder" v-else>
@@ -98,7 +98,7 @@
 			async getOrderNo() {
 				try {
 					if(this.goodsData.prepayStatus == 1){
-						const url = `/subpageB/OrderPage/OrderPage?orderNo=${this.goodsData.balanceOrderNo}`
+						const url = `/subpageB/OrderPage/OrderPage?orderNo=${this.goodsData.preSaleOrderNo}`
 						this.$routerTo(url, 'redirect')
 					}else{
 						const goodsId = this.goodsData.goodsId

@@ -2,7 +2,7 @@
 	<view>
 		<!-- private int goodsStatus; // 状态 0 上架 1下架 2 未发布 新增: 3 已售罄 4 已结束'  5 售卖中 6 预售中 -->
 		<!-- 预付支付按钮模块 -->
-		<prepayModule v-if="(goodsData.prepayStaus==1 && goodsData.balanceEndTime > curTime) || (goodsData.goodsType == 3 && ![3,4,5].includes(goodsData.goodsStatus))" 
+		<prepayModule v-if="(goodsData.prepayStatus==1 && goodsData.balanceEndTime > curTime) || (goodsData.goodsType == 3 && ![3,4,5].includes(goodsData.goodsStatus))" 
 			:goodsData="goodsData" @showLoginTip="isShow=true" @showIdentityShow="identityShow=true"></prepayModule>
 		<!-- 常规支付按钮模块 -->
 		<routineModule v-else :goodsData="goodsData" @showLoginTip="isShow=true" @showIdentityShow="identityShow=true"></routineModule>

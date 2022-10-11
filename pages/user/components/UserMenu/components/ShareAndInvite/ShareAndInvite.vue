@@ -96,14 +96,12 @@
 			uni.$on("toOpenSharePoster",()=>{
 				const name=uni.getStorageSync("userInfo").name
 				const userId=uni.getStorageSync("userInfo").buyerId 
-				// http://120.197.126.61:18940 http://192.168.2.11:8080
 				const baseCodeUrl = process.env.NODE_ENV=="development" ? "http://192.168.2.15:8082":"https://h5.jialex.cn"
 				this.posterData={
 					codeUrl : `${baseCodeUrl}/pages/home/home?share=platform&userId=${userId}`,
 					name,
 					loadType:3 // 0 邀请分享  1 分享把玩
 				}
-				console.log(this.posterData.codeUrl,'codeUrl')
 				this.isOpenPoster=true
 			})
 		},

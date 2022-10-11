@@ -31,8 +31,12 @@
 				goodsData: {},
 				buyerList: [],
 				instanceId: "",
-				blindboxId: ""
+				blindboxId: "",
+				timer:null,
 			}
+		},
+		destroyed(){
+			clearTimeout(this.timer)
 		},
 		onShow() {
 			this.init()
@@ -46,7 +50,8 @@
 			uni.$off("reLoadPage")
 		},
 		mounted(){
-			setTimeout(()=> {
+			this.timer = setTimeout(()=> {
+				clearTimeout(this.timer)
 				this.count();
 			}, 3000);
 		},

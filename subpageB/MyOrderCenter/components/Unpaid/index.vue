@@ -7,7 +7,7 @@
 			<OrderCard :item="item" :index_="index" v-for="(item,index) in orderList" :key="index" @cancelOrder="cancelOrder" @countEnd="countEnd"></OrderCard>
 			<IsEnd v-if="isLastData"></IsEnd>
 		</view>
-		<CancelPop :isShow="isShow" :orderNo="cancelOrderNo" @close="isShow=false" @cancelSuccess="cancelSuccess"></CancelPop>
+		<CancelPop :isShow="isShow" :orderNo="cancelOrderNo" :orderStatus="orderStatus" @close="isShow=false" @cancelSuccess="cancelSuccess"></CancelPop>
 	</scroll-view>
 </template>
 
@@ -29,7 +29,8 @@
 				cancelIdx:null,
 				isLastData:false,
 				updatePage:1,
-				orderList:[]
+				orderList:[],
+				orderStatus:0
 			} 
 		},
 		mounted() {
@@ -66,19 +67,23 @@
 							}
 							callback(res.data.orders)
 						}
+					}else{
+						this.$toast(res.errorMsg)
 					}
 				}catch(e){
 					//TODO handle the exception
 				}
 			},
 			cancelOrder(data){
-				const {orderNo,index}=data
+				const {orderNo,index,orderStatus}=data
 				this.cancelOrderNo=orderNo
 				this.cancelIdx=index
+				this.orderStatus = orderStatus
 				this.isShow=true
 			},
 			cancelSuccess(){
 				this.isShow=false
+				this.orderStatus = 0
 				this.$toast("取消成功")
 				this.orderList.splice(this.cancelIdx,1)
 				if(this.orderList.length==0){

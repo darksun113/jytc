@@ -63,13 +63,13 @@
 							<view class="left">
 								阶段二：尾款（待付款）
 							</view>
-							{{(orderInfo.goods.prepayAmount/100).toFixed(2)}}
+							{{((orderInfo.goods.prepayAmount - orderInfo.goods.deposit)/100).toFixed(2)}}
 						</view>	
 						<view v-else style="color:#999999;width: 100%; display:flex;justify-content: space-between;">
 							<view class="left">
 								阶段二：尾款（未开始）
 							</view>
-							<text>{{(orderInfo.goods.prepayAmount/100).toFixed(2)}}</text>
+							<text>{{((orderInfo.goods.prepayAmount - orderInfo.goods.deposit)/100).toFixed(2)}}</text>
 						</view>
 					</view>
 				</view>

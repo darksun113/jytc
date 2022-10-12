@@ -80,7 +80,7 @@
 			</view>
 			<view v-if="orderInfo.status!=0" class="order-detail">
 				<view class="title">订单金额：</view>
-				<view class="detail price">¥ {{(orderInfo.totalFee/100).toFixed(2)}}</view>
+				<view class="detail price">¥ {{(orderInfo.goods.prepayAmount/100).toFixed(2)}}</view>
 			</view>
 			<view class="order-detail">
 				<view class="title">订单编号：</view>

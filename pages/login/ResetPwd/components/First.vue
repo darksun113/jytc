@@ -25,7 +25,7 @@
 
 <script>
 	import {rsaEncrypt} from "@/utils/tools.js"
-	import PuzzleCodeMixin from "../../mixins/PuzzleCodeMixin.js"
+	import PuzzleCodeMixin from "@/libs/mixins/PuzzleCodeMixin.js"
 	export default {
 		mixins:[PuzzleCodeMixin],
 		data(){

@@ -1,6 +1,6 @@
 <template>
 	<view class="search-box">
-		<u-input v-model="searchPhone" height="88" :clearable="false" placeholder="请输入手机号码"
+		<u--input v-model="searchPhone" height="88" :clearable="false" placeholder="请输入手机号码"
 			placeholder-style="color: #666666" :custom-style="searchStyle" :type="'number'" :border="false" />
 		<view class="search-btn" @click="toFindBuyer">发起传承</view>
 		<ResultPop :isShow="isShow" :searchPhone="searchPhone" :buyerInfo="buyerInfo" @close="isShow=false"

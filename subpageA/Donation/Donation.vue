@@ -35,8 +35,15 @@
 
 			},
 			getGoodsInfo() {
-				this.goodsData = this.$store.state.goodsData
-				console.log(this.goodsData,"this.goodsData")
+				// this.goodsData = this.$store.state.goodsData
+				this.goodsData = {
+					image:require("../static/images/noquan.png"),
+					goodsName:"十二生肖",
+					goodsCode:56,
+					totalNumber:1000,
+					shopIcon:require("../static/images/noquan.png"),
+					shopName:"阿里云新能源"
+				}
 				if(JSON.stringify(this.goodsData)=="{}"){
 					uni.reLaunch({
 						url:"/pages/MyObject/MyObject"

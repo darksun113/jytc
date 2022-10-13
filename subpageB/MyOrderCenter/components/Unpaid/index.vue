@@ -92,6 +92,9 @@
 			},
 			countEnd(cancelIdx){
 				this.orderList.splice(cancelIdx,1)
+				if(this.orderList.length==0){
+					this.isNoData=true
+				}
 			},
 			updateList(){
 				const createTime=this.orderList[this.orderList.length-1].createTime

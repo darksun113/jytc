@@ -1,14 +1,14 @@
 <template>
 	<view  class="item_box">
 		<view class="box_left">
-			<image class="left_img" :src="goodsData.image" mode="aspectFill"> </image>
+			<image class="left_img" :src="goodsData.image" mode="aspectFill" />
 		</view>
 		<view class="box_right">
 			<view style="" class="right_text1 nowrap">
 				{{ goodsData.goodsName }}
 			</view>
 			<view class="right_tab">
-				<view class="goodsCode">#{{goodsData.goodsCode}}</view>
+				<view class="goodsCode">#{{goodsData.goodsCode}}/{{goodsData.totalNumber}}</view>
 			</view>
 			<view class="right_bot">
 				<image class="avater" :src="goodsData.shopIcon" mode=""></image>
@@ -50,6 +50,7 @@
 			min-width: 236rpx;
 			min-height: 236rpx;
 			border-radius: 32rpx;
+			position: relative;
 			.left_img {
 				width: 100%;
 				height: 100%;
@@ -79,18 +80,15 @@
 	
 			.right_tab {
 				height: 50rpx;
-				color: #000000;
 				font-size: 24rpx;
 				.goodsCode{
-					text-align: center;
 					height: 50rpx;
 					font-size: 24rpx;
 					padding: 6rpx 18rpx;
-					background: #FAEED7;
 					border-radius:0 4rpx 4rpx 0;
 					font-family: PingFangSC-Semibold, PingFang SC;
 					font-weight: 600;
-					color: #000000;
+					color: #28D8E5;
 					line-height: 40rpx;
 					min-width: 120rpx;
 				}

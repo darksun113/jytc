@@ -30,7 +30,6 @@
 
 <script>
 	import PuzzleCodeMixin from "@/libs/mixins/PuzzleCodeMixin.js"
-	import {mapState} from "vuex"
 	export default {
 		mixins:[PuzzleCodeMixin],
 		data (){
@@ -69,9 +68,8 @@
 			uni.$off("toInherit")
 		},
 		methods:{
-			...mapState,
 			reSend(){
-				if(mapState.second!==60)return;
+				if(this.$store.state.second!==60)return;
 				this.confirm()
 			},
 			confirm(){

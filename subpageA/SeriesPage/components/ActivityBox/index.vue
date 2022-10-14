@@ -17,7 +17,7 @@
 			</view>
 		</view>
 		<!-- 活动进行中 -->
-		<view class="active-tip" v-else-if="seriesInfo_.end == 0">
+		<view class="active-tip" v-else-if="seriesInfo_.reward == 0">
 			<view class="active-tip-info">
 				<view class="active-tip-info-title">
 					预购活动已开启

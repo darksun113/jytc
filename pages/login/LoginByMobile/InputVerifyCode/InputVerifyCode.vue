@@ -22,7 +22,7 @@
 </template>
 
 <script>
-	import mixin from "../../mixins/PuzzleCodeMixin.js"
+	import mixin from "@/libs/mixins/PuzzleCodeMixin.js"
 	export default {
 		data() {
 			return {

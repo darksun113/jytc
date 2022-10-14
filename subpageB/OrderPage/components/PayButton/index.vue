@@ -214,7 +214,6 @@
 				} catch (error) {
 					throw new Error("系统错误", error)
 				}
-				
 			},
 			// 银联
 			async uniPay() {
@@ -259,7 +258,6 @@
 			},
 			// 支付宝支付
 			openPayWeb(body) {
-				console.log(body,'body--------')
 				uni.removeStorageSync("isWxPay")
 				const formElement = document.createElement("div");
 				formElement.style.display = "display:none;";
@@ -281,14 +279,17 @@
 					})
 					this.verifyCode = ""
 					if(res.code==0){
-						alert("成功")
-						this.$routerTo(`/subpageB/MyOrderCenter/MyOrderCenter?type=1`)
+						this.$toast("支付成功","success")
+						setTimeout(()=>{
+							if(this.orderInfo.status == 3){
+								this.$routerTo(`/subpageB/MyOrderCenter/MyOrderCenter?type=0`,"redirect")
+							}else{
+								this.$routerTo(`/subpageB/MyOrderCenter/MyOrderCenter?type=1`,"redirect")
+							}
+						},2000)
 					}else{
-						alert("支付失败")
-
+						this.$toast(res.errorMsg,"error")
 					}
-
-
 				}catch(e){
 					//TODO handle the exception
 				}

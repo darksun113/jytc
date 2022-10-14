@@ -49,7 +49,7 @@
 </template>
 
 <script>
-	import mixin from "../mixins/PuzzleCodeMixin.js"
+	import mixin from "@/libs/mixins/PuzzleCodeMixin.js"
 	import {rsaEncrypt} from "@/utils/tools.js"
 	export default {
 		data() {

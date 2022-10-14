@@ -17,6 +17,7 @@
 	import LoadAudio from "./components/LoadAudio/index.vue"
 	import LoadBlind from "./components/LoadBlind/index.vue"
 	import ShowCode from "./components/ShowCode/index.vue"
+	
 	export default{
 		props:{
 			// materialType 类型 0 模型  1 图片  2 视频  3 音频
@@ -77,5 +78,6 @@
 	.show-box{
 		background: #0E0E0E ;
 		border: 2rpx solid #21201F;
+		position: relative;
 	}
 </style>

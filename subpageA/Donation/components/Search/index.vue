@@ -1,7 +1,8 @@
 <template>
 	<view class="search-box">
-		<u--input v-model="searchPhone" height="88" :clearable="false" placeholder="请输入手机号码"
-			placeholder-style="color: #666666" :custom-style="searchStyle" :type="'number'" :border="false" />
+		<u--input :value="searchPhone" placeholder="请输入手机号码" color="#fff" :custom-style="searchStyle" border="none"  type="number" maxlength="11" placeholder-style="color: #666666"></u--input>
+	<!-- 	<u--input v-model="searchPhone" height="88" :clearable="false" placeholder="请输入手机号码"
+			placeholder-style="color: #666666" :custom-style="searchStyle" :type="'number'" :border="false" /> -->
 		<view class="search-btn" @click="toFindBuyer">发起传承</view>
 		<ResultPop :isShow="isShow" :searchPhone="searchPhone" :buyerInfo="buyerInfo" @close="isShow=false"
 			:instanceId="instanceId" :goodsId="goodsId"></ResultPop>
@@ -24,7 +25,7 @@
 					background: '#393939',
 					color: '#eeeeee',
 					borderRadius: '16rpx',
-					padding: '0 40rpx',
+					padding: '28rpx 40rpx',
 					fontSize: '32rpx'
 				}
 			}
@@ -93,7 +94,7 @@
 		height: 88rpx;
 		margin-top: 40rpx;
 		user-select: none;
-		background: linear-gradient(180deg, #F9ECCD 0%, #CFA06E 100%);
+		background: #28D8E5 ;
 		border-radius: 16rpx;
 		font-size: 32rpx;
 		font-family: PingFangSC-Regular, PingFang SC;

@@ -4,7 +4,7 @@
 			<image class="left_img" :src="goodsData.image" mode="aspectFill" />
 		</view>
 		<view class="box_right">
-			<view style="" class="right_text1 nowrap">
+			<view style="" class="right_text1 nowrap_2">
 				{{ goodsData.goodsName }}
 			</view>
 			<view class="right_tab">

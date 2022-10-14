@@ -1,10 +1,10 @@
 <template>
 	<view class="donation-collection-box">
-		<view class="collection-box">
-			<image class="icon" src="../../../../../static/images/my_objects_icon.svg" mode=""></image>
+		<view class="collection-box" v-if="false">
+			<image class="icon" src="../../../../../../../static/images/my_objects_icon.svg" mode=""></image>
 			<text>100</text>
 		</view>
-		<view class="donation-box">
+		<view class="donation-box" v-else>
 			<view class="donation-btn" @click="toDonationPage">转赠</view>
 			<view class="donation-tip">需等待365天</view>
 		</view>
@@ -30,16 +30,9 @@
 
 <style lang="scss" scoped>
 	.donation-collection-box{
-		position: absolute;
-		height: 100%;
 		min-width: 160rpx;
-		right: 28rpx;
-		top: 0;
+		
 		.collection-box{
-			width: 100%;
-			position: absolute;
-			top: 40rpx;	
-			right: 0;
 			padding-right: 12rpx;
 			display: flex;
 			align-items: center;
@@ -58,11 +51,10 @@
 			}
 		}
 		.donation-box{
-			position: absolute;
-			bottom: 20rpx;
-			right: 0;
 			.donation-btn{
-				padding: 10rpx 26rpx;
+				width: 100rpx;
+				padding: 10rpx 0;
+				margin: 0 auto;
 				background: #28D8E5;
 				border-radius: 30rpx;
 				text-align: center;
@@ -75,9 +67,9 @@
 			.donation-tip{
 				margin-top: 10rpx;
 				font-size: 20rpx;
+				text-align: center;
 				font-family: PingFangSC-Regular, PingFang SC;
 				color: #AAAAAA;
-				// line-height: 28rpx;
 			}
 		}
 	}

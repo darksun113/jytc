@@ -1,13 +1,11 @@
 <template>
 	<view class="show-box" :style="{height:(goodsData.loadType==0 || goodsData.loadType==2) ? '668rpx':'780rpx'}">
-		
 		<show-code :goodsData="loadData" v-if="goodsData.loadType==1" />
 		<load-blind :goodsData="loadData" v-if="loadData.goodsType==2"/>
 		<load-model  :goodsData="loadData" v-else-if="loadData.materialType==0" />
 		<load-image  :goodsData="loadData" v-else-if="loadData.materialType==1" />
 		<load-video  :goodsData="loadData" v-else-if="loadData.materialType==2" />
 		<load-audio :goodsData="loadData" v-else></load-audio>
-		<donation-and-collection :goodsData="loadData"/>
 		<SharePoster :isOpenPoster="isOpenPoster" @close="isOpenPoster=false" :posterData="posterData"></SharePoster>
 	</view>
 </template>
@@ -19,7 +17,7 @@
 	import LoadAudio from "./components/LoadAudio/index.vue"
 	import LoadBlind from "./components/LoadBlind/index.vue"
 	import ShowCode from "./components/ShowCode/index.vue"
-	import DonationAndCollection from "./components/DonationAndCollection"
+	
 	export default{
 		props:{
 			// materialType 类型 0 模型  1 图片  2 视频  3 音频
@@ -66,8 +64,7 @@
 			LoadVideo,
 			LoadAudio,
 			ShowCode,
-			LoadBlind,
-			DonationAndCollection
+			LoadBlind
 		},
 		watch:{
 			goodsData(data){

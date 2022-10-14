@@ -2,10 +2,10 @@
 	<PageTemp>
 		<scroll-view class="pre-order" scroll-y="true" @scrolltolower="updateList" v-if="hasData">
 			<view class="container">
-				<view class="title" v-if="seriesList.length>0">
+				<view class="title" v-if="writelist.length>0">
 					已获得以下系列的预购名额
 				</view>
-				<ModelOfListFlow :seriesList="seriesList" :loadType="1"></ModelOfListFlow>
+				<ModelOfListFlow :renderList="writelist" :loadType="1"></ModelOfListFlow>
 				<IsEnd v-if="isLastItem"></IsEnd>
 			</view>
 		</scroll-view>
@@ -20,7 +20,7 @@
 	export default {
 		data() {
 			return {
-				seriesList:[],
+				writelist:[],
 				isLastItem:false,
 				hasData:true,
 				updatePage:1
@@ -38,7 +38,7 @@
 					if(list==0){
 						this.isLastItem=true
 					}else{
-						this.seriesList=[...this.seriesList,...list]
+						this.writelist=[...this.writelist,...list]
 					}
 				})
 			},
@@ -48,7 +48,7 @@
 					if(list==0){
 						this.hasData=false
 					}else{
-						this.seriesList=list
+						this.writelist=list
 					}
 				})
 			},
@@ -83,7 +83,7 @@
 	height: 100%;
 	box-sizing: border-box;
 	overflow: auto;
-	padding: 40rpx 30rpx;
+	padding: 40rpx 40rpx;
 	padding-top: 0;
 	.container{
 		.title{

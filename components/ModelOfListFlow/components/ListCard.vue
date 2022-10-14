@@ -112,7 +112,6 @@
 	}
 .series-box{
 	color: #FFFFFF;
-	// width: 670rpx;
 	height: 840rpx;
 	background: #333;
 	border-radius: 30rpx;
@@ -133,7 +132,7 @@
 		align-items: center;
 	}
 	.series-pic{
-		width: 670rpx;
+		width: 100%;
 		height: 670rpx;
 		border-radius: 30rpx;
 	}

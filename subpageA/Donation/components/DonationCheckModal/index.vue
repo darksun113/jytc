@@ -1,20 +1,23 @@
 <template>
 	<view class="inherit-box">
-		<u-modal :show = "inhritConfirm" :show-cancel-button="true" width="640" title="操作认证" @confirm="confirm" :cancel-style="cancelStyle"
-			:confirm-style="confirmStyle" :title-style="titleStyle">
+		<u-modal :show = "inhritConfirm" class="inherit-box-modal" :show-cancel-button="true" width="640rpx" 
+			title="操作认证"  confirmColor="#fff"
+			cancelColor="#aaa" :title-style="titleStyle"
+			@confirm="confirm" @cancel="cancel">
 			<view class="slot-content">
 				<rich-text :nodes="content"></rich-text>
 			</view>
 		</u-modal>
-		<u-modal :show ="inhritInput" width="640" title="输入验证码" :show-confirm-button="false" @confirm="confirm" :cancel-style="cancelStyle"
+		<u-modal :show ="inhritInput" class="inherit-box-modal-2" width="640rpx" title="输入验证码" :show-confirm-button="false" @confirm="confirm" :cancel-style="cancelStyle"
 			:confirm-style="confirmStyle" :title-style="titleStyle">
 			<view class="slot-content">
 				<u-icon class="close" name="close" @click="inhritInput=false"></u-icon>
 				<view class="re-send" @click="reSend">
-					重新发送<text v-show="second!==60">({{second}})</text>
+					重新发送<text v-show="$store.state.second!==60">({{$store.state.second}})</text>
 				</view>
-				<u-code-input v-model="verifyCode" :hairline="true" mode="line" color="#28D8E5" @finish="finish"></u-code-input>
-				<!-- <u-message-input mode="bottomLine" :bold="false" :focus="true" active-color="#aaa"  :maxlength="6" @finish="toInhert_"></u-message-input> -->
+				<view class="code-box">
+					<u-code-input :hairline="true" mode="line" color="#28D8E5" @finish="toInhert"></u-code-input>
+				</view>
 			</view>
 		</u-modal>
 		<PuzzleCode style="z-index:9999999"
@@ -27,12 +30,14 @@
 
 <script>
 	import PuzzleCodeMixin from "@/libs/mixins/PuzzleCodeMixin.js"
+	import {mapState} from "vuex"
 	export default {
 		mixins:[PuzzleCodeMixin],
 		data (){
 			return{
-				userPhoneStr: JSON.parse(uni.getStorageSync("userInfo")).phone,
-				phone:uni.getStorageSync("phone"),
+				userPhoneStr: uni.getStorageSync("userInfo").phone,
+				// phone:uni.getStorageSync("phone"),
+				phone:17302694611,
 				inhritConfirm: false,
 				inhritInput:false,
 				transInfo:{},
@@ -64,15 +69,19 @@
 			uni.$off("toInherit")
 		},
 		methods:{
+			...mapState,
 			reSend(){
-				if(this.second!==60)return;
+				if(mapState.second!==60)return;
 				this.confirm()
 			},
 			confirm(){
 				this.starCheckRobot(2,this.phone)
 			},
+			cancel(){
+				this.inhritConfirm=false
+			},
 			// 人机验证通过，发送验证码后执行
-			toDoSomething(){
+			afterGetCode(){
 				this.inhritConfirm=false
 				this.inhritInput=true
 			},
@@ -81,7 +90,7 @@
 					url:"/pages/MyObject/MyObject"
 				})
 			},
-			async toInhert_(code){
+			async toInhert(code){
 				try{
 					const res = await uni.$http("goods/transfer",{
 						goodsId:this.transInfo.goodsId,
@@ -130,27 +139,41 @@
 		.re-send{
 			font-size: 24rpx;
 			font-weight: 400;
-			color: #FEE0A0;
+			color: #28D8E5;
 			line-height: 48rpx;
 			margin-bottom: 40rpx;
 		}
 		.close{
 			position: absolute;
 			right: 40rpx;
-			top: -50rpx;
+			top: -70rpx;
 		}
 	}
-	::v-deep .u-model{
-		background: none;
-		.u-model__footer{
-			.hairline-left{
-				border-left: 2rpx solid rgba(255,255,255,0.1000);
-			}
-			&::after{
-				border: 2rpx solid rgba(255,255,255,0.1000);
-			}
+	::v-deep .inherit-box-modal-2,::v-deep .inherit-box-modal{
+		.u-popup__content{
+			background: #21201F;
+			
 		}
-	}::v-deep .u-placeholder-line{
-		background: #EFCE91;
+		.u-line{
+			border-bottom: none;
+		}
+		.u-transition{
+			z-index: 10075 !important;
+		}
+		.u-modal__title{
+			font-size: 36rpx;
+			font-family: SourceHanSansCN-Medium, SourceHanSansCN;
+			font-weight: 500;
+			color: #FFFFFF;
+		}
 	}
+	::v-deep .inherit-box-modal{
+		.u-modal__button-group__wrapper--hover{
+			background: #444;
+		}
+		.u-line{
+			border-bottom: 2rpx solid rgba(255,255,255,0.2) !important;
+			border-left: 2rpx solid rgba(255,255,255,0.2) !important;
+		}
+	} 
 </style>

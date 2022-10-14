@@ -1,11 +1,8 @@
 <template>
 	<view class="search-box">
-		<u--input :value="searchPhone" placeholder="请输入手机号码" color="#fff" :custom-style="searchStyle" border="none"  type="number" maxlength="11" placeholder-style="color: #666666"></u--input>
-	<!-- 	<u--input v-model="searchPhone" height="88" :clearable="false" placeholder="请输入手机号码"
-			placeholder-style="color: #666666" :custom-style="searchStyle" :type="'number'" :border="false" /> -->
+		<u--input v-model="searchPhone" placeholder="请输入手机号码" color="#fff" :custom-style="searchStyle" border="none"  type="number" maxlength="11" placeholder-style="color: #666666"></u--input>
 		<view class="search-btn" @click="toFindBuyer">发起传承</view>
-		<ResultPop :isShow="isShow" :searchPhone="searchPhone" :buyerInfo="buyerInfo" @close="isShow=false"
-			:instanceId="instanceId" :goodsId="goodsId"></ResultPop>
+		<ResultPop :isShow="isShow" :searchPhone="searchPhone" :buyerInfo="buyerInfo" @close="isShow=false" :instanceId="instanceId" :goodsId="goodsId"></ResultPop>
 	</view>
 </template>
 
@@ -45,15 +42,17 @@
 			// 搜索用户
 			async searchBuyerInfo() {
 				try {
-					const res = await uni.$http("user/getInfoByPhone", {
-						phone: this.searchPhone
-					})
-					if (res.code == 0) {
-						this.buyerInfo=res.data
-						this.isShow = true
-					}else{
-						this.$toast(res.errorMsg)
-					}
+					this.buyerInfo.fullName="Tom"
+					this.isShow = true
+					// const res = await uni.$http("user/getInfoByPhone", {
+					// 	phone: this.searchPhone
+					// })
+					// if (res.code == 0) {
+					// 	this.buyerInfo=res.data
+					// 	this.isShow = true
+					// }else{
+					// 	this.$toast(res.errorMsg)
+					// }
 				} catch (e) {
 					//TODO handle the exception
 				}
@@ -63,7 +62,7 @@
 </script>
 
 <style lang="scss" scoped>
-	::v-deep .u-input__input {
+	::v-deep .u-input--square {
 		position: relative;
 
 		&::before {
@@ -86,7 +85,6 @@
 
 	::v-deep .uni-input-placeholder {
 		padding-left: 60rpx;
-
 	}
 
 	.search-btn {

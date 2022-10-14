@@ -51,15 +51,19 @@
 			return {
 				loadType_: this.loadType,
 				// 商品类型
-				goodsType_:this.item.goodsType
+				goodsType_: this.item.goodsType
 			};
 		},
 		methods: {
 			active() {
-				if(this.item.goodsType==1){
-					const url=`/subpageA/DetailPage/DetailPage?loadType=0&goodsId=${this.item.goodsId}`
+				if (this.item.goodsType == 1) {
+					const url = `/subpageA/DetailPage/DetailPage?loadType=0&goodsId=${this.item.goodsId}`
 					this.$routerTo(url)
-				}else{
+				} else if (this.item.goodsType == 3) {
+					const url = `/subpageA/DetailPage/DetailPage?loadType=0&goodsId=${this.item.goodsId}`
+					this.$routerTo(url)
+				} else {
+					console.log(this.item);
 					const url = `/subpageA/DetailPage/DetailPage?loadType=2&blindboxId=${this.item.goodsId}`
 					this.$routerTo(url)
 				}
@@ -184,6 +188,7 @@
 						display: flex;
 						justify-content: center;
 						align-items: center;
+
 						.text {
 							// line-height: 40rpx;
 							// margin: auto 0;

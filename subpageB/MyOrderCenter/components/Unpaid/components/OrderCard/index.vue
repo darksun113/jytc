@@ -36,7 +36,7 @@
 				</view>
 				<view class="price-box">
 					<view class="price">
-						<text v-if="item.status == 3 || item.status == 4">¥ {{((item.goods.prepayAmount + item.goods.deposit)/100).toFixed(2)}}</text>
+						<text v-if="item.status == 3 || item.status == 4">¥ {{(item.goods.prepayAmount/100).toFixed(2)}}</text>
 						<text v-else>¥ {{(item.totalFee/100).toFixed(2)}}</text>
 					</view>
 					<view class="pre-pay-price" v-if="item.status == 3 || item.status == 4">

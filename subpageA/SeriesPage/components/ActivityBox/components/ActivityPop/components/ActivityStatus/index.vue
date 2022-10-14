@@ -1,8 +1,9 @@
 <template>
 	<view class="activity-status">
 		<view class="title-count" v-if="totalNum_ - powerList.length>0">还差 {{totalNum_ - powerList.length}} 人即可参与抽奖</view>
+		<view class="title-count" v-else-if="totalNum_ == 0">参与成功，等待开奖</view>
 		<view class="title-count" v-else>已完成任务，等待开奖吧</view>
-		<PowerNums :powerList="powerList" :totalNum="totalNum_"></PowerNums>
+		<PowerNums v-if="totalNum_ !== 0" :powerList="powerList" :totalNum="totalNum_"></PowerNums>
 		<view class="share-poster-btn" @click="toOpenSharePoster" v-if="totalNum_ - powerList.length>0">
 			分享我的专属海报
 		</view>

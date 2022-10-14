@@ -6,11 +6,11 @@
 			<StickyNav ref="nav" @changeShowType="changeShowType" @switchOverNav="switchOverNav" @resetPage="reset" />
 			<view class="container">
 				<!-- 数字藏品 -->
-				<DigitalCollection v-if="navType==0" :renderList="renderList" :hasData="hasData" :isLastItem="isLastItem" :showType="showType"/>
+				<DigitalCollection v-show="navType==0" :renderList="renderList" :hasData="hasData" :isLastItem="isLastItem" :showType="showType"/>
 				<!-- 盲盒 -->
-				<BlindBoxModule v-else-if="navType==1" :renderList="renderList" :hasData="hasData" :isLastItem="isLastItem" />
+				<BlindBoxModule v-show="navType==1" :renderList="renderList" :hasData="hasData" :isLastItem="isLastItem" />
 				<!-- 发售日历 -->
-				<CalendarModule v-else :renderList="renderList" :hasData="hasData" :isLastItem="isLastItem" />
+				<CalendarModule v-show="navType==2" :renderList="renderList" :hasData="hasData" :isLastItem="isLastItem" />
 			</view>
 		</scroll-view>
 		<Notice :isShow="isNoticeShow" :noticeList="noticeList" @close="closeNotice"></Notice>

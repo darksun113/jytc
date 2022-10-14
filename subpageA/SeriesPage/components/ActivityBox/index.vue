@@ -32,7 +32,7 @@
 				</view>
 			</view>
 		</view>
-		<!-- 活动已结束 -->
+		<!-- 活动已开奖 -->
 		<view class="active-tip" v-else>
 			<view class="active-tip-info">
 				<view class="active-tip-info-title">

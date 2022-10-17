@@ -80,6 +80,13 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/information/information",
+			"style": {
+				"navigationBarTitleText": "消息",
+				"enablePullDownRefresh": false
+			}
+
 		}
 	],
 	"tabBar": {

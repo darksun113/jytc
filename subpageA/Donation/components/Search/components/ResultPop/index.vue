@@ -1,5 +1,5 @@
 <template>
-	<u-popup v-model="show" mode="bottom" @close="close" :mask-close-able="false" :closeable="true">
+	<u-popup :show="show" mode="bottom" @close="close" :mask-close-able="false" :closeable="true">
 		<view class="res-box">
 			<view class="user-name">
 				传承对象：{{buyerInfo.fullName}}
@@ -48,7 +48,7 @@
 		font-family: PingFangSC-Regular, PingFang SC;
 		.user-name{
 			font-size: 32rpx;
-			color: #F9E0A8;
+			color: #28D8E5 ;
 			line-height: 44rpx;
 		}
 		.text-tip{
@@ -60,8 +60,8 @@
 		.btn{
 			width: 100%;
 			height: 84rpx;
-			background: linear-gradient(180deg, #F9ECCD 0%, #CFA06E 100%);
-			border-radius: 44rpx;
+			background: #28D8E5;
+			border-radius: 20rpx;
 			font-size: 32rpx;
 			font-family: PingFangSC-Medium, PingFang SC;
 			font-weight: 500;

@@ -22,6 +22,7 @@
 		data() {
 			return {
 				instanceId: "",
+				goodsId:"",
 				goodsData: {},
 			};
 		},
@@ -31,9 +32,6 @@
 			this.getGoodsInfo()
 		},
 		methods: {
-			toDonation() {
-
-			},
 			getGoodsInfo() {
 				// this.goodsData = this.$store.state.goodsData
 				this.goodsData = {

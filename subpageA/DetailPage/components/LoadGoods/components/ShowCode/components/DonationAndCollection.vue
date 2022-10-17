@@ -1,12 +1,12 @@
 <template>
 	<view class="donation-collection-box">
-		<view class="collection-box" v-if="false">
-			<image class="icon" src="../../../../../../../static/images/my_objects_icon.svg" mode=""></image>
-			<text>100</text>
-		</view>
-		<view class="donation-box" v-else>
+		<view class="donation-box" v-if="goodsData.loadType==1">
 			<view class="donation-btn" @click="toDonationPage">转赠</view>
 			<view class="donation-tip">需等待365天</view>
+		</view>
+		<view class="collection-box" v-else>
+			<image class="icon" src="../../../../../../../static/images/my_objects_icon.svg" mode=""></image>
+			<text>100</text>
 		</view>
 	</view>
 </template>
@@ -21,7 +21,8 @@
 		},
 		methods: {
 			toDonationPage() {
-				const url = "/subpageA/Donation/Donation";
+				const {goodsId , goodsInstanceId} = this.goodsData
+				const url = `/subpageA/Donation/Donation?goodsId=${goodsId}&instanceId=${goodsInstanceId}`;
 				this.$routerTo(url)
 			}
 		},

@@ -5,7 +5,7 @@
 			<view class="donation-tip">需等待365天</view>
 		</view>
 		<view class="collection-box" v-else>
-			<image class="icon" src="../../../../../../../static/images/my_objects_icon.svg" mode=""></image>
+			<image class="icon" src="@/static/images/collection_icon.svg" mode=""></image>
 			<text>100</text>
 		</view>
 	</view>

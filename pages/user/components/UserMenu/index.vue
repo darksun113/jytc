@@ -1,29 +1,35 @@
 <template>
 	<view class="user-menu">
 		<view class="title">常用功能</view>
-		<MenuItem @click.native="toSubmenu(0)" src="/static/images/my_objects_icon.svg">我的藏品</MenuItem>
+		<MenuItem @click.native="toSubmenu(0)" src="/static/images/object_icon.svg">我的藏品</MenuItem>
 		<MenuItem @click.native="toSubmenu(1)" src="/static/images/preorder_icon.svg">预购信息</MenuItem>
+		<MenuItem @click.native="toSubmenu(7)" src="/static/images/collection_icon.svg">我的收藏</MenuItem>
+		<MenuItem @click.native="toSubmenu(8)" src="/static/images/service_icon.svg">我的客服</MenuItem>
 		<MenuItem @click.native="toSubmenu(5)" src="/static/images/my_cards.svg">我的银行卡</MenuItem>
 		<MenuItem @click.native="toSubmenu(2)" src="/static/images/account_security_icon.svg">帐号与安全</MenuItem>
 		<MenuItem @click.native="toSubmenu(3)" src="/static/images/privacy_icon.svg">隐私设置</MenuItem>
 		<MenuItem @click.native="toSubmenu(4)" src="/static/images/about_icon.svg">关于平台</MenuItem>
 		<MenuItem @click.native="toSubmenu(6)" src="/static/images/about_share.svg">分享与邀请</MenuItem>
+		<customer-server :isShow="isShowServer" @close="isShowServer = false" />
 	</view>
 </template>
 
 <script>
 	import MenuItem from "./components/MenuItem.vue"
+	import CustomerServer from "./components/CustomerServer.vue"
 	export default {
 		props:{
 			isLogin:[Boolean]
 		},
 		data() {
 			return {
-				checkLogin:this.isLogin
+				checkLogin:this.isLogin,
+				isShowServer:false
 			}
 		},
 		components:{
 			MenuItem,
+			CustomerServer
 		},
 		methods:{
 			toSubmenu(idx){
@@ -48,6 +54,11 @@
 					case 5 : fn_to("MyCards")
 					break;
 					case 6 : uni.$emit("showPopUp")
+					break;
+					case 7 : fn_to("MyCollection");
+					break;
+					case 8 :this.isShowServer = true;
+					break
 				}
 			}
 		},

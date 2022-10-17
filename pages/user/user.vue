@@ -27,7 +27,6 @@
 				isLogin: false,
 				isShow: false,
 				popUpshow: false,
-				// popQrshow:false,
 			};
 		},
 		onShow() {

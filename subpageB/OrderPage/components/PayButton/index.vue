@@ -29,7 +29,7 @@
 		<u-popup class="pop2" :show="check_shows" :round="10" mode="center">
 			<view class="check_head">
 				<view class="check_headtxt">支付提示</view>
-				<image class="x" @click="closeCpop" src="../../static/images/x.svg"></image>
+				<image class="x" @click="closeCpop" src="@/static/images/x.svg"></image>
 			</view>
 			<view class="check_body">
 				<view>因微信支付限制，需关注平台公众号后在微信</view>

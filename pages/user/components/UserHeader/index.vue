@@ -9,9 +9,15 @@
 	<view class="user-header" v-else>
 		<image class="avatar" :src="$store.state.userInfo.avatar"></image>
 		<view class="user-info">
-			<view class="name-box">
-				<view class="name nowrap">{{$store.state.userInfo.name}}</view>
-				<view class="real-name" v-if="$store.state.userInfo.certificationStatus!==1" @click.self="toBindCard">未认证</view>
+			<view class="top-info">
+				<view class="name-box">
+					<view class="name nowrap">{{$store.state.userInfo.name}}</view>
+					<view class="real-name" v-if="$store.state.userInfo.certificationStatus!==1" @click.self="toBindCard">未认证</view>
+				</view>
+				<view class="function-zone">
+					<image @click="toSignInPage" src="../../../../static/images/my_cards.svg"></image>
+					<MassageBadge />
+				</view>
 			</view>
 			<view class="user-info-item">
 				<view class="id-style">
@@ -20,7 +26,7 @@
 				</view>
 				<image class="copy-icon" src="@/static/images/copy_icon.svg" @click="copy($store.state.userInfo.buyerId)"></image>
 			</view>
-			<view class="user-info-item">
+			<view class="user-info-item" style="margin-top: 16rpx;">
 				<view class="id-style">
 					<view style="min-width: 168rpx;">区块链地址：</view> 
 					<view class="nowrap_s" style="max-width: 280rpx;">{{$store.state.userInfo.blockchainAddress}}</view>
@@ -29,13 +35,16 @@
 			</view>
 			<view class="fans-focus">
 				<view class="item" @click="toFansPage(0)">
-					<text style="margin-right: 10rpx;color: #CCC;">粉丝</text>{{$store.state.userInfo.fansNumber}}
+					<text style="margin-right: 10rpx;color: #aaa;">粉丝</text>{{$store.state.userInfo.fansNumber}}
 				</view>
 				<view class="item" @click="toFansPage(1)">
-					<text style="margin-right: 10rpx;color: #CCC;">关注</text>{{$store.state.userInfo.followNumber}}
+					<text style="margin-right: 10rpx;color: #aaa;">关注</text>{{$store.state.userInfo.followNumber}}
 				</view>
 				<view class="item" @click="toMyObjects">
-					<text style="margin-right: 10rpx;color: #CCC;">藏品</text>{{$store.state.userInfo.collectionNumber}}
+					<text style="margin-right: 10rpx;color: #aaa;">藏品</text>{{$store.state.userInfo.collectionNumber}}
+				</view>
+				<view class="item">
+					<text style="margin-right: 10rpx;color: #aaa;">空投</text>{{$store.state.userInfo.collectionNumber}}
 				</view>
 			</view>
 		</view>
@@ -63,6 +72,10 @@
 					const url = "/pages/login/LoginByMobile/GetVerifyCode/GetVerifyCode?name=user"
 					this.$routerTo(url)
 				}
+			},
+			toSignInPage(){
+				const url = `/pages/signInPage/signInPage`;
+				this.$routerTo(url)
 			},
 			toFansPage(type){
 				const url=`/subpageC/UserFansAndFocus/UserFansAndFocus?type=${type}&viewBuyerId=${this.$store.state.userInfo.buyerId}`
@@ -100,7 +113,6 @@
 <style lang="scss" scoped>
 	.user-header{
 		display: flex;
-		margin-top: 40rpx;
 		.avatar{
 			width: 130rpx;
 			min-width: 130rpx;
@@ -111,37 +123,53 @@
 		}
 		.user-info{
 			width: calc(100% - 130rpx);
-			.name-box{
+			.top-info{
 				font-family: PingFangSC-Medium, PingFang SC;
 				color: #FFFFFF;
 				display: flex;
 				align-items: center;
+				justify-content: space-between;
 				font-weight: 500;
-				.name{
-					font-size: 32rpx;
-					line-height: 44rpx;
-					margin-right: 20rpx;
-					max-width: 400rpx;
+				.name-box{
+					font-family: PingFangSC-Medium, PingFang SC;
+					color: #FFFFFF;
+					display: flex;
+					align-items: center;
+					.name{
+						font-size: 32rpx;
+						line-height: 44rpx;
+						margin-right: 20rpx;
+						max-width: 400rpx;
+					}
+					.real-name{
+						min-width: 88rpx;
+						padding: 4rpx 14rpx;
+						background: #666;
+						border-radius: 4rpx;
+						text-align: center;
+						font-size: 20rpx;
+					}
 				}
-				.real-name{
-					min-width: 88rpx;
-					padding: 4rpx 14rpx;
-					background: #666;
-					border-radius: 4rpx;
-					text-align: center;
-					font-size: 20rpx;
+				.function-zone{
+					display: flex;
+					image{
+						width: 48rpx;
+						height: 48rpx;
+						margin-right: 40rpx;
+					}
 				}
 			}
 			.user-info-item{
 				display: flex;
 				align-items: center;
-				margin-top: 6rpx;
+				margin-top: 26rpx;
+				
 				.id-style{
 					display: flex;
-					font-size: 28rpx;
+					font-size: 10rpx;
 					font-family: PingFangSC-Regular, PingFang SC;
 					font-weight: 400;
-					color: #FFFFFF;
+					color: #999;
 					line-height: 40rpx;
 				}
 				.copy-icon{
@@ -156,6 +184,12 @@
 				font-family: PingFangSC-Regular, PingFang SC;
 				margin-top: 20rpx;
 				font-size: 28rpx;
+				.item{
+					color: #aaa;
+					text{
+						// font-size: 28rpx;
+					}
+				}
 			}
 		}
 	}

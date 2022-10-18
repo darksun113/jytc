@@ -12,7 +12,7 @@
 					<view class="bar" :class="{flish:j == 0}" :style="{borderRadius :j == 0 ? '40rpx':''}"></view>
 					<view class="gift-box">
 						<image class="get-gift" src="@/static/sign/text_await_get_icon.svg" v-if="j !== 0" ></image>
-						<image class="get-gift" src="@/static/sign/text_get_icon.svg" v-else></image>
+						<image class="get-gift" @tap="openAward" src="@/static/sign/text_get_icon.svg" v-else></image>
 						<view class="gift">
 							<image src="@/static/sign/gift_await_get_icon.svg" v-if="j !== 0" ></image>
 							<image src="@/static/sign/gift_get_icon.svg" v-else></image>
@@ -23,22 +23,39 @@
 				</view>
 			</swiper-item>
 		</swiper>
+		<AwardPop :isShow="isOpenAward" @openBlindSuccess="openSuccess" :blindData="awardRes" />
 	</view>
 </template>
 
 <script>
+	import AwardPop from "../../../subpageB/MyObject/components/BlindToGoods/index.vue"
 	export default {
 		data() {
 			return {
 				curDot: 0,
 				circular:false,
-				totalNum:3
+				totalNum:3,
+				isOpenAward:false,
+				awardRes:{}
 			}
+		},
+		components:{
+			AwardPop
 		},
 		methods:{
 			swiperChange(e){
 				// this.curDot = e.detail.current;
-			}			
+			},
+			openSuccess(){
+				this.isOpenAward = false
+			},
+			openAward(){
+				this.awardRes = {
+					goodsName:"炫彩明珠动四方为的哈",
+					image:require("../../../static/新增icon/占位图.png")
+				}
+				this.isOpenAward = true
+			}
 		}
 	}
 </script>

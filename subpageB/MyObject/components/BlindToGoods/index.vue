@@ -15,6 +15,7 @@
 						<view class="blind_tip">{{blindData.goodsName}}</view>
 					</view>
 				</transition>
+				<view style="height: 136rpx;" v-show="!isOpenResultText"></view>
 			</view>
 		</view>
 	</u-popup>

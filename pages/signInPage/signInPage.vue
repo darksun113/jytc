@@ -1,11 +1,15 @@
 <template>
 	<PageTemp class="sign-page">
-		<Calendar></Calendar>
+		<Calendar />
+		<SignProgressBar />
+		<AwardList />
 	</PageTemp>
 </template>
 
 <script>
 	import Calendar from "./components/Calendar"
+	import SignProgressBar from "./components/SignProgressBar"
+	import AwardList from "./components/AwardList"
 	export default {
 		data() {
 			return {
@@ -14,6 +18,8 @@
 		},
 		components:{
 			Calendar,
+			SignProgressBar,
+			AwardList
 		},
 		methods:{
 			
@@ -24,6 +30,7 @@
 <style lang="scss">
 .sign-page{
 	padding: 30rpx;
+	padding-bottom: 44rpx;
 	// color: #000;
 }
 </style>

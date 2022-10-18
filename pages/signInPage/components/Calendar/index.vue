@@ -1,11 +1,10 @@
 <template>
 	<view class="w100 min100 sign pb-40">
 		<view class="bg-white mlr-20 radius-10 ptb-20">
-			<model-calendar :sendYear="toYear" :sendMonth="toMonth" :dataSource="signData" :totalNum="sumCount" @dateChange="getRecord">
-			</model-calendar>
-			<view class="plr-40">
-				<u-button type="warning" @click="clickSign" :disabled="status" class="w100">{{!status?'立即签到':'今日已签到'}}</u-button>
-			</view>
+			<model-calendar 
+				:sendYear="toYear" 
+				:sendMonth="toMonth" 
+				:dataSource="signData" :totalNum="sumCount" @signUp="signUp" />
 		</view>
 	</view>
 </template>
@@ -19,9 +18,8 @@
 				toYear: parseInt(new Date().getFullYear()), //本日
 				toMonth: parseInt(new Date().getMonth() + 1), //本月
 				sumCount: 0,
-				signData: [], //["2022-10-13", "2022-10-20", "2022-10-11"]
-				status: false,
-				set: {},
+				signData: ["2022-10-12", "2022-10-10", "2022-10-11"], 
+				// signData: [], 
 				month: '',
 			};
 		},
@@ -34,32 +32,16 @@
 		},
 		methods: {
 			init() {
-				this.$http('/addons/ddshop/signin/signin_record', {
-					month: this.month
-				}).then(data => {
-					this.signData = data.signin_record
-					this.sumCount = data.succession_signin
-					this.status = data.is_signin_day
-				})
+				
 			},
-			setSign() {
-				this.$http('/addons/ddshop/signin/signin_set').then(data => {
-					this.set = data.signin_set
-				})
-			},
-			getRecord(data) {
-				this.month = data
+			signUp() {
+				this.signData.push("2022-10-18")
+				uni.showToast({
+					title: "签到成功",
+					icon: 'success',
+					duration: 2000
+				});
 				this.init()
-			},
-			clickSign() {
-				this.$http("/addons/ddshop/signin/signin").then(res => { //可以通过后台接口添加当前用户当日打卡记录，
-					uni.showToast({
-						title: "签到成功",
-						icon: 'success',
-						duration: 2000
-					});
-					this.init()
-				})
 			},
 
 			//获取当前用户该任务的签到数组

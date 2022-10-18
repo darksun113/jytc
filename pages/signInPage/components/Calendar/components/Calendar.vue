@@ -13,7 +13,7 @@
 				<view v-for="(item,index) in weeks_ch" :key="index">{{item}}</view>
 			</view>
 			<view class="cell-box">
-				<view v-for="(item,j) in days" :key="j" class='dateCell' :style="{top:item.isSign?'20rpx':''}">
+				<view v-for="(item,j) in days" :key="j" class='dateCell' >
 					<view v-if="item.date==undefined||item.date == null" class='cell'>
 						<text :decode="true">&nbsp;&nbsp;</text>
 					</view>
@@ -23,7 +23,7 @@
 							<image style="width:100%;height:100%;" src="@/static/images/check_icon.svg"></image>
 						</view>
 						<!-- 今日未签到-->
-						<view @click="clickSignUp(item.date)" class="cell bg-today" v-else-if="item.date==today&&cur_month==toMonth&&cur_year==toYear">
+						<view class="cell bg-today" v-else-if="item.date==today&&cur_month==toMonth&&cur_year==toYear">
 							<text>{{item.date}}</text>
 						</view>
 						<!-- 当前日期之后 -->
@@ -93,8 +93,14 @@
 			getFirstDayOfWeek(year, month) {
 				return new Date(Date.UTC(year, month - 1, 1)).getDay();
 			},
+			// 获取当月最后1天星期几
 			getLastDayOfWeek(year, month) {
-				return new Date(Date.UTC(year, month - 1, 29)).getDay();
+				const getNowMonthLast = () => {
+				 	const endDate = new Date(year, month + 2, 0)
+				 	return endDate.getDate()
+				}
+				const lastDate = getNowMonthLast();
+				return new Date(Date.UTC(year, month - 1, lastDate)).getDay();
 			},
 			// 计算当月1号前空了几个格子，把它填充在days数组的前面
 			calculateEmptyGrids(year, month) {
@@ -103,20 +109,7 @@
 				const firstDayOfWeek = this.getFirstDayOfWeek(year, month);
 				if (firstDayOfWeek > 0) {
 					for (let i = 0; i < firstDayOfWeek; i++) {
-						var obj = {
-							date: null,
-							isSign: false
-						}
-						this.days.push(obj);
-					}
-				}
-				// const lastDayOfWeek = this.getLastDayOfWeek(year, month);
-			},
-			calculateLastDayEmptyGrids(){
-				const firstDayOfWeek = this.getLastDayOfWeek(year, month);
-				if (firstDayOfWeek > 0) {
-					for (let i = 0; i < firstDayOfWeek; i++) {
-						var obj = {
+						const obj = {
 							date: null,
 							isSign: false
 						}
@@ -124,23 +117,36 @@
 					}
 				}
 			},
+			// 计算当月最后一天后空了几个格子，把它填充在days数组的前面
+			calculateLastDayEmptyGrids(year, month){
+				const lastDayOfWeek = this.getLastDayOfWeek(year, month);
+				if (lastDayOfWeek > 0) {
+					for (let i = 6; i > lastDayOfWeek; i--) {
+						const obj = {
+							date: null,
+							isSign: false
+						}
+						this.days.push(obj);
+					}
+				}
+			},
+			// 签到
 			toSignUp(){
 				this.status = !this.status
+				this.$emit("signUp")
 			},
 			// 绘制当月天数占的格子，并把它放到days数组中
 			calculateDays(year, month) {
 				const thisMonthDays = this.getThisMonthDays(year, month);
-				// this.columnsLen=Math.ceil(thisMonthDays/7);
-				// console.log(this.columnsLen);
 				for (let i = 1; i <= thisMonthDays; i++) {
-					var obj = {
+					let obj = {
 						date: i,
 						isSign: false
 					}
 					this.days.push(obj);
 				}
 				//console.log(this.days);
-
+				this.calculateLastDayEmptyGrids(year, month)
 			},
 
 			onResChange(newD, oldD) {
@@ -149,48 +155,22 @@
 			},
 			//匹配判断当月与当月哪些日子签到打卡
 			onJudgeSign() {
-				var signs = this.SignUp;
-				var daysArr = this.days;
-				for (var i = 0; i < signs.length; i++) {
-					var current = new Date(signs[i].replace(/-/g, "/"));
-					var year = current.getFullYear();
-					var month = current.getMonth() + 1;
-					var day = current.getDate();
+				let signs = this.SignUp;
+				let daysArr = this.days;
+				for (let i = 0; i < signs.length; i++) {
+					let current = new Date(signs[i].replace(/-/g, "/"));
+					let year = current.getFullYear();
+					let month = current.getMonth() + 1;
+					let day = current.getDate();
 					day = parseInt(day);
-					for (var j = 0; j < daysArr.length; j++) {
+					for (let j = 0; j < daysArr.length; j++) {
 						//年月日相同则打卡成功   						
-						if (year == this.cur_year && month == this.cur_month && daysArr[j].date ==
-							day) { //&& signs[i].isSign == "今日已打卡"
-							// console.log(daysArr[j].date, day);
+						if (year == this.cur_year && month == this.cur_month && daysArr[j].date ==day) { //&& signs[i].isSign == "今日已打卡"
 							daysArr[j].isSign = true;
 						}
 					}
 				}
 				this.days = daysArr;
-			},
-
-			clickSignUp(date, type) { //type=0补签，type=1当日签到		
-
-				// var str = "签到";
-				// if (type == 0) {//如果不需要补签功能直接在这阻止不执行后面的代码就行。
-				// 	str = "补签";
-				// }
-				// uni.showToast({
-				// 	title: str + "成功" + date + "号",
-				// 	icon: 'success',
-				// 	duration: 2000
-				// });
-				// this.SignUp.push(this.cur_year + "-" + this.cur_month + "-" + date); //自动加假数据，写了接口就不用了
-
-				// console.log(this.SignUp);
-				// this.$forceUpdate();
-
-				// this.$emit('clickChange', this.cur_year + "-" + this.cur_month + "-" + date); //传给调用模板页面
-				// this.$emit('clickChange'); //传给调用模板页面
-
-				//refresh
-				this.onJudgeSign();
-
 			}
 		}
 	}
@@ -227,12 +207,9 @@
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
-			padding: 40rpx;
-			padding-left: 78rpx;
-			padding-bottom: 20rpx;
+			padding: 40rpx 60rpx;
 			font-size: 32rpx;
 			color: #999;
-			padding-right: 85rpx;
 			border-radius: 20rpx;
 			background-color: #333;
 		}
@@ -242,12 +219,16 @@
 			border-radius: 20rpx;
 			background: #333;
 			.cell-box{
-				padding: 0 50rpx;
+				padding: 20rpx 40rpx;
+				padding-top: 0;
 				text-align: justify;
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
 				.dateCell {
 					width: 80rpx;
 					height:80rpx;
-					// padding: 1vw;
+					padding: 1vw;
 					display: inline-block;
 					text-align: center;
 					font-size: 32rpx;

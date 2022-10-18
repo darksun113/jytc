@@ -3,9 +3,9 @@
 		<view class="main">
 			<OrderStatus :orderInfo="orderInfo"  v-if="orderInfo.goods"></OrderStatus>
 			<OrderInfo :orderInfo="orderInfo" v-if="orderInfo.goods"></OrderInfo>
-			<PayType v-if="orderInfo.status==0 || orderInfo.status==3 ||orderInfo.status==4 && !isPingAn" @setPayType="setPayType" @setCard="setCard"></PayType>
+			<PayType v-if="[0,3,4].includes(orderInfo.status) && !isPingAn" @setPayType="setPayType" @setCard="setCard"></PayType>
 		</view>
-		<PayButton v-if="orderInfo.status==0 || orderInfo.status==3 ||orderInfo.status==4" 
+		<PayButton v-if="[0,3,4].includes(orderInfo.status)" 
 			:payType_="payType" :orderNo="orderInfo.orderNo" @updateOrderInfo="getOrderInfo" 
 			:price="orderInfo.totalFee" :orderInfo="orderInfo" :cardId_="cardId"></PayButton>
 		<Contact v-if="orderInfo.status==7" :orderNo="orderNo"></Contact>
@@ -29,7 +29,7 @@
 		},
 		onLoad(opt) {
 			this.orderNo=opt.orderNo?opt.orderNo : uni.getStorageSync("orderNo")
-			this.isPingAn=this.$isMap_PingAn
+			this.isPingAn = this.$isMap_PingAn
 			this.$checkAI(4)
 		},
 		onShow() {

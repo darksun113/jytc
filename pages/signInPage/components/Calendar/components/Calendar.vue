@@ -11,10 +11,10 @@
 					<view v-if="item.date==undefined||item.date == null" class='cell'>
 						<text :decode="true">&nbsp;&nbsp;</text>
 					</view>
-					<view v-else>
+					<view v-else style="width:100%;height:100%;">
 						<!-- 已签到日期 -->
-						<view v-if="item.isSign == true" class='cell yellow' style="background: #ffde21;">
-							<text>{{item.date}}</text>
+						<view v-if="item.isSign == true" class='cell'>
+							<image style="width:100%;height:100%;display: inline" src="@/static/images/check_icon.svg" mode=""></image>
 						</view>
 						<!-- 漏签 -->
 						<!-- <view @click="clickSignUp(item.date,0)" class="cell redColor bgGray" 
@@ -207,6 +207,7 @@
 				text-align: justify;
 				.dateCell {
 					width: 80rpx;
+					height:80rpx;
 					padding: 1vw;
 					display: inline-block;
 					text-align: center;
@@ -215,7 +216,8 @@
 					.cell {
 						display: flex;
 						border-radius: 50%;
-						height: 9vw;
+						height: 100%;
+						width: 100%;
 						justify-content: center;
 						align-items: center;
 					}

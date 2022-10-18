@@ -1,9 +1,5 @@
 <template>
 	<view class="w100 min100 sign pb-40">
-		<view style="">
-			<view class="gray-2 text-center">已连续签到</view>
-			<view class="text-center mt-30 "><text style="font-size: 50rpx;margin-right: 10rpx;" class="yellow bold">{{sumCount}}</text>天</view>
-		</view>
 		<view class="bg-white mlr-20 radius-10 ptb-20">
 			<model-calendar :sendYear="toYear" :sendMonth="toMonth" :dataSource="signData" :totalNum="sumCount" @dateChange="getRecord">
 			</model-calendar>
@@ -23,7 +19,7 @@
 				toYear: parseInt(new Date().getFullYear()), //本日
 				toMonth: parseInt(new Date().getMonth() + 1), //本月
 				sumCount: 0,
-				signData: ["2021-01-13", "2021-01-12", "2021-01-11"], //["2021-01-13", "2021-01-12", "2021-01-11"]
+				signData: ["2022-10-13", "2022-10-12", "2022-10-11"], //["2021-01-13", "2021-01-12", "2021-01-11"]
 				status: false,
 				set: {},
 				month: '',

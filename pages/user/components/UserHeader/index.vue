@@ -15,7 +15,7 @@
 					<view class="real-name" v-if="$store.state.userInfo.certificationStatus!==1" @click.self="toBindCard">未认证</view>
 				</view>
 				<view class="function-zone">
-					<image @click="toSignInPage" src="../../../../static/images/my_cards.svg"></image>
+					<image @click="toSignInPage" src="@/static/images/sign_icon.svg"></image>
 					<MassageBadge />
 				</view>
 			</view>

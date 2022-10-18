@@ -16,8 +16,10 @@
 		},
 		methods: {
 			changeNav(idx) {
-				this.cur=idx
-				this.$emit("changeNav",idx)
+				if(this.cur!==idx){
+					this.cur=idx
+					this.$emit("changeNav",idx)
+				}
 			}
 		},
 	}
@@ -33,6 +35,10 @@
 		line-height: 48rpx;
 		font-family: SourceHanSansCN-Medium, SourceHanSansCN;
 		color: #999999;
+		position: sticky;
+		top: 0;
+		z-index: 1;
+		background: #222;
 		.active{
 			font-weight: 500;
 			color: #FFFFFF;

@@ -2,9 +2,6 @@
 	<PageTemp>
 		<scroll-view class="pre-order" scroll-y="true" @scrolltolower="updateList" v-if="hasData">
 			<view class="container">
-				<view class="title" v-if="writelist.length>0">
-					已获得以下系列的预购名额
-				</view>
 				<ModelOfListFlow :renderList="writelist" :loadType="1"></ModelOfListFlow>
 				<IsEnd v-if="isLastItem"></IsEnd>
 			</view>
@@ -86,6 +83,7 @@
 	padding: 40rpx 40rpx;
 	padding-top: 0;
 	.container{
+		padding-top: 40rpx;
 		.title{
 			font-size: 32rpx;
 			font-family: PingFangSC-Regular, PingFang SC;

@@ -19,7 +19,7 @@
 				toYear: parseInt(new Date().getFullYear()), //本日
 				toMonth: parseInt(new Date().getMonth() + 1), //本月
 				sumCount: 0,
-				signData: ["2022-10-13", "2022-10-12", "2022-10-11"], //["2021-01-13", "2021-01-12", "2021-01-11"]
+				signData: [], //["2022-10-13", "2022-10-20", "2022-10-11"]
 				status: false,
 				set: {},
 				month: '',
@@ -61,7 +61,6 @@
 					this.init()
 				})
 			},
-			//当模板的时候可以直接引入，然后触发子组件事件到父界面去控制数据
 
 			//获取当前用户该任务的签到数组
 			getData(val) {

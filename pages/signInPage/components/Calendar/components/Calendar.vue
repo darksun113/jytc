@@ -1,34 +1,33 @@
 <template>
 	<!-- 打卡日历页面 -->
 	<view class='all'>
+		<view class="header">
+			<text>{{cur_year}} 年 {{cur_month}} 月</text>
+			<view class="sign-btn" @touchend="toSignUp">
+				{{!status?'立即签到':'今日已签到'}}
+			</view>
+		</view>
 		<!-- 显示星期 -->
 		<view class="myDateTable">
 			<view class="week" v-if="langType=='ch'">
 				<view v-for="(item,index) in weeks_ch" :key="index">{{item}}</view>
 			</view>
 			<view class="cell-box">
-				<view v-for="(item,j) in days" :key="j" class='dateCell'>
+				<view v-for="(item,j) in days" :key="j" class='dateCell' :style="{top:item.isSign?'20rpx':''}">
 					<view v-if="item.date==undefined||item.date == null" class='cell'>
 						<text :decode="true">&nbsp;&nbsp;</text>
 					</view>
 					<view v-else style="width:100%;height:100%;">
 						<!-- 已签到日期 -->
 						<view v-if="item.isSign == true" class='cell'>
-							<image style="width:100%;height:100%;display: inline" src="@/static/images/check_icon.svg" mode=""></image>
+							<image style="width:100%;height:100%;" src="@/static/images/check_icon.svg"></image>
 						</view>
-						<!-- 漏签 -->
-						<!-- <view @click="clickSignUp(item.date,0)" class="cell redColor bgGray" 
-						v-else-if="cur_year<toYear||(cur_year==toYear&&cur_month<toMonth)||(cur_year==toYear&&cur_month==toMonth&&item.date<today)">
-							小程序不兼容这个 v-else-if="(new Date(cur_year+'-'+cur_month+'-'+item.date))<(new Date())">
-							<text>{{item.date}}</text>
-						</view> -->
 						<!-- 今日未签到-->
-						<view @click="clickSignUp(item.date)" class="cell white bg-red"
-							v-else-if="item.date==today&&cur_month==toMonth&&cur_year==toYear">
-							<text>今日</text>
+						<view @click="clickSignUp(item.date)" class="cell bg-today" v-else-if="item.date==today&&cur_month==toMonth&&cur_year==toYear">
+							<text>{{item.date}}</text>
 						</view>
 						<!-- 当前日期之后 -->
-						<view class="whiteColor cell" v-else>
+						<view class="cell" v-else>
 							<text>{{item.date}}</text>
 						</view>
 					</view>
@@ -50,7 +49,7 @@
 				toMonth: parseInt(new Date().getMonth() + 1), //本月
 				toYear: parseInt(new Date().getFullYear()), //本年
 				weeks_ch: ['日', '一', '二', '三', '四', '五', '六'],
-				weeks_en: ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat']
+				status:false
 			};
 		},
 		props: {
@@ -77,7 +76,7 @@
 			this.cur_year = this.sendYear;
 			this.cur_month = this.sendMonth;
 			this.SignUp = this.dataSource;
-
+			// this.status = this.dataSource.is_signin_day;
 			this.calculateEmptyGrids(this.cur_year, this.cur_month);
 			this.calculateDays(this.cur_year, this.cur_month);
 			this.onJudgeSign();
@@ -94,6 +93,9 @@
 			getFirstDayOfWeek(year, month) {
 				return new Date(Date.UTC(year, month - 1, 1)).getDay();
 			},
+			getLastDayOfWeek(year, month) {
+				return new Date(Date.UTC(year, month - 1, 29)).getDay();
+			},
 			// 计算当月1号前空了几个格子，把它填充在days数组的前面
 			calculateEmptyGrids(year, month) {
 				//计算每个月时要清零
@@ -108,11 +110,25 @@
 						this.days.push(obj);
 					}
 				}
+				// const lastDayOfWeek = this.getLastDayOfWeek(year, month);
 			},
-
+			calculateLastDayEmptyGrids(){
+				const firstDayOfWeek = this.getLastDayOfWeek(year, month);
+				if (firstDayOfWeek > 0) {
+					for (let i = 0; i < firstDayOfWeek; i++) {
+						var obj = {
+							date: null,
+							isSign: false
+						}
+						this.days.push(obj);
+					}
+				}
+			},
+			toSignUp(){
+				this.status = !this.status
+			},
 			// 绘制当月天数占的格子，并把它放到days数组中
 			calculateDays(year, month) {
-
 				const thisMonthDays = this.getThisMonthDays(year, month);
 				// this.columnsLen=Math.ceil(thisMonthDays/7);
 				// console.log(this.columnsLen);
@@ -185,12 +201,35 @@
 		width: 100%;
 		border-radius: 20rpx;
 		background-color: #333;
+		.header{
+			padding: 40rpx;
+			padding-bottom: 0;
+			padding-top: 20rpx;
+			font-size: 32rpx;
+			font-family: PingFangSC-Medium, PingFang SC;
+			font-weight: 500;
+			color: #FFFFFF;
+			line-height: 44rpx;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			.sign-btn{
+				padding: 10rpx 44rpx;
+				background: linear-gradient(90deg, #FFFFFF 0%, #28D8E5 50%, #C058F6 100%);
+				border-radius: 40rpx;
+				font-size: 28rpx;
+				font-family: SourceHanSansCN-Medium, SourceHanSansCN;
+				font-weight: 500;
+				color: #000000;
+			}
+		}
 		.week {
 			display: flex;
 			flex-direction: row;
 			justify-content: space-between;
 			padding: 40rpx;
 			padding-left: 78rpx;
+			padding-bottom: 20rpx;
 			font-size: 32rpx;
 			color: #999;
 			padding-right: 85rpx;
@@ -208,10 +247,11 @@
 				.dateCell {
 					width: 80rpx;
 					height:80rpx;
-					padding: 1vw;
+					// padding: 1vw;
 					display: inline-block;
 					text-align: center;
 					font-size: 32rpx;
+					position: relative;
 				
 					.cell {
 						display: flex;
@@ -220,17 +260,16 @@
 						width: 100%;
 						justify-content: center;
 						align-items: center;
+						text{
+							font-family: PingFangSC-Regular, PingFang SC;
+						}
 					}
 				}
 			}
 		}
 	}
-
-	.bgGray {
-		background-color: rgba(255, 255, 255, 0.42);
-	}
-
-	.redColor {
-		color: #ff0000;
+	.bg-today{
+		color: #222;
+		background: #28D8E5;
 	}
 </style>

@@ -41,7 +41,7 @@
 		},
 		methods: {
 			searchKeyWords(value) {
-				console.log(value)
+				console.log(value.trim())
 			},
 			searchGoods(item,idx){
 				this.curSelect = idx

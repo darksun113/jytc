@@ -36,7 +36,7 @@
 </template>
 
 <script>
-	import PuzzleCodeMixin from "../mixins/PuzzleCodeMixin.js"
+	import PuzzleCodeMixin from "@/libs/mixins/PuzzleCodeMixin.js"
 	export default {
 		data() {
 			return {

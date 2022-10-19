@@ -2,7 +2,7 @@
 	<u-popup :show="show" mode="center" :mask="false" bgColor="transparent">
 		<view class="center-pop">
 			<view class="notice-box">
-				<img class="close_icon" src="@/static/notice/close_notice_icon.svg" alt="" @click="$emit('close')">
+				<img v-lazy class="close_icon" src="@/static/notice/close_notice_icon.svg" alt="" @click="$emit('close')">
 				<view class="control-box">
 					<image src="@/static/notice/pre_icon.svg" @click="pre" v-show="currentDot!==0"></image>
 					<view v-show="currentDot==0"></view>
@@ -14,7 +14,7 @@
 						<view class="swiper-item">
 							<scroll-view scroll-y="true" class="content">
 								<view class="title"> {{item.title}}</view>
-								<view v-html="translateHtml(item.info)"></view>
+								<view class="info" v-html="translateHtml(item.description)"></view>
 							</scroll-view>
 						</view>
 					</swiper-item>
@@ -28,17 +28,18 @@
 	export default {
 		name:"Preview",
 		props:{
-			isShow:[Boolean]
+			isShow:[Boolean],
+			noticeList:{
+				type: Array,
+				require: true,
+			},
 		},
 		data() {
 			return {
 				show:this.isShow,
+				noticeListAccept:this.noticeList,
 				currentDot:0,
-				noticeList:[]
 			};
-		},
-		mounted() {
-			this.getNoticeList()
 		},
 		computed:{
 			
@@ -63,34 +64,14 @@
 					this.currentDot--
 				}
 			},
-			async getNoticeList(){
-				try{
-					const res = [
-						{
-							title:"公告标题-1",
-							info:"由于uni-app支持多端开发，而各端，特别是各小程序平台，没有统一的标准，加重了开发者和企业的成本。/n幸好uni-app使用Vue标准，对各端进行了写法的统一， 推动了生态的发展，/n但是由于某些小程序平台自身的原因，仍然会出现某些兼容性问题，我们会将制作uView过程中遇到，和平时收集的兼容性问题呈现在本专题，希望能 帮助到uni-app开发者"
-						},
-						{
-							title:"公告标题-2",
-							info:"支付宝在很早前，已升级为component2模式，此模式支持更多的功能和特性，uni-app上，很多的特性,如provide/inject、$slots等，需要开启此模式才能支持， 而此模式在uni-app新建项目中默认是关闭的，因而需要在项目根目录的manifest.json中开启，如没有alipay属性节点，新增即可："
-						},
-						{
-							title:"公告标题-3",
-							info:"支付宝在很早前，已升级为component2模式，此模式支持更多的功能和特性，uni-app上，很多的特性，如provide/inject、$slots等，需要开启此模式才能支持， 而此模式在uni-app新建项目中默认是关闭的，因而需要在项目根目录的manifest.json中开启，如没有alipay属性节点，新增即可："
-						}
-					]
-					this.noticeList=res
-					if(this.noticeList.length==0){
-						this.show=false
-					}
-				}catch(e){
-					//TODO handle the exception
-				}
-			}
+			
 		},
 		watch:{
 			isShow(boo){
 				this.show=boo
+			},
+			noticeList(newVal){
+				this.noticeListAccept = newVal
 			}
 		}
 	}
@@ -153,6 +134,7 @@
 				color: #5A5A5A;
 				line-height: 42rpx;
 				text-align: justify;
+				width: 100%;
 				.title{
 					text-align: center;
 					padding: 100rpx 0 28rpx;
@@ -161,6 +143,25 @@
 					font-weight: 500;
 					color: #000000;
 					line-height: 54rpx;
+				}
+				.info{
+					word-break: break-word; /* 文本行的任意字内断开，就算是一个单词也会分开 */
+					
+					word-wrap: break-word; /* IE */
+					
+					white-space: -moz-pre-wrap; /* Mozilla */
+					
+					white-space: -hp-pre-wrap; /* HP printers */
+					
+					white-space: -o-pre-wrap; /* Opera 7 */
+					
+					white-space: -pre-wrap; /* Opera 4-6 */
+					
+					white-space: pre; /* CSS2 */
+					
+					white-space: pre-wrap; /* CSS 2.1 */
+					
+					white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
 				}
 			}
 		}

@@ -25,7 +25,7 @@
 								{{item.name}}
 							</view>
 							<view style="height:30rpx; text-align: center;width:100rpx;">
-								<img v-if="item.certification==1" style="width:26rpx;height:30rpx;display: inline-block;"
+								<img v-lazy v-if="item.certification==1" style="width:26rpx;height:30rpx;display: inline-block;"
 									src="../../../../../../static/新增icon/认证.svg" alt="">
 							</view>
 							<view style="width:274rpx;text-align: right;" class="font78 nowrap_s">
@@ -96,14 +96,12 @@
 			uni.$on("toOpenSharePoster",()=>{
 				const name=uni.getStorageSync("userInfo").name
 				const userId=uni.getStorageSync("userInfo").buyerId 
-				// http://120.197.126.61:18940 http://192.168.2.11:8080
 				const baseCodeUrl = process.env.NODE_ENV=="development" ? "http://192.168.2.15:8082":"https://h5.jialex.cn"
 				this.posterData={
 					codeUrl : `${baseCodeUrl}/pages/home/home?share=platform&userId=${userId}`,
 					name,
 					loadType:3 // 0 邀请分享  1 分享把玩
 				}
-				console.log(this.posterData.codeUrl,'codeUrl')
 				this.isOpenPoster=true
 			})
 		},

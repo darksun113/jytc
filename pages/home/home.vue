@@ -3,18 +3,17 @@
 		<scroll-view class="home" scroll-y="true" @scrolltolower="updateList">
 			<!-- <Search /> -->
 			<Banner />
-			<StickyNav ref="nav" @changeShowType="changeShowType" @switchOverNav="switchOverNav" @resetPage="reset">
-			</StickyNav>
+			<StickyNav ref="nav" @changeShowType="changeShowType" @switchOverNav="switchOverNav" @resetPage="reset" />
 			<view class="container">
 				<!-- 数字藏品 -->
-				<DigitalCollection v-if="navType==0" :renderList="renderList" :hasData="hasData" :isLastItem="isLastItem" :showType="showType"/>
+				<DigitalCollection v-show="navType==0" :renderList="renderList" :hasData="hasData" :isLastItem="isLastItem" :showType="showType"/>
 				<!-- 盲盒 -->
-				<BlindBoxModule v-else-if="navType==1" :renderList="renderList" :hasData="hasData" :isLastItem="isLastItem" />
+				<BlindBoxModule v-show="navType==1" :renderList="renderList" :hasData="hasData" :isLastItem="isLastItem" />
 				<!-- 发售日历 -->
-				<CalendarModule v-else :renderList="renderList" :hasData="hasData" :isLastItem="isLastItem" />
+				<CalendarModule v-show="navType==2" :renderList="renderList" :hasData="hasData" :isLastItem="isLastItem" />
 			</view>
 		</scroll-view>
-		<!-- <Notice :isShow="isNoticeShow" @close="isNoticeShow=false"></Notice> -->
+		<Notice :isShow="isNoticeShow" :noticeList="noticeList" @close="closeNotice"></Notice>
 	</PageTemp>
 </template>
 
@@ -25,9 +24,7 @@
 	import DigitalCollection from "./components/DigitalCollection"
 	import BlindBoxModule from "./components/BlindBoxModule"
 	import CalendarModule from "./components/CalendarModule"
-	import {
-		getFilePath
-	} from "@/utils/tools.js"
+	import { getFilePath } from "@/utils/tools.js"
 
 	export default {
 		components: {
@@ -36,10 +33,11 @@
 			Search,
 			DigitalCollection,
 			BlindBoxModule,
-			CalendarModule
+			CalendarModule,
 		},
 		data() {
 			return {
+				isNoticeShow:false,
 				showType: 0,
 				hasData: true,
 				navType: 0,
@@ -47,7 +45,15 @@
 				updatePage: 1,
 				renderList: [],
 				shouldRequest: true,
-				isNoticeShow: true,
+				showAnnoun: false,
+				noticeList:[],
+			}
+		},
+		onShow() {
+			
+			if(this.$checkLogin()&&uni.getStorageSync("announceIsShow")!=true){
+				//已登录，且没有展示过公告
+				this.getNoticeList()
 			}
 		},
 		onLoad(opt) {
@@ -59,7 +65,6 @@
 			}
 			this.init()
 		},
-		onHide() {},
 		methods: {
 			changeShowType(type) {
 				this.showType = type
@@ -248,6 +253,28 @@
 					return a.startTime - b.startTime
 				})
 				return newArr
+			},
+			async getNoticeList(){
+				try{
+					const res = await uni.$http("/homepage/getNoticeList", {
+					})
+					if (res.code == 0) {
+						this.noticeList = res.data.list
+						//公告数量不等于0时，展示公告
+						if(this.noticeList.length!=0){
+							this.isNoticeShow=true
+						}
+					}else{
+						this.$toast(res.errorMsg)
+					}
+					
+				}catch(e){
+					//TODO handle the exception
+				}
+			},
+			closeNotice(){
+				this.isNoticeShow=false
+				uni.setStorageSync("announceIsShow",true)
 			}
 		}
 	}
@@ -263,19 +290,6 @@
 		.container {
 			position: relative;
 			min-height: calc(100% - 280rpx - 150rpx - 134rpx);
-
-			.sell-time {
-				// padding: 40rpx 0;
-				padding-bottom: 40rpx;
-				font-size: 32rpx;
-				font-family: SourceHanSansCN-Medium, SourceHanSansCN;
-				font-weight: 500;
-				color: #FFFFFF;
-
-				:nth-of-type(1) {
-					padding-top: 0;
-				}
-			}
 		}
 	}
 </style>

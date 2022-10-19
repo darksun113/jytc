@@ -1,10 +1,10 @@
 <template>
 	<view class="control-box">
 		<view class="control"  @click="toOpenModelPre" >
-			<img src="@/static/images/control_icon.svg" alt="">
+			<img v-lazy src="@/static/images/control_icon.svg" alt="">
 		</view>
 		<view class="control"  @click="toShare" style="margin-left: 80rpx;" v-if="buyerId == buyerId">
-			<img src="@/static/images/share_icon.svg" alt="">
+			<img v-lazy src="@/static/images/share_icon.svg" alt="">
 		</view>
 	</view>
 </template>

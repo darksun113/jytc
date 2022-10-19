@@ -4,26 +4,29 @@ import App from './App'
 import request from './utils/http.js'
 import store from './store'
 import uView from "uview-ui"
-
 import {isMap_PingAn} from "./libs/jsm/PingAn-app.js"
 
 // 自定义方法
 import { routerTo } from '@/utils/routerTo.js' //公共方法
 import { myshare, isWechat} from '@/libs/jsm/w-share.js'
+import { count } from '@/utils/countApi.js'
+import LazyLoad from "./directives/lazy.js"
 
+Vue.directive("lazy",LazyLoad)
 if (isWechat()) {
 	Vue.prototype.$wShare = myshare;
 } else {
 	Vue.prototype.$wShare = () => {}
 }
-
 Vue.prototype.$store = store
 Vue.config.productionTip = false
 uni.$http = request;
 Vue.use(uView);
 
-App.mpType = 'app'
+//刷新页面，统计
+count()
 
+App.mpType = 'app'
 Object.assign(Vue.prototype, {
 	'$routerTo': routerTo,
 })
@@ -61,3 +64,4 @@ Vue.prototype.$checkAI = async function(type) {
 		}
 	}
 }
+

@@ -37,14 +37,16 @@
 						font-weight: 400;
 						color: #FFFFFF;
 						line-height: 34rpx;
+						max-width: 260rpx;
 					}
 				}
 
 				.count-box {
-					width: 204rpx;
-					min-width: 204rpx;
+					width: 260rpx;
+					min-width: 260rpx;
 					display: flex;
 					align-items: center;
+					justify-content: flex-end;
 					font-size: 28rpx;
 				}
 			}
@@ -62,17 +64,34 @@
 		.item-center {
 			padding-top: 30rpx;
 			display: flex;
-
-			.goods-pic {
+			.goods-pic-box{
 				height: 200rpx;
 				width: 200rpx;
-				border-radius: 8rpx;
 				min-width: 200rpx;
 				margin-right: 20rpx;
+				position: relative;
+				.goods-pic {
+					width: 100%;
+					height: 100%;
+					border-radius: 8rpx;
+					overflow: hidden;
+				}
+				.goods-type{
+					position: absolute;
+					background: rgba(142, 139, 138, 1);
+					padding: 2rpx;
+					border-radius: 4rpx;
+					bottom: 10rpx;
+					left: 10rpx;
+					width: 40rpx;
+					height: 40rpx;
+				}
 			}
+			
 
 			.goods-info {
 				font-family: PingFangSC-Medium, PingFang SC;
+				width:100%;
 				display: flex;
 				flex-direction: column;
 				justify-content: space-between;
@@ -87,13 +106,29 @@
 				.goods-type {
 					width: 36rpx;
 					height: 36rpx;
+					position: absolute;
+					left: 20rpx;
+					bottom: 20rpx;
+					background: #8E8A8A;
+					padding: 4rpx 4rpx;
+					border-radius: 8rpx;
 				}
-
-				.price {
-					font-size: 44rpx;
-					font-weight: 500;
-					color: #FFFFFF;
+				.price-box{
+					.price {
+						font-size: 44rpx;
+						font-weight: 500;
+						color: #FFFFFF;
+						display:flex;
+						justify-content:space-between;
+					}
+					.pre-pay-price{
+						font-size: 28rpx;
+						font-family: PingFangSC-Medium, PingFang SC;
+						font-weight: 500;
+						color: #FF5454;
+					}
 				}
+				
 			}
 		}
 
@@ -119,6 +154,11 @@
 			.btn-pay {
 				background: #28D8E5;
 				color: #000;
+			}
+			.btn-tail{
+				color: #000000;
+				background: #28D8E5;
+				opacity: 0.6;
 			}
 		}
 	}

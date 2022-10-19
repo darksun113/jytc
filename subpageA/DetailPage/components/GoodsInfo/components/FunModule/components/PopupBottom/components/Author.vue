@@ -5,7 +5,7 @@
 		</view>
 		<view class="author_content">
 			<view class="pic_box">
-				<img :src="authorInfo.icon" alt="">
+				<img v-lazy :src="authorInfo.icon" alt="">
 				<view class="author_name">
 					{{authorInfo.shopName}}
 				</view>

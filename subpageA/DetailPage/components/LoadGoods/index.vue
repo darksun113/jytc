@@ -1,6 +1,6 @@
 <template>
 	<view class="show-box" :style="{height:(goodsData.loadType==0 || goodsData.loadType==2) ? '668rpx':'780rpx'}">
-		<show-code :goodsData="loadData" v-if="goodsData.loadType==1" />
+		<show-code :goodsData="loadData" />
 		<load-blind :goodsData="loadData" v-if="loadData.goodsType==2"/>
 		<load-model  :goodsData="loadData" v-else-if="loadData.materialType==0" />
 		<load-image  :goodsData="loadData" v-else-if="loadData.materialType==1" />
@@ -17,6 +17,7 @@
 	import LoadAudio from "./components/LoadAudio/index.vue"
 	import LoadBlind from "./components/LoadBlind/index.vue"
 	import ShowCode from "./components/ShowCode/index.vue"
+	
 	export default{
 		props:{
 			// materialType 类型 0 模型  1 图片  2 视频  3 音频
@@ -35,9 +36,7 @@
 		mounted() {
 			uni.$on("toOpenSharePoster",()=>{
 				const name=uni.getStorageSync("userInfo").name
-				// const avatar=uni.getStorageSync("userInfo").avatar
 				const avatar=uni.getStorageSync("userInfo").avatar.split("?")[0]
-				// const posterImg = this.goodsData.image
 				const posterImg = this.goodsData.image.split("?")[0]
 				const instanceId = this.goodsData.goodsInstanceId?this.goodsData.goodsInstanceId:""
 				const baseCodeUrl = process.env.NODE_ENV=="development" ? "http://192.168.2.11:8080":"https://h5.jialex.cn"
@@ -47,7 +46,6 @@
 					posterImg,
 					avatar,
 					shopName:this.goodsData.shopName,
-					// shopIcon:this.goodsData.shopIcon,
 					shopIcon:this.goodsData.shopIcon.split("?")[0],
 					goodsName:this.goodsData.goodsName,
 					goodsCode:this.goodsData.goodsCode,
@@ -80,5 +78,6 @@
 	.show-box{
 		background: #0E0E0E ;
 		border: 2rpx solid #21201F;
+		position: relative;
 	}
 </style>

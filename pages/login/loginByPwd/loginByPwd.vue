@@ -49,7 +49,7 @@
 </template>
 
 <script>
-	import mixin from "../mixins/PuzzleCodeMixin.js"
+	import mixin from "@/libs/mixins/PuzzleCodeMixin.js"
 	import {rsaEncrypt} from "@/utils/tools.js"
 	export default {
 		data() {
@@ -155,6 +155,10 @@
 						prePurchaseId:this.prePurchaseId
 					})
 					if(res.code==0){
+						uni.setStorage({
+							key: 'announceIsShow',
+							data: false,
+						})
 						uni.setStorageSync("token",res.data.token)
 						this.$store.commit("getToken",res.data.token)
 						this.$toast('登录成功')

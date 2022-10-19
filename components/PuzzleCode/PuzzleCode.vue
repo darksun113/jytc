@@ -6,9 +6,9 @@
 			<div class="auth-body_" :style="`height: ${canvasHeight}px`">
 				<!-- 主图，有缺口 -->
 				<div v-if="!image1" style="width:300px;height:150px;background:#000000"></div>
-				<img ref="img1" :src="image1" alt="" :width="canvasWidth" :height="canvasHeight">
+				<img v-lazy ref="img1" :src="image1" alt="" :width="canvasWidth" :height="canvasHeight">
 				<!-- 小图 -->
-				<img ref="img2" :src="image2" class="auth-canvas2_" :height="canvasHeight"
+				<img v-lazy ref="img2" :src="image2" class="auth-canvas2_" :height="canvasHeight"
 					:style="`transform:translateX(${styleWidth - sliderBaseSize}px)`" alt="">
 				<div :class="['loading-box_', { hide_: !loading }]">
 					<div class="loading-gif_">
@@ -20,7 +20,7 @@
 				</div>
 				<div :class="['flash_', { show: isSuccess }]"
 					:style="`transform: translateX(${isSuccess ? `${canvasWidth + canvasHeight * 0.578}px` : `-${canvasHeight * 0.578}px`}) skew(-30deg, 0);`" />
-				<img class="reset_" :src="resetSvg" @click="reset">
+				<img v-lazy class="reset_" :src="resetSvg" @click="reset">
 			</div>
 			<div class="auth-control_">
 				<div class="range-box" :style="`height:${sliderBaseSize}px`">

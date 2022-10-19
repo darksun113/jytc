@@ -22,7 +22,7 @@
 </template>
 
 <script>
-	import mixin from "../../mixins/PuzzleCodeMixin.js"
+	import mixin from "@/libs/mixins/PuzzleCodeMixin.js"
 	export default {
 		data() {
 			return {
@@ -77,6 +77,10 @@
 						share:this.share
 					})
 					if(res.code==0){
+						uni.setStorage({
+							key: 'announceIsShow',
+							data: false,
+						})
 						uni.setStorageSync("token",res.data.token)
 						this.$store.commit("getToken",res.data.token)
 						this.$toast('登录成功')

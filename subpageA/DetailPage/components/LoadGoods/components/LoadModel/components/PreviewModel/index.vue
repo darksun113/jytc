@@ -6,17 +6,17 @@
 				<text :style="{color:showType==0?'#fff':'#999',fontWeight:showType==0? 'bold':'normal'}" @click="changeModule(0)">旋转</text>
 				<text :style="{color:showType==0?'#999':'#fff',fontWeight:showType==1? 'bold':'normal'}" @click="changeModule(1)">平移</text>
 			</view>
-			<img class="close_icon" src="@/static/images/close_preview_icon.svg" alt="" @click="$emit('close')">
+			<img v-lazy class="close_icon" src="@/static/images/close_preview_icon.svg" alt="" @click="$emit('close')">
 		</view>
 		<LoadModelPre ref="LoadModelPre" v-if="goodsData.threeD && goodsData.mtl && goodsData.mapping && loadType==2"
 			:OBJPath="goodsData.threeD" :MTLPath="goodsData.mtl" :MAPPath="goodsData.mapping"
 			:modelType="goodsData.modelType"></LoadModelPre>
 		<view class="control" v-show="showType==0">
 			<view class="btn" @click="startRotate">
-				<img src="../../static/images/start_rotate_icon.svg" alt="">
+				<img v-lazy src="../../static/images/start_rotate_icon.svg" alt="">
 			</view>
 			<view class="btn" @click="stopRotate">
-				<img src="../../static/images/stop_rotate_icon.svg" alt="">
+				<img v-lazy src="../../static/images/stop_rotate_icon.svg" alt="">
 			</view>
 		</view>
 		<view class="control" v-show="showType!=0">

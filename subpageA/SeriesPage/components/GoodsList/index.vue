@@ -9,7 +9,7 @@
 		</view>
 		<view class="list-contnet">
 			<template v-for="(item,index) in goodsList">
-				<GoodsCards :item="item" :key='index'></GoodsCards>
+				<GoodsCards :item="item" :key='index' @countFinish="init"></GoodsCards>
 			</template>
 			<IsEnd v-if="isLastItem"></IsEnd>
 		</view>
@@ -18,9 +18,7 @@
 	</view>
 </template>
 <script>
-	import {
-		getFilePath
-	} from "@/utils/tools.js"
+	import { getFilePath } from "@/utils/tools.js"
 	export default {
 		props: ["seriesId"],
 		data() {
@@ -30,7 +28,7 @@
 				updatePage: 1,
 				show: false,
 				goodsList: [],
-				goodsList_default: [],
+				listOrigin: [],
 				shouldRequest: true,
 				showList: false,
 				dropdownTitle: "默认排序",
@@ -49,40 +47,30 @@
 				this.sortGoodsList(arr.value[0])
 			},
 			sortGoodsList(type) {
-				const price_h_to_l = () => {
-					this.goodsList = this.goodsList.sort((a, b) => b.goodsPrice - a.goodsPrice)
-				}
-				const price_l_to_h = () => {
-					this.goodsList = this.goodsList.sort((a, b) => a.goodsPrice - b.goodsPrice)
-				}
-				const sell_h_to_l = () => {
-					this.goodsList = this.goodsList.sort((a, b) => {
-						return (b.totalNumber - b.remainingNumber) - (a.totalNumber - a.remainingNumber)
-					})
-				}
-				const defaultList = () => {
-					this.goodsList = this.goodsList_default
-				}
-				switch (type) {
-					case "销量最高":
-						sell_h_to_l()
-						break;
-					case "价格高到低":
-						price_h_to_l()
-						break;
-					case "价格低到高":
-						price_l_to_h()
-						break;
-					default:
-						defaultList()
-				}
-				this.show = false
+				const opt = {
+					"销量最高":() => {
+						this.goodsList = this.goodsList.sort((a, b) => {
+							return (b.totalNumber - b.remainingNumber) - (a.totalNumber - a.remainingNumber)
+						})
+					},
+					"价格高到低":() => {
+						this.goodsList = this.goodsList.sort((a, b) => b.goodsPrice - a.goodsPrice)
+					},
+					"价格低到高":() => {
+						this.goodsList = this.goodsList.sort((a, b) => a.goodsPrice - b.goodsPrice)
+					},
+					"综合排序":() => {
+						this.goodsList = this.listOrigin
+					}
+				};
+				opt[type]();
+				this.show = false;
 			},
 			init() {
 				this.getSeriesGoodsList((list, total) => {
 					this.listTotal = total
 					this.goodsList = list
-					this.goodsList_default = JSON.parse(JSON.stringify(list))
+					this.listOrigin = JSON.parse(JSON.stringify(list))
 					this.isLastItem = true
 				})
 			},

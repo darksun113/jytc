@@ -1,5 +1,5 @@
 <p align="center">
-    <img alt="logo" src="https://uviewui.com/common/logo.png" width="120" height="120" style="margin-bottom: 10px;">
+    <img v-lazy alt="logo" src="https://uviewui.com/common/logo.png" width="120" height="120" style="margin-bottom: 10px;">
 </p>
 <h3 align="center" style="margin: 30px 0 30px;font-weight: bold;font-size:40px;">uView</h3>
 <h3 align="center">多平台快速开发的UI框架</h3>
@@ -92,13 +92,13 @@ Vue.use(uView);
 您可以通过**微信**扫码，查看最佳的演示效果。
 <br>
 <br>
-<img src="https://uviewui.com/common/weixin_mini_qrcode.png" width="220" height="220" >
+<img v-lazy src="https://uviewui.com/common/weixin_mini_qrcode.png" width="220" height="220" >
 
 ## 捐赠uView的研发
 
 uView文档和源码全部开源免费，如果您认为uView帮到了您的开发工作，您可以捐赠uView的研发工作，捐赠无门槛，哪怕是一杯可乐也好(相信这比打赏主播更有意义)。
 
-<img src="https://uviewui.com/common/alipay.png" width="220" ><img style="margin-left: 100px;" src="https://uviewui.com/common/wechat.png" width="220" >
+<img v-lazy src="https://uviewui.com/common/alipay.png" width="220" ><img v-lazy style="margin-left: 100px;" src="https://uviewui.com/common/wechat.png" width="220" >
 
 ## 版权信息
 uView遵循[MIT](https://en.wikipedia.org/wiki/MIT_License)开源协议，意味着您无需支付任何费用，也无需授权，即可将uView应用到您的产品中。

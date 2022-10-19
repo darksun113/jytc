@@ -45,7 +45,7 @@ export default {
 							title:'发送成功',
 							icon:"success"
 						})
-						this.doSomething()
+						this.afterGetCode()
                     } else if (res.code == 20004) {
 						uni.hideLoading()
 						uni.showToast({
@@ -73,6 +73,6 @@ export default {
 			this.isPuzzleShow = false
 			this.getVerificationCode(this.phone)
 		},
-        doSomething(){}
+        afterGetCode(){}
     },
 }

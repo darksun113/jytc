@@ -4,10 +4,10 @@
 			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-if="item.goodsTotal==0 || item.remainingNumber == 0">
 				已售罄
 			</view>
-			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-else-if="item.startTime>curTime">
+			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-else-if="!!item.startTime && item.startTime > curTime">
 				开售时间 {{item.startTime | formatYearToMinutes_EN}}
 			</view>
-			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-else-if="item.sellTime>curTime">
+			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-else-if="!!item.sellTime && item.sellTime > curTime">
 				开售时间 {{item.sellTime | formatYearToMinutes_EN}}
 			</view>
 		</template>
@@ -30,7 +30,7 @@
 				</u-count-down>
 			</view>
 		</template>
-		<image class="series-pic" :src="item.seriesImg || item.image" :mode="isBlind?'aspectFit':'aspectFill'"></image>
+		<img v-lazy class="series-pic" :src="item.seriesImg || item.image" :style="{objectFit:isBlind ? 'contain':'cover'}" />
 		<view class="series-info-box">
 			<view class="series-info">
 				<view class="series-title nowrap">
@@ -38,7 +38,7 @@
 				</view>
 				<view class="author-box">
 					<image class="author-icon" :src="item.shopIcon" mode=""></image>
-					<view class="author-name nowrap">
+					<view class="author-name nowrap_s">
 						{{item.shopName}}
 					</view>
 				</view>
@@ -112,7 +112,6 @@
 	}
 .series-box{
 	color: #FFFFFF;
-	// width: 670rpx;
 	height: 840rpx;
 	background: #333;
 	border-radius: 30rpx;
@@ -133,7 +132,7 @@
 		align-items: center;
 	}
 	.series-pic{
-		width: 670rpx;
+		width: 100%;
 		height: 670rpx;
 		border-radius: 30rpx;
 	}
@@ -166,6 +165,7 @@
 				.author-name{
 					height: 40rpx;
 					font-size: 28rpx;
+					max-width: 400rpx;
 					font-family: PingFangSC-Regular, PingFang SC;
 					font-weight: 400;
 					line-height: 40rpx;
@@ -178,7 +178,7 @@
 			flex-direction: column;
 			justify-content: space-between;
 			.total{
-				font-size: 12rpx;
+				font-size: 24rpx;
 				font-family: SourceHanSansCN-Regular, SourceHanSansCN;
 				font-weight: 400;
 				color: #999999;
@@ -193,10 +193,6 @@
 				line-height: 48rpx;
 			}
 		}
-		
 	}
-	
-	
-	
 }
 </style>

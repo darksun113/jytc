@@ -58,8 +58,8 @@
 		position: relative;
 
 		.video-box {
-			width: 450rpx;
-			height: 252rpx;
+			width: 70%;
+			height: 70%;
 			position: absolute;
 			left: 50%;
 			top: 50%;

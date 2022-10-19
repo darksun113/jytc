@@ -25,9 +25,9 @@
 				}, {
 					name: '盲盒商城'
 				}
-				// , {
-				// 	name: '发售日历'
-				// },
+				, {
+					name: '发售日历'
+				},
 				],
 				itemStyle: {
 					fontSize: "32rpx",

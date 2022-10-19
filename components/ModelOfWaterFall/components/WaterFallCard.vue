@@ -3,7 +3,7 @@
 		<view class="sell-tip" v-if="item.goodsTotal==0">
 			已售罄
 		</view>
-		<img class="series-pic" :src="item.seriesImg" />
+		<img v-lazy class="series-pic" :src="item.seriesImg" />
 		<view class="series-info">
 			<view class="series-title nowrap">
 				{{item.seriesName}}

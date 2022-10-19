@@ -4,7 +4,15 @@
 			<view class="price-box">
 				待支付：<text class="price"> ¥ {{(price/100).toFixed(2)}}</text>
 			</view>
-			<view class="btn" @click="toPay">
+			<template v-if="orderInfo.status == 4">
+				<view class="btn" style="background: #999;color: #fff;" v-if="orderInfo.goods.startTime > curTime">
+					付尾款
+				</view>
+				<view class="btn" @click="toPay" v-else>
+					付尾款
+				</view>
+			</template>
+			<view class="btn" @click="toPay" v-else>
 				去支付
 			</view>
 		</view>
@@ -14,7 +22,7 @@
 				<view class="txt">请输入验证码</view>
 			</view>
 			<view class="body">
-				<u-code-input class="input" v-model="verifyCode" :hairline="true" mode="line" color="#28D8E5" @finish="finish"></u-code-input>
+				<u-code-input class="input" v-model="verifyCode" :hairline="true" mode="line" color="#28D8E5" @finish="handleCheckVerifyCode"></u-code-input>
 			</view>
 			<u-button class="resend" @click="resend">重新发送</u-button>
 		</u-popup>
@@ -32,7 +40,7 @@
 				<view>第3步：关注公众号即可在公众号开启网页</view>
 			</view>
 			<view class="copy" >
-				<button class="copy-btn" @click="copy">
+				<button class="copy-btn" @click="copyName">
 					点击复制名称
 				</button>
 			</view>
@@ -60,6 +68,10 @@
 			orderNo:[String],
 			price:[String,Number],
 			cardId_:[String,Number],
+			orderInfo:{
+				type:Object,
+				default:()=>{}
+			}
 		},
 		data() {
 			return {
@@ -72,6 +84,7 @@
 				cardId: this.cardId_,
 				isWx:false,
 				check_shows: false,
+				curTime:parseInt(Date.now()/1000)
 			}
 		},
 		async mounted(){
@@ -201,7 +214,6 @@
 				} catch (error) {
 					throw new Error("系统错误", error)
 				}
-				
 			},
 			// 银联
 			async uniPay() {
@@ -246,7 +258,6 @@
 			},
 			// 支付宝支付
 			openPayWeb(body) {
-				console.log(body,'body--------')
 				uni.removeStorageSync("isWxPay")
 				const formElement = document.createElement("div");
 				formElement.style.display = "display:none;";
@@ -258,7 +269,7 @@
 				}
 			},
 			//银行支付，验证手机验证码
-			async finish(){
+			async handleCheckVerifyCode(){
 				try{
 					const res = await uni.$http("/payment/confirmPay", {
 						"appType": "H5",
@@ -268,20 +279,35 @@
 					})
 					this.verifyCode = ""
 					if(res.code==0){
-						alert("成功")
-						this.$routerTo(`/subpageB/MyOrderCenter/MyOrderCenter?type=1`)
+						this.$toast("支付成功","success")
+						setTimeout(()=>{
+							if(this.orderInfo.status == 3){
+								this.$routerTo(`/subpageB/MyOrderCenter/MyOrderCenter?type=0`,"redirect")
+							}else{
+								this.$routerTo(`/subpageB/MyOrderCenter/MyOrderCenter?type=1`,"redirect")
+							}
+						},2000)
 					}else{
-						alert("支付失败")
-
+						this.$toast(res.errorMsg,"error")
 					}
-
-
 				}catch(e){
 					//TODO handle the exception
 				}
 			},
 			resend(){
 				toPay()
+			},
+			copyName(){
+				uni.setClipboardData({
+					data:"数版通服务",
+					success:()=> {
+						uni.showToast({
+							title: "复制成功",
+							icon: "none"
+						})
+						this.check_shows=false
+					}
+				})
 			}
 		},
 		watch: {
@@ -300,6 +326,7 @@
 		width: 100%;
 		height: 188rpx;
 		background: #FFFFFF;
+		border-top: 2rpx solid #EEEEEE;
 		position: fixed;
 		padding: 32rpx 40rpx;
 		left: 0;

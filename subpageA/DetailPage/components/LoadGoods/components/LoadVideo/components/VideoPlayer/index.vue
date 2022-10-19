@@ -12,7 +12,7 @@
 		:controls="false"
 		preload="auto"
 		:muted="videoData.loadType==1?false:true" 
-		autoplay
+		autoplay="autoplay"
 		loop
 		:poster="videoData.image"
 		:src="videoData.url">
@@ -50,6 +50,9 @@
 				})
 			},
 			control(){
+				if(this.videoData.loadType==0){
+					return;
+				}
 				if(this.videoNode.paused){
 					this.play()
 					this.isPause=false
@@ -73,9 +76,16 @@
 
 <style lang="scss" scoped>
 	.video {
-		width: 100% ;
-		height: 100% ;
 		position: relative;
+		object-fit: contain;
+		position: absolute;
+		top: 0px;
+		right: 0px;
+		bottom: 0px;
+		left: 0px;
+		width: 100%;
+		height:100% ;
+		margin: auto;
 		.play-box{
 			width: 80rpx;
 			height: 80rpx;
@@ -97,5 +107,8 @@
 	}
 	::v-deep .uni-video-cover{
 		// display: none;
+	}
+	::v-deep .uni-video-container{
+		background: transparent;
 	}
 </style>

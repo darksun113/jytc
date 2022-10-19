@@ -9,56 +9,51 @@ import {
 // 获取多张图片
 // data:object|array
 // keysList:string[] 
-export async function getFilePath(data,keysList){
-	try{
-		if((!Array.isArray(data) || data.toString() !== "[object Object]") && !Array.isArray(keysList)){
+export async function getFilePath(data, keysList) {
+	try {
+		if ((!Array.isArray(data) || data.toString() !== "[object Object]") && !Array.isArray(keysList)) {
 			console.error("getFilePath(a,b) 当前参数不正确，请确保a为object或array 且b为array")
 			return
 		}
-		if(Array.isArray(data)){
-			const temp={}
-			keysList.forEach(key=>{
-				temp[key]=""
-			})
-			for(let i=0;i<data.length;i++){
-				Object.keys(temp).forEach(key=>{
-					if(data[i][key]){
-						temp[key]=data[i][key]
-					}else{
-						console.error(key+"无内容，请检查")
-						return
-					}
+		if (Array.isArray(data)) {
+			await Promise.all(
+				data.map(async (item, index) => {
+					const temp = {}
+					keysList.forEach(key => {
+						temp[key] = ""
+					})
+					Object.keys(temp).forEach(key => {
+						if (data[index][key]) {
+							temp[key] = data[index][key]
+						} else {
+							console.error(key + "无内容，请检查")
+							return
+						}
+					})
+					await getFilesPath_(temp, data, "array", index)
 				})
-				const objData = await getFilesPath_(temp)
-				Object.keys(objData).forEach(key=>{
-					data[i][key] = objData[key]
-				})
-			}
+			)
 			return data
-		}else if(data.toString() == "[object Object]"){
-			const temp={}
-			keysList.forEach(key=>{
-				if(data[key]){
-					temp[key]=data[key]
-				}else{
-					debugger
-					console.error(key+"无内容，请检查")
+		} else if (data.toString() == "[object Object]") {
+			const temp = {}
+			keysList.forEach(key => {
+				if (data[key]) {
+					temp[key] = data[key]
+				} else {
+					console.error(key + "无内容，请检查")
 					return
 				}
 			})
-			const objData = await getFilesPath_(temp)
-			Object.keys(objData).forEach(key=>{
-				data[key] = objData[key]
-			})
+			await getFilesPath_(temp, data, "object")
 			return data
 		}
-	}catch(e){
+	} catch (e) {
 		//TODO handle the exception
 	}
 }
 
 // 获取图片请求
-async function getFilesPath_(data) {
+async function getFilesPath_(data, list, dataType ,indexs) {
 	try {
 		const result = {}
 		const length = Object.keys(data).length
@@ -74,14 +69,14 @@ async function getFilesPath_(data) {
 					const res = await request("/file/applydownload", {
 						uuid: data[key]
 					})
-					if(res.code==0){
+					if (res.code == 0) {
 						store.commit("saveFilePath", {
 							uuid: data[key],
 							path: res.data.url
 						})
 						result[key] = res.data.url
 						idx++
-					}else{
+					} else {
 						idx++
 						console.error(res.errorMsg)
 					}
@@ -92,7 +87,15 @@ async function getFilesPath_(data) {
 			}
 		}
 		if (idx == length) {
-			return result
+			if(dataType == "array"){
+				Object.keys(result).forEach(key => {
+					list[indexs][key] = result[key]
+				})
+			}else{
+				Object.keys(result).forEach(key => {
+					list[key] = result[key]
+				})
+			}
 		}
 	} catch (error) {
 		throw new Error("系统错误", error)
@@ -140,12 +143,16 @@ async function sendRequest(fileData, file) {
 						"Content-Type": fileData.contentType,
 						"Content-Md5": fileData.md5
 					},
-					data:file,
+					data: file,
 					timeout: 30 * 1000,
 				}
-				const res_ = await axios({...data})
+				const res_ = await axios({
+					...data
+				})
 				if (res_.status == 200) {
-					const res_1 = await uni.$http("/file/uploadsuccess", {uuid})
+					const res_1 = await uni.$http("/file/uploadsuccess", {
+						uuid
+					})
 					if (res_1.code == 0) {
 						return {
 							status: "success",
@@ -420,66 +427,69 @@ export function base64ToPath(base64) {
 		reject(new Error('not support'))
 	})
 }
+
 function getNewFileId() {
 	return Date.now() + String(index++)
 }
 // 图片格式转换
-export async function formatImg(file, type,cb) {
-    try {
-        let resFile = null;
-        let urlData = "";
-        // 把image 转换为 canvas对象
-        const imgToCanvas = (image) => {
-            const canvas = document.createElement("canvas");
-            canvas.width = image.width;
-            canvas.height = image.height;
-            canvas.getContext("2d").drawImage(image, 0, 0);
-            return canvas;
-        }
-        //canvas转换为image
-        const canvasToImg = (canvas, type) => {
-            const src = canvas.toDataURL(type);
-            return src;
-        }
-        // base64转blob
-        const Base64UrlToBlob= (urlData)=> {
-            let arr = urlData.split(",");
-            let mime = arr[0].match(/:(.*?);/)[1];
-            let bstr = atob(arr[1]);
-            let n = bstr.length;
-            let u8arr = new Uint8Array(n);
-            while (n--) {
-                u8arr[n] = bstr.charCodeAt(n);
-            }
-            return new Blob([u8arr], {type: mime})
-        }
-        //获取图片信息
-        const getImg = (fn)=>{
-            let imgFile = new FileReader();
-            try {
-                // 使用FileReader来把文件读入内存，并且读取文件中的数据。 readAsDataURL方法可以在浏览器主线程中异步访问文件系统，读取文件中的数据，且读取后 result 为 DataURL, DataURL 可直接 赋值给 img.src
-                imgFile.readAsDataURL(file);
-                imgFile.onload = function (e) {
-                    let image = new Image();
-                    image.src = e.target.result; //base64数据
-                    image.onload = async function () {
-                        fn(image);
-                    }
-                }
-            } catch (e) {
-                console.log("请上传图片！" + e);
-            }
-        }
-        getImg(async image => {
-            let can = await imgToCanvas(image)
-            urlData = await canvasToImg(can, type)
-            resFile = await Base64UrlToBlob(urlData)
-            cb({
-                urlData,
-                resFile
-            })
-        })
-    } catch (error) {
-        throw new Error("系统错误")
-    }
+export async function formatImg(file, type, cb) {
+	try {
+		let resFile = null;
+		let urlData = "";
+		// 把image 转换为 canvas对象
+		const imgToCanvas = (image) => {
+			const canvas = document.createElement("canvas");
+			canvas.width = image.width;
+			canvas.height = image.height;
+			canvas.getContext("2d").drawImage(image, 0, 0);
+			return canvas;
+		}
+		//canvas转换为image
+		const canvasToImg = (canvas, type) => {
+			const src = canvas.toDataURL(type);
+			return src;
+		}
+		// base64转blob
+		const Base64UrlToBlob = (urlData) => {
+			let arr = urlData.split(",");
+			let mime = arr[0].match(/:(.*?);/)[1];
+			let bstr = atob(arr[1]);
+			let n = bstr.length;
+			let u8arr = new Uint8Array(n);
+			while (n--) {
+				u8arr[n] = bstr.charCodeAt(n);
+			}
+			return new Blob([u8arr], {
+				type: mime
+			})
+		}
+		//获取图片信息
+		const getImg = (fn) => {
+			let imgFile = new FileReader();
+			try {
+				// 使用FileReader来把文件读入内存，并且读取文件中的数据。 readAsDataURL方法可以在浏览器主线程中异步访问文件系统，读取文件中的数据，且读取后 result 为 DataURL, DataURL 可直接 赋值给 img.src
+				imgFile.readAsDataURL(file);
+				imgFile.onload = function(e) {
+					let image = new Image();
+					image.src = e.target.result; //base64数据
+					image.onload = async function() {
+						fn(image);
+					}
+				}
+			} catch (e) {
+				console.log("请上传图片！" + e);
+			}
+		}
+		getImg(async image => {
+			let can = await imgToCanvas(image)
+			urlData = await canvasToImg(can, type)
+			resFile = await Base64UrlToBlob(urlData)
+			cb({
+				urlData,
+				resFile
+			})
+		})
+	} catch (error) {
+		throw new Error("系统错误")
+	}
 }

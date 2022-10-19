@@ -44,7 +44,7 @@
 </template>
 
 <script>
-	import mixin from "../../mixins/PuzzleCodeMixin.js"
+	import mixin from "@/libs/mixins/PuzzleCodeMixin.js"
 	export default {
 		data() {
 			return {
@@ -100,7 +100,7 @@
 				})
 			},
 			// 人机验证通过后自定义方法执行
-			doSomething() {
+			afterGetCode() {
 				const url =
 					`../InputVerifyCode/InputVerifyCode?phone=${this.form.phone}&slidingFigureId=${this.slidingFigureId}&inviter=${this.inviter}&prePurchaseId=${this.prePurchaseId}&instanceId=${this.instanceId}&from=${this.from}`
 				this.$routerTo(url)

@@ -38,7 +38,6 @@
 						this.isNoData=true
 					}else{
 						this.orderList=list
-						console.log(this.orderList,list)
 					}
 				})
 			},
@@ -61,6 +60,8 @@
 							}
 							callback(res.data.orders)
 						}
+					}else{
+						this.$toast(res.errorMsg)
 					}
 				}catch(e){
 					//TODO handle the exception

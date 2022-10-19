@@ -2,8 +2,8 @@
 	<view>
 		<IsNoData v-if="!hasData">暂无数据</IsNoData>
 		<view v-else>
-			<ModelOfListFlow :renderList="renderList" v-if="showType==0" :loadType="0"></ModelOfListFlow>
-			<ModelOfWaterFall :renderList="renderList" v-else></ModelOfWaterFall>
+			<ModelOfListFlow :renderList="renderList" v-show="showType==0" :loadType="0"></ModelOfListFlow>
+			<ModelOfWaterFall :renderList="renderList" v-show="showType==1"></ModelOfWaterFall>
 			<IsEnd v-if="isLastItem"></IsEnd>
 		</view>
 	</view>

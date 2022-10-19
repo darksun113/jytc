@@ -31,8 +31,15 @@
 				goodsData: {},
 				buyerList: [],
 				instanceId: "",
-				blindboxId: ""
+				blindboxId: "",
+				timer:null,
 			}
+		},
+		destroyed(){
+			clearTimeout(this.timer)
+		},
+		onShow() {
+			this.init()
 		},
 		onHide() {
 			uni.$emit("destroyAudio")
@@ -40,6 +47,13 @@
 		},
 		onUnload() {
 			uni.$off("toOpenSharePoster")
+			uni.$off("reLoadPage")
+		},
+		mounted(){
+			this.timer = setTimeout(()=> {
+				clearTimeout(this.timer)
+				this.count();
+			}, 3000);
 		},
 		methods: {
 			async getGoodsDetail() {
@@ -58,6 +72,11 @@
 						this.goodsData = objData
 						this.goodsData.loadType = this.loadType
 						this.goodsData.modelType = 4
+						if(true){
+							uni.setNavigationBarTitle({
+								title:this.goodsData.goodsName
+							})
+						}
 					} else {
 						uni.showToast({
 							title: res.errorMsg,
@@ -83,6 +102,11 @@
 						this.goodsData = objData
 						this.goodsData.loadType = this.loadType
 						this.goodsData.modelType = 4
+						if(true){
+							uni.setNavigationBarTitle({
+								title:this.goodsData.goodsName
+							})
+						}
 					} else if (res.code == 1000) {
 						this.toLogin()
 					} else {
@@ -119,7 +143,7 @@
 				if (res.code == 0) {
 					const keyList = ["image", "description", "shopIcon"]
 					this.goodsData = await getFilePath(res.data.goods, keyList)
-					this.goodsData.loadType = this.loadType
+					this.goodsData.loadType = this.loadType	
 				} else {
 					this.$toast(res.errorMsg)
 				}
@@ -131,7 +155,7 @@
 						this.buyerList = list
 					})
 				} else {
-					if (this.loadType == 0 || this.loadType == 3) {
+					if ([0,3].includes(Number(this.loadType))) {
 						this.getGoodsDetail()
 						this.getBuyers(list => {
 							this.buyerList = list
@@ -150,16 +174,24 @@
 				const url = `/pages/login/LoginByMobile/GetVerifyCode/GetVerifyCode?instanceId=${instanceId}`
 				this.$routerTo(url, 'redirect')
 			},
+			async count(){
+				const time = Date.now()
+				const res = await uni.$http("/tracking/report",{
+					eventCode: 'view_gooods',
+					eventTimestamp: parseInt(time/1000),
+					data: this.goodsId,
+				},false)
+			}
 		},
 		onLoad(opt) {
 			// loadType: 0 未购买  1 已购买  2 盲盒   3 后台预览
-			this.loadType = opt.loadType
-			this.goodsId = opt.goodsId ? opt.goodsId : ""
-			this.instanceId = opt.instanceId ? opt.instanceId : ""
-			this.blindboxId = opt.blindboxId ? opt.blindboxId : ""
-		},
-		onShow() {
-			this.init()
+			this.loadType = opt.loadType;
+			this.goodsId = opt.goodsId ? opt.goodsId : "";
+			this.instanceId = opt.instanceId ? opt.instanceId : "";
+			this.blindboxId = opt.blindboxId ? opt.blindboxId : "";
+			uni.$on("reLoadPage",()=>{
+				this.init()
+			})
 		}
 	}
 </script>

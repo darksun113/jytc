@@ -2,22 +2,85 @@
 	<view class="order-info">
 		<view class="goods">
 			<view class="left">
-				<image class="goods-pic" :src="orderInfo.goods.image" mode="aspectFill"></image>
+				<image class="goods-pic" :src="orderInfo.goods.image" 
+				:style="{background:orderInfo.goods.goodsType == 2 ?'#000':''}" 
+				:mode="orderInfo.goods.goodsType == 2 ? 'aspectFit' : 'aspectFill'"></image>
 			</view>
 			<view class="right">
 				<view class="goods-name nowrap">
 					{{orderInfo.goods.goodsName}}
 				</view>
 				<view class="author">
-					<image class="author-pic" :src="orderInfo.goods.shopIcon" mode=""></image>
+					<image class="author-pic" :src="orderInfo.goods.shopIcon" ></image>
 					<view class="author-name nowrap">{{orderInfo.goods.shopName}}</view>
 				</view>
 			</view>
 		</view>
 		<view class="order-detail-box">
-			<view class="order-detail">
+			<view class="pre-oder"  v-if="orderInfo.status>2">
+				<view style="display:flex;padding-top:40rpx">
+					<image style="width: 52rpx; height: 52rpx;padding-right:28rpx" src="../../static/images/1r.svg"></image>
+					<view  class="step">
+						<view class="in-step" v-if="orderInfo.status==3" style="color:#C75943">
+							<view class="left">
+								阶段一：定金（待付款）
+							</view>
+							{{(orderInfo.goods.deposit/100).toFixed(2)}}
+						</view>
+						<view class="in-step" v-if="orderInfo.status==4" style="color:#000000">
+							<view class="left">
+								阶段一：定金（已付）
+							</view>
+							{{(orderInfo.goods.deposit/100).toFixed(2)}}
+						</view>
+						<view class="in-step" v-if="orderInfo.status==5" style="color:#999999;display:flex;">
+							<view class="left">
+								阶段一：定金<view style="color:#C75943">（待退款）</view>
+							</view>
+							{{(orderInfo.goods.deposit/100).toFixed(2)}}
+						</view>
+						<view class="in-step" v-if="orderInfo.status==6" style="color:#999999;display:flex;">
+							<view class="left">
+								阶段一：定金<view style="color:#C75943">（退款失败）</view> 
+							</view>
+							{{(orderInfo.goods.deposit/100).toFixed(2)}}
+						</view>
+						<view class="in-step" v-if="orderInfo.status==7" style="color:#999999;display:flex;">
+							<view class="left">
+								阶段一：定金<view style="color:#C75943">（退款成功）</view>
+							</view>
+							{{(orderInfo.goods.deposit/100).toFixed(2)}}
+						</view>
+					</view>
+				</view>
+				<view style="margin-bottom: -6rpx">
+					<image style="height:60rpx;width:48rpx;padding-top:2rpx" src="../../static/images/dot_line.svg"></image>
+				</view>
+				<view style="padding-bottom:20rpx; display:flex;">
+					<image style="width: 52rpx; height: 52rpx;padding-right:28rpx" src="../../static/images/2g.svg"></image>
+					<view class="step">
+						<view class="in-step" v-if="orderInfo.status == 4 && orderInfo.goods.startTime < curTime" style="color:#C75943">
+							<view class="left">
+								阶段二：尾款（待付款）
+							</view>
+							{{((orderInfo.goods.prepayAmount - orderInfo.goods.deposit)/100).toFixed(2)}}
+						</view>	
+						<view v-else style="color:#999999;width: 100%; display:flex;justify-content: space-between;">
+							<view class="left">
+								阶段二：尾款（未开始）
+							</view>
+							<text>{{((orderInfo.goods.prepayAmount - orderInfo.goods.deposit)/100).toFixed(2)}}</text>
+						</view>
+					</view>
+				</view>
+				<view v-if="orderInfo.status==4">
+					<view class="pay-time" v-if="orderInfo.goods.startTime < curTime" style="padding-left:78rpx; color:#C75943;">{{orderInfo.goods.startTime | formatDate}} 至 {{orderInfo.goods.balanceEndTime | formatDate}}</view>
+					<view class="pay-time" v-else style="padding-left:78rpx; color:#999999;">{{orderInfo.goods.startTime | formatDate}} 至 {{orderInfo.goods.balanceEndTime | formatDate}}</view>
+				</view>
+			</view>
+			<view v-if="orderInfo.status!=0" class="order-detail">
 				<view class="title">订单金额：</view>
-				<view class="detail price">¥ {{(orderInfo.goods.goodsPrice/100).toFixed(2)}}</view>
+				<view class="detail price">¥ {{(orderInfo.goods.prepayAmount/100).toFixed(2)}}</view>
 			</view>
 			<view class="order-detail">
 				<view class="title">订单编号：</view>
@@ -39,8 +102,15 @@
 				default:()=>{}
 			}
 		},
+		mounted(){
+		},
 		data(){
-			return {}
+			return {
+				status:0,
+				curTime:parseInt(Date.now()/1000)
+			}
+		},
+		methods:{
 		},
 		filters:{
 			format(stamp){
@@ -56,6 +126,26 @@
 					const S = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
 					return Y + M + D + H + M2 + S
 				}
+			},
+			formatDate(value) {
+				if(value == undefined){
+					return;
+				}
+				let date = new Date(value * 1000);
+				//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+				let y = date.getFullYear();
+				let MM = date.getMonth() + 1;
+				MM = MM < 10 ? ('0' + MM) : MM; //月补0
+				let d = date.getDate();
+				d = d < 10 ? ('0' + d) : d; //天补0
+				let h = date.getHours();
+				h = h < 10 ? ('0' + h) : h; //小时补0
+				let m = date.getMinutes();
+				m = m < 10 ? ('0' + m) : m; //分钟补0
+				let s = date.getSeconds();
+				s = s < 10 ? ('0' + s) : s; //秒补0
+				// return y + '-' + MM + '-' + d; //年月日
+				return y + '-' + MM + '-' + d + ' ' + h + ':' + m+ ':' + s; //年月日时分秒
 			}
 		}
 	}
@@ -64,9 +154,8 @@
 <style lang="scss" scoped>
 	.order-info{
 		width: 100%;
-		height: 504rpx;
 		background: #fff;
-		padding: 0 40rpx;
+		padding: 0 40rpx 20rpx;
 		.goods{
 			height: 280rpx;
 			padding: 40rpx 0;
@@ -118,10 +207,30 @@
 			}
 		}
 		.order-detail-box{
-			height: 224rpx;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
+			.pre-oder{
+				display:flex;
+				flex-direction:column;
+				font-family: PingFangSC-Regular, PingFang SC;
+				.step{
+					width:100%;
+					display:flex;
+					justify-content:space-between;
+					.in-step{
+						width:100%;
+						display:flex;
+						justify-content:space-between;
+					}
+				}
+				.pay-time{
+					font-size: 24rpx;
+					font-family: SourceHanSansCN-Regular, SourceHanSansCN;
+					font-weight: 400;
+					color: #C75943;
+				}
+			}
 			.order-detail{
 				display: flex;
 				justify-content: space-between;

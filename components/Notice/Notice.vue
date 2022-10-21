@@ -90,14 +90,15 @@
 	.notice-box{
 		width: 530rpx;
 		height: 600rpx;
-		background: linear-gradient(180deg, #F4FBFF 0%, #B6C2CC 100%);
-		background-image: url("../../static/notice/notice_bg.png");
+		background: rgba(35,35,35,0.9);
 		background-repeat: no-repeat;
 		background-position: center center;
 		background-size: cover;
 		border-radius: 20rpx;
 		position: relative;
-		color: #000;
+		color: #fff;
+		box-shadow: 0px 0px 4px 2px rgba(255,255,255,0.5);
+		backdrop-filter: blur(27px);
 		.close_icon{
 			width: 60rpx;
 			height: 60rpx;
@@ -131,36 +132,28 @@
 				font-size: 28rpx;
 				font-family: SourceHanSansCN-Regular, SourceHanSansCN;
 				font-weight: 400;
-				color: #5A5A5A;
+				color: #fff;
 				line-height: 42rpx;
 				text-align: justify;
 				width: 100%;
 				.title{
 					text-align: center;
-					padding: 100rpx 0 28rpx;
+					padding: 80rpx 0 28rpx;
 					font-size: 36rpx;
 					font-family: SourceHanSansCN-Medium, SourceHanSansCN;
 					font-weight: 500;
-					color: #000000;
+					color: #fff;
 					line-height: 54rpx;
 				}
 				.info{
 					word-break: break-word; /* 文本行的任意字内断开，就算是一个单词也会分开 */
-					
 					word-wrap: break-word; /* IE */
-					
 					white-space: -moz-pre-wrap; /* Mozilla */
-					
 					white-space: -hp-pre-wrap; /* HP printers */
-					
 					white-space: -o-pre-wrap; /* Opera 7 */
-					
 					white-space: -pre-wrap; /* Opera 4-6 */
-					
 					white-space: pre; /* CSS2 */
-					
 					white-space: pre-wrap; /* CSS 2.1 */
-					
 					white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
 				}
 			}

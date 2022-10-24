@@ -57,7 +57,7 @@
 				})
 				this.isLogin = this.$checkLogin()
 				if (this.isLogin) {
-					this.$updateUserInfo()
+					this.$store.commit("getUserInfo")
 				}
 			},
 			closePop() {

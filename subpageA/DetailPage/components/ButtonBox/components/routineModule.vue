@@ -44,11 +44,7 @@
 				const boo=this.$checkLogin()
 				if(boo){
 					const certificationStatus=uni.getStorageSync("userInfo").certificationStatus
-					if(certificationStatus==1){
-						this.getOrderNo()
-					}else{
-						this.$emit("showIdentityShow")
-					}
+					certificationStatus == 1 ? this.getOrderNo() : this.$emit("showIdentityShow");
 				}else{
 					this.$emit("showLoginTip")
 				}

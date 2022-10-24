@@ -1,4 +1,5 @@
 
+import store from "../../store"
 var localURL;
 function getLocal(){
 	// const reg_pay_url="http://h5.jytc-test.binavy.com/subpageB/OrderPage/OrderPage"
@@ -85,6 +86,7 @@ function afterLogin(res,code){
 			icon:"success",
 			duration:2000
 		})
+		store.dispatch("getUserInfo");
 		setTimeout(()=>{
 			uni.reLaunch({
 				url:"/pages/home/home"

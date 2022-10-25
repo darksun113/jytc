@@ -20,7 +20,10 @@
 		},
 	}
 </script>
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev
 <style scoped lang="scss">
 	.goods-box{
 		min-height: 100vh;

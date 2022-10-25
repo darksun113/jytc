@@ -28,7 +28,7 @@
 	}
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
 	.goods-box{
 		min-height: 100vh;
 	}

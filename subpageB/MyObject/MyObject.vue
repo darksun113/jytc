@@ -1,13 +1,15 @@
 <template>
 	<PageTemp>
-		<nav-bar @changeNav="changeNav"></nav-bar>
-		<scroll-view v-if="hasData" class="my-object" scroll-y="true" @scrolltolower="updateList">
-			<CardOfObject :item="item" v-for="(item,index) in goodsList" :key="index" :loadType="loadType" @toOpenBlindBox="toOpenBlindBox" />
-			<IsEnd v-show="isEnd"></IsEnd>
+		<scroll-view class="my-object" scroll-y="true" @scrolltolower="updateList">
+			<nav-bar @changeNav="changeNav"></nav-bar>
+			<view v-if="hasData">
+				<CardOfObject :item="item" v-for="(item,index) in goodsList" :key="index" :loadType="loadType" @toOpenBlindBox="toOpenBlindBox" />
+				<IsEnd v-show="isEnd"></IsEnd>
+			</view>
+			<IsNoObject v-else>
+				暂无藏品
+			</IsNoObject>
 		</scroll-view>
-		<IsNoObject v-else>
-			暂无藏品
-		</IsNoObject>
 		<BlindToGoods :isShow="isOpenBlind" @openBlindSuccess="openBlindSuccess" :blindData="blindDataRes" />
 	</PageTemp>
 </template>
@@ -110,10 +112,8 @@
 <style lang="scss">
 	.my-object {
 		box-sizing: border-box;
-		// height: calc(100% - 112rpx);
 		height: 100%;
-		padding: 40rpx;
-		// padding-top: 0;
+		padding: 0 40rpx 40rpx 40rpx;
 		overflow: auto;
 	}
 </style>

@@ -27,7 +27,6 @@
 				isLogin: false,
 				isShow: false,
 				popUpshow: false,
-				// popQrshow:false,
 			};
 		},
 		onShow() {
@@ -57,7 +56,7 @@
 				})
 				this.isLogin = this.$checkLogin()
 				if (this.isLogin) {
-					this.$store.commit("getUserInfo")
+					this.$updateUserInfo()
 				}
 			},
 			closePop() {

@@ -30,8 +30,7 @@
 			
 		},
 		onShow() {
-			this.$store.commit("getUserInfo")
-			// this.$updateUserInfo()
+			this.$updateUserInfo()
 		},
 		methods:{
 			// 修改名字

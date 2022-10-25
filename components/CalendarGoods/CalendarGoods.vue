@@ -23,7 +23,10 @@
 				</view>
 				<!-- 价格 -->
 				<view class="price">
-					<text class="num">¥&nbsp;{{(item.price/100||88.88).toFixed(2)}}</text>
+					<view class="limit-get" v-if="false">
+						限时领取
+					</view>
+					<text class="num" v-else>¥&nbsp;{{(item.price/100||88.88).toFixed(2)}}</text>
 					<view class="PreSell" v-if="item.isPreSaleGoods">
 						<text class="text">预售</text>
 					</view>
@@ -166,7 +169,13 @@
 					justify-content: space-between;
 					align-items: center;
 					margin-top: 24rpx;
-
+					.limit-get{
+						font-size: 28rpx;
+						// font-family: PingFangSC-Medium, PingFang SC;
+						font-weight: 500;
+						color: #28D8E5;
+						line-height: 40rpx;
+					}
 					.num {
 						width: 160rpx;
 						height: 56rpx;

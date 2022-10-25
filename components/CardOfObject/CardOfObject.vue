@@ -17,7 +17,7 @@
 			<view>
 				<view class="goods-code-box" v-if="loadType_ == 0 || loadType_ == 2">
 					<view class="code" v-if="loadType_ == 0">
-						#{{item.goodsCode}}/{{item.totalNumber}}
+						#{{item.goodsCode}}
 					</view>
 					<view class="limit" v-else>
 						限量 10000

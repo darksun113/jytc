@@ -3,7 +3,6 @@
 		<scroll-view class="home" scroll-y="true" @scrolltolower="updateList">
 			<!-- <Search /> -->
 			<Banner />
-			
 			<view class="container">
 				<StickyNav ref="nav" @changeShowType="changeShowType" @switchOverNav="switchOverNav" @resetPage="reset" />
 				<!-- 数字藏品 -->
@@ -290,7 +289,7 @@
 		position: relative;
 		.container {
 			position: relative;
-			min-height: calc(100% - 280rpx - 150rpx - 134rpx);
+			min-height: calc(100% - 150rpx - 134rpx);
 		}
 	}
 </style>

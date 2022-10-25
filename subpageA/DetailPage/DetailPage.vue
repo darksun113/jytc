@@ -50,6 +50,13 @@
 			uni.$off("reLoadPage")
 		},
 		mounted(){
+			uni.$on("getSuccess",()=>{
+				this.$toast("领取成功","success");
+				const time = setTimeout(()=>{
+					clearTimeout(time);
+					this.init();
+				},1500)
+			})
 			this.timer = setTimeout(()=> {
 				clearTimeout(this.timer)
 				this.count();

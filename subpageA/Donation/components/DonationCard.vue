@@ -8,7 +8,7 @@
 				{{ goodsData.goodsName }}
 			</view>
 			<view class="right_tab">
-				<view class="goodsCode">#{{goodsData.goodsCode}}/{{goodsData.totalNumber}}</view>
+				<view class="goodsCode">#{{goodsData.goodsCode}}</view>
 			</view>
 			<view class="right_bot">
 				<image class="avater" :src="goodsData.shopIcon" mode=""></image>

@@ -1,9 +1,20 @@
 <template>
 	<view class="btn-box">
-		<view class="price">
+		<view class="price" v-if="goodsData.goodsPrice > 0">
 			¥ {{(goodsData.goodsPrice/100).toFixed(2)}}
 		</view>
-		<view class="">
+		<template v-if="goodsData.goodsPrice === 0 ">
+			<view class="btn w100" style="opacity: 0.65;" v-if="goodsData.limit">
+				已领取
+			</view>
+			<view class="btn w100" style="opacity: 0.65;" v-else-if="goodsData.goodsStatus == 3">
+				已领完
+			</view>
+			<view class="btn w100" @click="toOrder(1)" :style="{opacity: goodsData.goodsStatus == 5 ? '1':'0.65'}" v-else>
+				立即领取
+			</view>
+		</template>
+		<template v-else>
 			<view class="btn" style="opacity: 0.65;" v-if="goodsData.goodsStatus == 3">
 				已售罄
 			</view>
@@ -11,16 +22,16 @@
 				已结束
 			</view>
 			<!-- 预购白名单 -->
-			<view class="btn" @click="toOrder" v-else-if="goodsData.selling==1 && goodsData.goodsStatus == 0">
+			<view class="btn" @click="toOrder(0)" v-else-if="goodsData.selling==1 && goodsData.goodsStatus == 0">
 				购买
 			</view>
 			<view class="btn" style="opacity: 0.65;" v-else-if="goodsData.goodsStatus == 0">
 				即将开售
 			</view>
-			<view class="btn" @click="toOrder" v-else>
+			<view class="btn" @click="toOrder(0)" v-else>
 				购买
 			</view>
-		</view>
+		</template>
 	</view>
 </template>
 
@@ -37,25 +48,30 @@
 				curTime:parseInt(Date.now()/1000)
 			}
 		},
-		mounted() {
-		},
 		methods:{
-			toOrder(){
+			/**
+			 * @param {number} optType 0 订单流程 1 0元购领取
+			 */
+			toOrder(optType){
 				const boo=this.$checkLogin()
 				if(boo){
 					const certificationStatus=uni.getStorageSync("userInfo").certificationStatus
-					certificationStatus == 1 ? this.getOrderNo() : this.$emit("showIdentityShow");
+					certificationStatus == 1 ? this.getOrderNo(optType) : this.$emit("showIdentityShow");
 				}else{
 					this.$emit("showLoginTip")
 				}
 			},
-			async getOrderNo(){
+			async getOrderNo(optType){
 				try{
 					const goodsId = this.goodsData.goodsId
 					const res = await uni.$http("/order/place",{goodsId})
 					if(res.code==0){
-						const url = `/subpageB/OrderPage/OrderPage?orderNo=${res.data.orderNo}`
-						this.$routerTo(url,'redirect')
+						if(optType == 1){
+							uni.$emit("getSuccess")
+						}else{
+							const url = `/subpageB/OrderPage/OrderPage?orderNo=${res.data.orderNo}`
+							this.$routerTo(url,'redirect')
+						}
 					}else{
 						this.$toast(res.errorMsg)
 					}
@@ -99,6 +115,9 @@
 			font-weight: 500;
 			line-height: 80rpx;
 			color: #000000;
+		}
+		.w100{
+			width: 100%;
 		}
 	}
 	

@@ -53,7 +53,7 @@
 							{{posterData.goodsName&&posterData.goodsName.length>22? posterData.goodsName.substr(0,12)+'...' : posterData.goodsName}}
 						</view>
 						<view class="right">
-							#{{posterData.goodsCode}}/{{posterData.totalNum}}
+							#{{posterData.goodsCode}}
 						</view>
 					</view>
 					<view class="poster-goods-detail">

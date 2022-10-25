@@ -56,6 +56,9 @@ export default new Vuex.Store({
 			}
 			uni.setStorageSync("userInfo",state.userInfo)
 		},
+		getUserInfo(state){	
+			state.userInfo = uni.getStorageSync("userInfo");
+		},
 		getToken(state,token){
 			state.token=token
 		}

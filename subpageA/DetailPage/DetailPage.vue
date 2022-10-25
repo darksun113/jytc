@@ -50,6 +50,13 @@
 			uni.$off("reLoadPage")
 		},
 		mounted(){
+			uni.$on("getSuccess",()=>{
+				this.$toast("领取成功","success");
+				const time = setTimeout(()=>{
+					clearTimeout(time);
+					this.init();
+				},1500)
+			})
 			this.timer = setTimeout(()=> {
 				clearTimeout(this.timer)
 				this.count();
@@ -200,6 +207,7 @@
 	.detail-page {
 		height: 100%;
 		overflow: auto;
+		overflow-x: hidden;
 		position: relative;
 		background: #04030A;
 	}

@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<IsNoData v-if="!hasData">暂无数据</IsNoData>
-		<view v-else>
+		<view class="goods-box" v-else>
 			<ModelOfListFlow :renderList="renderList" v-show="showType==0" :loadType="0"></ModelOfListFlow>
 			<ModelOfWaterFall :renderList="renderList" v-show="showType==1"></ModelOfWaterFall>
 			<IsEnd v-if="isLastItem"></IsEnd>
@@ -29,4 +29,7 @@
 </script>
 
 <style lang="scss" scoped>
+	.goods-box{
+		min-height: 100vh;
+	}
 </style>

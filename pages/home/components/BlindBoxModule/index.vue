@@ -1,7 +1,7 @@
 <template>
-	<view>
+	<view >
 		<IsNoBlind v-if="!hasData">暂无盲盒，敬请期待！</IsNoBlind>
-		<view v-else>
+		<view class="goods-box" v-else>
 			<ModelOfListFlow :renderList="renderList" :loadType="2" :isBlind="true"></ModelOfListFlow>
 			<IsEnd v-if="isLastItem"></IsEnd>
 		</view>
@@ -21,5 +21,8 @@
 	}
 </script>
 
-<style>
+<style scoped lang="scss">
+	.goods-box{
+		min-height: 100vh;
+	}
 </style>

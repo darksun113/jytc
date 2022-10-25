@@ -31,7 +31,7 @@
 	<view v-else-if="orderInfo.status == 4&& onSale==false" class="topBox1">
 		<view class="tabRight">
 			<view class="" style="font-size: 38rpx"> 尾款支付-未开始 </view>
-			<view class="pay-time" style="color:#eca800;">{{orderInfo.goods.startTime | formatDate}} 至 {{orderInfo.goods.endTime | formatDate}}</view>
+			<view class="pay-time" style="color:#eca800;">{{orderInfo.goods.startTime | formatDate}} 至 {{orderInfo.goods.balanceEndTime | formatDate}}</view>
 		</view>
 	</view>
 	<view v-else-if="orderInfo.status == 5" class="topBox-s5">

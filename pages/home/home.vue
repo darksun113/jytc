@@ -3,8 +3,8 @@
 		<scroll-view class="home" scroll-y="true" @scrolltolower="updateList">
 			<Search />
 			<Banner />
-			<StickyNav ref="nav" @changeShowType="changeShowType" @switchOverNav="switchOverNav" @resetPage="reset" />
 			<view class="container">
+				<StickyNav ref="nav" @changeShowType="changeShowType" @switchOverNav="switchOverNav" @resetPage="reset" />
 				<!-- 数字藏品 -->
 				<DigitalCollection v-show="navType==0" :renderList="renderList" :hasData="hasData" :isLastItem="isLastItem" :showType="showType"/>
 				<!-- 盲盒 -->
@@ -286,10 +286,10 @@
 		width: 100%;
 		overflow: auto;
 		color: #FFFFFF;
-
+		position: relative;
 		.container {
 			position: relative;
-			min-height: calc(100% - 280rpx - 150rpx - 134rpx);
+			min-height: calc(100% - 150rpx - 134rpx);
 		}
 	}
 </style>

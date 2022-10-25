@@ -1,13 +1,52 @@
 {
-  "dependencies": {
-    "axios": "^0.27.2",
-    "clipboard": "^2.0.11",
-    "file-saver": "^2.0.5",
-    "fingerprintjs2": "^2.1.4",
-    "html2canvas": "^1.4.1",
-    "jweixin-module": "^1.6.0",
-    "mui-player": "^1.6.1",
-    "three": "^0.140.2",
-    "three-obj-mtl-loader": "^1.0.3"
-  }
+	"uni-app": {
+		"scripts": {
+			"h5dev": {
+				"title": "jytc-h5-开发版",
+				"browser": "chrome",
+				"env": {
+					"UNI_PLATFORM": "h5",
+					"VUE_APP_BASE_URL": "http://120.197.126.61:18940"
+				},
+				"define": {
+					"H5-DEV": true
+				}
+			},
+			"h5test": {
+				"title": "jytc-h5-测试版",
+				"browser": "chrome",
+				"env": {
+					"UNI_PLATFORM": "h5",
+					"VUE_APP_BASE_URL": "http://120.197.126.61:18940",
+					"MY_TEST": "test-variable"
+				},
+				"define": {
+					"H5-TEST": true
+				}
+			},
+			"h5prod": {
+				"title": "jytc-h5-生产版",
+				"browser": "chrome",
+				"env": {
+					"UNI_PLATFORM": "h5",
+					"VUE_APP_BASE_URL": "https://api.jialex.cn"
+				},
+				"define": {
+					"H5-PROD": true
+				}
+			}
+		}
+
+	},
+	"dependencies": {
+		"axios": "^0.27.2",
+		"clipboard": "^2.0.11",
+		"file-saver": "^2.0.5",
+		"fingerprintjs2": "^2.1.4",
+		"html2canvas": "^1.4.1",
+		"jweixin-module": "^1.6.0",
+		"mui-player": "^1.6.1",
+		"three": "^0.140.2",
+		"three-obj-mtl-loader": "^1.0.3"
+	}
 }

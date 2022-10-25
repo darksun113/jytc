@@ -42,7 +42,10 @@
 				{{item.goodsName}}
 			</view>
 			<view class="price-box">
-				<view class="price">
+				<view class="limit-get" v-if="item.goodsPrice == 0">
+					限时领取
+				</view>
+				<view class="price" v-else>
 					<view class="pre-pay-info-box" v-if="item.goodsType==3  && [0,6].includes(item.goodsStatus)">
 						<view class="pre-item">
 							<text class="pre-title">预售价：</text>
@@ -184,6 +187,14 @@
 			align-items: center;
 			justify-content: space-between;
 			align-items: flex-end;
+			margin-top: 40rpx;
+			.limit-get{
+				font-size: 28rpx;
+				// font-family: PingFangSC-Medium, PingFang SC;
+				font-weight: 500;
+				color: #28D8E5;
+				line-height: 40rpx;
+			}
 			.price{
 				font-size: 44rpx;
 				line-height: 60rpx;
@@ -191,7 +202,7 @@
 			.goods-count{
 				padding: 6rpx 4rpx;
 				font-size: 20rpx;
-				font-family: PingFangSC-Regular, PingFang SC;
+				// font-family: PingFangSC-Regular, PingFang SC;
 				font-weight: 400;
 				color: #999999;
 				line-height: 28rpx;

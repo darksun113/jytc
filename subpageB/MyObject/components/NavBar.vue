@@ -35,10 +35,10 @@
 		line-height: 48rpx;
 		font-family: SourceHanSansCN-Medium, SourceHanSansCN;
 		color: #999999;
+		background: #222;
+		z-index: 1;
 		position: sticky;
 		top: 0;
-		z-index: 1;
-		background: #222;
 		.active{
 			font-weight: 500;
 			color: #FFFFFF;

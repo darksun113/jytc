@@ -1,6 +1,4 @@
-const devBaseUrl = "http://120.197.126.61:18940";
-const proBaseUrl = "https://api.jialex.cn";
-const baseUrl =process.env.NODE_ENV=="development" ? devBaseUrl : devBaseUrl;	
+
 import {isMap_PingAn} from "@/libs/jsm/PingAn-app.js";
 
 const request = (url = '', date = {},loading=true, type = 'POST', header = {}) => {
@@ -9,7 +7,7 @@ const request = (url = '', date = {},loading=true, type = 'POST', header = {}) =
 	return new Promise((resolve, reject) => {
 		let data = {
 			method: type,
-			url: baseUrl + url,
+			url: process.env.VUE_APP_BASE_URL + url,
 			data: date,
 			header: {
 				'Content-Type': 'application/json',

@@ -51,7 +51,6 @@ const app = new Vue({
 	store
 })
 app.$mount()
-
 Vue.prototype.$checkAI = async function(type) {
 	const res1 = uni.getStorageSync('isAI')
 	if (res1 == true) {

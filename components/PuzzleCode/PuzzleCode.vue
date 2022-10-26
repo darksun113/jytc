@@ -2,7 +2,7 @@
 	<!-- 本体部分 -->
 	<div :id="id" :class="['vue-puzzle-vcode', { show_: show }]" @mousedown="onCloseMouseDown" @mouseup="onCloseMouseUp"
 		@touchstart="onCloseMouseDown" @touchend="onCloseMouseUp">
-		<div class="vue-auth-box_" :style="{'border-radius':borderRadius+'px'}" @mousedown.stop @touchstart.stop>
+		<div class="vue-auth-box_" :style="{'border-radius':borderRadius+'px',display:show ?'block':'none'}" @mousedown.stop @touchstart.stop>
 			<div class="auth-body_" :style="`height: ${canvasHeight}px`">
 				<!-- 主图，有缺口 -->
 				<div v-if="!image1" style="width:300px;height:150px;background:#000000"></div>
@@ -301,14 +301,13 @@
 </script>
 <style lang="less" scoped>
 	.vue-puzzle-vcode {
-		z-index: 999999;
+		z-index: 99999;
 		position: fixed;
 		top: 0;
 		left: 0;
 		bottom: 0;
 		right: 0;
 		background-color: rgba(0, 0, 0, 0.3);
-		z-index: 999;
 		opacity: 0;
 		pointer-events: none;
 		transition: opacity 200ms;

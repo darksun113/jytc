@@ -24,14 +24,14 @@
 					<view>ID：</view> 
 					<view class="nowrap_s" style="max-width: 280rpx;">{{$store.state.userInfo.buyerId}}</view>
 				</view>
-				<image class="copy-icon" src="@/static/images/copy_icon.svg" @click="copy($store.state.userInfo.buyerId)"></image>
+				<image class="copy-icon" src="@/static/images/copy_icon.svg" @click.stop="copy($store.state.userInfo.buyerId)"></image>
 			</view>
 			<view class="user-info-item" style="margin-top: 16rpx;">
 				<view class="id-style">
 					<view style="min-width: 168rpx;">区块链地址：</view> 
 					<view class="nowrap_s" style="max-width: 280rpx;">{{$store.state.userInfo.blockchainAddress}}</view>
 				</view>
-				<image class="copy-icon" src="@/static/images/copy_icon.svg" @click="copy($store.state.userInfo.blockchainAddress)"></image>
+				<image class="copy-icon" src="@/static/images/copy_icon.svg" @click.stop="copy($store.state.userInfo.blockchainAddress)"></image>
 			</view>
 			<view class="fans-focus">
 				<view class="item" @click="toFansPage(0)">

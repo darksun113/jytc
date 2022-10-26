@@ -5,7 +5,7 @@
 				转赠对象：{{buyerInfo.fullName}}
 			</view>
 			<view class="text-tip">是否将该藏品转赠给对方，转赠完成后无法撤销</view>
-			<view class="btn" @click="toInhert">确认传承</view>
+			<view class="btn" @click="toInhert">确认转赠</view>
 		</view>
 	</u-popup>
 </template>

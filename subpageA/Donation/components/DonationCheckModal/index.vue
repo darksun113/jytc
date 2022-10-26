@@ -23,7 +23,7 @@
 		<PuzzleCode style="z-index:9999999"
 			@resetPuzzle="starCheckRobot" 
 			:bind="$attrs" :show="isPuzzleShow" 
-			:phone="phone" verifyType="2" loadType="4"
+			:phone="phone" :verifyType="2" :loadType="4"
 			@success="puzzleSuccess" @close="puzzleClose" />
 	</view>
 </template>
@@ -41,6 +41,7 @@
 				inhritInput:false,
 				transInfo:{},
 				content: "",
+				type:4,
 				titleStyle: {
 					fontSize: '34rpx',
 					color: '#FFF',
@@ -90,7 +91,7 @@
 			},
 			async toInhert(code){
 				try{
-					const res = await uni.$http("goods/transfer",{
+					const res = await uni.$http("/goods/transfer",{
 						goodsId:this.transInfo.goodsId,
 						instanceId:this.transInfo.instanceId,
 						to:this.transInfo.buyerId,
@@ -153,7 +154,7 @@
 			
 		}
 		.u-line{
-			border-bottom: none;
+			border-bottom: none !important;
 		}
 		.u-transition{
 			z-index: 10075 !important;

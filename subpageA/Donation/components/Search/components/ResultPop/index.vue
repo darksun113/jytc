@@ -2,9 +2,9 @@
 	<u-popup :show="show" mode="bottom" @close="close" :mask-close-able="false" :closeable="true">
 		<view class="res-box">
 			<view class="user-name">
-				传承对象：{{buyerInfo.fullName}}
+				转赠对象：{{buyerInfo.fullName}}
 			</view>
-			<view class="text-tip">是否将该藏品传承给对方，传承完成后无法撤销</view>
+			<view class="text-tip">是否将该藏品转赠给对方，转赠完成后无法撤销</view>
 			<view class="btn" @click="toInhert">确认传承</view>
 		</view>
 	</u-popup>

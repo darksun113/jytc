@@ -21,7 +21,8 @@
 		},
 		methods: {
 			toDonationPage() {
-				const {goodsId , goodsInstanceId} = this.goodsData
+				const {image,goodsName,goodsCode,shopIcon,shopName,goodsId , goodsInstanceId} = this.goodsData
+				uni.setStorageSync("donationGoods",{image,goodsName,goodsCode,shopIcon,shopName});
 				const url = `/subpageA/Donation/Donation?goodsId=${goodsId}&instanceId=${goodsInstanceId}`;
 				this.$routerTo(url)
 			}

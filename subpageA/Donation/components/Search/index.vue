@@ -1,7 +1,7 @@
 <template>
 	<view class="search-box">
 		<u--input v-model="searchPhone" placeholder="请输入手机号码" color="#fff" :custom-style="searchStyle" border="none"  type="number" maxlength="11" placeholder-style="color: #666666"></u--input>
-		<view class="search-btn" @click="toFindBuyer">发起传承</view>
+		<view class="search-btn" @click="toFindBuyer">发起转增</view>
 		<ResultPop :isShow="isShow" :searchPhone="searchPhone" :buyerInfo="buyerInfo" @close="isShow=false" :instanceId="instanceId" :goodsId="goodsId"></ResultPop>
 	</view>
 </template>
@@ -42,17 +42,15 @@
 			// 搜索用户
 			async searchBuyerInfo() {
 				try {
-					this.buyerInfo.fullName="Tom"
-					this.isShow = true
-					// const res = await uni.$http("user/getInfoByPhone", {
-					// 	phone: this.searchPhone
-					// })
-					// if (res.code == 0) {
-					// 	this.buyerInfo=res.data
-					// 	this.isShow = true
-					// }else{
-					// 	this.$toast(res.errorMsg)
-					// }
+					const res = await uni.$http("/user/getInfoByPhone", {
+						phone: this.searchPhone
+					})
+					if (res.code == 0) {
+						this.buyerInfo=res.data
+						this.isShow = true
+					}else{
+						this.$toast(res.errorMsg)
+					}
 				} catch (e) {
 					//TODO handle the exception
 				}

@@ -81,6 +81,10 @@
 			borderRadius: {
 				type: Number,
 				default: 10
+			},
+			loadType: {
+				type: Number,
+				default: 1
 			}
 		},
 		/** 私有数据 **/
@@ -238,7 +242,8 @@
 				try {
 					const res = await uni.$http("/puzzle/verify", {
 						x,
-						id: this.roundId
+						id: this.roundId,
+						type:this.loadType
 					})
 					if (res.data) {
 						// 成功

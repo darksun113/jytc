@@ -4,8 +4,7 @@
 		<view class="goodsCode_box" v-if="goodsData.loadType==1">
 			<view class="goodsCode">#{{goodsData.goodsCode}}</view>
 		</view>
-		<view class="" style="width: 160rpx;"></view>
-		<!-- <donation-and-collection :goodsData="goodsData"/> -->
+		<donation-and-collection :goodsData="goodsData"/>
 	</view>
 </template>
 

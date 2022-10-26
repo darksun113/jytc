@@ -2,9 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
-import {
-	getFilePath
-} from "@/utils/tools.js"
+import { getFilePath } from "@/utils/tools.js"
 export default new Vuex.Store({
 	state: {
 		filePath: {},

@@ -1,7 +1,6 @@
 <template>
 	<u-popup :show="show" mode="center" :mask="false" bgColor="transparent">
 		<view class="center-pop">
-			<!-- <img v-lazy class="close_icon" src="@/static/images/close_preview_icon.svg" alt="" @click="$emit('close')"> -->
 			<slot></slot>
 		</view>
 	</u-popup>

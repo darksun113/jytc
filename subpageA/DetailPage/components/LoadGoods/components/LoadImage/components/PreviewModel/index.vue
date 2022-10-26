@@ -1,6 +1,6 @@
 <template>
 	<view class="pre-image">
-		<img v-lazy class="close_icon" src="@/static/images/close_preview_icon.svg" alt="" @click="$emit('close')">
+		<image class="close_icon" src="@/static/images/close_preview_icon.svg" @click="$emit('close')"></image>
 		<view class="scaleImg">
 			<movable-area>
 				<movable-view direction="all" scale-value="1" scale-min="0.1" scale="true" scale-max="2" :damping="100" out-of-bounds="false">
@@ -24,6 +24,9 @@
 </script>
 
 <style lang="scss" scoped>
+	img{
+		pointer-events: auto;
+	}
 	.pre-image {
 		width: 100vw;
 		height: 100vh;

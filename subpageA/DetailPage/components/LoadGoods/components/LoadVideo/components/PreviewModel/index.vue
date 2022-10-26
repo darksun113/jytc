@@ -1,6 +1,6 @@
 <template>
 	<view class="pre-box">
-		<img v-lazy class="close_icon" src="@/static/images/close_preview_icon.svg" alt="" @click="$emit('close')">
+		<image class="close_icon" src="@/static/images/close_preview_icon.svg" mode="" @click="$emit('close')"></image>
 		<view class="pre">
 			<view id="mui-pre-player"></view>
 		</view>

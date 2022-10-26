@@ -1,6 +1,6 @@
 <template>
 	<view class="pre-box">
-		<img v-lazy class="close_icon" src="@/static/images/close_preview_icon.svg" alt="" @click="close">
+		<image class="close_icon" src="@/static/images/close_preview_icon.svg" @click="close"></image>
 		<view class="pre">
 			<image :src="audioData.image" mode="aspectFill"></image>
 			<audioDom ref="audioNode" :url="audioData.url" :endPic="endPic" :startPic="stattPic"></audioDom>

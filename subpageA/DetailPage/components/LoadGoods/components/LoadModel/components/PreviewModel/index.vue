@@ -6,7 +6,7 @@
 				<text :style="{color:showType==0?'#fff':'#999',fontWeight:showType==0? 'bold':'normal'}" @click="changeModule(0)">旋转</text>
 				<text :style="{color:showType==0?'#999':'#fff',fontWeight:showType==1? 'bold':'normal'}" @click="changeModule(1)">平移</text>
 			</view>
-			<img v-lazy class="close_icon" src="@/static/images/close_preview_icon.svg" alt="" @click="$emit('close')">
+			<image class="close_icon" src="@/static/images/close_preview_icon.svg" @click="$emit('close')"></image>
 		</view>
 		<LoadModelPre ref="LoadModelPre" v-if="goodsData.threeD && goodsData.mtl && goodsData.mapping && loadType==2"
 			:OBJPath="goodsData.threeD" :MTLPath="goodsData.mtl" :MAPPath="goodsData.mapping"

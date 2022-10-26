@@ -78,6 +78,9 @@
 </script>
 
 <style lang="scss">
+	img{
+		pointer-events: auto;
+	}
 .center-pop{
 	width: 100vw;
 	height: 100vh;

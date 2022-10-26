@@ -4,7 +4,7 @@
 		<view class="poster-page">
 			<image v-if="posterData.loadType==3" class="download_pic_icon" src="@/static/新增icon/保存.svg" @click="saveFile"></image>
 			<image v-else class="download_pic_icon" src="@/static/images/download_pic_icon.svg" @click="saveFile"></image>
-			<image v-if="posterUrl" :src="posterUrl" mode="" style="height: 740rpx;width: 100%;"></image>
+			<img v-if="posterUrl" :src="posterUrl" style="height: 740rpx;width: 100%;" />
 			<view class="poster-box" id="pagePoster" v-else>
 				<view class="poster-pic">
 					<img v-lazy  v-if="posterData.loadType!=3" crossorigin="anonymous" :src="posterData.posterImg + '?' + new Date().getTime()" >
@@ -84,7 +84,6 @@
 				取消
 			</view>
 		</view>
-		
 		<view class="mask" v-if="!posterUrl">
 			<u-loading-icon mode="semicircle" size="36"></u-loading-icon>
 		</view>
@@ -205,7 +204,10 @@
 		font-size: 32rpx;
 	}
 	view {
-		box-sizing: -box;
+		box-sizing: border-box;
+	}
+	img{
+		pointer-events: auto;
 	}
 	.mask{
 		width: 100%;

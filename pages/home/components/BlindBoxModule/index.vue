@@ -26,6 +26,6 @@
 >>>>>>> dev
 <style scoped lang="scss">
 	.goods-box{
-		min-height: 100vh;
+		min-height: calc(100vh - 100vw * 140 / 375 - 90rpx);
 	}
 </style>

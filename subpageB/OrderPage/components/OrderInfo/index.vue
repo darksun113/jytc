@@ -19,7 +19,9 @@
 		<view class="order-detail-box">
 			<view class="pre-oder"  v-if="orderInfo.status>2">
 				<view style="display:flex;padding-top:40rpx">
-					<image style="width: 52rpx; height: 52rpx;padding-right:28rpx" src="../../static/images/1r.svg"></image>
+					<image v-if="orderInfo.status==3" style="width: 52rpx; height: 52rpx;padding-right:28rpx" src="../../static/images/1r.svg"></image>
+					<image v-else-if="orderInfo.status==4" style="width: 52rpx; height: 52rpx;padding-right:28rpx" src="../../static/images/1b.svg"></image>
+					<image v-else style="width: 52rpx; height: 52rpx;padding-right:28rpx" src="../../static/images/1g.svg"></image>
 					<view  class="step">
 						<view class="in-step" v-if="orderInfo.status==3" style="color:#C75943">
 							<view class="left">
@@ -35,19 +37,19 @@
 						</view>
 						<view class="in-step" v-if="orderInfo.status==5" style="color:#999999;display:flex;">
 							<view class="left">
-								阶段一：定金<view style="color:#C75943">（待退款）</view>
+								阶段一：定金<text style="color:#C75943">（待退款）</text>
 							</view>
 							{{(orderInfo.goods.deposit/100).toFixed(2)}}
 						</view>
 						<view class="in-step" v-if="orderInfo.status==6" style="color:#999999;display:flex;">
 							<view class="left">
-								阶段一：定金<view style="color:#C75943">（退款失败）</view> 
+								阶段一：定金<text style="color:#C75943">（退款失败）</text> 
 							</view>
 							{{(orderInfo.goods.deposit/100).toFixed(2)}}
 						</view>
 						<view class="in-step" v-if="orderInfo.status==7" style="color:#999999;display:flex;">
 							<view class="left">
-								阶段一：定金<view style="color:#C75943">（退款成功）</view>
+								阶段一：定金<text style="color:#C75943">（退款成功）</text>
 							</view>
 							{{(orderInfo.goods.deposit/100).toFixed(2)}}
 						</view>
@@ -78,9 +80,9 @@
 					<view class="pay-time" v-else style="padding-left:78rpx; color:#999999;">{{orderInfo.goods.startTime | formatDate}} 至 {{orderInfo.goods.balanceEndTime | formatDate}}</view>
 				</view>
 			</view>
-			<view v-if="orderInfo.status!=0" class="order-detail">
+			<view v-if="[0].includes(orderInfo.status)" class="order-detail">
 				<view class="title">订单金额：</view>
-				<view class="detail price">¥ {{(orderInfo.goods.prepayAmount/100).toFixed(2)}}</view>
+				<view class="detail price">¥ {{(orderInfo.totalFee/100).toFixed(2)}}</view>
 			</view>
 			<view class="order-detail">
 				<view class="title">订单编号：</view>

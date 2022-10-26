@@ -313,7 +313,9 @@
 			pointer-events: auto;
 		}
 	}
-
+	img{
+		pointer-events: auto;
+	}
 	.vue-auth-box_ {
 		position: absolute;
 		top: 40%;

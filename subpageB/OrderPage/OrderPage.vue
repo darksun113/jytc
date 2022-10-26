@@ -8,7 +8,7 @@
 		<PayButton v-if="[0,3,4].includes(orderInfo.status)" 
 			:payType_="payType" :orderNo="orderInfo.orderNo" @updateOrderInfo="getOrderInfo" 
 			:price="orderInfo.totalFee" :orderInfo="orderInfo" :cardId_="cardId"></PayButton>
-		<Contact v-if="orderInfo.status==7" :orderNo="orderNo"></Contact>
+		<Contact v-if="orderInfo.status==6" :orderNo="orderNo"></Contact>
 	</PageTemp>
 </template>
 

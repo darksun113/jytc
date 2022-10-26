@@ -41,18 +41,18 @@
 			<view style="color:#333333;">已取消订单，等待商家退款</view>
 		</view>
 	</view>
-	<view v-else-if="orderInfo.status == 6" class="topBox-s6">
-		<image class="status-icon" src="../../static/images/x_grey.svg" mode=""></image>
-		<view class="tabRight">
-			<view class="grey-txt" style="font-size: 38rpx:color:#999999"> 交易失败 </view>
-			<view style="color:#333333;">已取消订单，等待商家退款</view>
-		</view>
-	</view>
-	<view v-else-if="orderInfo.status == 7" class="topBox-s5">
+	<view v-else-if="orderInfo.status == 6" class="topBox-s5">
 		<image class="status-icon" src="../../static/images/x_red.svg" mode=""></image>
 		<view class="tabRight">
 			<view class="red-txt"> 交易失败 </view>
 			<view style="color:#333333;">商家退款失败，请联系客服重新退款</view>
+		</view>
+	</view>
+	<view v-else-if="orderInfo.status == 7" class="topBox-s6">
+		<image class="status-icon" src="../../static/images/x_grey.svg" mode=""></image>
+		<view class="tabRight">
+			<view class="grey-txt" style="font-size: 38rpx:color:#999999"> 交易失败 </view>
+			<view style="color:#333333;">已取消订单，商家退款成功</view>
 		</view>
 	</view>
 </template>

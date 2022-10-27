@@ -23,10 +23,10 @@
 				</view>
 				<!-- 价格 -->
 				<view class="price">
-					<view class="limit-get" v-if="false">
+					<view class="limit-get" v-if="item.price == 0">
 						限时领取
 					</view>
-					<text class="num" v-else>¥&nbsp;{{(item.price/100||88.88).toFixed(2)}}</text>
+					<text class="num" v-else>¥&nbsp;{{(item.price/100).toFixed(2)}}</text>
 					<view class="PreSell" v-if="item.isPreSaleGoods">
 						<text class="text">预售</text>
 					</view>

@@ -2,9 +2,9 @@
 	<view class="progress-bar-box">
 		<view class="title-box">
 			<view class="count-tip">
-				已连续签到<text style="color: #28D8E5;margin: 0 10rpx;">4</text>天
+				已连续签到<text style="color: #28D8E5;margin: 0 10rpx;">{{signDetail.cumulativeDays || 0}}</text>天
 			</view>
-			<text class="rules">签到规则</text>
+			<text class="rules" @tap="isRuleShow = true">签到规则</text>
 		</view>
 		<swiper class="number-of-power" :current="curDot" @change="swiperChange" :circular='circular' :display-multiple-items="3">
 			<swiper-item v-for="(item , j) in totalNum" :key="j">
@@ -12,10 +12,10 @@
 					<view class="bar" :class="{flish:j == 0}" :style="{borderRadius :j == 0 ? '40rpx':''}"></view>
 					<view class="gift-box">
 						<image class="get-gift" src="@/static/sign/text_await_get_icon.svg" v-if="j !== 0" ></image>
-						<image class="get-gift" @tap="openAward" src="@/static/sign/text_get_icon.svg" v-else></image>
-						<view class="gift">
+						<image class="get-gift"  src="@/static/sign/text_get_icon.svg" v-else></image>
+						<view class="gift" @tap="openAward">
 							<image src="@/static/sign/gift_await_get_icon.svg" v-if="j !== 0" ></image>
-							<image src="@/static/sign/gift_get_icon.svg" v-else></image>
+							<image src="@/static/sign/gift_get_icon.svg"  v-else></image>
 							<image src="" mode=""></image>
 						</view>
 						<text class="count-days">5天</text>
@@ -24,23 +24,46 @@
 			</swiper-item>
 		</swiper>
 		<AwardPop :isShow="isOpenAward" @openBlindSuccess="openSuccess" :blindData="awardRes" />
+		<SignRulesPop :isShow="isRuleShow" :rulesData="rulesData" @close="isRuleShow=false"></SignRulesPop>
 	</view>
 </template>
 
 <script>
 	import AwardPop from "../../../subpageB/MyObject/components/BlindToGoods/index.vue"
+	import SignRulesPop from "./modals/SignRules.vue" 
 	export default {
+		props:{
+			signDetail:{
+				type:Object,
+				default:()=>{}
+			},
+			signInId:{
+				type:String,
+				default:""
+			}
+		},
 		data() {
 			return {
 				curDot: 0,
 				circular:false,
-				totalNum:3,
+				totalNum:5,
 				isOpenAward:false,
-				awardRes:{}
+				isRuleShow:false,
+				awardRes:{},
+				rulesData:{
+					title:"签到活动标题",
+					startTime:parseInt(Date.now()/1000),
+					endTime:parseInt(Date.now()/1000)+10*3600*24,
+					content:`1.每日签到可得xx积分；/n
+							2.连续签到x天，可得x积分和n次抽奖机会；连续签到x天，可得x积分和n次抽奖机会；/n
+							此处是签到活动文案此处是签到活动文案此处是签到活动文案此处是签到活动文案此处是签到活动文案此处是签到活动文
+							案此处是签到活动文案此处是签到活动文案此处是签到活动文案此处是签到活动文案此处是签到活动文案此处是签到活动文案此处是签到活动文案`
+				}
 			}
 		},
 		components:{
-			AwardPop
+			AwardPop,
+			SignRulesPop
 		},
 		methods:{
 			swiperChange(e){
@@ -55,6 +78,12 @@
 					image:require("../../../static/新增icon/占位图.png")
 				}
 				this.isOpenAward = true
+				// uni.showModal({
+				// 	content:"很抱歉，此奖励已领取完",
+				// 	showCancel:false,
+				// 	confirmColor:"#fff",
+				// 	confirmText:"确认"
+				// })
 			}
 		}
 	}

@@ -4,7 +4,7 @@
 		<view class="header">
 			<text>{{cur_year}} 年 {{cur_month}} 月</text>
 			<view class="sign-btn" @touchend="toSignUp">
-				{{!status?'立即签到':'今日已签到'}}
+				{{status == 1 ? '今日已签到' : '立即签到'}}
 			</view>
 		</view>
 		<!-- 显示星期 -->
@@ -49,7 +49,7 @@
 				toMonth: parseInt(new Date().getMonth() + 1), //本月
 				toYear: parseInt(new Date().getFullYear()), //本年
 				weeks_ch: ['日', '一', '二', '三', '四', '五', '六'],
-				status:false
+				status:this.signIn
 			};
 		},
 		props: {
@@ -71,18 +71,24 @@
 				type: String,
 				default: "ch"
 			},
+			signIn: {
+				type : [Number,String],
+				require:true
+			}
 		},
 		created() {
 			this.cur_year = this.sendYear;
 			this.cur_month = this.sendMonth;
 			this.SignUp = this.dataSource;
-			// this.status = this.dataSource.is_signin_day;
 			this.calculateEmptyGrids(this.cur_year, this.cur_month);
 			this.calculateDays(this.cur_year, this.cur_month);
 			this.onJudgeSign();
 		},
 		watch: {
 			dataSource: 'onResChange',
+			signIn(num){
+				this.status = num
+			}
 		},
 		methods: {
 			// 获取当月共多少天
@@ -132,7 +138,6 @@
 			},
 			// 签到
 			toSignUp(){
-				this.status = !this.status
 				this.$emit("signUp")
 			},
 			// 绘制当月天数占的格子，并把它放到days数组中

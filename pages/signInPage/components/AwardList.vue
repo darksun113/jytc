@@ -16,6 +16,16 @@
 
 <script>
 	export default {
+		props:{
+			signDetail:{
+				type:Object,
+				default:()=>{}
+			},
+			signInId:{
+				type:String,
+				default:""
+			}
+		},
 		data() {
 			return {
 				curDot: 0,

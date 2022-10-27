@@ -36,3 +36,13 @@ body{
 img{
 	pointer-events:none;
 }
+.uni-modal{
+	border-radius: 16rpx !important;
+	background: #333333 !important;
+	.uni-modal__bd{
+		color: #fff;
+	}
+	.uni-modal__btn:active{
+		background-color: #333333;
+	}
+}

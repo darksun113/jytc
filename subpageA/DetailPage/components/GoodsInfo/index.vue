@@ -12,7 +12,7 @@
 						<text>定金：¥{{(goodsData.deposit/100).toFixed(2)}}</text>
 					</view>
 					<view class="limit" style="margin-top: 40rpx;">
-						<text>{{goodsData.remainingNumber}}/{{goodsData.totalNumber}}份</text>
+						<!-- <text>{{goodsData.remainingNumber}}/{{goodsData.totalNumber}}份</text> -->
 					</view>
 				</view>
 				<view v-else>
@@ -20,7 +20,7 @@
 						{{goodsData.goodsName}}
 					</view>
 					<view class="limit" v-if="goodsData.loadType==0 || goodsData.loadType==2">
-						<text>{{goodsData.remainingNumber}}/{{goodsData.totalNumber}}份</text>
+						<!-- <text>{{goodsData.remainingNumber}}/{{goodsData.totalNumber}}份</text> -->
 					</view>
 				</view>
 			</template>

@@ -5,7 +5,7 @@
 				color="#fff"
 				v-model="keyWords"
 				bgColor="#333333" :showAction="false"></u-search>
-			<MassageBadge></MassageBadge>
+			<MassageBadge />
 		</view>
 		<view class="res-list" v-show="searchResList.length>0">
 			<view class="res-item" :style="{background:idx==curSelect?'#565656' : '#333'}" 

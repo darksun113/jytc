@@ -12,14 +12,16 @@ export default new Vuex.Store({
 		// 用户头像uuid
 		avatarUuid:'',
 		userInfo: {},
-		token:""
+		token:"",
+		isDot:true,
 	},
 	mutations: {
+		//设置信息徽标状态
+		setDot(state,boo){
+			state.isDot = boo;
+		},
 		saveFilePath(state, data) {
-			const {
-				uuid,
-				path
-			} = data
+			const { uuid, path } = data
 			state.filePath[uuid] = path
 		},
 		setAvatarUuid(state,value){

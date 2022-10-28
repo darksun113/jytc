@@ -6,16 +6,21 @@
 </template>
 
 <script>
+	import {mapState,mapMutations} from "vuex";
 	export default {
 		name:"MassageBadge",
 		data() {
 			return {
-				isDot: true
+				
 			}
 		},
+		computed:{
+			...mapState(["isDot"])
+		},
 		methods: {
+			...mapMutations(["setDot"]),
 			toMsgPage() {
-				this.isDot = false;
+				this.setDot(!this.isDot)
 				const url = `/pages/information/information`
 				this.$routerTo(url)
 			}

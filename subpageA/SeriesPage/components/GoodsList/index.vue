@@ -1,7 +1,8 @@
 <template>
 	<view class="goods-list">
 		<view class="list-title">
-			<view>该系列下有{{listTotal}}种藏品</view>
+			<!-- <view>该系列下有{{listTotal}}种藏品</view> -->
+			<view></view>
 			<view class="sort" @click="show = true">
 				<text style="margin-right: 20rpx;">{{dropdownTitle}}</text>
 				<u-icon name="arrow-down"></u-icon>

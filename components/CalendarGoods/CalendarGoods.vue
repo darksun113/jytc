@@ -19,7 +19,7 @@
 			</view>
 			<view class="goods-code-box">
 				<view class="limit">
-					限量 {{item.totalNumber||99999}}
+					<!-- 限量 {{item.totalNumber}} -->
 				</view>
 				<!-- 价格 -->
 				<view class="price">

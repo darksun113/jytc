@@ -59,7 +59,7 @@
 					<text v-else>¥ {{(item.goodsPrice/100).toFixed(2)}}</text>
 				</view>
 				<view class="goods-count">
-					限量{{item.totalNumber}}份
+					<!-- 限量{{item.totalNumber}}份 -->
 				</view>
 			</view>
 		</view>

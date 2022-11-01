@@ -50,7 +50,6 @@
 			}
 		},
 		onShow() {
-			
 			if(this.$checkLogin()&&uni.getStorageSync("announceIsShow")!=true){
 				//已登录，且没有展示过公告
 				this.getNoticeList()

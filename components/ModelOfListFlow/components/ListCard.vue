@@ -35,8 +35,10 @@
 				</u-count-down>
 			</view>
 		</template>
-		<img v-lazy class="series-pic" :src="item.seriesImg || item.image"
-			:style="{objectFit:isBlind ? 'contain':'cover'}" />
+		<img v-lazy class="series-pic" :src="item.seriesImg || item.image" :style="{objectFit:isBlind ? 'contain':'cover'}" />
+		<!-- <view class="series-pic">
+			<lazyLoad :src="item.seriesImg || item.image" :mode="!isBlind?'aspectFill':'aspectFit'"></lazyLoad>
+		</view> -->
 		<view class="series-info-box">
 			<view class="series-info">
 				<view class="series-title nowrap">
@@ -65,6 +67,7 @@
 </template>
 
 <script>
+	import lazyLoad from '@/uni_modules/muqian-lazyLoad/components/muqian-lazyLoad/muqian-lazyLoad.vue'
 	import {
 		formatYearToMinutes_EN
 	} from "@/utils/formatDate.js"
@@ -81,6 +84,9 @@
 			},
 			// 0 普通模式 1 预购模式 2 盲盒模式
 			loadType: [Number, String]
+		},
+		components: {
+			lazyLoad
 		},
 		data() {
 			return {

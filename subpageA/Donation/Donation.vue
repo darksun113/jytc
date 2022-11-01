@@ -35,11 +35,11 @@
 			getGoodsInfo() {
 				// this.goodsData = this.$store.state.goodsData
 				this.goodsData = {
-					image:require("../static/images/noquan.png"),
+					image:require("@/static/images/BG.jpg"),
 					goodsName:"故宫里的中国节-中秋当名字过长时换行字过长时换行字过长时换行",
 					goodsCode:56,
 					totalNumber:1000,
-					shopIcon:require("../static/images/noquan.png"),
+					shopIcon:require("@/static/images/BG.jpg"),
 					shopName:"阿里云新能源"
 				}
 				if(JSON.stringify(this.goodsData)=="{}"){

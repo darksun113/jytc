@@ -71,7 +71,7 @@
 		justify-content: space-between;
 		align-items: center;
 		position: sticky;
-		top: 0;
+		top: -2rpx;
 		z-index: 999;
 		.nav-show {
 			display: flex;

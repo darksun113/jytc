@@ -1,10 +1,11 @@
 <template>
 	<view class="search-module">
 		<view class="scarch-box">
-			<u-search shape="square" placeholder="数学通识" placeholderColor="#666" :searchIcon="searchIcon" @change="searchKeyWords" :clearabled="true" @clear="clear"
+			<view class=""></view>
+			<!-- <u-search shape="square" placeholder="数学通识" placeholderColor="#666" :searchIcon="searchIcon" @change="searchKeyWords" :clearabled="true" @clear="clear"
 				color="#fff"
 				v-model="keyWords"
-				bgColor="#333333" :showAction="false"></u-search>
+				bgColor="#333333" :showAction="false"></u-search> -->
 			<MassageBadge />
 		</view>
 		<view class="res-list" v-show="searchResList.length>0">

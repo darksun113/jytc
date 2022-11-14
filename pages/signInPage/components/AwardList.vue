@@ -9,7 +9,6 @@
 					<image src="../../../static/新增icon/占位图.png" mode=""></image>
 				</view>
 			</swiper-item>
-			<!-- <swiper-item style="width: 100rpx;"></swiper-item> -->
 		</swiper>
 	</view>
 </template>

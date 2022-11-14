@@ -91,6 +91,10 @@
 			}
 		},
 		methods: {
+			// 签到
+			toSignUp(){
+				this.$emit("signUp")
+			},
 			// 获取当月共多少天
 			getThisMonthDays(year, month) {
 				return new Date(year, month, 0).getDate()
@@ -136,10 +140,6 @@
 					}
 				}
 			},
-			// 签到
-			toSignUp(){
-				this.$emit("signUp")
-			},
 			// 绘制当月天数占的格子，并把它放到days数组中
 			calculateDays(year, month) {
 				const thisMonthDays = this.getThisMonthDays(year, month);
@@ -153,7 +153,6 @@
 				//console.log(this.days);
 				this.calculateLastDayEmptyGrids(year, month)
 			},
-
 			onResChange(newD, oldD) {
 				this.SignUp = newD;
 				this.onJudgeSign();

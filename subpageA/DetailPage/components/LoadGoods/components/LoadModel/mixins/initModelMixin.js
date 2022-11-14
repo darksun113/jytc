@@ -53,11 +53,10 @@ export default{
 		    this.scene = new THREE.Scene();
 		},
 		initControls() {
-		    this.control = new OrbitControls(this.camera, this.renderer.domElement)
-			
+		    this.control = new OrbitControls(this.camera, this.renderer.domElement);
 		    // 开启自动旋转
 		    this.control.autoRotate = true
-			
+			console.log(this.control)
 		    // 设置缩放最大、最小距离
 		    this.control.minDistance = 50
 		    this.control.maxDistance = 400
@@ -66,9 +65,8 @@ export default{
 		        this.control.enableRotate = false;
 		        this.control.enableZoom = false;
 		    }
-		
 		    // 禁用平移
-		    this.control.enablePan = false
+		    this.control.enablePan = true
 		    this.control.rotateSpeed = 0.5
 		    // 开启拖拽惯性
 		    this.control.enableDamping = true
@@ -174,9 +172,17 @@ export default{
 			this.control.enablePan=true
 			this.control.autoRotate=false
 			this.control.enableRotate = false
+			this.control.mous = {
+				ONE: THREE.TOUCH.DOLLY_PAN,
+				TWO: THREE.TOUCH.ROTATE
+			}
 		},
 		closeEnablePan(){
 			this.resetModel()
+			// this.control.touches = {
+			// 	ONE: THREE.TOUCH.ROTATE,
+			// 	ONE: THREE.TOUCH.DOLLY_PAN
+			// }
 		},
 		execute() {
 		    // 初始化场景

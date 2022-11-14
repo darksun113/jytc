@@ -58,9 +58,9 @@
 			changeModule(type){
 				this.showType=type
 				if(type== 1){
-					this.$refs.LoadModelPre.openEnablePan()
+					this.$refs.LoadModelPre.openEnablePan(type)
 				}else{
-					this.$refs.LoadModelPre.closeEnablePan()
+					this.$refs.LoadModelPre.closeEnablePan(type)
 				}
 			}
 		},

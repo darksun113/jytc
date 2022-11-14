@@ -49,12 +49,12 @@
 				const res = await uni.$http("/signIn/do",{
 					signInId:this.signInId
 				})
-				this.signData.push("2022-10-18")
-				uni.showToast({
-					title: "签到成功",
-					icon: 'success',
-					duration: 2000
-				});
+				if(res.code == 0){
+					this.$toast("签到成功","success")
+					this.$emit("signSuccess",this.signInId)
+				}else{
+					this.$toast(res.errorMsg)
+				}
 			}
 		},
 		watch:{

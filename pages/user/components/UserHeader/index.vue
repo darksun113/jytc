@@ -7,44 +7,44 @@
 		</view>
 	</view>
 	<view class="user-header" v-else>
-		<image class="avatar" :src="$store.state.userInfo.avatar"></image>
+		<image class="avatar" :src="userInfo.avatar"></image>
 		<view class="user-info">
 			<view class="top-info">
 				<view class="name-box">
-					<view class="name nowrap">{{$store.state.userInfo.name}}</view>
-					<view class="real-name" v-if="$store.state.userInfo.certificationStatus!==1" @click.self="toBindCard">未认证</view>
+					<view class="name nowrap">{{userInfo.name}}</view>
+					<view class="real-name" v-if="userInfo.certificationStatus!==1" @click.self="toBindCard">未认证</view>
 				</view>
 				<view class="function-zone">
-					<image @click="toSignInPage" src="@/static/images/sign_icon.svg"></image>
+					<image v-if="userInfo.signInId" @click="toSignInPage" src="@/static/images/sign_icon.svg"></image>
 					<MassageBadge />
 				</view>
 			</view>
 			<view class="user-info-item">
 				<view class="id-style">
 					<view>ID：</view> 
-					<view class="nowrap_s" style="max-width: 280rpx;">{{$store.state.userInfo.buyerId}}</view>
+					<view class="nowrap_s" style="max-width: 280rpx;">{{userInfo.buyerId}}</view>
 				</view>
-				<image class="copy-icon" src="@/static/images/copy_icon.svg" @click.stop="copy($store.state.userInfo.buyerId)"></image>
+				<image class="copy-icon" src="@/static/images/copy_icon.svg" @click.stop="copy(userInfo.buyerId)"></image>
 			</view>
 			<view class="user-info-item" style="margin-top: 16rpx;">
 				<view class="id-style">
 					<view style="min-width: 168rpx;">区块链地址：</view> 
-					<view class="nowrap_s" style="max-width: 280rpx;">{{$store.state.userInfo.blockchainAddress}}</view>
+					<view class="nowrap_s" style="max-width: 280rpx;">{{userInfo.blockchainAddress}}</view>
 				</view>
-				<image class="copy-icon" src="@/static/images/copy_icon.svg" @click.stop="copy($store.state.userInfo.blockchainAddress)"></image>
+				<image class="copy-icon" src="@/static/images/copy_icon.svg" @click.stop="copy(userInfo.blockchainAddress)"></image>
 			</view>
 			<view class="fans-focus">
 				<view class="item" @click="toFansPage(0)">
-					<text style="margin-right: 10rpx;color: #aaa;">粉丝</text>{{$store.state.userInfo.fansNumber}}
+					<text style="margin-right: 10rpx;color: #aaa;">粉丝</text>{{userInfo.fansNumber}}
 				</view>
 				<view class="item" @click="toFansPage(1)">
-					<text style="margin-right: 10rpx;color: #aaa;">关注</text>{{$store.state.userInfo.followNumber}}
+					<text style="margin-right: 10rpx;color: #aaa;">关注</text>{{userInfo.followNumber}}
 				</view>
 				<view class="item" @click="toMyObjects">
-					<text style="margin-right: 10rpx;color: #aaa;">藏品</text>{{$store.state.userInfo.collectionNumber}}
+					<text style="margin-right: 10rpx;color: #aaa;">藏品</text>{{userInfo.collectionNumber}}
 				</view>
 				<view class="item">
-					<text style="margin-right: 10rpx;color: #aaa;">空投</text>{{$store.state.userInfo.collectionNumber}}
+					<text style="margin-right: 10rpx;color: #aaa;">空投</text>{{userInfo.collectionNumber}}
 				</view>
 			</view>
 		</view>
@@ -52,7 +52,8 @@
 </template>
 
 <script>
-	import {PingAn_login} from "@/libs/jsm/PingAn-app.js"
+	import {PingAn_login} from "@/libs/jsm/PingAn-app.js";
+	import { mapState} from "vuex"
 	export default{
 		props:{
 			isLogin:[Boolean]
@@ -61,6 +62,9 @@
 			return{
 				checkLogin:this.isLogin
 			}
+		},
+		computed:{
+			...mapState(["userInfo"])
 		},
 		methods:{
 			toLogin(){
@@ -74,11 +78,11 @@
 				}
 			},
 			toSignInPage(){
-				const url = `/pages/signInPage/signInPage`;
+				const url = `/pages/signInPage/signInPage?signInId=${this.userInfo.signInId}`;
 				this.$routerTo(url)
 			},
 			toFansPage(type){
-				const url=`/subpageC/UserFansAndFocus/UserFansAndFocus?type=${type}&viewBuyerId=${this.$store.state.userInfo.buyerId}`
+				const url=`/subpageC/UserFansAndFocus/UserFansAndFocus?type=${type}&viewBuyerId=${this.userInfo.buyerId}`
 				this.$routerTo(url)
 			},
 			toMyObjects(){
@@ -97,7 +101,7 @@
 				}); 
 			},
 			toBindCard(){
-				if(this.$store.state.userInfo.certificationStatus==0){
+				if(this.userInfo.certificationStatus==0){
 					this.$routerTo("/subpageA/BindIdCard/BindIdCard")
 				}
 			},

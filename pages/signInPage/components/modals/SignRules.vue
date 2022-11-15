@@ -42,7 +42,7 @@
 		},
 		methods: {
 			translateHtml(htmlText) {
-				const textArr = htmlText.split("/n").map((item, idx) => {
+				const textArr = htmlText.split("\n").map((item, idx) => {
 					return item + "<br/>"
 				})
 				return textArr.join("")

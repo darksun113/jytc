@@ -2,23 +2,33 @@
 	<view class="progress-bar-box">
 		<view class="title-box">
 			<view class="count-tip">
-				已连续签到<text style="color: #28D8E5;margin: 0 10rpx;">{{signDetail.cumulativeDays || 0}}</text>天
+				已{{signDetail.type == 1 ? '连续' : '累计'}}签到
+				<text v-if="signDetail.type == 1" style="color: #28D8E5;margin: 0 10rpx;">{{signDetail.continuityMaxDays || 0}}</text>
+				<text v-else style="color: #28D8E5;margin: 0 10rpx;">{{signDetail.cumulativeDays || 0}}</text>
+				天
 			</view>
 			<text class="rules" @tap="isRuleShow = true">签到规则</text>
 		</view>
 		<swiper class="number-of-power" :current="curDot" @change="swiperChange" :circular='circular'
-			:display-multiple-items="signDetail.rewards.length < 3 ? signDetail.rewards.length : 3">
-			<swiper-item v-for="(item , j) in signDetail.rewards.length" :key="j">
+			:display-multiple-items="(signDetail.rewards && signDetail.rewards.length < 3) ? signDetail.rewards.length : 3">
+			<swiper-item v-for="(item , j) in signDetail.rewards" :key="j">
 				<view class="gift-step-box">
-					<view class="bar" :class="{flish:signDetail.cumulativeDays > item.days}"
-						:style="{borderRadius :j == 0 ? '40rpx':''}"></view>
-					<view class="gift-box">
-						<image class="get-gift" src="@/static/sign/text_get_icon.svg"
-							v-if="signDetail.cumulativeDays > item.days && item.receive == 0"></image>
+					<view class="bar" v-if="signDetail.type == 2" :class="{flish:signDetail.cumulativeDays >= item.days}" :style="{borderRadius :j == 0 ? '40rpx':''}"></view>
+					<view class="bar" v-else :class="{flish:signDetail.continuityMaxDays >= item.days}" :style="{borderRadius :j == 0 ? '40rpx':''}"></view>
+					<view class="gift-box" v-if="signDetail.type == 2">
+						<image class="get-gift" src="@/static/sign/text_get_icon.svg" v-if="signDetail.cumulativeDays >= item.days && item.receive == 0"></image>
 						<image class="get-gift" src="@/static/sign/text_await_get_icon.svg" v-else></image>
 						<view class="gift" @tap="openAward(item)">
-							<image src="@/static/sign/gift_get_icon.svg"
-								v-if="signDetail.cumulativeDays > item.days && item.receive == 0"></image>
+							<image src="@/static/sign/gift_get_icon.svg" v-if="signDetail.cumulativeDays >= item.days && item.receive == 0"></image>
+							<image src="@/static/sign/gift_await_get_icon.svg" v-else></image>
+						</view>
+						<text class="count-days">{{item.days}}天</text>
+					</view>
+					<view class="gift-box" v-else>
+						<image class="get-gift" src="@/static/sign/text_get_icon.svg" v-if="signDetail.continuityMaxDays >= item.days && item.receive == 0"></image>
+						<image class="get-gift" src="@/static/sign/text_await_get_icon.svg" v-else></image>
+						<view class="gift" @tap="openAward(item)">
+							<image src="@/static/sign/gift_get_icon.svg" v-if="signDetail.continuityMaxDays >= item.days && item.receive == 0"></image>
 							<image src="@/static/sign/gift_await_get_icon.svg" v-else></image>
 						</view>
 						<text class="count-days">{{item.days}}天</text>
@@ -65,16 +75,19 @@
 				// this.curDot = e.detail.current;
 			},
 			openSuccess() {
-				this.isOpenAward = false
+				this.$emit("resetPage",this.signInId);
+				this.isOpenAward = false;
 			},
 			async openAward(item) {
-				const {
-					rewardId,
-					days,
-					receive
-				} = item
-				if (days < this.signDetail.cumulativeDays || receive == 1) return;
-				const res = uni.$http("/signIn/reward/receive", {
+				const {days, receive ,rewardId} = item
+				switch(this.signDetail.type){
+					case 1:
+					if (days > this.signDetail.cumulativeDays || receive == 1) return;
+					case 2:
+					if (days > this.signDetail.continuityMaxDays || receive == 1) return;
+				}
+				
+				const res = await uni.$http("/signIn/reward/receive", {
 					signInId: this.signInId,
 					rewardId
 				})

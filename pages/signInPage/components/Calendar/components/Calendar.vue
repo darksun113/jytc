@@ -93,6 +93,7 @@
 		methods: {
 			// 签到
 			toSignUp(){
+				if(this.status == 1)return;
 				this.$emit("signUp")
 			},
 			// 获取当月共多少天
@@ -127,11 +128,11 @@
 					}
 				}
 			},
-			// 计算当月最后一天后空了几个格子，把它填充在days数组的前面
+			// 计算当月最后一天后空了几个格子，把它填充在days数组的后面
 			calculateLastDayEmptyGrids(year, month){
 				const lastDayOfWeek = this.getLastDayOfWeek(year, month);
 				if (lastDayOfWeek > 0) {
-					for (let i = 6; i > lastDayOfWeek; i--) {
+					for (let i = 7; i > lastDayOfWeek; i--) {
 						const obj = {
 							date: null,
 							isSign: false
@@ -198,7 +199,9 @@
 			justify-content: space-between;
 			align-items: center;
 			.sign-btn{
-				padding: 10rpx 44rpx;
+				padding: 10rpx 0;
+				width: 200rpx;
+				text-align: center;
 				background: linear-gradient(90deg, #FFFFFF 0%, #28D8E5 50%, #C058F6 100%);
 				border-radius: 40rpx;
 				font-size: 28rpx;

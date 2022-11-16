@@ -1,7 +1,7 @@
 <template>
 	<PageTemp style="padding: 0 40rpx;">
 		<scroll-view class="home" scroll-y="true" @scrolltolower="updateList">
-			<Search />
+			<Search v-if="$checkLogin()" />
 			<Banner />
 			<view class="container">
 				<StickyNav ref="nav" @changeShowType="changeShowType" @switchOverNav="switchOverNav" @resetPage="reset" />

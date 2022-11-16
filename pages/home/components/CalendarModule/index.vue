@@ -6,14 +6,15 @@
 				<view v-if="Date.now() < item.startTime">
 					<view class="sell-time">
 						{{ parseInt(item.startTime/1000) || parseInt(Date.now()/1000) | format}}
+						<!-- {{parseInt(Date.now()/1000) | format}} -->
 					</view>
 					<view v-for="(it,id) in item.doneList" :key="item.goodsId">
 						<CalendarGoods :item="it" :loadType="2"></CalendarGoods>
 					</view>
 				</view>
 			</view>
+			<IsEnd v-if="isLastItem"></IsEnd>
 		</view>
-		<IsEnd v-if="isLastItem"></IsEnd>
 	</view>
 </template>
 
@@ -36,7 +37,7 @@
 </script>
 
 <style scoped lang="scss">
-	.calendar-box{
+	.goods-box{
 		min-height: calc(100vh - 100vw * 140 / 375 - 90rpx);
 	}
 </style>

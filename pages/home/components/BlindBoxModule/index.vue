@@ -1,5 +1,5 @@
 <template>
-	<view >
+	<view>
 		<IsNoBlind v-if="!hasData">暂无盲盒，敬请期待！</IsNoBlind>
 		<view class="goods-box" v-else>
 			<ModelOfListFlow :renderList="renderList" :loadType="2" :isBlind="true"></ModelOfListFlow>
@@ -21,7 +21,7 @@
 	}
 </script>
 <style scoped lang="scss">
-	.blind-box{
+	.goods-box{
 		min-height: calc(100vh - 100vw * 140 / 375 - 90rpx);
 	}
 </style>

@@ -1,10 +1,11 @@
 <template>
 	<PageTemp class="information-page">
-		<scroll-view class="page-content" scroll-y="true" @scrolltolower="update">
+		<scroll-view class="page-content" scroll-y="true" @scrolltolower="update" v-if="hasData">
 			<template v-for="(item,index) in msgList">
 				<MessageCard :item="item" :key="index" @click.native="toDetailPage(item)" />
 			</template>
 		</scroll-view>
+		<IsNoData v-else>暂无数据</IsNoData>
 	</PageTemp>
 </template>
 
@@ -14,18 +15,26 @@
 		data() {
 			return {
 				updatePage:1,
-				msgList:[]
+				msgList:[],
+				hasData:true
 			};
 		},
 		components:{
 			MessageCard
 		},
 		onLoad() {
-			this.getMsgList();
+			this.getMsgList(list=>{
+				this.msgList = list;
+				if(list.length == 0){
+					this.hasData = false;
+				}
+			});
 		},
 		methods:{
 			update(){
-				this.getMsgList()
+				this.getMsgList(list=>{
+					this.msgList = [...this.msgList,...list];
+				})
 			},
 			toDetailPage(item){
 				if(item.type == 1){
@@ -43,15 +52,15 @@
 				const url=`/subpageA/SeriesPage/SeriesPage?seriesId=${seriesId}`
 				this.$routerTo(url)
 			},
-			async getMsgList (){
+			async getMsgList (cb){
 				const {code,errorMsg,data:{list}} = await uni.$http("/user/message/list",{
 					page:this.updatePage,
 					size:10,
 					unread:0
-				},false)
+				})
 				if(code == 0){
-					this.msgList = list;
 					this.updatePage++;
+					cb(list)
 				}else{
 					this.$toast(errorMsg);
 				}

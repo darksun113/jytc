@@ -71,6 +71,6 @@
 		height: 100%;
 		overflow: auto;
 		padding-bottom: 20rpx;
-		padding-top: 40rpx;
+		padding-top: 49rpx;
 	}
 </style>

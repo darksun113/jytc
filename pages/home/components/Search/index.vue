@@ -1,14 +1,12 @@
 <template>
 	<view class="search-module">
 		<view class="scarch-box">
-			<u-search shape="square" placeholder="数学通识" placeholderColor="#666" :searchIcon="searchIcon" @change="searchKeyWords" :clearabled="true" @clear="clear"
+			<view class=""></view>
+			<!-- <u-search shape="square" placeholder="数学通识" placeholderColor="#666" :searchIcon="searchIcon" @change="searchKeyWords" :clearabled="true" @clear="clear"
 				color="#fff"
 				v-model="keyWords"
-				bgColor="#333333" :showAction="false"></u-search>
-			<view class="msg-box">
-				<image class="msg-icon" src="@/static/images/msg-icon.svg" mode=""></image>
-				<u-badge :isDot="true" class="dot"></u-badge>
-			</view>
+				bgColor="#333333" :showAction="false"></u-search> -->
+			<MassageBadge />
 		</view>
 		<view class="res-list" v-show="searchResList.length>0">
 			<view class="res-item" :style="{background:idx==curSelect?'#565656' : '#333'}" 
@@ -44,7 +42,7 @@
 		},
 		methods: {
 			searchKeyWords(value) {
-				console.log(value)
+				console.log(value.trim())
 			},
 			searchGoods(item,idx){
 				this.curSelect = idx
@@ -64,20 +62,6 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			.msg-box{
-				width: 48rpx;
-				height: 48rpx;
-				position: relative;
-				.msg-icon{
-					width: 48rpx;
-					height: 48rpx;
-				}
-				.dot{
-					position: absolute;
-					right: 0;
-					top: 0;
-				}
-			}
 		}
 		.res-list{
 			position: absolute;

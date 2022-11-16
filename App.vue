@@ -7,7 +7,7 @@
 			this.$wShare();
 		},
 		onShow: function() {
-			this.watchRouter()
+			this.watchRouter();
 		},
 		methods: {
 			resetFilePath() {

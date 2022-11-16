@@ -1,12 +1,14 @@
 <template>
 	<view class="donation-collection-box">
 		<view class="donation-box" v-if="goodsData.loadType==1">
-			<view class="donation-btn" @click="toDonationPage">转赠</view>
-			<view class="donation-tip">需等待365天</view>
+			<view class="donation-btn" style="opacity:0.6" v-if="format > 0">转赠</view>
+			<view class="donation-btn" v-else @click="toDonationPage">转赠</view>
+			<view class="donation-tip" v-if="format > 0">需等待{{format}}天</view>
 		</view>
 		<view class="collection-box" v-else>
-			<image class="icon" src="../../../../../../../static/images/my_objects_icon.svg" mode=""></image>
-			<text>100</text>
+			<image class="icon" v-show="isFavorite" @tap="handleFavorite(1)" src="@/static/images/collection_icon.svg"></image>
+			<image class="icon" v-show="!isFavorite" @tap="handleFavorite(0)" src="@/static/images/un_collection_icon.svg"></image>
+			<text>{{favoriteCount}}</text>
 		</view>
 	</view>
 </template>
@@ -19,9 +21,44 @@
 				default:()=>{}
 			}
 		},
+		data() {
+			return {
+				curTime: Date.now(),
+				isFavorite:false,
+				favoriteCount:0
+			}
+		},
+		computed: {
+			format(){
+				let stamp = this.goodsData.collectionTime*1000
+				const D = 1000 * 60 * 60 * 24;
+				const D_180 = D * 180;
+				stamp += D_180;
+				const resStamp = stamp - this.curTime;
+				return Math.ceil(resStamp/D);
+			}
+		},
 		methods: {
+			handleFavorite(opt){
+				const boo = this.$checkLogin();
+				boo ? this.favoriteConfirm(opt) : this.$emit("showLoginTip");
+			},
+			async favoriteConfirm(opt){
+				const { goodsId } = this.goodsData
+				const res = await uni.$http("/goods/favorite",{
+					goodsId,
+					isFavorite:opt
+				})
+				if(res.code == 0){
+					this.favoriteCount = res.data.count;
+					this.isFavorite = !this.isFavorite
+				}else{
+					this.$toast(res.errorMsg,"error")
+				}
+			},
 			toDonationPage() {
-				const {goodsId , goodsInstanceId} = this.goodsData
+				const {image,goodsName,goodsCode,shopIcon,shopName,goodsId , goodsInstanceId} = this.goodsData
+				uni.setStorageSync("donationGoods",{image,goodsName,goodsCode,shopIcon,shopName});
 				const url = `/subpageA/Donation/Donation?goodsId=${goodsId}&instanceId=${goodsInstanceId}`;
 				this.$routerTo(url)
 			}

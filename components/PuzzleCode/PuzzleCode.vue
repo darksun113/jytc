@@ -81,6 +81,10 @@
 			borderRadius: {
 				type: Number,
 				default: 10
+			},
+			loadType: {
+				type: Number,
+				default: 1
 			}
 		},
 		/** 私有数据 **/
@@ -238,7 +242,8 @@
 				try {
 					const res = await uni.$http("/puzzle/verify", {
 						x,
-						id: this.roundId
+						id: this.roundId,
+						type:this.loadType
 					})
 					if (res.data) {
 						// 成功
@@ -296,14 +301,13 @@
 </script>
 <style lang="less" scoped>
 	.vue-puzzle-vcode {
-		z-index: 999999;
+		z-index: 99999;
 		position: fixed;
 		top: 0;
 		left: 0;
 		bottom: 0;
 		right: 0;
 		background-color: rgba(0, 0, 0, 0.3);
-		z-index: 999;
 		opacity: 0;
 		pointer-events: none;
 		transition: opacity 200ms;

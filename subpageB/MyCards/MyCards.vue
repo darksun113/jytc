@@ -1,6 +1,6 @@
 <template>
 	<PageTemp>
-		<scroll-view class="list" v-if="hasCard==true" scroll-y="true" @scrolltolower="updateList">
+		<view class="list" v-if="hasCard">
 			<view class="cards">
 				<view class="item" v-for="(item,index) in cardList" :key="index" @click="unBindPage(index)">
 					<view class="card-info">
@@ -19,13 +19,13 @@
 					</view>
 				</view>
 			</view>
-			<button class="add-cards-btn" @click="addCard">
+			<button class="add-cards-btn" v-show="addBtnShow" @click="addCard">
 				<view class="add-container">
 					<image class="add-icon" src="../../static/images/plus.svg"></image>
 					<view vlass="add-txt">添加银行卡</view>
 				</view>
 			</button>
-		</scroll-view>
+		</view>
 		
 		<IsNoCards v-else>
 			<view class="container">
@@ -42,11 +42,11 @@
 	export default {
 		data() {
 			return {
-				hasCard:false,
+				hasCard:true,
 				isEnd:false,
-				isCanReq:true,
 				cardList:[],
 				four_digit:[],
+				addBtnShow:false,
 				icon:""
 			};
 		},
@@ -54,37 +54,20 @@
 			this.init();
 		},
 		methods: {
-			test(){
-				console.log(this.cardList)
-			},
 			init(){
 				this.cardList=[]
 				this.getCardList(list=>{
 					if(list==0){
 						this.hasCard=false;
 					}else{
-						this.hasCard=true;
+						this.addBtnShow = true;
 						this.cardList=list;
-					}
-				})
-			},
-			updateList(){
-				if(this.isCanReq)return;
-				this.getCardList(list=>{
-					if(item==0){
-						this.isCanReq=false
-						this.isEnd=true
-					}else{
-						this.cardList=[...this.cardList,...list]
 					}
 				})
 			},	
 			async getCardList(callback){
 				try{
-					const res= await uni.$http("/payment/bankList",{
-						
-					})
-					
+					const res= await uni.$http("/payment/bankList",{})
 					if(res.code==0){
 						if(res.data.list.length==0){
 							callback(0)

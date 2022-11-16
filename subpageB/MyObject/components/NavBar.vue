@@ -16,8 +16,10 @@
 		},
 		methods: {
 			changeNav(idx) {
-				this.cur=idx
-				this.$emit("changeNav",idx)
+				if(this.cur!==idx){
+					this.cur=idx
+					this.$emit("changeNav",idx)
+				}
 			}
 		},
 	}

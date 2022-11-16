@@ -70,8 +70,8 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		// position: sticky;
-		// top: 0;
+		position: sticky;
+		top: -2rpx;
 		z-index: 999;
 		.nav-show {
 			display: flex;

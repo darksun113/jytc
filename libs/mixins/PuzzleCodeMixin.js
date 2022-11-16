@@ -45,6 +45,7 @@ export default {
 							title:'发送成功',
 							icon:"success"
 						})
+						this.isPuzzleShow = false
 						this.afterGetCode()
                     } else if (res.code == 20004) {
 						uni.hideLoading()

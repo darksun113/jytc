@@ -11,7 +11,7 @@
 		<u-modal :show ="inhritInput" class="inherit-box-modal-2" width="640rpx" title="输入验证码" :show-confirm-button="false" @confirm="confirm" :cancel-style="cancelStyle"
 			:confirm-style="confirmStyle" :title-style="titleStyle">
 			<view class="slot-content">
-				<u-icon class="close" name="close" @click="inhritInput=false"></u-icon>
+				<u-icon class="close" name="close" @click="closeModal"></u-icon>
 				<view class="re-send" @click="reSend">
 					重新发送<text v-show="$store.state.second!==60">({{$store.state.second}})</text>
 				</view>
@@ -20,10 +20,10 @@
 				</view>
 			</view>
 		</u-modal>
-		<PuzzleCode style="z-index:9999999"
+		<PuzzleCode style="z-index:99999"
 			@resetPuzzle="starCheckRobot" 
 			:bind="$attrs" :show="isPuzzleShow" 
-			:phone="phone" verifyType="2" loadType="4"
+			:phone="phone" :verifyType="2" :loadType="4"
 			@success="puzzleSuccess" @close="puzzleClose" />
 	</view>
 </template>
@@ -41,6 +41,7 @@
 				inhritInput:false,
 				transInfo:{},
 				content: "",
+				type:5,
 				titleStyle: {
 					fontSize: '34rpx',
 					color: '#FFF',
@@ -78,6 +79,9 @@
 			cancel(){
 				this.inhritConfirm=false
 			},
+			closeModal(){
+				this.inhritInput = false;
+			},
 			// 人机验证通过，发送验证码后执行
 			afterGetCode(){
 				this.inhritConfirm=false
@@ -90,7 +94,7 @@
 			},
 			async toInhert(code){
 				try{
-					const res = await uni.$http("goods/transfer",{
+					const res = await uni.$http("/goods/transfer",{
 						goodsId:this.transInfo.goodsId,
 						instanceId:this.transInfo.instanceId,
 						to:this.transInfo.buyerId,
@@ -99,7 +103,7 @@
 					})
 					if(res.code==0){
 						uni.showToast({
-							title:"传承成功",
+							title:"转赠成功",
 							icon:"success"
 						})
 						this.inhritConfirm=false
@@ -135,6 +139,7 @@
 		padding:48rpx 0;
 		position: relative;
 		.re-send{
+			z-index: 100000;
 			font-size: 24rpx;
 			font-weight: 400;
 			color: #28D8E5;
@@ -142,8 +147,9 @@
 			margin-bottom: 40rpx;
 		}
 		.close{
+			z-index: 100000;
 			position: absolute;
-			right: 40rpx;
+			right: 0rpx;
 			top: -70rpx;
 		}
 	}
@@ -153,7 +159,7 @@
 			
 		}
 		.u-line{
-			border-bottom: none;
+			border-bottom: none !important;
 		}
 		.u-transition{
 			z-index: 10075 !important;
@@ -174,4 +180,7 @@
 			border-left: 2rpx solid rgba(255,255,255,0.2) !important;
 		}
 	} 
+	::v-deep .inherit-box-modal-2{
+		z-index: 100000 !important;
+	}
 </style>

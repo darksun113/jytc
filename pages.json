@@ -80,8 +80,24 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/information/information",
+			"style": {
+				"navigationBarTitleText": "消息",
+				"enablePullDownRefresh": false
+			}
+
 		}
-	],
+	    ,{
+            "path" : "pages/signInPage/signInPage",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "签到",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"tabBar": {
 		"color": "#666", //字体颜色
 		"selectedColor": "#FFFFFF", //选中时字体颜色
@@ -243,7 +259,16 @@
 					}
 
 				}
-			]
+			    ,{
+                    "path" : "MyCollection/MyCollection",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "收藏",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
+            ]
 		},
 		{
 			"root": "subpageC",

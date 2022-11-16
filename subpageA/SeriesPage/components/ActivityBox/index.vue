@@ -50,7 +50,6 @@
 		</view>
 		<ActivityPop @close="isJoinShow=false" :isShow="isJoinShow" :joinStatus="joinStatus" :prePurchaseId="seriesInfo_.prePurchaseId" @changeAcitveBoxStatus="changeAcitveBoxStatus"></ActivityPop>
 		<WinnerList @close="isWinnerOpen=false" :isShow="isWinnerOpen" :prePurchaseId="seriesInfo_.prePurchaseId"></WinnerList>
-		<LoginTipPop name="SeriesPage" @loginSuccess="$emit('loginSuccess')" :isShow="isLoginTip" @close="isLoginTip=false"></LoginTipPop>
 	</view>
 </template>
 
@@ -70,7 +69,6 @@
 				isJoinShow:false,
 				seriesInfo_:this.seriesInfo,
 				isWinnerOpen:false,
-				isLoginTip:false,
 				curTime:parseInt(Date.now()/1000)
 			}
 		},
@@ -95,12 +93,12 @@
 		},
 		methods:{
 			toJoin(){
-				const login=this.$checkLogin()
+				const login=this.$checkLogin();
 				if(login){
-					this.joinStatus=this.seriesInfo_.join
-					this.isJoinShow=true
+					this.joinStatus=this.seriesInfo_.join;
+					this.isJoinShow=true;
 				}else{
-					this.isLoginTip=true
+					this.$emit("showLoginTip");
 				}
 			},
 			toViewWinnerList(){

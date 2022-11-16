@@ -1,10 +1,8 @@
 import request from "./http.js"
 import store from "../store/index.js"
 import axios from "axios"
-import {
-	md,
-	pki
-} from "node-forge";
+import md5 from "js-md5"
+import { md, pki } from "node-forge";
 
 // 获取多张图片
 // data:object|array
@@ -106,16 +104,16 @@ async function getFilesPath_(data, list, dataType ,indexs) {
 export function getFileMd5(file) {
 	let fr = new FileReader();
 	fr.readAsBinaryString(file);
+	const crypto = require("crypto")
 	return new Promise(function(resolve) {
 		fr.addEventListener("loadend", function() {
-			let result = fr.result;
+			const result = fr.result;
 			let digest = md.md5.create().update(result).digest();
 			let data = window.btoa(digest.data);
 			resolve(data);
 		});
 	});
 }
-
 /* 文件上传 */
 export async function uploadFile(md5, file) {
 	try {

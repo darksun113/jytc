@@ -9,10 +9,10 @@
 			<view class="pop-box">
 				<view class="head">
 					<view class="text">联系专属客服</view>
-					<image class="x" @click="closeCpop" src="../../static/images/x.svg"></image>
+					<image class="x" @click="closeCpop" src="@/static/images/x.svg"></image>
 				</view>
 				<view class="body">
-					<image class="code" src="../../static/images/contact.png"></image>
+					<image class="code" src="@/static/images/contact.png"></image>
 				</view>
 				<view class="foot">
 					<view class="text">长按保存二维码</view>

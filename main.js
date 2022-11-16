@@ -9,7 +9,7 @@ import {isMap_PingAn} from "./libs/jsm/PingAn-app.js"
 // 自定义方法
 import { routerTo } from '@/utils/routerTo.js' //公共方法
 import { myshare, isWechat} from '@/libs/jsm/w-share.js'
-import { count } from '@/utils/countApi.js'
+import { count,heartOfGetMsg } from '@/utils/countApi.js'
 import LazyLoad from "./directives/lazy.js"
 
 Vue.directive("lazy",LazyLoad)
@@ -25,6 +25,8 @@ Vue.use(uView);
 
 //刷新页面，统计
 count()
+// 获取未读消息心跳
+heartOfGetMsg()
 
 App.mpType = 'app'
 Object.assign(Vue.prototype, {

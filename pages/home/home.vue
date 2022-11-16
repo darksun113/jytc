@@ -1,7 +1,7 @@
 <template>
 	<PageTemp style="padding: 0 40rpx;">
 		<scroll-view class="home" scroll-y="true" @scrolltolower="updateList">
-			<Search v-if="$checkLogin()" />
+			<Search v-if="checkLogin" />
 			<Banner />
 			<view class="container">
 				<StickyNav ref="nav" @changeShowType="changeShowType" @switchOverNav="switchOverNav" @resetPage="reset" />
@@ -47,10 +47,12 @@
 				shouldRequest: true,
 				showAnnoun: false,
 				noticeList:[],
+				checkLogin:false
 			}
 		},
 		onShow() {
-			if(this.$checkLogin()&&uni.getStorageSync("announceIsShow")!=true){
+			this.checkLogin = this.$checkLogin();
+			if(this.checkLogin && uni.getStorageSync("announceIsShow")!=true){
 				//已登录，且没有展示过公告
 				this.getNoticeList()
 			}

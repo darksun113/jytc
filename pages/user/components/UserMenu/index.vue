@@ -3,7 +3,7 @@
 		<view class="title">常用功能</view>
 		<MenuItem @click.native="toSubmenu(0)" src="/static/images/object_icon.svg">我的藏品</MenuItem>
 		<MenuItem @click.native="toSubmenu(1)" src="/static/images/preorder_icon.svg">预购信息</MenuItem>
-		<MenuItem @click.native="toSubmenu(7)" src="/static/images/collection_icon.svg">我的收藏</MenuItem>
+		<MenuItem @click.native="toSubmenu(7)" src="/static/images/un_collection_icon.svg">我的收藏</MenuItem>
 		<MenuItem @click.native="toSubmenu(8)" src="/static/images/service_icon.svg">我的客服</MenuItem>
 		<MenuItem @click.native="toSubmenu(5)" src="/static/images/my_cards.svg">我的银行卡</MenuItem>
 		<MenuItem @click.native="toSubmenu(2)" src="/static/images/account_security_icon.svg">帐号与安全</MenuItem>

@@ -15,17 +15,9 @@
 			</view>
 		</template>
 		<template v-else-if="loadType==1">
-			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-if="item.writeListStatus==2">
-				已使用
-			</view>
-			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;"
-				v-else-if="item.writeListStatus==1">
-				已过期
-			</view>
-			<view class="sell-tip" v-else-if="(item.sellTime - 10*60) - curTime > 0">
-				<text>预购倒计时：</text>
-				<u-count-down :time="((item.sellTime - 10*60) - curTime) * 1000" format="DD:HH:mm:ss" @change="onChange"
-					@finish="finish">
+			<view class="sell-tip" v-if="item.finishTime > curTime">
+				<text>结束倒计时：</text>
+				<u-count-down :time="(item.finishTime - curTime) * 1000" format="DD:HH:mm:ss" @change="onChange" @finish="finish">
 					<view class="time">
 						<text class="time__item">{{ timeData.days }}天</text>
 						<text class="time__item">{{ timeData.hours>10?timeData.hours:'0'+timeData.hours}}时</text>
@@ -33,6 +25,15 @@
 						<text class="time__item">{{ timeData.seconds }}秒</text>
 					</view>
 				</u-count-down>
+			</view>
+			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-else-if="item.finishTime > curTime && item.rewardTime < curTime">
+				等待开奖
+			</view>
+			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-if="item.logStatus==2">
+				恭喜你抽中白名单资格
+			</view>
+			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-else-if="item.logStatus !==2">
+				很遗憾未抽中白名单资格
 			</view>
 		</template>
 		<img v-lazy class="series-pic" :src="item.seriesImg || item.image"

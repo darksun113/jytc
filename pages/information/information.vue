@@ -13,6 +13,7 @@
 	export default {
 		data() {
 			return {
+				updatePage:1,
 				msgList:[
 					{
 						msgType:1,
@@ -33,12 +34,28 @@
 		components:{
 			MessageCard
 		},
+		onLoad() {
+			this.getMsgList();
+		},
 		methods:{
 			update(){
-				console.log(5588)
+				this.getMsgList()
 			},
-			toDetailPage(){
+			toDetailPage(item){
 				
+			},
+			async getMsgList (){
+				const {code,errorMsg,data:{list}} = await uni.$http("/user/message/list",{
+					page:this.updatePage,
+					size:10,
+					unread:0
+				},false)
+				if(code == 0){
+					this.msgList = list;
+					this.updatePage++;
+				}else{
+					this.$toast(errorMsg);
+				}
 			}
 		}
 	}

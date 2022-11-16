@@ -20,7 +20,7 @@
 		methods: {
 			...mapMutations(["setDot"]),
 			toMsgPage() {
-				this.setDot(!this.isDot)
+				this.setDot(false)
 				const url = `/pages/information/information`
 				this.$routerTo(url)
 			}

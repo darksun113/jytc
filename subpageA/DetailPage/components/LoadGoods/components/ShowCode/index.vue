@@ -1,10 +1,14 @@
 <template>
-	<view class="code-box">
-		<view class="" style="width: 160rpx;"></view>
-		<view class="goodsCode_box" v-if="goodsData.loadType==1">
-			<view class="goodsCode">#{{goodsData.goodsCode}}</view>
+	<view >
+		<view class="code-box">
+			<view class="" style="width: 160rpx;"></view>
+			<view class="goodsCode_box" v-if="goodsData.loadType==1">
+				<view class="goodsCode">#{{goodsData.goodsCode}}</view>
+			</view>
+			<donation-and-collection :goodsData="goodsData"  @showLoginTip="isShow=true" />
 		</view>
-		<donation-and-collection :goodsData="goodsData"/>
+		<!-- 登录pop -->
+		<LoginTipPop name="goodsDetail" @loginSuccess="loginSuccess" :isShow="isShow" @close="isShow=false"></LoginTipPop>
 	</view>
 </template>
 
@@ -18,9 +22,23 @@
 				default:()=>{}
 			}
 		},
+		data() {
+			return {
+				isShow: false
+			}
+		},
 		components:{
 			DonationAndCollection
-		}
+		},
+		methods: {
+			loginSuccess(){
+				uni.showToast({
+					title:"登录成功",
+					icon:"success",
+					duration:2000
+				})
+			},
+		},
 	}
 </script>
 

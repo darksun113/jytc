@@ -1,13 +1,15 @@
 <template>
 	<PageTemp>
-		<scroll-view class="series-page" scroll-y="true" @scrolltolower="updateList">
+		<scroll-view class="series-page" scroll-y="true">
 			<Banner :seriesInfo="seriesInfo"></Banner>
 			<view class="container">
-				<ActivityDesBox :seriesInfo="seriesInfo"></ActivityDesBox>
-				<ActivityBox :seriesInfo="seriesInfo" v-if="seriesInfo.prePurchaseId" @loginSuccess="loginSuccess"></ActivityBox>
+				<ActivityDesBox :seriesInfo="seriesInfo" @showLoginTip="isLoginShow = true"></ActivityDesBox>
+				<ActivityBox :seriesInfo="seriesInfo" v-if="seriesInfo.prePurchaseId" @showLoginTip="isLoginShow = true"></ActivityBox>
 				<GoodsList ref="GoodsList" :seriesId="seriesId"></GoodsList>
 			</view>
 		</scroll-view>
+		<!-- 登录pop -->
+		<LoginTipPop name="goodsDetail" @loginSuccess="loginSuccess" :isShow="isLoginShow" @close="isLoginShow=false"></LoginTipPop>
 	</PageTemp>
 </template>
 
@@ -27,12 +29,12 @@
 		data() {
 			return {
 				seriesId:"",
-				seriesInfo:{}
+				seriesInfo:{},
+				isLoginShow: false
 			};
 		},
 		onLoad(opt) {
 			this.seriesId=opt.seriesId
-			
 		},
 		onShow() {
 			this.getSeriesDetail()
@@ -62,8 +64,7 @@
 				}catch(e){
 					//TODO handle the exception
 				}
-			},
-			updateList(){}
+			}
 		}
 	}
 </script>

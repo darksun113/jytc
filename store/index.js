@@ -13,7 +13,7 @@ export default new Vuex.Store({
 		avatarUuid:'',
 		userInfo: {},
 		token:"",
-		isDot:true,
+		isDot:false,
 	},
 	mutations: {
 		//设置信息徽标状态
@@ -99,6 +99,19 @@ export default new Vuex.Store({
 				}
 			} catch (e) {
 				//TODO handle the exception
+			}
+		},
+		/**
+		 * 获取未读消息count
+		 */
+		async getMsgOfUnread(context){
+			const {code,errorMsg,data:{list}} = await uni.$http("/user/message/list",{
+				page:1,
+				size:10,
+				unread:1
+			},false)
+			if(list.length > 0){
+				context.commit("setDot",true)
 			}
 		}
 	}

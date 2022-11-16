@@ -37,11 +37,27 @@ export default {
             this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
             document.querySelector("#model_pre").appendChild(this.renderer.domElement);
         },
-        // 重置模型位置
-        resetModel(){
-            this.initCamera()
-            this.initControls()
-        }
+		openEnablePan(){
+			this.control.reset();
+			this.control.enablePan=true
+			this.control.autoRotate=false
+			this.control.enableRotate = false
+			this.control.touches = { 
+				ONE: THREE.TOUCH.PAN, // 单个手指 拖动(默认旋转：ROTATE)
+				TWO: THREE.TOUCH.DOLLY_PAN // 两个手指 缩放
+			};
+			
+		},
+		closeEnablePan(){
+			this.control.reset();
+			this.control.enablePan=false
+			this.control.autoRotate=true
+			this.control.enableRotate = true
+			this.control.touches = {
+				ONE: THREE.TOUCH.ROTATE,// 单个手指 旋转(默认旋转：ROTATE)
+				TWO: THREE.TOUCH.DOLLY_PAN//// 两个手指 缩放
+			}
+		},
     }
 }
 </script>

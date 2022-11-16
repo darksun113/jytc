@@ -132,6 +132,14 @@ export default{
 		    this.renderer.render(this.scene, this.camera);
 		    this.animationId=window.requestAnimationFrame(this.render);
 		},
+		
+		// 控制模型自动旋转与暂停
+		startRotate(){
+		    this.control.autoRotate=true
+		},
+		stopRotate(){
+			this.control.autoRotate=false
+		},
 		clearScene() {
 		    cancelAnimationFrame(this.animationId);
 		    this.scene.traverse((child) => {
@@ -154,35 +162,6 @@ export default{
 		    this.renderer.domElement = null;
 		    this.renderer = null;
 		    THREE.Cache.clear()
-		},
-		// 重置模型位置
-		resetModel(){
-		    this.initCamera()
-		    this.initControls()
-		},
-		// 控制模型自动旋转与暂停
-		startRotate(){
-		    this.control.autoRotate=true
-		},
-		stopRotate(){
-			this.control.autoRotate=false
-		},
-		openEnablePan(){
-			this.resetModel()
-			this.control.enablePan=true
-			this.control.autoRotate=false
-			this.control.enableRotate = false
-			this.control.mous = {
-				ONE: THREE.TOUCH.DOLLY_PAN,
-				TWO: THREE.TOUCH.ROTATE
-			}
-		},
-		closeEnablePan(){
-			this.resetModel()
-			// this.control.touches = {
-			// 	ONE: THREE.TOUCH.ROTATE,
-			// 	ONE: THREE.TOUCH.DOLLY_PAN
-			// }
 		},
 		execute() {
 		    // 初始化场景

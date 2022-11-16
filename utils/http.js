@@ -1,9 +1,13 @@
 
 import {isMap_PingAn} from "@/libs/jsm/PingAn-app.js";
+import {isWechat} from "../libs/jsm/w-share.js"
+const isPingan_env = isMap_PingAn();
+const isWechat_env = isWechat();
 
 const request = (url = '', date = {},loading=true, type = 'POST', header = {}) => {
-	loading && uni.showLoading()
-	const token = getToken()
+	loading && uni.showLoading();
+	const token = getToken();
+	const LoginType = getLoginHeader();
 	return new Promise((resolve, reject) => {
 		let data = {
 			method: type,
@@ -12,6 +16,7 @@ const request = (url = '', date = {},loading=true, type = 'POST', header = {}) =
 			header: {
 				'Content-Type': 'application/json',
 				Authorization : token,
+				LoginType,
 				header,
 			},
 			dataType: 'json',
@@ -46,7 +51,7 @@ function routerTo(){
 	uni.hideLoading()
 	const timer_=setTimeout(()=>{
 		clearTimeout(timer_)
-		if(isMap_PingAn){
+		if(isMap_PingAn()){
 			uni.reLaunch({
 				url:"/pages/home/home"
 			})
@@ -56,5 +61,14 @@ function routerTo(){
 			})
 		}
 	},2000)
+}
+function getLoginHeader(){
+	if(isPingan_env){
+		return 1;
+	}else if(isWechat_env){
+		return 2;
+	}else{
+		return 3;
+	}
 }
 export default request

@@ -44,7 +44,7 @@
 					<text style="margin-right: 10rpx;color: #aaa;">藏品</text>{{userInfo.collectionNumber}}
 				</view>
 				<view class="item">
-					<text style="margin-right: 10rpx;color: #aaa;">空投</text>{{userInfo.collectionNumber}}
+					<text style="margin-right: 10rpx;color: #aaa;">空投</text>{{userInfo.airDropNum}}
 				</view>
 			</view>
 		</view>

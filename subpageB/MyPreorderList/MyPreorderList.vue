@@ -52,7 +52,7 @@
 			// 获取预购白名单
 			async getWritelist(callback){
 				try{
-					const res = await uni.$http("/series/prepurchase/writelist",{
+					const res = await uni.$http("/user/prePurchaseLogList",{
 						page:this.updatePage,
 						size:10
 					})

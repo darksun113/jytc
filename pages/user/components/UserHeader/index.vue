@@ -170,11 +170,10 @@
 				
 				.id-style{
 					display: flex;
-					font-size: 10rpx;
+					font-size: 28rpx;
 					font-family: PingFangSC-Regular, PingFang SC;
 					font-weight: 400;
 					color: #999;
-					line-height: 40rpx;
 				}
 				.copy-icon{
 					width: 20rpx;

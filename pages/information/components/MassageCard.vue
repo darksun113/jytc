@@ -8,7 +8,7 @@
 			<text class="title-text">{{item.createTime | formatMouthToMinutes}}</text>
 		</view>
 		<view class="content-box">
-			{{item.msgInfo}}
+			{{item.content}}
 		</view>
 		<view class="more-box" v-if="item.msgType == 1">
 			<text>查看详情</text>

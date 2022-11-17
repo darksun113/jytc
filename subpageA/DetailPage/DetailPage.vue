@@ -48,6 +48,7 @@
 		onUnload() {
 			uni.$off("toOpenSharePoster")
 			uni.$off("reLoadPage")
+			uni.$off("getSuccess")
 		},
 		mounted(){
 			uni.$on("getSuccess",()=>{

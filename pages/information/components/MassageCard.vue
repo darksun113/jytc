@@ -3,14 +3,14 @@
 		<view class="title-box">
 			<view class="title-text">
 				<text>系统消息</text>
-				<u-badge :isDot="item.isRead == 0" class="dot"></u-badge>
+				<!-- <u-badge :isDot="item.isRead == 0" class="dot"></u-badge> -->
 			</view>
 			<text class="title-text">{{item.createTime | formatMouthToMinutes}}</text>
 		</view>
 		<view class="content-box">
 			{{item.content}}
 		</view>
-		<view class="more-box" v-if="item.msgType == 1">
+		<view class="more-box" v-if="item.type !== 0">
 			<text>查看详情</text>
 			<image style="width: 24rpx;height: 40rpx;" src="@/static/images/more_arrows_icon.svg" mode=""></image>
 		</view>

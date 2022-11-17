@@ -6,9 +6,9 @@
 			<view class="donation-tip" v-if="format > 0">需等待{{format}}天</view>
 		</view>
 		<view class="collection-box" v-else>
-			<image class="icon" v-show="isFavorite" @tap="handleFavorite(1)" src="@/static/images/collection_icon.svg"></image>
-			<image class="icon" v-show="!isFavorite" @tap="handleFavorite(0)" src="@/static/images/un_collection_icon.svg"></image>
-			<text>{{favoriteCount}}</text>
+			<image class="icon" v-show="goodsData.ifFavorite" @tap="handleFavorite(1)" src="@/static/images/collection_icon.svg"></image>
+			<image class="icon" v-show="!goodsData.ifFavorite" @tap="handleFavorite(0)" src="@/static/images/un_collection_icon.svg"></image>
+			<text>{{goodsData.favorites}}</text>
 		</view>
 	</view>
 </template>
@@ -23,9 +23,7 @@
 		},
 		data() {
 			return {
-				curTime: Date.now(),
-				isFavorite:false,
-				favoriteCount:0
+				curTime: Date.now()
 			}
 		},
 		computed: {
@@ -50,8 +48,8 @@
 					isFavorite:opt
 				})
 				if(res.code == 0){
-					this.favoriteCount = res.data.count;
-					this.isFavorite = !this.isFavorite
+					this.goodsData.favorites = res.data.count;
+					this.goodsData.ifFavorite = !this.goodsData.ifFavorite
 				}else{
 					this.$toast(res.errorMsg,"error")
 				}

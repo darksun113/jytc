@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import {  OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import {  MTLLoader, OBJLoader } from "three-obj-mtl-loader";
-// import { GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 export default{
 	props: {
 	    OBJPath: {	
@@ -56,7 +55,6 @@ export default{
 		    this.control = new OrbitControls(this.camera, this.renderer.domElement);
 		    // 开启自动旋转
 		    this.control.autoRotate = true
-			console.log(this.control)
 		    // 设置缩放最大、最小距离
 		    this.control.minDistance = 50
 		    this.control.maxDistance = 400

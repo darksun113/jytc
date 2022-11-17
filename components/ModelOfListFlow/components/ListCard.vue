@@ -29,7 +29,7 @@
 			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-else-if="item.finishTime > curTime && item.rewardTime < curTime">
 				等待开奖
 			</view>
-			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-if="item.logStatus==2">
+			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-else-if="item.logStatus==2">
 				恭喜你抽中白名单资格
 			</view>
 			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-else-if="item.logStatus !==2">
@@ -37,9 +37,6 @@
 			</view>
 		</template>
 		<img v-lazy class="series-pic" :src="item.seriesImg || item.image" :style="{objectFit:isBlind ? 'contain':'cover'}" />
-		<!-- <view class="series-pic">
-			<lazyLoad :src="item.seriesImg || item.image" :mode="!isBlind?'aspectFill':'aspectFit'"></lazyLoad>
-		</view> -->
 		<view class="series-info-box">
 			<view class="series-info">
 				<view class="series-title nowrap">

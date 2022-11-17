@@ -12,7 +12,7 @@
 					<image class="x" @click="closeCpop" src="@/static/images/x.svg"></image>
 				</view>
 				<view class="body">
-					<image class="code" src="@/static/images/contact.png"></image>
+					<img class="code" src="@/static/images/contact.png" />
 				</view>
 				<view class="foot">
 					<view class="text">长按保存二维码</view>
@@ -48,6 +48,9 @@
 </script>
 
 <style lang="scss" scoped>
+	img{
+		pointer-events: auto;
+	}
 	.contact-btn {
 		width: 100%;
 		height:80rpx;

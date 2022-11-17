@@ -31,6 +31,9 @@
 			this.goodsId = opt.goodsId
 			this.getGoodsInfo()
 		},
+		onUnload() {
+			uni.removeStorageSync("donationGoods")
+		},
 		methods: {
 			getGoodsInfo() {
 				this.goodsData = uni.getStorageSync("donationGoods")

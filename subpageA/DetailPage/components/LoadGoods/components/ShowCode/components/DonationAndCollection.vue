@@ -1,9 +1,9 @@
 <template>
 	<view class="donation-collection-box">
 		<view class="donation-box" v-if="goodsData.loadType==1">
-			<view class="donation-btn" style="opacity:0.6" v-if="format > 0">转赠</view>
+			<view class="donation-btn" style="opacity:0.6" v-if="format < 0">转赠</view>
 			<view class="donation-btn" v-else @click="toDonationPage">转赠</view>
-			<view class="donation-tip" v-if="format > 0">需等待{{format}}天</view>
+			<!-- <view class="donation-tip" v-if="format > 0">需等待{{format}}天</view> -->
 		</view>
 		<view class="collection-box" v-else>
 			<image class="icon" v-show="goodsData.ifFavorite" @tap="handleFavorite(1)" src="@/static/images/collection_icon.svg"></image>

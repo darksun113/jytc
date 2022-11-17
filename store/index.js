@@ -38,7 +38,7 @@ export default new Vuex.Store({
 					state.second--
 				} else {
 					state.isCount = false
-					this.second = 60
+					state.second = 60
 					clearInterval(timer)
 				}
 			}, 1000);

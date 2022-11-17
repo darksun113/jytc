@@ -9,6 +9,9 @@ export async function count(){
 }
 
 export function heartOfGetMsg(){
+	if(checkLogin()){
+		store.dispatch("getMsgOfUnread")
+	}
 	setInterval(()=>{
 		if(checkLogin()){
 			store.dispatch("getMsgOfUnread")

@@ -7,7 +7,7 @@
 				<image class="x" @click="$emit('close')" src="@/static/images/close_999.svg"></image>
 			</view>
 			<view class="body">
-				<image class="code" src="@/static/images/contact.png"></image>
+				<img class="code" src="@/static/images/contact.png" />
 			</view>
 			<view class="foot">
 				<view class="text">长按保存二维码</view>
@@ -86,6 +86,9 @@
 				}
 			}
 		}
+	}
+	img{
+		pointer-events: auto;
 	}
 	::v-deep .u-popup__content{
 		background: transparent;

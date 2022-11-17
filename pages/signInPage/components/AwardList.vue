@@ -8,7 +8,8 @@
 			<swiper-item class="gift-item-swiper" v-for="(item , j) in rewards" :key="j">
 				<view class="gift-item" @tap="handleGift(item)">
 					<image v-if="item.type == 1" :src="item.goodsImage" mode="aspectFill"></image>
-					<image v-else src="../../../static/新增icon/占位图.png" mode=""></image>
+					<image v-else-if="item.type == 2" src="@/static/images/blind.png" mode="aspectFill"></image>
+					<image v-else src="@/static/新增icon/占位图.png" mode=""></image>
 				</view>
 			</swiper-item>
 		</swiper>

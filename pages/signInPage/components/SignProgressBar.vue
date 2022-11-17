@@ -79,7 +79,7 @@
 				this.isOpenAward = false;
 			},
 			async openAward(item) {
-				const {days, receive ,rewardId} = item
+				const {days, receive ,rewardId,type} = item
 				switch(this.signDetail.type){
 					case 1:
 					if (days > this.signDetail.cumulativeDays || receive == 1) return;
@@ -92,7 +92,18 @@
 					rewardId
 				})
 				if (res.code == 0) {
-					this.awardRes = await getFilePath(res.data, ["image"]);
+					if(res.data.image !== ""){
+						res.data = await getFilePath(res.data, ["image"]);
+					}
+					this.awardRes.goodsName = res.data.name;
+					let image = ""
+					switch(type){
+						case 1:image = res.data.image
+							break;
+						case 2:image = require("../../../static/images/blind.png");
+							break;
+						case 3:image = require("../../../static/新增icon/占位图.png");
+					}
 					this.isOpenAward = true;
 				} else {
 					uni.showModal({

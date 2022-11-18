@@ -5,17 +5,17 @@ export async function count(){
 		eventCode: 'access',
 		eventTimestamp: parseInt(time/1000),
 		data: "",
-	})
+	},false)
 }
 export function startHeartBeat(){
 	heartOfOnline();
 	heartOfGetMsg()
 }
 async function heartOfOnline(){
-	const res = await uni.$http("/heartbeat",{})
+	const res = await uni.$http("/heartbeat",{},false)
 	setInterval(()=>{
 		if(checkLogin()){
-			uni.$http("/heartbeat",{})
+			uni.$http("/heartbeat",{},false)
 		}
 	},30000)
 }

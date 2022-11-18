@@ -64,7 +64,7 @@ export default{
 		        this.control.enableZoom = false;
 		    }
 		    // 禁用平移
-		    this.control.enablePan = true
+		    this.control.enablePan = false
 		    this.control.rotateSpeed = 0.5
 		    // 开启拖拽惯性
 		    this.control.enableDamping = true

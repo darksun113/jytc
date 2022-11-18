@@ -43,8 +43,8 @@
 
 <script>
 	import AwardPop from "../../../subpageB/MyObject/components/BlindToGoods/index.vue";
-	import { getFilePath } from "../../../utils/tools.js"
-	import SignRulesPop from "./modals/SignRules.vue"
+	import { getFilePath } from "../../../utils/tools.js";
+	import SignRulesPop from "./modals/SignRules.vue";
 	export default {
 		props: {
 			signDetail: {
@@ -102,8 +102,9 @@
 							break;
 						case 2:image = require("../../../static/images/blind.png");
 							break;
-						case 3:image = require("../../../static/新增icon/占位图.png");
+						case 3:image = require("../../../static/images/airDrop.png");
 					}
+					this.awardRes.image = image;
 					this.isOpenAward = true;
 				} else {
 					uni.showModal({

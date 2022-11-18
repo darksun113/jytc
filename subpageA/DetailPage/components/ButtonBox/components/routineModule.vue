@@ -3,8 +3,12 @@
 		<view class="price" v-if="goodsData.goodsPrice > 0">
 			¥ {{(goodsData.goodsPrice/100).toFixed(2)}}
 		</view>
+		
 		<template v-if="goodsData.goodsPrice === 0 ">
-			<view class="btn w100" style="opacity: 0.65;" v-if="goodsData.limit">
+			<view class="btn w100" style="opacity: 0.65;" v-if="goodsData.goodsStatus == 1">
+				已下架
+			</view>
+			<view class="btn w100" style="opacity: 0.65;" v-else-if="goodsData.limit">
 				已领取
 			</view>
 			<view class="btn w100" style="opacity: 0.65;" v-else-if="goodsData.goodsStatus == 3">
@@ -15,7 +19,10 @@
 			</view>
 		</template>
 		<template v-else>
-			<view class="btn" style="opacity: 0.65;" v-if="goodsData.goodsStatus == 3">
+			<view class="btn" style="opacity: 0.65;" v-if="goodsData.goodsStatus == 1">
+				已下架
+			</view>
+			<view class="btn" style="opacity: 0.65;" v-else-if="goodsData.goodsStatus == 3">
 				已售罄
 			</view>
 			<view class="btn" style="opacity: 0.65;" v-else-if="goodsData.goodsStatus == 4">

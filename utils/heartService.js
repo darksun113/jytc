@@ -7,8 +7,19 @@ export async function count(){
 		data: "",
 	})
 }
-
-export function heartOfGetMsg(){
+export function startHeartBeat(){
+	heartOfOnline();
+	heartOfGetMsg()
+}
+async function heartOfOnline(){
+	const res = await uni.$http("/heartbeat",{})
+	setInterval(()=>{
+		if(checkLogin()){
+			uni.$http("/heartbeat",{})
+		}
+	},30000)
+}
+function heartOfGetMsg(){
 	if(checkLogin()){
 		store.dispatch("getMsgOfUnread")
 	}

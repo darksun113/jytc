@@ -12,7 +12,9 @@ export function startHeartBeat(){
 	heartOfGetMsg()
 }
 async function heartOfOnline(){
-	const res = await uni.$http("/heartbeat",{},false)
+	if(checkLogin()){
+		uni.$http("/heartbeat",{},false)
+	}
 	setInterval(()=>{
 		if(checkLogin()){
 			uni.$http("/heartbeat",{},false)

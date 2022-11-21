@@ -7,6 +7,7 @@
 				<!-- private int goodsStatus; // 状态 0 上架 1下架 2 未发布 新增: 3 已售罄 4已结束'  5 售卖中 6 预售中 -->
 				<text v-if="item.goodsStatus==0 && item.goodsType==3">预售活动：{{item.preSaleTime | format}}</text>
 				<text v-else-if="item.goodsStatus==0 && item.goodsType==1">开售时间：{{item.startTime | format}}</text>
+				<text v-else-if="item.goodsStatus==1">已下架</text>
 				<text v-else-if="item.goodsStatus==3">已售罄</text>
 				<text v-else-if="item.goodsStatus==4">已结束</text>
 				<text v-else-if="item.goodsStatus==5">在售</text>
@@ -93,9 +94,8 @@
 				this.$emit("countFinish")
 			},
 			toDetailPage(){
-				const loadType = 0
-				// materialType 类型  0模型 1图片 2视频 3音频
-				const url=`/subpageA/DetailPage/DetailPage?loadType=${loadType}&goodsId=${this.item.goodsId}`
+				if(this.item.goodsStatus == 1)return;
+				const url=`/subpageA/DetailPage/DetailPage?loadType=0&goodsId=${this.item.goodsId}`
 				this.$routerTo(url)
 			}
 		}

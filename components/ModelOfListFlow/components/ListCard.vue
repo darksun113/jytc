@@ -1,16 +1,16 @@
 <template>
 	<view class="series-box" @click="toSeriesDetailPage">
 		<template v-if="loadType==0 || loadType==2">
-			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;"
-				v-if="item.goodsTotal==0 || item.remainingNumber == 0">
+			<view class="sell-tip" v-if="item.seriesStatus == 6">
+				已下架
+			</view>
+			<view class="sell-tip" v-else-if="item.goodsTotal==0 || item.remainingNumber == 0">
 				已售罄
 			</view>
-			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;"
-				v-else-if="!!item.startTime && item.startTime > curTime">
+			<view class="sell-tip" v-else-if="!!item.startTime && item.startTime > curTime">
 				开售时间 {{item.startTime | formatYearToMinutes_EN}}
 			</view>
-			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;"
-				v-else-if="!!item.sellTime && item.sellTime > curTime">
+			<view class="sell-tip" v-else-if="!!item.sellTime && item.sellTime > curTime">
 				开售时间 {{item.sellTime | formatYearToMinutes_EN}}
 			</view>
 		</template>
@@ -26,13 +26,13 @@
 					</view>
 				</u-count-down>
 			</view>
-			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-else-if="item.finishTime > curTime && item.rewardTime < curTime">
+			<view class="sell-tip" v-else-if="item.finishTime > curTime && item.rewardTime < curTime">
 				等待开奖
 			</view>
-			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-else-if="item.logStatus==2">
+			<view class="sell-tip" v-else-if="item.logStatus==2">
 				恭喜你抽中白名单资格
 			</view>
-			<view class="sell-tip" style="font-family: PingFangSC-Regular, PingFang SC;" v-else-if="item.logStatus !==2">
+			<view class="sell-tip" v-else-if="item.logStatus !==2">
 				很遗憾未抽中白名单资格
 			</view>
 		</template>
@@ -66,9 +66,7 @@
 
 <script>
 	import lazyLoad from '@/uni_modules/muqian-lazyLoad/components/muqian-lazyLoad/muqian-lazyLoad.vue'
-	import {
-		formatYearToMinutes_EN
-	} from "@/utils/formatDate.js"
+	import { formatYearToMinutes_EN } from "@/utils/formatDate.js"
 	export default {
 		name: "ListCard",
 		props: {
@@ -97,6 +95,7 @@
 		},
 		methods: {
 			toSeriesDetailPage() {
+				if(this.item.seriesStatus == 6)return;
 				const id = this.isBlind ? this.item.blindboxId : this.item.seriesId
 				this.$emit("toSeriesDetailPage", id)
 			},
@@ -143,7 +142,7 @@
 			padding: 10rpx 20rpx;
 			border-radius: 30rpx;
 			font-size: 28rpx;
-			font-family: PingFangSC-Semibold, PingFang SC;
+			font-family: PingFangSC-Regular, PingFang SC;
 			left: 40rpx;
 			top: 40rpx;
 			z-index: 1;

@@ -104,6 +104,7 @@
 			},
 			finish() {
 				// this.item.writeListStatus=1
+				uni.$emit("resetPreOrderPage")
 			}
 		}
 	}

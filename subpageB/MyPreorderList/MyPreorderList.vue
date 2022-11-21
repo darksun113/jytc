@@ -27,7 +27,12 @@
 			this.init()
 		},
 		onLoad() {
-			
+			uni.$on("resetPreOrderPage",()=>{
+				this.init();
+			})
+		},
+		onUnload() {
+			uni.$off("resetPreOrderPage");
 		},
 		methods:{
 			updateList(){

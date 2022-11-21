@@ -26,7 +26,7 @@
 					</view>
 				</u-count-down>
 			</view>
-			<view class="sell-tip" v-else-if="item.finishTime > curTime && item.rewardTime < curTime">
+			<view class="sell-tip" v-else-if="item.finishTime < curTime && item.rewardTime > curTime">
 				等待开奖
 			</view>
 			<view class="sell-tip" v-else-if="item.logStatus==2">

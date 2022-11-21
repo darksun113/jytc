@@ -35,8 +35,7 @@
 		data (){
 			return{
 				userPhoneStr: uni.getStorageSync("userInfo").phone,
-				// phone:uni.getStorageSync("phone"),
-				phone:17302694611,
+				phone: uni.getStorageSync("userInfo").fullPhone,
 				inhritConfirm: false,
 				inhritInput:false,
 				transInfo:{},

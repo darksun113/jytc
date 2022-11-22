@@ -2,7 +2,7 @@
 	<view class="pay-type">
 		<view class="title">请选择支付方式</view>
 		<view class="type-item-bank" @click="selectPayType('bankPay')">
-			<image src="../../static/images/ccb.svg" mode=""></image>
+			<image src="../../static/images/ys_logo.png" mode=""></image>
 			<view class="cardinfo-box">
 				<view class="txt1">银行卡支付</view>
 				<view class="change-box">

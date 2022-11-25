@@ -40,24 +40,15 @@
 						<view class="info" v-if="cardList.length!==0">
 							{{ cardList[index].bankName }}储蓄卡({{ four_digit[index]}})
 						</view>
-						<image v-show="payType=='aliPay'" class="check-icon" style="width: 28rpx;height: 24rpx;" src="../../static/images/check.svg"></image>
 					</view>
-					<u-radio-group>
-					   <u-radio class="radio" @click="selectCard(index)"></u-radio>
-					</u-radio-group>
+					<image v-show="index == curSelect" @click.stop="selectCard(index)" class="check-icon" style="width: 28rpx;height: 24rpx;" src="../../static/images/check.svg"></image>
 				</view>
-				<button class="add-cards-btn" @click="addCard">
-					<image class="add-icon" src="../../static/images/plus2.svg"></image>
-					<view vlass="add-txt">添加银行卡</view>
-					<image class="arrow" src="../../static/images/right_arrow.svg"></image>
-				</button>
+				<view class="add-cards-btn" >
+					<image class="add-icon" @click.stop="addCard" src="../../static/images/plus2.svg"></image>
+					<view vlass="add-txt" @click.stop="addCard">添加银行卡</view>
+				</view>
 			</scroll-view>
 		</u-popup>
-		<!--view class="type-item" @click="selectPayType('uniPay')">
-			<image src="../../static/images/uni_pay.svg" mode=""></image>
-			<view>银联支付</view>
-			<image v-show="payType=='uniPay'" class="check-icon" style="width: 28rpx;height: 24rpx;" src="../../static/images/check.svg"></image>
-		</view> -->
 	</view>
 </template>
 
@@ -74,7 +65,8 @@
 				Shows:false,
 				p_ext:"",
 				selected_card_name:"default",
-				selected_card_num:"default"
+				selected_card_num:"default",
+				curSelect:0
 			}
 		},
 		mounted() {
@@ -108,6 +100,7 @@
 				this.Shows=true
 			},
 			selectCard(index){
+				this.curSelect = index;
 				this.$emit("setCard",this.cardList[index].id)
 			},
 			async getCardList(){
@@ -250,8 +243,16 @@
 			}
 			.list{
 				height: 30vh;
+				padding:20rpx 40rpx;
+				width: 100%;
+				box-sizing: border-box;
 				.cards{
+					border-bottom: 2rpx solid #EEEEEE;
+					box-sizing: border-box;
 					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					width: 100%;
 					padding:30rpx;
 					.card-info{
 						display: flex;
@@ -264,18 +265,20 @@
 							height: 40rpx;
 						}
 					}
-					.radio{
-						padding-left: 260rpx;
+					.check-icon{
+						width: 32rpx;
+						height: 32rpx;
 					}
 				}
 				.add-cards-btn{
 					text-align: left;
 					display: flex;
+					align-items: center;
 					color: #000000;
 					font-family: PingFangSC-Medium, PingFang SC;
 					border-color: #FFFFFF;
 					background-color: white;
-					padding: 0rpx;
+					border-bottom: 2rpx solid #EEEEEE;
 					.add-txt{
 						display: flex;
 					}

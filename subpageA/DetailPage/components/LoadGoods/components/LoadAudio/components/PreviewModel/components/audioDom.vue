@@ -111,7 +111,6 @@
 				let paused = this.context.paused;
 				this.context.pause();
 				this.context.seek(e.detail.value)
-				console.log(this.context)
 				if (!paused) {
 					this.context.play();
 				}

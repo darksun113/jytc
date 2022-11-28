@@ -187,7 +187,7 @@
 				const res = await uni.$http("/tracking/report",{
 					eventCode: 'view_gooods',
 					eventTimestamp: parseInt(time/1000),
-					data: this.goodsId,
+					data: `{"goodsId":"${this.goodsId}"}`,
 				},false)
 			}
 		},

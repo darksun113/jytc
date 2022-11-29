@@ -47,7 +47,7 @@
 			</view>
 		</view>
 		<view class="item-bottom">
-			<view class="btn btn-cancel" @click.stop="$emit('cancelOrder',{orderNo:item.orderNo,index:index_,orderStatus:item.status})">
+			<view class="btn btn-cancel" @click.stop="$emit('cancelOrder',{orderNo:item.orderNo,index:idx,orderStatus:item.status})">
 				取消订单
 			</view>
 			<view v-if="this.item.status==0||this.item.status==3" class="btn btn-pay" @click.stop="toPay">
@@ -67,7 +67,7 @@
 				type: Object,
 				default: () => {}
 			},
-			index_:[Number,String]
+			idx:[Number,String]
 		},
 		data() {
 			return {
@@ -91,7 +91,7 @@
 		},
 		methods: {
 			countEnd() {
-				this.$emit("countEnd",this.index)
+				this.$emit("countEnd",this.idx)
 			},
 			toPay() {
 				const url = `/subpageB/OrderPage/OrderPage?orderNo=${this.item.orderNo}`

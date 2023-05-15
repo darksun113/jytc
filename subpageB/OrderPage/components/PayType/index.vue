@@ -34,14 +34,14 @@
 				<image @click="closePop" src="@/static/images/x.svg"></image>
 			</view>
 			<scroll-view class="list" scroll-y="true" @scrolltolower="updateList">
-				<view class="cards" v-for="(item,index) in cardList" :key="index" >
+				<view class="cards" v-for="(item,index) in cardList" :key="index" @click.stop="selectCard(index)">
 					<view class="card-info">
-						<image class="fixed-icon" src="../../static/images/ccb.svg" mode=""></image>
+						<image class="fixed-icon" :src="getIcon(item.bankName)" mode=""></image>
 						<view class="info" v-if="cardList.length!==0">
 							{{ cardList[index].bankName }}储蓄卡({{ four_digit[index]}})
 						</view>
 					</view>
-					<image v-show="index == curSelect" @click.stop="selectCard(index)" class="check-icon" style="width: 28rpx;height: 24rpx;" src="../../static/images/check.svg"></image>
+					<image v-show="index == curSelect"  class="check-icon" style="width: 28rpx;height: 24rpx;" src="../../static/images/check.svg"></image>
 				</view>
 				<view class="add-cards-btn" >
 					<image class="add-icon" @click.stop="addCard" src="../../static/images/plus2.svg"></image>
@@ -99,19 +99,21 @@
 			changeCard(){
 				this.Shows=true
 			},
+			getIcon(icon){
+				return require("@/static/bank_images/"+icon+".svg")
+			},
 			selectCard(index){
 				this.curSelect = index;
-				this.$emit("setCard",this.cardList[index].id)
+				this.selected_card_name=this.cardList[index].bankName;
+				this.selected_card_num=this.four_digit[index];
+				this.closePop();
+				this.$emit("setCard",this.cardList[index].id);
 			},
 			async getCardList(){
 				try{
 					const res= await uni.$http("/payment/bankList",{
 					})
 					if(res.code==0){
-						// this.cardList = res.data.list
-						// this.selected_card_name=this.cardList[0].bankName
-						// this.selected_card_num=this.cardList[0].bankNo
-						// console.log(this.cardList,'this.cardList')
 						if(res.data.list.length==0){
 							this.cardList = res.data.list
 						}else{

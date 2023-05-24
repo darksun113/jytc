@@ -1,11 +1,9 @@
 <template>
 	<u-popup :show="show" mode="center" @close="close" :mask="false">
-		<view class="blind_box_res" @click.self="close">
-			<view class="open_res_box" >
+		<view class="blind_box_res" @click.self="close" v-if="Object.keys(blindData).length>0">
+			<view class="open_res_box">
 				<transition enter-active-class="animated bounceIn">
-					<img v-lazy class="goods_pic" v-show="isOpenResult" 
-						style="width:100%;height:100%;object-fit: contain;" 
-						crossorigin="anonymous" :src="blindData.image" alt="">
+					<image class="goods_pic" v-show="isOpenResult" :src="blindData.image" mode="aspectFit"></image>
 				</transition>
 			</view>
 			<view style="margin-top:40px">
@@ -24,49 +22,46 @@
 <script>
 	import salute from "./libs/salute.js"
 	export default {
-		props:{
-			isShow:[Boolean],
-			blindData:{
-				type:Object,
-				default:()=>{}
+		props: {
+			isShow: [Boolean],
+			blindData: {
+				type: Object,
+				default: () => {}
 			}
 		},
-		mounted() {
-			
-		},
-		data(){
+		data() {
 			return {
-				show:this.isShow,
-				isOpenResult:false,
-				isOpenResultText:false,
+				show: this.isShow,
+				isOpenResult: false,
+				isOpenResultText: false,
 			}
 		},
-		methods:{
-			close(){
-				this.isOpenResult=false
-				this.isOpenResultText=false
+		methods: {
+			close() {
+				this.isOpenResult = false
+				this.isOpenResultText = false
 				this.$emit("openBlindSuccess")
 			},
 			// 开盲盒特效
-			openSalute(){
-			    let timer1 = setTimeout(() => {
-			        clearTimeout(timer1)
-					this.isOpenResult=true
-			        salute(1)
+			openSalute() {
+				let timer1 = setTimeout(() => {
+					clearTimeout(timer1)
+					this.isOpenResult = true
+					salute(1)
 					salute(2)
-			        }, 500);
-			    let timer2 = setTimeout(() => {
-			        clearTimeout(timer2)
-					this.isOpenResult=true
-					this.isOpenResultText=true
-			        salute()
-			    }, 1000);
+				}, 500);
+				let timer2 = setTimeout(() => {
+					clearTimeout(timer2)
+					this.isOpenResult = true
+					this.isOpenResultText = true
+					salute()
+				}, 1000);
 			},
 		},
-		watch:{
-			isShow(boo){
-				this.show=boo
-				if(boo)this.openSalute()
+		watch: {
+			isShow(boo) {
+				this.show = boo
+				if (boo) this.openSalute()
 			}
 		}
 	}
@@ -74,7 +69,8 @@
 
 <style lang="scss" scoped>
 	@import "./libs/animate.min.css";
-	.blind_box_res{
+
+	.blind_box_res {
 		width: 100vw;
 		height: 100vh;
 		background: rgba(0, 0, 0, .85);
@@ -84,14 +80,20 @@
 		align-items: center;
 		flex-direction: column;
 		overflow: auto;
-		.open_res_box{
+
+		.open_res_box {
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			height: 648rpx;
 			width: 648rpx;
+			.goods_pic{
+				width:100%;
+				height:100%;
+			}
 		}
-		.blind_tip{
+
+		.blind_tip {
 			margin: 0;
 			text-align: center;
 			line-height: 68rpx;

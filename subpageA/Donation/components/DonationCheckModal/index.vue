@@ -87,8 +87,8 @@
 				this.inhritInput=true
 			},
 			toMyObject(){
-				uni.reLaunch({
-					url:"/pages/MyObject/MyObject"
+				uni.redirectTo({
+					url:"/subpageB/MyObject/MyObject"
 				})
 			},
 			async toInhert(code){

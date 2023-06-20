@@ -2,17 +2,20 @@
 	<u-popup :show="show" mode="center" @open="open" overlayOpacity="0.8" :closeOnClickOverlay="false"
 		bgColor="transparent">
 		<view class="poster-page">
-			<image v-if="posterData.loadType==3" class="download_pic_icon" src="@/static/新增icon/保存.svg" @click="saveFile"></image>
-			<image v-else class="download_pic_icon" src="@/static/images/download_pic_icon.svg" @click="saveFile"></image>
+			<image v-if="posterData.loadType==3" class="download_pic_icon" src="@/static/新增icon/保存.svg"
+				@click="saveFile"></image>
+			<image v-else class="download_pic_icon" src="@/static/images/download_pic_icon.svg" @click="saveFile">
+			</image>
 			<img v-if="posterUrl" :src="posterUrl" style="height: 740rpx;width: 100%;" />
 			<view class="poster-box" id="pagePoster" v-else>
 				<view class="poster-pic">
-					<img v-lazy  v-if="posterData.loadType!=3" crossorigin="anonymous" :src="posterData.posterImg + '?' + new Date().getTime()" >
-					<img v-lazy v-else  crossorigin="anonymous" src="@/static/新增icon/占位图.png" >
+					<img v-lazy v-if="posterData.loadType!=3" crossorigin="anonymous"
+						:src="posterData.posterImg + '?' + new Date().getTime()">
+					<img v-lazy v-else crossorigin="anonymous" src="@/static/新增icon/占位图.png">
 				</view>
 				<view class="poster-content" v-if="posterData.loadType==0">
 					<view style="max-width: 500rpx;" class="poster-title nowrap_s">
-						 {{userName}} 
+						{{userName}}
 					</view>
 					<view class="poster-detail">
 						<view class="left">
@@ -25,25 +28,29 @@
 							</view>
 						</view>
 						<view class="right" id="qrBox">
-							<canvas id="qrcode" canvas-id="qrcode" :style="{ width: `${size}px`, height: `${size}px`}"/>
+							<!-- <canvas id="qrcode" canvas-id="qrcode" :style="{ width: `${size}px`, height: `${size}px`}"/> -->
+							<canvas id="qrcode" canvas-id="qrcode"
+								:style="{ width: `${size}px`, height: `${size}px`}"></canvas>
 						</view>
 					</view>
 				</view>
-				<view style="background: none;background-size: none;" class="poster-content" v-if="posterData.loadType==3">
+				<view style="background: none;background-size: none;" class="poster-content"
+					v-if="posterData.loadType==3">
 					<p style="max-width: 600rpx;" class="poster-title nowrap_s">
-						 {{userName}} 
+						{{userName}}
 					</p>
 					<view class="poster-detail">
 						<view class="left">
-							<view class="tip"> 
+							<view class="tip">
 								赶紧注册加入我们吧
 							</view>
 							<view class="tip-3">
-								扫码打开数版通，一起玩转数字藏品 
+								扫码打开数版通，一起玩转数字藏品
 							</view>
 						</view>
 						<view class="right" id="qrBox">
-							<canvas id="qrcode" canvas-id="qrcode" :style="{ width: `${size}px`, height: `${size}px`}"/>
+							<canvas id="qrcode" canvas-id="qrcode"
+								:style="{ width: `${size}px`, height: `${size}px`}" />
 						</view>
 					</view>
 				</view>
@@ -61,20 +68,27 @@
 							<view class="item">
 								<text class="title">持有者：</text>
 								<view class="info">
-									<img v-lazy crossorigin="anonymous" :src="posterData.avatar+ '?' + new Date().getTime()" >
-									<view class="name nowrap">{{posterData.name && posterData.name.length>10? posterData.name.substr(0,8)+'...':posterData.name}}</view>
+									<img v-lazy crossorigin="anonymous"
+										:src="posterData.avatar+ '?' + new Date().getTime()">
+									<view class="name nowrap">
+										{{posterData.name && posterData.name.length>10? posterData.name.substr(0,8)+'...':posterData.name}}
+									</view>
 								</view>
 							</view>
 							<view class="item">
 								<text class="title">发行方：</text>
 								<view class="info">
-									<img v-lazy crossorigin="anonymous" :src="posterData.shopIcon+ '?' + new Date().getTime()" >
-									<view class="name nowrap">{{posterData.shopName && posterData.shopName.length>10? posterData.shopName.substr(0,8)+'...': posterData.shopName}}</view>
+									<img v-lazy crossorigin="anonymous"
+										:src="posterData.shopIcon+ '?' + new Date().getTime()">
+									<view class="name nowrap">
+										{{posterData.shopName && posterData.shopName.length>10? posterData.shopName.substr(0,8)+'...': posterData.shopName}}
+									</view>
 								</view>
 							</view>
 						</view>
 						<view class="right" id="qrBox">
-							<canvas id="qrcode" canvas-id="qrcode" :style="{ width: `${size}px`, height: `${size}px` }"/>
+							<canvas id="qrcode" canvas-id="qrcode"
+								:style="{ width: `${size}px`, height: `${size}px` }" />
 						</view>
 					</view>
 				</view>
@@ -91,11 +105,14 @@
 </template>
 
 <script>
-	import uQRCode from "../../libs/jsm/uqrcode.js";
+	import uQRCode from "uqrcodejs";
 	import FileSaver from 'file-saver'
-	import {imgPathToBase64,blobToBase64} from "@/utils/tools.js"
+	import {
+		imgPathToBase64,
+		blobToBase64
+	} from "@/utils/tools.js"
 	export default {
-		name:"SharePoster",
+		name: "SharePoster",
 		props: {
 			posterData: {
 				type: Object,
@@ -105,38 +122,38 @@
 		},
 		data() {
 			return {
-				userName:uni.getStorageSync("userInfo").name,
+				userName: uni.getStorageSync("userInfo").name,
 				show: this.isOpenPoster,
 				size: 60,
-				posterUrl:null,
+				posterUrl: null,
 			}
 		},
 		methods: {
-			initQrCode(){
-				if(this.posterUrl)return
-				this.size=document.getElementById("qrBox").clientWidth
-				const ctx = uni.createCanvasContext('qrcode');
-				uQRCode.make({
-					canvasId: 'qrcode',
-					componentInstance: this,
-					text: this.posterData.codeUrl,
-					size: this.size,
-					margin: 0,
-					backgroundColor: '#ffffff',
-					foregroundColor: '#000000',
-					fileType: 'jpg',
-					errorCorrectLevel: uQRCode.errorCorrectLevel.H,
-					success: () => {
-						this.$nextTick(()=>{
-							this.canvasImage.generateImage((val)=>{
-								this.posterUrl = val.replace(/[\r\n]/g, ''); // 去除base64位中的空格
-							})
-						})
-					}
+			initQrCode() {
+				if (this.posterUrl) return
+				this.size = document.getElementById("qrBox").clientWidth
+				// 获取uQRCode实例
+				const qr = new uQRCode();
+				// 设置二维码内容
+				qr.data = this.posterData.codeUrl;
+				// 设置二维码大小，必须与canvas设置的宽高一致
+				qr.size = this.size;
+				// 调用制作二维码方法
+				qr.make();
+				// 获取canvas上下文
+				const canvasContext = uni.createCanvasContext('qrcode', this); // 如果是组件，this必须传入
+				// 设置uQRCode实例的canvas上下文
+				qr.canvasContext = canvasContext;
+				// 调用绘制方法将二维码图案绘制到canvas上
+				qr.drawCanvas();
+				this.$nextTick(() => {
+					this.canvasImage.generateImage((val) => {
+						this.posterUrl = val.replace(/[\r\n]/g, ''); // 去除base64位中的空格
+					})
 				})
 			},
 			// 保存图片至本地
-			saveFile(){
+			saveFile() {
 				FileSaver.saveAs(this.posterUrl)
 			},
 			open() {
@@ -168,8 +185,8 @@
 						scrollY: 0, // html2canvas默认绘制视图内的页面，需要把scrollY，scrollX设置为0
 						scrollX: 0,
 						useCORS: true, //支持跨域
-						dpi:300,//处理模糊问题
-						crossOrigin:"anonymous",
+						dpi: 300, //处理模糊问题
+						crossOrigin: "anonymous",
 						scale: 10, // 设置生成图片的像素比例，默认是1，如果生成的图片模糊的话可以开启该配置项
 					}).then((canvas) => {
 						// 生成成功
@@ -185,31 +202,41 @@
 </script>
 
 <style lang="scss" scoped>
-	.note{
+	.note {
 		text-align: center;
-        margin-top: 20rpx;
+		margin-top: 20rpx;
 		font-size: 28rpx;
 		font-family: SourceHanSansCN-Regular, SourceHanSansCN;
 		font-weight: 400;
 		color: #FFFFFF;
 		line-height: 21rpx;
 	}
+
 	.nowrap_s {
-		overflow: hidden;       /* 隐藏溢出 */
-		word-break: break-all;  /* break-all(允许在单词内换行。) */
-		text-overflow: ellipsis;  /* 超出部分省略号 */
-		display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
-		-webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
-		-webkit-line-clamp: 1; /** 显示的行数 **/
+		overflow: hidden;
+		/* 隐藏溢出 */
+		word-break: break-all;
+		/* break-all(允许在单词内换行。) */
+		text-overflow: ellipsis;
+		/* 超出部分省略号 */
+		display: -webkit-box;
+		/** 对象作为伸缩盒子模型显示 **/
+		-webkit-box-orient: vertical;
+		/** 设置或检索伸缩盒对象的子元素的排列方式 **/
+		-webkit-line-clamp: 1;
+		/** 显示的行数 **/
 		font-size: 32rpx;
 	}
+
 	view {
 		box-sizing: border-box;
 	}
-	img{
+
+	img {
 		pointer-events: auto;
 	}
-	.mask{
+
+	.mask {
 		width: 100%;
 		height: 100vh;
 		position: fixed;
@@ -221,16 +248,19 @@
 		justify-content: center;
 		align-items: center;
 	}
-	.tip-3{
+
+	.tip-3 {
 		font-size: 20rpx;
 		font-family: PingFangSC-Regular, PingFang SC;
 		font-weight: 400;
 		color: #EFCE91;
 		line-height: 28rpx;
 	}
+
 	.poster-page {
 		position: relative;
 		width: 588rpx;
+
 		.download_pic_icon {
 			width: 72rpx;
 			height: 72rpx;
@@ -247,6 +277,7 @@
 			background: #333;
 			border-radius: 20rpx;
 			overflow: auto;
+
 			.poster-pic {
 				width: 100%;
 				height: 516rpx;
@@ -256,8 +287,9 @@
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				img{
-					width:100% ;
+
+				img {
+					width: 100%;
 					height: 100%;
 					object-fit: cover;
 					overflow: auto;
@@ -269,7 +301,8 @@
 				padding: 20rpx;
 				padding-top: 10rpx;
 				background: url("../../static/images/card_bg.png") no-repeat right center;
-				background-size: auto 160%; 
+				background-size: auto 160%;
+
 				.poster-title {
 					font-size: 32rpx;
 					font-family: PingFangSC-Medium, PingFang SC;
@@ -317,6 +350,7 @@
 						display: flex;
 						justify-content: center;
 						align-items: center;
+
 						image {
 							width: 100%;
 							height: 100%;
@@ -325,17 +359,19 @@
 				}
 			}
 
-			.poster-goods-content{
+			.poster-goods-content {
 				padding: 20rpx;
 				padding-top: 10rpx;
 				background: url("../../static/images/card_bg.png") no-repeat right center;
-				background-size: auto 160%; 
-				.poster-goods-title{
+				background-size: auto 160%;
+
+				.poster-goods-title {
 					display: flex;
 					justify-content: space-between;
 					align-items: center;
 					height: 44rpx;
-					view{
+
+					view {
 						font-size: 32rpx;
 						font-family: PingFangSC-Medium, PingFang SC;
 						font-weight: 500;
@@ -343,24 +379,27 @@
 						line-height: 44rpx;
 					}
 				}
-				.poster-goods-detail{
+
+				.poster-goods-detail {
 					height: 120rpx;
 					margin-top: 20rpx;
 					display: flex;
 					justify-content: space-between;
 					align-items: center;
-					
+
 					.left {
 						height: 120rpx;
 						font-family: PingFangSC-Regular, PingFang SC;
 						display: flex;
 						flex-direction: column;
 						justify-content: flex-end;
-						.item{
+
+						.item {
 							margin-top: 10px;
 							display: flex;
 							align-items: center;
-							.title{
+
+							.title {
 								width: 100rpx;
 								min-width: 50px;
 								font-size: 24rpx;
@@ -369,18 +408,21 @@
 								color: #CCCCCC;
 								line-height: 34rpx;
 							}
-							.info{
+
+							.info {
 								display: flex;
 								align-items: center;
 								text-align: left;
-								img{
+
+								img {
 									width: 32rpx;
 									min-width: 32rpx;
 									height: 32rpx;
 									border-radius: 50%;
 									margin-right: 10rpx;
 								}
-								view{
+
+								view {
 									font-size: 24rpx;
 									font-family: PingFangSC-Regular, PingFang SC;
 									font-weight: 400;
@@ -388,13 +430,15 @@
 									line-height: 34rpx;
 									text-align: left;
 								}
-								.name{
+
+								.name {
 									max-width: 260rpx;
 									font-size: 24rpx;
 								}
 							}
 						}
 					}
+
 					.right {
 						width: 120rpx;
 						min-width: 120rpx;
@@ -403,10 +447,11 @@
 						display: flex;
 						justify-content: center;
 						align-items: center;
+
 						image {
 							width: 100%;
 							height: 100%;
-					
+
 						}
 					}
 				}

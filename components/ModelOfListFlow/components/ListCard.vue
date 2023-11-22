@@ -17,7 +17,8 @@
 		<template v-else-if="loadType==1">
 			<view class="sell-tip" v-if="item.finishTime > curTime">
 				<text>结束倒计时：</text>
-				<u-count-down :time="(item.finishTime - curTime) * 1000" format="DD:HH:mm:ss" @change="onChange" @finish="finish">
+				<u-count-down :time="(item.finishTime - curTime) * 1000" format="DD:HH:mm:ss" @change="onChange"
+					@finish="finish">
 					<view class="time">
 						<text class="time__item">{{ timeData.days }}天</text>
 						<text class="time__item">{{ timeData.hours>10?timeData.hours:'0'+timeData.hours}}时</text>
@@ -29,14 +30,18 @@
 			<view class="sell-tip" v-else-if="item.finishTime < curTime && item.rewardTime > curTime">
 				等待开奖
 			</view>
-			<view class="sell-tip" v-else-if="item.logStatus==2">
+			<view class="sell-tip" v-else-if="item.logStatus == 2">
 				恭喜你抽中白名单资格
 			</view>
-			<view class="sell-tip" v-else-if="item.logStatus !==2">
+			<view class="sell-tip" v-else-if="item.logStatus !== 3">
+				开奖中
+			</view>
+			<view class="sell-tip" v-else-if="item.logStatus == 3">
 				很遗憾未抽中白名单资格
 			</view>
 		</template>
-		<img v-lazy class="series-pic" :src="item.seriesImg || item.image" :style="{objectFit:isBlind ? 'contain':'cover'}" />
+		<img v-lazy class="series-pic" :src="item.seriesImg || item.image"
+			:style="{objectFit:isBlind ? 'contain':'cover'}" />
 		<view class="series-info-box">
 			<view class="series-info">
 				<view class="series-title nowrap">
@@ -66,7 +71,9 @@
 
 <script>
 	import lazyLoad from '@/uni_modules/muqian-lazyLoad/components/muqian-lazyLoad/muqian-lazyLoad.vue'
-	import { formatYearToMinutes_EN } from "@/utils/formatDate.js"
+	import {
+		formatYearToMinutes_EN
+	} from "@/utils/formatDate.js"
 	export default {
 		name: "ListCard",
 		props: {
@@ -95,7 +102,7 @@
 		},
 		methods: {
 			toSeriesDetailPage() {
-				if(this.item.seriesStatus == 6)return;
+				if (this.item.seriesStatus == 6) return;
 				const id = this.isBlind ? this.item.blindboxId : this.item.seriesId
 				this.$emit("toSeriesDetailPage", id)
 			},

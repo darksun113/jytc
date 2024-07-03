@@ -17,7 +17,7 @@
         "browser": "chrome",
         "env": {
           "UNI_PLATFORM": "h5",
-          "VUE_APP_BASE_URL": "http://120.197.126.61:18940",
+          "VUE_APP_BASE_URL": "http://api-h5.jytc.binavy.com",
           "MY_TEST": "test-variable"
         },
         "define": {
@@ -29,7 +29,7 @@
         "browser": "chrome",
         "env": {
           "UNI_PLATFORM": "h5",
-          "VUE_APP_BASE_URL": "https://api.jialex.cn"
+          "VUE_APP_BASE_URL": "http://api-h5.jytc.binavy.com"
         },
         "define": {
           "H5-PROD": true
